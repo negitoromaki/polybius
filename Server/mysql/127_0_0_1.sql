@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 23, 2018 at 09:01 PM
+-- Generation Time: Sep 23, 2018 at 09:39 PM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -23,6 +23,23 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `users` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `users`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userdata`
+--
+
+DROP TABLE IF EXISTS `userdata`;
+CREATE TABLE IF NOT EXISTS `userdata` (
+  `username` text NOT NULL,
+  `password` text NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `isonline` tinyint(1) NOT NULL,
+  `currentgame` int(11) NOT NULL,
+  `friends` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
