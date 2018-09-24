@@ -1,0 +1,2878 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -530159753, guid: 68c7e4565cde54155bb78d8e935f1dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheType: 3
+  lastUpdatedAtString: 2018-09-24T18:59:16.419-04:00
+  initializedAtString: 2018-09-24T18:48:27.892-04:00
+  log:
+  - commitID: 3d320d38db12e32f9a9e3d19fab4ee9af58e50d5
+    mergeA: 
+    mergeB: 
+    authorName: tr-io
+    authorEmail: leoliu.mailbox@gmail.com
+    commitEmail: leoliu.mailbox@gmail.com
+    commitName: tr-io
+    summary: Main Menu UI setup
+    description: "Main Menu UI setup\r\n\r\nSetup main menu scripts and panel"
+    timeString: 2018-09-23T22:48:23.000-04:00
+    commitTimeString: 2018-09-23T22:48:23.000-04:00
+    changes:
+    - path: Unity\Assets\Scenes\Main-Meu.unity
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scenes\Main-Meu.unity
+      projectPath: ..\Unity\Assets\Scenes\Main-Meu.unity
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Unity\Assets\Scenes\Main-Meu.unity.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scenes\Main-Meu.unity.meta
+      projectPath: ..\Unity\Assets\Scenes\Main-Meu.unity.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Unity\Assets\Scripts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scripts.meta
+      projectPath: ..\Unity\Assets\Scripts.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Unity\Assets\Scripts\UIMain.cs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scripts\UIMain.cs
+      projectPath: ..\Unity\Assets\Scripts\UIMain.cs
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Unity\Assets\Scripts\UIMain.cs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scripts\UIMain.cs.meta
+      projectPath: ..\Unity\Assets\Scripts\UIMain.cs.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Unity\ProjectSettings\ProjectVersion.txt
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\ProjectVersion.txt
+      projectPath: ..\Unity\ProjectSettings\ProjectVersion.txt
+      originalPath: 
+      status: 3
+      staged: 0
+  - commitID: e9a3787bafd979e51166b38321676840111e5305
+    mergeA: 
+    mergeB: 
+    authorName: csculley
+    authorEmail: cs.sculley@gmail.com
+    commitEmail: cs.sculley@gmail.com
+    commitName: csculley
+    summary: Fix gitignore for Unity dirs
+    description: Fix gitignore for Unity dirs
+    timeString: 2018-09-23T20:19:31.000-04:00
+    commitTimeString: 2018-09-23T20:19:31.000-04:00
+    changes:
+    - path: .gitignore
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\.gitignore
+      projectPath: ..\.gitignore
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Unity\Assets\Scripts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scripts.meta
+      projectPath: ..\Unity\Assets\Scripts.meta
+      originalPath: 
+      status: 5
+      staged: 0
+  - commitID: 5bc7ed6374ee775352f7f8ab2153c72047fa119d
+    mergeA: 
+    mergeB: 
+    authorName: sotails
+    authorEmail: lucashahn@comcast.net
+    commitEmail: lucashahn@comcast.net
+    commitName: sotails
+    summary: Implemented User Structure
+    description: Implemented User Structure
+    timeString: 2018-09-23T17:40:46.000-04:00
+    commitTimeString: 2018-09-23T17:40:46.000-04:00
+    changes:
+    - path: Server\mysql\127_0_0_1.sql
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\mysql\127_0_0_1.sql
+      projectPath: ..\Server\mysql\127_0_0_1.sql
+      originalPath: 
+      status: 3
+      staged: 0
+  - commitID: 238876629caacbf7c4aabffcb28183f8e5adb3e4
+    mergeA: 
+    mergeB: 
+    authorName: sotails
+    authorEmail: lucashahn@comcast.net
+    commitEmail: lucashahn@comcast.net
+    commitName: sotails
+    summary: Initialize MySql Database
+    description: "Initialize MySql Database\r\n\r\nThis is the intial push for the
+      database. No initial data has been stored, and was built using WAMP."
+    timeString: 2018-09-23T17:21:21.000-04:00
+    commitTimeString: 2018-09-23T17:21:21.000-04:00
+    changes:
+    - path: Server\mysql\127_0_0_1.sql
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\mysql\127_0_0_1.sql
+      projectPath: ..\Server\mysql\127_0_0_1.sql
+      originalPath: 
+      status: 4
+      staged: 0
+  - commitID: 2d721cc659ace24e3cf825b054106825c7a66368
+    mergeA: 
+    mergeB: 
+    authorName: nibarder
+    authorEmail: 43069746+nibarder@users.noreply.github.com
+    commitEmail: 43069746+nibarder@users.noreply.github.com
+    commitName: nibarder
+    summary: create extension
+    description: "create extension\r\n\r\nadded blank files for smartfox extensions"
+    timeString: 2018-09-23T16:48:48.000-04:00
+    commitTimeString: 2018-09-23T16:48:48.000-04:00
+    changes:
+    - path: Server\src\.classpath
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\.classpath
+      projectPath: ..\Server\src\.classpath
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\.project
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\.project
+      projectPath: ..\Server\src\.project
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\.settings\org.eclipse.jdt.core.prefs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\.settings\org.eclipse.jdt.core.prefs
+      projectPath: ..\Server\src\.settings\org.eclipse.jdt.core.prefs
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\bin\CreateUser.class
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\bin\CreateUser.class
+      projectPath: ..\Server\src\bin\CreateUser.class
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\bin\DatabaseManager.class
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\bin\DatabaseManager.class
+      projectPath: ..\Server\src\bin\DatabaseManager.class
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\bin\Main.class
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\bin\Main.class
+      projectPath: ..\Server\src\bin\Main.class
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\bin\RequestHandler.class
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\bin\RequestHandler.class
+      projectPath: ..\Server\src\bin\RequestHandler.class
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\bin\ServerManager.class
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\bin\ServerManager.class
+      projectPath: ..\Server\src\bin\ServerManager.class
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\bin\User.class
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\bin\User.class
+      projectPath: ..\Server\src\bin\User.class
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\bin\UserLogin.class
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\bin\UserLogin.class
+      projectPath: ..\Server\src\bin\UserLogin.class
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\src\CreateUser.java
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\src\CreateUser.java
+      projectPath: ..\Server\src\src\CreateUser.java
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\src\DatabaseManager.java
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\src\DatabaseManager.java
+      projectPath: ..\Server\src\src\DatabaseManager.java
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\src\Main.java
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\src\Main.java
+      projectPath: ..\Server\src\src\Main.java
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\src\RequestHandler.java
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\src\RequestHandler.java
+      projectPath: ..\Server\src\src\RequestHandler.java
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\src\ServerManager.java
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\src\ServerManager.java
+      projectPath: ..\Server\src\src\ServerManager.java
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\src\User.java
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\src\User.java
+      projectPath: ..\Server\src\src\User.java
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Server\src\src\UserLogin.java
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Server\src\src\UserLogin.java
+      projectPath: ..\Server\src\src\UserLogin.java
+      originalPath: 
+      status: 4
+      staged: 0
+  - commitID: 46d933556c390e4bb5b831fda47a2fee3cea7537
+    mergeA: 
+    mergeB: 
+    authorName: nibarder
+    authorEmail: 43069746+nibarder@users.noreply.github.com
+    commitEmail: 43069746+nibarder@users.noreply.github.com
+    commitName: nibarder
+    summary: don't hurt me
+    description: "don't hurt me\r\n\r\nSeparated server and unity folders"
+    timeString: 2018-09-23T16:46:46.000-04:00
+    commitTimeString: 2018-09-23T16:46:46.000-04:00
+    changes:
+    - path: Unity\Assets\.gitignore
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\.gitignore
+      projectPath: ..\Unity\Assets\.gitignore
+      originalPath: Assets\.gitignore
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Animations.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Animations.meta
+      projectPath: ..\Unity\Assets\Animations.meta
+      originalPath: Assets\Animations.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Animations\Hover.anim
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Animations\Hover.anim
+      projectPath: ..\Unity\Assets\Animations\Hover.anim
+      originalPath: Assets\Animations\Hover.anim
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Animations\Hover.anim.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Animations\Hover.anim.meta
+      projectPath: ..\Unity\Assets\Animations\Hover.anim.meta
+      originalPath: Assets\Animations\Hover.anim.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Animations\Sphere.controller
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Animations\Sphere.controller
+      projectPath: ..\Unity\Assets\Animations\Sphere.controller
+      originalPath: Assets\Animations\Sphere.controller
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Animations\Sphere.controller.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Animations\Sphere.controller.meta
+      projectPath: ..\Unity\Assets\Animations\Sphere.controller.meta
+      originalPath: Assets\Animations\Sphere.controller.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor.meta
+      projectPath: ..\Unity\Assets\Editor.meta
+      originalPath: Assets\Editor.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia.meta
+      projectPath: ..\Unity\Assets\Editor\Vuforia.meta
+      originalPath: Assets\Editor\Vuforia.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\Emulator.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\Emulator.meta
+      projectPath: ..\Unity\Assets\Editor\Vuforia\Emulator.meta
+      originalPath: Assets\Editor\Vuforia\Emulator.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat
+      projectPath: ..\Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat
+      originalPath: Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat.meta
+      projectPath: ..\Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat.meta
+      originalPath: Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml
+      projectPath: ..\Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml
+      originalPath: Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml.meta
+      projectPath: ..\Unity\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml.meta
+      originalPath: Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\ForPrint.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\ForPrint.meta
+      projectPath: ..\Unity\Assets\Editor\Vuforia\ForPrint.meta
+      originalPath: Assets\Editor\Vuforia\ForPrint.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\ForPrint\Emulator.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\ForPrint\Emulator.meta
+      projectPath: ..\Unity\Assets\Editor\Vuforia\ForPrint\Emulator.meta
+      originalPath: Assets\Editor\Vuforia\ForPrint\Emulator.meta
+      status: 6
+      staged: 0
+    - path: "Ground Plane.pdf\tUnity\\Assets\\Editor\\Vuforia\\ForPrint\\Emulator\\Emulator
+        Ground Plane.pdf"
+      fullPath: "C:\\Users\\leoth\\Desktop\\Leo\\Classwork\\Fall 2018\\CS 307\\polybius\\Ground
+        Plane.pdf\tUnity\\Assets\\Editor\\Vuforia\\ForPrint\\Emulator\\Emulator Ground
+        Plane.pdf"
+      projectPath: "..\\Ground Plane.pdf\tUnity\\Assets\\Editor\\Vuforia\\ForPrint\\Emulator\\Emulator
+        Ground Plane.pdf"
+      originalPath: Assets\Editor\Vuforia\ForPrint\Emulator\Emulator
+      status: 6
+      staged: 0
+    - path: "Ground Plane.pdf.meta\tUnity\\Assets\\Editor\\Vuforia\\ForPrint\\Emulator\\Emulator
+        Ground Plane.pdf.meta"
+      fullPath: "C:\\Users\\leoth\\Desktop\\Leo\\Classwork\\Fall 2018\\CS 307\\polybius\\Ground
+        Plane.pdf.meta\tUnity\\Assets\\Editor\\Vuforia\\ForPrint\\Emulator\\Emulator
+        Ground Plane.pdf.meta"
+      projectPath: "..\\Ground Plane.pdf.meta\tUnity\\Assets\\Editor\\Vuforia\\ForPrint\\Emulator\\Emulator
+        Ground Plane.pdf.meta"
+      originalPath: Assets\Editor\Vuforia\ForPrint\Emulator\Emulator
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\ImageTargetTextures.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\ImageTargetTextures.meta
+      projectPath: ..\Unity\Assets\Editor\Vuforia\ImageTargetTextures.meta
+      originalPath: Assets\Editor\Vuforia\ImageTargetTextures.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\ImageTargetTextures\Polybius.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\ImageTargetTextures\Polybius.meta
+      projectPath: ..\Unity\Assets\Editor\Vuforia\ImageTargetTextures\Polybius.meta
+      originalPath: Assets\Editor\Vuforia\ImageTargetTextures\Polybius.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg
+      projectPath: ..\Unity\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg
+      originalPath: Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg.meta
+      projectPath: ..\Unity\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg.meta
+      originalPath: Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Materials.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Materials.meta
+      projectPath: ..\Unity\Assets\Materials.meta
+      originalPath: Assets\Materials.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Materials\Green.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Materials\Green.mat
+      projectPath: ..\Unity\Assets\Materials\Green.mat
+      originalPath: Assets\Materials\Green.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Materials\Green.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Materials\Green.mat.meta
+      projectPath: ..\Unity\Assets\Materials\Green.mat.meta
+      originalPath: Assets\Materials\Green.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins.meta
+      projectPath: ..\Unity\Assets\Plugins.meta
+      originalPath: Assets\Plugins.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub.meta
+      originalPath: Assets\Plugins\GitHub.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor.meta
+      originalPath: Assets\Plugins\GitHub\Editor.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+      originalPath: Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+      originalPath: Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+      originalPath: Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll
+      originalPath: Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+      originalPath: Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+      originalPath: Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+      originalPath: Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+      originalPath: Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\System.Threading.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\System.Threading.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\System.Threading.dll
+      originalPath: Assets\Plugins\GitHub\Editor\System.Threading.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\big-logo@2x.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\big-logo@2x.png
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\big-logo@2x.png
+      originalPath: Assets\Plugins\GitHub\Editor\big-logo@2x.png
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+      originalPath: Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\credits.txt
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\credits.txt
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\credits.txt
+      originalPath: Assets\Plugins\GitHub\Editor\credits.txt
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\credits.txt.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\credits.txt.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\credits.txt.meta
+      originalPath: Assets\Plugins\GitHub\Editor\credits.txt.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\eula.txt
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\eula.txt
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\eula.txt
+      originalPath: Assets\Plugins\GitHub\Editor\eula.txt
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\eula.txt.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\eula.txt.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\eula.txt.meta
+      originalPath: Assets\Plugins\GitHub\Editor\eula.txt.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\libsfw.bundle
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\libsfw.bundle
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\libsfw.bundle
+      originalPath: Assets\Plugins\GitHub\Editor\libsfw.bundle
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+      originalPath: Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\libsfw.so
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\libsfw.so
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\libsfw.so
+      originalPath: Assets\Plugins\GitHub\Editor\libsfw.so
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\libsfw.so.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\libsfw.so.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\libsfw.so.meta
+      originalPath: Assets\Plugins\GitHub\Editor\libsfw.so.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\sfw.net.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\sfw.net.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\sfw.net.dll
+      originalPath: Assets\Plugins\GitHub\Editor\sfw.net.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x64.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x64.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x64.meta
+      originalPath: Assets\Plugins\GitHub\Editor\x64.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+      originalPath: Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+      originalPath: Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x86.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x86.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x86.meta
+      originalPath: Assets\Plugins\GitHub\Editor\x86.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+      originalPath: Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+      originalPath: Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+      originalPath: Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\SmartFox2X.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\SmartFox2X.dll
+      projectPath: ..\Unity\Assets\Plugins\SmartFox2X.dll
+      originalPath: Assets\Plugins\SmartFox2X.dll
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Plugins\SmartFox2X.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Plugins\SmartFox2X.dll.meta
+      projectPath: ..\Unity\Assets\Plugins\SmartFox2X.dll.meta
+      originalPath: Assets\Plugins\SmartFox2X.dll.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Resources.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Resources.meta
+      projectPath: ..\Unity\Assets\Resources.meta
+      originalPath: Assets\Resources.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Resources\VuforiaConfiguration.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Resources\VuforiaConfiguration.asset
+      projectPath: ..\Unity\Assets\Resources\VuforiaConfiguration.asset
+      originalPath: Assets\Resources\VuforiaConfiguration.asset
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Resources\VuforiaConfiguration.asset.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Resources\VuforiaConfiguration.asset.meta
+      projectPath: ..\Unity\Assets\Resources\VuforiaConfiguration.asset.meta
+      originalPath: Assets\Resources\VuforiaConfiguration.asset.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Scenes.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scenes.meta
+      projectPath: ..\Unity\Assets\Scenes.meta
+      originalPath: Assets\Scenes.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Scenes\Polybius.unity
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scenes\Polybius.unity
+      projectPath: ..\Unity\Assets\Scenes\Polybius.unity
+      originalPath: Assets\Scenes\Polybius.unity
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Scenes\Polybius.unity.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scenes\Polybius.unity.meta
+      projectPath: ..\Unity\Assets\Scenes\Polybius.unity.meta
+      originalPath: Assets\Scenes\Polybius.unity.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Scripts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Scripts.meta
+      projectPath: ..\Unity\Assets\Scripts.meta
+      originalPath: Assets\Scripts.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\StreamingAssets.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\StreamingAssets.meta
+      projectPath: ..\Unity\Assets\StreamingAssets.meta
+      originalPath: Assets\StreamingAssets.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\StreamingAssets\Vuforia.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\StreamingAssets\Vuforia.meta
+      projectPath: ..\Unity\Assets\StreamingAssets\Vuforia.meta
+      originalPath: Assets\StreamingAssets\Vuforia.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\StreamingAssets\Vuforia\Polybius.dat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\StreamingAssets\Vuforia\Polybius.dat
+      projectPath: ..\Unity\Assets\StreamingAssets\Vuforia\Polybius.dat
+      originalPath: Assets\StreamingAssets\Vuforia\Polybius.dat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\StreamingAssets\Vuforia\Polybius.dat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\StreamingAssets\Vuforia\Polybius.dat.meta
+      projectPath: ..\Unity\Assets\StreamingAssets\Vuforia\Polybius.dat.meta
+      originalPath: Assets\StreamingAssets\Vuforia\Polybius.dat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\StreamingAssets\Vuforia\Polybius.xml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\StreamingAssets\Vuforia\Polybius.xml
+      projectPath: ..\Unity\Assets\StreamingAssets\Vuforia\Polybius.xml
+      originalPath: Assets\StreamingAssets\Vuforia\Polybius.xml
+      status: 6
+      staged: 0
+    - path: Unity\Assets\StreamingAssets\Vuforia\Polybius.xml.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\StreamingAssets\Vuforia\Polybius.xml.meta
+      projectPath: ..\Unity\Assets\StreamingAssets\Vuforia\Polybius.xml.meta
+      originalPath: Assets\StreamingAssets\Vuforia\Polybius.xml.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia.meta
+      projectPath: ..\Unity\Assets\Vuforia.meta
+      originalPath: Assets\Vuforia.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Editor.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Editor.meta
+      projectPath: ..\Unity\Assets\Vuforia\Editor.meta
+      originalPath: Assets\Vuforia\Editor.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Editor\Scripts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Editor\Scripts.meta
+      projectPath: ..\Unity\Assets\Vuforia\Editor\Scripts.meta
+      originalPath: Assets\Vuforia\Editor\Scripts.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs
+      projectPath: ..\Unity\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs
+      originalPath: Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs.meta
+      projectPath: ..\Unity\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs.meta
+      originalPath: Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Editor\VirtualButtonTextures.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Editor\VirtualButtonTextures.meta
+      projectPath: ..\Unity\Assets\Vuforia\Editor\VirtualButtonTextures.meta
+      originalPath: Assets\Vuforia\Editor\VirtualButtonTextures.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png
+      projectPath: ..\Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png
+      originalPath: Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png.meta
+      projectPath: ..\Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png.meta
+      originalPath: Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat
+      projectPath: ..\Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat
+      originalPath: Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat.meta
+      originalPath: Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Fonts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Fonts.meta
+      projectPath: ..\Unity\Assets\Vuforia\Fonts.meta
+      originalPath: Assets\Vuforia\Fonts.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Fonts\SourceSansPro.ttf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Fonts\SourceSansPro.ttf
+      projectPath: ..\Unity\Assets\Vuforia\Fonts\SourceSansPro.ttf
+      originalPath: Assets\Vuforia\Fonts\SourceSansPro.ttf
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Fonts\SourceSansPro.ttf.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Fonts\SourceSansPro.ttf.meta
+      projectPath: ..\Unity\Assets\Vuforia\Fonts\SourceSansPro.ttf.meta
+      originalPath: Assets\Vuforia\Fonts\SourceSansPro.ttf.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials.meta
+      originalPath: Assets\Vuforia\Materials.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\CloudRecoTarget.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\CloudRecoTarget.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\CloudRecoTarget.mat
+      originalPath: Assets\Vuforia\Materials\CloudRecoTarget.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\CloudRecoTarget.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\CloudRecoTarget.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\CloudRecoTarget.mat.meta
+      originalPath: Assets\Vuforia\Materials\CloudRecoTarget.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\ColoredLines.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\ColoredLines.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\ColoredLines.mat
+      originalPath: Assets\Vuforia\Materials\ColoredLines.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\ColoredLines.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\ColoredLines.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\ColoredLines.mat.meta
+      originalPath: Assets\Vuforia\Materials\ColoredLines.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\DefaultTarget.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\DefaultTarget.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\DefaultTarget.mat
+      originalPath: Assets\Vuforia\Materials\DefaultTarget.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\DefaultTarget.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\DefaultTarget.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\DefaultTarget.mat.meta
+      originalPath: Assets\Vuforia\Materials\DefaultTarget.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\DepthMask.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\DepthMask.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\DepthMask.mat
+      originalPath: Assets\Vuforia\Materials\DepthMask.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\DepthMask.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\DepthMask.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\DepthMask.mat.meta
+      originalPath: Assets\Vuforia\Materials\DepthMask.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\GroundPlaneIndicator.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\GroundPlaneIndicator.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\GroundPlaneIndicator.mat
+      originalPath: Assets\Vuforia\Materials\GroundPlaneIndicator.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\GroundPlaneIndicator.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\GroundPlaneIndicator.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\GroundPlaneIndicator.mat.meta
+      originalPath: Assets\Vuforia\Materials\GroundPlaneIndicator.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\GroundPlaneReference.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\GroundPlaneReference.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\GroundPlaneReference.mat
+      originalPath: Assets\Vuforia\Materials\GroundPlaneReference.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\GroundPlaneReference.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\GroundPlaneReference.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\GroundPlaneReference.mat.meta
+      originalPath: Assets\Vuforia\Materials\GroundPlaneReference.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\GuideView2D.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\GuideView2D.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\GuideView2D.mat
+      originalPath: Assets\Vuforia\Materials\GuideView2D.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\GuideView2D.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\GuideView2D.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\GuideView2D.mat.meta
+      originalPath: Assets\Vuforia\Materials\GuideView2D.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\MidAirIndicator.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\MidAirIndicator.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\MidAirIndicator.mat
+      originalPath: Assets\Vuforia\Materials\MidAirIndicator.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\MidAirIndicator.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\MidAirIndicator.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\MidAirIndicator.mat.meta
+      originalPath: Assets\Vuforia\Materials\MidAirIndicator.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\MidAirReference.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\MidAirReference.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\MidAirReference.mat
+      originalPath: Assets\Vuforia\Materials\MidAirReference.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\MidAirReference.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\MidAirReference.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\MidAirReference.mat.meta
+      originalPath: Assets\Vuforia\Materials\MidAirReference.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\OutlineOpaque.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\OutlineOpaque.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\OutlineOpaque.mat
+      originalPath: Assets\Vuforia\Materials\OutlineOpaque.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\OutlineOpaque.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\OutlineOpaque.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\OutlineOpaque.mat.meta
+      originalPath: Assets\Vuforia\Materials\OutlineOpaque.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\StandardCutout.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\StandardCutout.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\StandardCutout.mat
+      originalPath: Assets\Vuforia\Materials\StandardCutout.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\StandardCutout.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\StandardCutout.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\StandardCutout.mat.meta
+      originalPath: Assets\Vuforia\Materials\StandardCutout.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\UserDefinedTarget.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\UserDefinedTarget.mat
+      projectPath: ..\Unity\Assets\Vuforia\Materials\UserDefinedTarget.mat
+      originalPath: Assets\Vuforia\Materials\UserDefinedTarget.mat
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Materials\UserDefinedTarget.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Materials\UserDefinedTarget.mat.meta
+      projectPath: ..\Unity\Assets\Vuforia\Materials\UserDefinedTarget.mat.meta
+      originalPath: Assets\Vuforia\Materials\UserDefinedTarget.mat.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Prefabs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Prefabs.meta
+      projectPath: ..\Unity\Assets\Vuforia\Prefabs.meta
+      originalPath: Assets\Vuforia\Prefabs.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab
+      projectPath: ..\Unity\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab
+      originalPath: Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab.meta
+      projectPath: ..\Unity\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab.meta
+      originalPath: Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab
+      projectPath: ..\Unity\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab
+      originalPath: Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab.meta
+      projectPath: ..\Unity\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab.meta
+      originalPath: Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab
+      projectPath: ..\Unity\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab
+      originalPath: Assets\Vuforia\Prefabs\GroundPlaneReference.prefab
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab.meta
+      projectPath: ..\Unity\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab.meta
+      originalPath: Assets\Vuforia\Prefabs\GroundPlaneReference.prefab.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Prefabs\MidAirReference.prefab
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Prefabs\MidAirReference.prefab
+      projectPath: ..\Unity\Assets\Vuforia\Prefabs\MidAirReference.prefab
+      originalPath: Assets\Vuforia\Prefabs\MidAirReference.prefab
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Prefabs\MidAirReference.prefab.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Prefabs\MidAirReference.prefab.meta
+      projectPath: ..\Unity\Assets\Vuforia\Prefabs\MidAirReference.prefab.meta
+      originalPath: Assets\Vuforia\Prefabs\MidAirReference.prefab.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Scripts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Scripts.meta
+      projectPath: ..\Unity\Assets\Vuforia\Scripts.meta
+      originalPath: Assets\Vuforia\Scripts.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs
+      projectPath: ..\Unity\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs
+      originalPath: Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs.meta
+      projectPath: ..\Unity\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs.meta
+      originalPath: Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs
+      projectPath: ..\Unity\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs
+      originalPath: Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs.meta
+      projectPath: ..\Unity\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs.meta
+      originalPath: Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders.meta
+      projectPath: ..\Unity\Assets\Vuforia\Shaders.meta
+      originalPath: Assets\Vuforia\Shaders.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\BrightTexture.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\BrightTexture.shader
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\BrightTexture.shader
+      originalPath: Assets\Vuforia\Shaders\BrightTexture.shader
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\BrightTexture.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\BrightTexture.shader.meta
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\BrightTexture.shader.meta
+      originalPath: Assets\Vuforia\Shaders\BrightTexture.shader.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\CameraDiffuse.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\CameraDiffuse.shader
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\CameraDiffuse.shader
+      originalPath: Assets\Vuforia\Shaders\CameraDiffuse.shader
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\CameraDiffuse.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\CameraDiffuse.shader.meta
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\CameraDiffuse.shader.meta
+      originalPath: Assets\Vuforia\Shaders\CameraDiffuse.shader.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\ColoredLines.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\ColoredLines.shader
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\ColoredLines.shader
+      originalPath: Assets\Vuforia\Shaders\ColoredLines.shader
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\ColoredLines.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\ColoredLines.shader.meta
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\ColoredLines.shader.meta
+      originalPath: Assets\Vuforia\Shaders\ColoredLines.shader.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\DepthContour.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\DepthContour.shader
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\DepthContour.shader
+      originalPath: Assets\Vuforia\Shaders\DepthContour.shader
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\DepthContour.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\DepthContour.shader.meta
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\DepthContour.shader.meta
+      originalPath: Assets\Vuforia\Shaders\DepthContour.shader.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\DepthMask.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\DepthMask.shader
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\DepthMask.shader
+      originalPath: Assets\Vuforia\Shaders\DepthMask.shader
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\DepthMask.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\DepthMask.shader.meta
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\DepthMask.shader.meta
+      originalPath: Assets\Vuforia\Shaders\DepthMask.shader.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\OutlineOpaque.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\OutlineOpaque.shader
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\OutlineOpaque.shader
+      originalPath: Assets\Vuforia\Shaders\OutlineOpaque.shader
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\OutlineOpaque.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\OutlineOpaque.shader.meta
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\OutlineOpaque.shader.meta
+      originalPath: Assets\Vuforia\Shaders\OutlineOpaque.shader.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\Text3D.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\Text3D.shader
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\Text3D.shader
+      originalPath: Assets\Vuforia\Shaders\Text3D.shader
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\Text3D.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\Text3D.shader.meta
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\Text3D.shader.meta
+      originalPath: Assets\Vuforia\Shaders\Text3D.shader.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\VertexLitWithZ.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\VertexLitWithZ.shader
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\VertexLitWithZ.shader
+      originalPath: Assets\Vuforia\Shaders\VertexLitWithZ.shader
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Shaders\VertexLitWithZ.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Shaders\VertexLitWithZ.shader.meta
+      projectPath: ..\Unity\Assets\Vuforia\Shaders\VertexLitWithZ.shader.meta
+      originalPath: Assets\Vuforia\Shaders\VertexLitWithZ.shader.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures.meta
+      projectPath: ..\Unity\Assets\Vuforia\Textures.meta
+      originalPath: Assets\Vuforia\Textures.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\CloudRecoTarget.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\CloudRecoTarget.png
+      projectPath: ..\Unity\Assets\Vuforia\Textures\CloudRecoTarget.png
+      originalPath: Assets\Vuforia\Textures\CloudRecoTarget.png
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\CloudRecoTarget.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\CloudRecoTarget.png.meta
+      projectPath: ..\Unity\Assets\Vuforia\Textures\CloudRecoTarget.png.meta
+      originalPath: Assets\Vuforia\Textures\CloudRecoTarget.png.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\GroundPlaneReference.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\GroundPlaneReference.png
+      projectPath: ..\Unity\Assets\Vuforia\Textures\GroundPlaneReference.png
+      originalPath: Assets\Vuforia\Textures\GroundPlaneReference.png
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\GroundPlaneReference.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\GroundPlaneReference.png.meta
+      projectPath: ..\Unity\Assets\Vuforia\Textures\GroundPlaneReference.png.meta
+      originalPath: Assets\Vuforia\Textures\GroundPlaneReference.png.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\MidAirReference.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\MidAirReference.png
+      projectPath: ..\Unity\Assets\Vuforia\Textures\MidAirReference.png
+      originalPath: Assets\Vuforia\Textures\MidAirReference.png
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\MidAirReference.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\MidAirReference.png.meta
+      projectPath: ..\Unity\Assets\Vuforia\Textures\MidAirReference.png.meta
+      originalPath: Assets\Vuforia\Textures\MidAirReference.png.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\Reticle.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\Reticle.png
+      projectPath: ..\Unity\Assets\Vuforia\Textures\Reticle.png
+      originalPath: Assets\Vuforia\Textures\Reticle.png
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\Reticle.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\Reticle.png.meta
+      projectPath: ..\Unity\Assets\Vuforia\Textures\Reticle.png.meta
+      originalPath: Assets\Vuforia\Textures\Reticle.png.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\UserDefinedTarget.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\UserDefinedTarget.png
+      projectPath: ..\Unity\Assets\Vuforia\Textures\UserDefinedTarget.png
+      originalPath: Assets\Vuforia\Textures\UserDefinedTarget.png
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\UserDefinedTarget.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\UserDefinedTarget.png.meta
+      projectPath: ..\Unity\Assets\Vuforia\Textures\UserDefinedTarget.png.meta
+      originalPath: Assets\Vuforia\Textures\UserDefinedTarget.png.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\VideoBackground.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\VideoBackground.png
+      projectPath: ..\Unity\Assets\Vuforia\Textures\VideoBackground.png
+      originalPath: Assets\Vuforia\Textures\VideoBackground.png
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\Textures\VideoBackground.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\Textures\VideoBackground.png.meta
+      projectPath: ..\Unity\Assets\Vuforia\Textures\VideoBackground.png.meta
+      originalPath: Assets\Vuforia\Textures\VideoBackground.png.meta
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\version
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\version
+      projectPath: ..\Unity\Assets\Vuforia\version
+      originalPath: Assets\Vuforia\version
+      status: 6
+      staged: 0
+    - path: Unity\Assets\Vuforia\version.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Assets\Vuforia\version.meta
+      projectPath: ..\Unity\Assets\Vuforia\version.meta
+      originalPath: Assets\Vuforia\version.meta
+      status: 6
+      staged: 0
+    - path: Unity\Packages\manifest.json
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\Packages\manifest.json
+      projectPath: ..\Unity\Packages\manifest.json
+      originalPath: Packages\manifest.json
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\AudioManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\AudioManager.asset
+      projectPath: ..\Unity\ProjectSettings\AudioManager.asset
+      originalPath: ProjectSettings\AudioManager.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\ClusterInputManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\ClusterInputManager.asset
+      projectPath: ..\Unity\ProjectSettings\ClusterInputManager.asset
+      originalPath: ProjectSettings\ClusterInputManager.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\DynamicsManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\DynamicsManager.asset
+      projectPath: ..\Unity\ProjectSettings\DynamicsManager.asset
+      originalPath: ProjectSettings\DynamicsManager.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\EditorBuildSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\EditorBuildSettings.asset
+      projectPath: ..\Unity\ProjectSettings\EditorBuildSettings.asset
+      originalPath: ProjectSettings\EditorBuildSettings.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\EditorSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\EditorSettings.asset
+      projectPath: ..\Unity\ProjectSettings\EditorSettings.asset
+      originalPath: ProjectSettings\EditorSettings.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\GraphicsSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\GraphicsSettings.asset
+      projectPath: ..\Unity\ProjectSettings\GraphicsSettings.asset
+      originalPath: ProjectSettings\GraphicsSettings.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\InputManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\InputManager.asset
+      projectPath: ..\Unity\ProjectSettings\InputManager.asset
+      originalPath: ProjectSettings\InputManager.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\NavMeshAreas.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\NavMeshAreas.asset
+      projectPath: ..\Unity\ProjectSettings\NavMeshAreas.asset
+      originalPath: ProjectSettings\NavMeshAreas.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\NetworkManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\NetworkManager.asset
+      projectPath: ..\Unity\ProjectSettings\NetworkManager.asset
+      originalPath: ProjectSettings\NetworkManager.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\Physics2DSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\Physics2DSettings.asset
+      projectPath: ..\Unity\ProjectSettings\Physics2DSettings.asset
+      originalPath: ProjectSettings\Physics2DSettings.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\PresetManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\PresetManager.asset
+      projectPath: ..\Unity\ProjectSettings\PresetManager.asset
+      originalPath: ProjectSettings\PresetManager.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\ProjectSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\ProjectSettings.asset
+      projectPath: ..\Unity\ProjectSettings\ProjectSettings.asset
+      originalPath: ProjectSettings\ProjectSettings.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\ProjectVersion.txt
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\ProjectVersion.txt
+      projectPath: ..\Unity\ProjectSettings\ProjectVersion.txt
+      originalPath: ProjectSettings\ProjectVersion.txt
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\QualitySettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\QualitySettings.asset
+      projectPath: ..\Unity\ProjectSettings\QualitySettings.asset
+      originalPath: ProjectSettings\QualitySettings.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\TagManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\TagManager.asset
+      projectPath: ..\Unity\ProjectSettings\TagManager.asset
+      originalPath: ProjectSettings\TagManager.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\TimeManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\TimeManager.asset
+      projectPath: ..\Unity\ProjectSettings\TimeManager.asset
+      originalPath: ProjectSettings\TimeManager.asset
+      status: 6
+      staged: 0
+    - path: Unity\ProjectSettings\UnityConnectSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\ProjectSettings\UnityConnectSettings.asset
+      projectPath: ..\Unity\ProjectSettings\UnityConnectSettings.asset
+      originalPath: ProjectSettings\UnityConnectSettings.asset
+      status: 6
+      staged: 0
+    - path: Unity\QCAR\somedata16
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Unity\QCAR\somedata16
+      projectPath: ..\Unity\QCAR\somedata16
+      originalPath: QCAR\somedata16
+      status: 6
+      staged: 0
+    - path: "Repository.pdf\tUnity\\docs\\Creating Repository.pdf"
+      fullPath: "C:\\Users\\leoth\\Desktop\\Leo\\Classwork\\Fall 2018\\CS 307\\polybius\\Repository.pdf\tUnity\\docs\\Creating
+        Repository.pdf"
+      projectPath: "..\\Repository.pdf\tUnity\\docs\\Creating Repository.pdf"
+      originalPath: docs\Creating
+      status: 6
+      staged: 0
+    - path: "Document.pdf\tUnity\\docs\\Design Document.pdf"
+      fullPath: "C:\\Users\\leoth\\Desktop\\Leo\\Classwork\\Fall 2018\\CS 307\\polybius\\Document.pdf\tUnity\\docs\\Design
+        Document.pdf"
+      projectPath: "..\\Document.pdf\tUnity\\docs\\Design Document.pdf"
+      originalPath: docs\Design
+      status: 6
+      staged: 0
+    - path: "and Resources.pdf\tUnity\\docs\\Links and Resources.pdf"
+      fullPath: "C:\\Users\\leoth\\Desktop\\Leo\\Classwork\\Fall 2018\\CS 307\\polybius\\and
+        Resources.pdf\tUnity\\docs\\Links and Resources.pdf"
+      projectPath: "..\\and Resources.pdf\tUnity\\docs\\Links and Resources.pdf"
+      originalPath: docs\Links
+      status: 6
+      staged: 0
+    - path: "Backlog.pdf\tUnity\\docs\\Product Backlog.pdf"
+      fullPath: "C:\\Users\\leoth\\Desktop\\Leo\\Classwork\\Fall 2018\\CS 307\\polybius\\Backlog.pdf\tUnity\\docs\\Product
+        Backlog.pdf"
+      projectPath: "..\\Backlog.pdf\tUnity\\docs\\Product Backlog.pdf"
+      originalPath: docs\Product
+      status: 6
+      staged: 0
+    - path: "Charter.pdf\tUnity\\docs\\Project Charter.pdf"
+      fullPath: "C:\\Users\\leoth\\Desktop\\Leo\\Classwork\\Fall 2018\\CS 307\\polybius\\Charter.pdf\tUnity\\docs\\Project
+        Charter.pdf"
+      projectPath: "..\\Charter.pdf\tUnity\\docs\\Project Charter.pdf"
+      originalPath: docs\Project
+      status: 6
+      staged: 0
+    - path: "1 Planning Document.pdf\tUnity\\docs\\Sprint 1 Planning Document.pdf"
+      fullPath: "C:\\Users\\leoth\\Desktop\\Leo\\Classwork\\Fall 2018\\CS 307\\polybius\\1
+        Planning Document.pdf\tUnity\\docs\\Sprint 1 Planning Document.pdf"
+      projectPath: "..\\1 Planning Document.pdf\tUnity\\docs\\Sprint 1 Planning Document.pdf"
+      originalPath: docs\Sprint
+      status: 6
+      staged: 0
+  - commitID: 79342990a95ec9422e75da32d3dd95532f440334
+    mergeA: 
+    mergeB: 
+    authorName: Lucas
+    authorEmail: lucashahn@comcast.net
+    commitEmail: lucashahn@comcast.net
+    commitName: Lucas
+    summary: Initialize SmartFox Api
+    description: Initialize SmartFox Api
+    timeString: 2018-09-21T00:07:51.000-04:00
+    commitTimeString: 2018-09-21T00:07:51.000-04:00
+    changes:
+    - path: Assets\Plugins\SmartFox2X.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\SmartFox2X.dll
+      projectPath: ..\Assets\Plugins\SmartFox2X.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\SmartFox2X.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\SmartFox2X.dll.meta
+      projectPath: ..\Assets\Plugins\SmartFox2X.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+  - commitID: 09c4c058957015df470b7cafbeb9af347610c490
+    mergeA: 
+    mergeB: 
+    authorName: csculley
+    authorEmail: cs.sculley@gmail.com
+    commitEmail: cs.sculley@gmail.com
+    commitName: csculley
+    summary: Vuforia QR-Code sphere test
+    description: Vuforia QR-Code sphere test
+    timeString: 2018-09-20T21:40:28.000-04:00
+    commitTimeString: 2018-09-20T21:40:28.000-04:00
+    changes:
+    - path: Assets\Animations.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Animations.meta
+      projectPath: ..\Assets\Animations.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Animations\Hover.anim
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Animations\Hover.anim
+      projectPath: ..\Assets\Animations\Hover.anim
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Animations\Hover.anim.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Animations\Hover.anim.meta
+      projectPath: ..\Assets\Animations\Hover.anim.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Animations\Sphere.controller
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Animations\Sphere.controller
+      projectPath: ..\Assets\Animations\Sphere.controller
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Animations\Sphere.controller.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Animations\Sphere.controller.meta
+      projectPath: ..\Assets\Animations\Sphere.controller.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor.meta
+      projectPath: ..\Assets\Editor.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia.meta
+      projectPath: ..\Assets\Editor\Vuforia.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\Emulator.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\Emulator.meta
+      projectPath: ..\Assets\Editor\Vuforia\Emulator.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat
+      projectPath: ..\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat.meta
+      projectPath: ..\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.dat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml
+      projectPath: ..\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml.meta
+      projectPath: ..\Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\ForPrint.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\ForPrint.meta
+      projectPath: ..\Assets\Editor\Vuforia\ForPrint.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\ForPrint\Emulator.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\ForPrint\Emulator.meta
+      projectPath: ..\Assets\Editor\Vuforia\ForPrint\Emulator.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\ForPrint\Emulator\Emulator Ground Plane.pdf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\ForPrint\Emulator\Emulator
+        Ground Plane.pdf
+      projectPath: ..\Assets\Editor\Vuforia\ForPrint\Emulator\Emulator Ground Plane.pdf
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\ForPrint\Emulator\Emulator Ground Plane.pdf.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\ForPrint\Emulator\Emulator
+        Ground Plane.pdf.meta
+      projectPath: ..\Assets\Editor\Vuforia\ForPrint\Emulator\Emulator Ground Plane.pdf.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\ImageTargetTextures.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\ImageTargetTextures.meta
+      projectPath: ..\Assets\Editor\Vuforia\ImageTargetTextures.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\ImageTargetTextures\Polybius.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\ImageTargetTextures\Polybius.meta
+      projectPath: ..\Assets\Editor\Vuforia\ImageTargetTextures\Polybius.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg
+      projectPath: ..\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg.meta
+      projectPath: ..\Assets\Editor\Vuforia\ImageTargetTextures\Polybius\QRCode_scaled.jpg.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Materials.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Materials.meta
+      projectPath: ..\Assets\Materials.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Materials\Green.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Materials\Green.mat
+      projectPath: ..\Assets\Materials\Green.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Materials\Green.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Materials\Green.mat.meta
+      projectPath: ..\Assets\Materials\Green.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Resources\VuforiaConfiguration.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Resources\VuforiaConfiguration.asset
+      projectPath: ..\Assets\Resources\VuforiaConfiguration.asset
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Assets\Scenes\Polybius.unity
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Scenes\Polybius.unity
+      projectPath: ..\Assets\Scenes\Polybius.unity
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Assets\Scripts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Scripts.meta
+      projectPath: ..\Assets\Scripts.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\StreamingAssets.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\StreamingAssets.meta
+      projectPath: ..\Assets\StreamingAssets.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\StreamingAssets\Vuforia.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\StreamingAssets\Vuforia.meta
+      projectPath: ..\Assets\StreamingAssets\Vuforia.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\StreamingAssets\Vuforia\Polybius.dat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\StreamingAssets\Vuforia\Polybius.dat
+      projectPath: ..\Assets\StreamingAssets\Vuforia\Polybius.dat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\StreamingAssets\Vuforia\Polybius.dat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\StreamingAssets\Vuforia\Polybius.dat.meta
+      projectPath: ..\Assets\StreamingAssets\Vuforia\Polybius.dat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\StreamingAssets\Vuforia\Polybius.xml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\StreamingAssets\Vuforia\Polybius.xml
+      projectPath: ..\Assets\StreamingAssets\Vuforia\Polybius.xml
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\StreamingAssets\Vuforia\Polybius.xml.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\StreamingAssets\Vuforia\Polybius.xml.meta
+      projectPath: ..\Assets\StreamingAssets\Vuforia\Polybius.xml.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia.meta
+      projectPath: ..\Assets\Vuforia.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Editor.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Editor.meta
+      projectPath: ..\Assets\Vuforia\Editor.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Editor\Scripts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Editor\Scripts.meta
+      projectPath: ..\Assets\Vuforia\Editor\Scripts.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs
+      projectPath: ..\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs.meta
+      projectPath: ..\Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Editor\VirtualButtonTextures.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Editor\VirtualButtonTextures.meta
+      projectPath: ..\Assets\Vuforia\Editor\VirtualButtonTextures.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png
+      projectPath: ..\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png.meta
+      projectPath: ..\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreview.png.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat
+      projectPath: ..\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat.meta
+      projectPath: ..\Assets\Vuforia\Editor\VirtualButtonTextures\VirtualButtonPreviewMaterial.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Fonts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Fonts.meta
+      projectPath: ..\Assets\Vuforia\Fonts.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Fonts\SourceSansPro.ttf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Fonts\SourceSansPro.ttf
+      projectPath: ..\Assets\Vuforia\Fonts\SourceSansPro.ttf
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Fonts\SourceSansPro.ttf.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Fonts\SourceSansPro.ttf.meta
+      projectPath: ..\Assets\Vuforia\Fonts\SourceSansPro.ttf.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials.meta
+      projectPath: ..\Assets\Vuforia\Materials.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\CloudRecoTarget.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\CloudRecoTarget.mat
+      projectPath: ..\Assets\Vuforia\Materials\CloudRecoTarget.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\CloudRecoTarget.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\CloudRecoTarget.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\CloudRecoTarget.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\ColoredLines.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\ColoredLines.mat
+      projectPath: ..\Assets\Vuforia\Materials\ColoredLines.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\ColoredLines.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\ColoredLines.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\ColoredLines.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\DefaultTarget.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\DefaultTarget.mat
+      projectPath: ..\Assets\Vuforia\Materials\DefaultTarget.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\DefaultTarget.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\DefaultTarget.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\DefaultTarget.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\DepthMask.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\DepthMask.mat
+      projectPath: ..\Assets\Vuforia\Materials\DepthMask.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\DepthMask.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\DepthMask.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\DepthMask.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\GroundPlaneIndicator.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\GroundPlaneIndicator.mat
+      projectPath: ..\Assets\Vuforia\Materials\GroundPlaneIndicator.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\GroundPlaneIndicator.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\GroundPlaneIndicator.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\GroundPlaneIndicator.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\GroundPlaneReference.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\GroundPlaneReference.mat
+      projectPath: ..\Assets\Vuforia\Materials\GroundPlaneReference.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\GroundPlaneReference.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\GroundPlaneReference.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\GroundPlaneReference.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\GuideView2D.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\GuideView2D.mat
+      projectPath: ..\Assets\Vuforia\Materials\GuideView2D.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\GuideView2D.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\GuideView2D.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\GuideView2D.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\MidAirIndicator.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\MidAirIndicator.mat
+      projectPath: ..\Assets\Vuforia\Materials\MidAirIndicator.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\MidAirIndicator.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\MidAirIndicator.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\MidAirIndicator.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\MidAirReference.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\MidAirReference.mat
+      projectPath: ..\Assets\Vuforia\Materials\MidAirReference.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\MidAirReference.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\MidAirReference.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\MidAirReference.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\OutlineOpaque.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\OutlineOpaque.mat
+      projectPath: ..\Assets\Vuforia\Materials\OutlineOpaque.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\OutlineOpaque.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\OutlineOpaque.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\OutlineOpaque.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\StandardCutout.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\StandardCutout.mat
+      projectPath: ..\Assets\Vuforia\Materials\StandardCutout.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\StandardCutout.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\StandardCutout.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\StandardCutout.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\UserDefinedTarget.mat
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\UserDefinedTarget.mat
+      projectPath: ..\Assets\Vuforia\Materials\UserDefinedTarget.mat
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Materials\UserDefinedTarget.mat.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Materials\UserDefinedTarget.mat.meta
+      projectPath: ..\Assets\Vuforia\Materials\UserDefinedTarget.mat.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Prefabs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Prefabs.meta
+      projectPath: ..\Assets\Vuforia\Prefabs.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab
+      projectPath: ..\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab.meta
+      projectPath: ..\Assets\Vuforia\Prefabs\DefaultMidAirIndicator.prefab.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab
+      projectPath: ..\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab.meta
+      projectPath: ..\Assets\Vuforia\Prefabs\DefaultPlaneIndicator.prefab.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Prefabs\GroundPlaneReference.prefab
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab
+      projectPath: ..\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Prefabs\GroundPlaneReference.prefab.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab.meta
+      projectPath: ..\Assets\Vuforia\Prefabs\GroundPlaneReference.prefab.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Prefabs\MidAirReference.prefab
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Prefabs\MidAirReference.prefab
+      projectPath: ..\Assets\Vuforia\Prefabs\MidAirReference.prefab
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Prefabs\MidAirReference.prefab.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Prefabs\MidAirReference.prefab.meta
+      projectPath: ..\Assets\Vuforia\Prefabs\MidAirReference.prefab.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Scripts.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Scripts.meta
+      projectPath: ..\Assets\Vuforia\Scripts.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs
+      projectPath: ..\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs.meta
+      projectPath: ..\Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs
+      projectPath: ..\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs.meta
+      projectPath: ..\Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders.meta
+      projectPath: ..\Assets\Vuforia\Shaders.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\BrightTexture.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\BrightTexture.shader
+      projectPath: ..\Assets\Vuforia\Shaders\BrightTexture.shader
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\BrightTexture.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\BrightTexture.shader.meta
+      projectPath: ..\Assets\Vuforia\Shaders\BrightTexture.shader.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\CameraDiffuse.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\CameraDiffuse.shader
+      projectPath: ..\Assets\Vuforia\Shaders\CameraDiffuse.shader
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\CameraDiffuse.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\CameraDiffuse.shader.meta
+      projectPath: ..\Assets\Vuforia\Shaders\CameraDiffuse.shader.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\ColoredLines.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\ColoredLines.shader
+      projectPath: ..\Assets\Vuforia\Shaders\ColoredLines.shader
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\ColoredLines.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\ColoredLines.shader.meta
+      projectPath: ..\Assets\Vuforia\Shaders\ColoredLines.shader.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\DepthContour.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\DepthContour.shader
+      projectPath: ..\Assets\Vuforia\Shaders\DepthContour.shader
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\DepthContour.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\DepthContour.shader.meta
+      projectPath: ..\Assets\Vuforia\Shaders\DepthContour.shader.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\DepthMask.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\DepthMask.shader
+      projectPath: ..\Assets\Vuforia\Shaders\DepthMask.shader
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\DepthMask.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\DepthMask.shader.meta
+      projectPath: ..\Assets\Vuforia\Shaders\DepthMask.shader.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\OutlineOpaque.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\OutlineOpaque.shader
+      projectPath: ..\Assets\Vuforia\Shaders\OutlineOpaque.shader
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\OutlineOpaque.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\OutlineOpaque.shader.meta
+      projectPath: ..\Assets\Vuforia\Shaders\OutlineOpaque.shader.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\Text3D.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\Text3D.shader
+      projectPath: ..\Assets\Vuforia\Shaders\Text3D.shader
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\Text3D.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\Text3D.shader.meta
+      projectPath: ..\Assets\Vuforia\Shaders\Text3D.shader.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\VertexLitWithZ.shader
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\VertexLitWithZ.shader
+      projectPath: ..\Assets\Vuforia\Shaders\VertexLitWithZ.shader
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Shaders\VertexLitWithZ.shader.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Shaders\VertexLitWithZ.shader.meta
+      projectPath: ..\Assets\Vuforia\Shaders\VertexLitWithZ.shader.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures.meta
+      projectPath: ..\Assets\Vuforia\Textures.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\CloudRecoTarget.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\CloudRecoTarget.png
+      projectPath: ..\Assets\Vuforia\Textures\CloudRecoTarget.png
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\CloudRecoTarget.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\CloudRecoTarget.png.meta
+      projectPath: ..\Assets\Vuforia\Textures\CloudRecoTarget.png.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\GroundPlaneReference.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\GroundPlaneReference.png
+      projectPath: ..\Assets\Vuforia\Textures\GroundPlaneReference.png
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\GroundPlaneReference.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\GroundPlaneReference.png.meta
+      projectPath: ..\Assets\Vuforia\Textures\GroundPlaneReference.png.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\MidAirReference.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\MidAirReference.png
+      projectPath: ..\Assets\Vuforia\Textures\MidAirReference.png
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\MidAirReference.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\MidAirReference.png.meta
+      projectPath: ..\Assets\Vuforia\Textures\MidAirReference.png.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\Reticle.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\Reticle.png
+      projectPath: ..\Assets\Vuforia\Textures\Reticle.png
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\Reticle.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\Reticle.png.meta
+      projectPath: ..\Assets\Vuforia\Textures\Reticle.png.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\UserDefinedTarget.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\UserDefinedTarget.png
+      projectPath: ..\Assets\Vuforia\Textures\UserDefinedTarget.png
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\UserDefinedTarget.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\UserDefinedTarget.png.meta
+      projectPath: ..\Assets\Vuforia\Textures\UserDefinedTarget.png.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\VideoBackground.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\VideoBackground.png
+      projectPath: ..\Assets\Vuforia\Textures\VideoBackground.png
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\Textures\VideoBackground.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\Textures\VideoBackground.png.meta
+      projectPath: ..\Assets\Vuforia\Textures\VideoBackground.png.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\version
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\version
+      projectPath: ..\Assets\Vuforia\version
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Vuforia\version.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Vuforia\version.meta
+      projectPath: ..\Assets\Vuforia\version.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\GraphicsSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\GraphicsSettings.asset
+      projectPath: ..\ProjectSettings\GraphicsSettings.asset
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: ProjectSettings\ProjectSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\ProjectSettings.asset
+      projectPath: ..\ProjectSettings\ProjectSettings.asset
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: ProjectSettings\QualitySettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\QualitySettings.asset
+      projectPath: ..\ProjectSettings\QualitySettings.asset
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: ProjectSettings\UnityConnectSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\UnityConnectSettings.asset
+      projectPath: ..\ProjectSettings\UnityConnectSettings.asset
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: QCAR\somedata16
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\QCAR\somedata16
+      projectPath: ..\QCAR\somedata16
+      originalPath: 
+      status: 4
+      staged: 0
+  - commitID: 43145bcc7e59d2dcd63418c05199772bf8fd59a5
+    mergeA: 
+    mergeB: 
+    authorName: csculley
+    authorEmail: cs.sculley@gmail.com
+    commitEmail: cs.sculley@gmail.com
+    commitName: csculley
+    summary: Initial Unity proj w Vuforia
+    description: Initial Unity proj w Vuforia
+    timeString: 2018-09-20T16:52:27.000-04:00
+    commitTimeString: 2018-09-20T16:52:27.000-04:00
+    changes:
+    - path: .gitattributes
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\.gitattributes
+      projectPath: ..\.gitattributes
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: .gitignore
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\.gitignore
+      projectPath: ..\.gitignore
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\.gitignore
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\.gitignore
+      projectPath: ..\Assets\.gitignore
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins.meta
+      projectPath: ..\Assets\Plugins.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub.meta
+      projectPath: ..\Assets\Plugins\GitHub.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+      projectPath: ..\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\ICSharpCode.SharpZipLib.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+      projectPath: ..\Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\System.Threading.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\System.Threading.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\System.Threading.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\big-logo@2x.png
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\big-logo@2x.png
+      projectPath: ..\Assets\Plugins\GitHub\Editor\big-logo@2x.png
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\credits.txt
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\credits.txt
+      projectPath: ..\Assets\Plugins\GitHub\Editor\credits.txt
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\credits.txt.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\credits.txt.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\credits.txt.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\eula.txt
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\eula.txt
+      projectPath: ..\Assets\Plugins\GitHub\Editor\eula.txt
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\eula.txt.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\eula.txt.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\eula.txt.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\libsfw.bundle
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\libsfw.bundle
+      projectPath: ..\Assets\Plugins\GitHub\Editor\libsfw.bundle
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\libsfw.so
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\libsfw.so
+      projectPath: ..\Assets\Plugins\GitHub\Editor\libsfw.so
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\libsfw.so.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\libsfw.so.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\libsfw.so.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\sfw.net.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\sfw.net.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\sfw.net.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x64.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x64.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x64.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x86.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x86.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x86.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+      projectPath: ..\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Resources.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Resources.meta
+      projectPath: ..\Assets\Resources.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Resources\VuforiaConfiguration.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Resources\VuforiaConfiguration.asset
+      projectPath: ..\Assets\Resources\VuforiaConfiguration.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Resources\VuforiaConfiguration.asset.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Resources\VuforiaConfiguration.asset.meta
+      projectPath: ..\Assets\Resources\VuforiaConfiguration.asset.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Scenes.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Scenes.meta
+      projectPath: ..\Assets\Scenes.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Scenes\Polybius.unity
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Scenes\Polybius.unity
+      projectPath: ..\Assets\Scenes\Polybius.unity
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\Scenes\Polybius.unity.meta
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Assets\Scenes\Polybius.unity.meta
+      projectPath: ..\Assets\Scenes\Polybius.unity.meta
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Packages\manifest.json
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Packages\manifest.json
+      projectPath: ..\Packages\manifest.json
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\AudioManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\AudioManager.asset
+      projectPath: ..\ProjectSettings\AudioManager.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\ClusterInputManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\ClusterInputManager.asset
+      projectPath: ..\ProjectSettings\ClusterInputManager.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\DynamicsManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\DynamicsManager.asset
+      projectPath: ..\ProjectSettings\DynamicsManager.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\EditorBuildSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\EditorBuildSettings.asset
+      projectPath: ..\ProjectSettings\EditorBuildSettings.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\EditorSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\EditorSettings.asset
+      projectPath: ..\ProjectSettings\EditorSettings.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\GraphicsSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\GraphicsSettings.asset
+      projectPath: ..\ProjectSettings\GraphicsSettings.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\InputManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\InputManager.asset
+      projectPath: ..\ProjectSettings\InputManager.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\NavMeshAreas.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\NavMeshAreas.asset
+      projectPath: ..\ProjectSettings\NavMeshAreas.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\NetworkManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\NetworkManager.asset
+      projectPath: ..\ProjectSettings\NetworkManager.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\Physics2DSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\Physics2DSettings.asset
+      projectPath: ..\ProjectSettings\Physics2DSettings.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\PresetManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\PresetManager.asset
+      projectPath: ..\ProjectSettings\PresetManager.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\ProjectSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\ProjectSettings.asset
+      projectPath: ..\ProjectSettings\ProjectSettings.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\ProjectVersion.txt
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\ProjectVersion.txt
+      projectPath: ..\ProjectSettings\ProjectVersion.txt
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\QualitySettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\QualitySettings.asset
+      projectPath: ..\ProjectSettings\QualitySettings.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\TagManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\TagManager.asset
+      projectPath: ..\ProjectSettings\TagManager.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\TimeManager.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\TimeManager.asset
+      projectPath: ..\ProjectSettings\TimeManager.asset
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: ProjectSettings\UnityConnectSettings.asset
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\ProjectSettings\UnityConnectSettings.asset
+      projectPath: ..\ProjectSettings\UnityConnectSettings.asset
+      originalPath: 
+      status: 4
+      staged: 0
+  - commitID: f4eebbe624d2ceebb1a87ab439c5f503d61b9dbd
+    mergeA: 
+    mergeB: 
+    authorName: tr-io
+    authorEmail: leoliu.mailbox@gmail.com
+    commitEmail: leoliu.mailbox@gmail.com
+    commitName: tr-io
+    summary: Added sprint planning document.
+    description: Added sprint planning document.
+    timeString: 2018-09-18T19:32:14.000-04:00
+    commitTimeString: 2018-09-18T19:32:14.000-04:00
+    changes:
+    - path: docs\Sprint 1 Planning Document.pdf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\docs\Sprint
+        1 Planning Document.pdf
+      projectPath: ..\docs\Sprint 1 Planning Document.pdf
+      originalPath: 
+      status: 4
+      staged: 0
+  - commitID: 74583db69c407aa58191f25156e129baed412c85
+    mergeA: 
+    mergeB: 
+    authorName: tr-io
+    authorEmail: leoliu.mailbox@gmail.com
+    commitEmail: leoliu.mailbox@gmail.com
+    commitName: tr-io
+    summary: Added design document.
+    description: Added design document.
+    timeString: 2018-09-14T10:02:35.000-04:00
+    commitTimeString: 2018-09-14T10:02:35.000-04:00
+    changes:
+    - path: docs\Design Document.pdf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\docs\Design
+        Document.pdf
+      projectPath: ..\docs\Design Document.pdf
+      originalPath: 
+      status: 4
+      staged: 0
+  - commitID: f67a23a260c21088190862172a75111805dc3f0c
+    mergeA: 
+    mergeB: 
+    authorName: csculley
+    authorEmail: cs.sculley@gmail.com
+    commitEmail: cs.sculley@gmail.com
+    commitName: csculley
+    summary: Add initial documents
+    description: Add initial documents
+    timeString: 2018-09-07T10:09:43.000-04:00
+    commitTimeString: 2018-09-07T10:09:43.000-04:00
+    changes:
+    - path: docs\Creating Repository.pdf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\docs\Creating
+        Repository.pdf
+      projectPath: ..\docs\Creating Repository.pdf
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: docs\Links and Resources.pdf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\docs\Links
+        and Resources.pdf
+      projectPath: ..\docs\Links and Resources.pdf
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: docs\Product Backlog.pdf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\docs\Product
+        Backlog.pdf
+      projectPath: ..\docs\Product Backlog.pdf
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: docs\Project Charter.pdf
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\docs\Project
+        Charter.pdf
+      projectPath: ..\docs\Project Charter.pdf
+      originalPath: 
+      status: 4
+      staged: 0
