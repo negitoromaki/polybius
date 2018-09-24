@@ -12,9 +12,75 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 3
-  lastUpdatedAtString: 2018-09-24T19:10:27.242-04:00
+  lastUpdatedAtString: 2018-09-24T19:16:11.031-04:00
   initializedAtString: 2018-09-24T19:10:27.242-04:00
   log:
+  - commitID: 7d74a3ac2f4f890802e194a5174ec7efd31957f3
+    mergeA: 
+    mergeB: 
+    authorName: tr-io
+    authorEmail: leoliu.mailbox@gmail.com
+    commitEmail: leoliu.mailbox@gmail.com
+    commitName: tr-io
+    summary: Changed gitignore
+    description: Changed gitignore
+    timeString: 2018-09-24T19:15:54.000-04:00
+    commitTimeString: 2018-09-24T19:15:54.000-04:00
+    changes:
+    - path: .gitignore
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\.gitignore
+      projectPath: ..\.gitignore
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\assetDatabase3
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\assetDatabase3
+      projectPath: Library\assetDatabase3
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\branches.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\branches.yaml
+      projectPath: Library\gfu\cache\branches.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\gitlocks.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitlocks.yaml
+      projectPath: Library\gfu\cache\gitlocks.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\gitlog.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitlog.yaml
+      projectPath: Library\gfu\cache\gitlog.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\gitstatusentries.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitstatusentries.yaml
+      projectPath: Library\gfu\cache\gitstatusentries.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\gittrackingstatus.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gittrackingstatus.yaml
+      projectPath: Library\gfu\cache\gittrackingstatus.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\repoinfo.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\repoinfo.yaml
+      projectPath: Library\gfu\cache\repoinfo.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\shadercompiler-UnityShaderCompiler.exe0.log
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\shadercompiler-UnityShaderCompiler.exe0.log
+      projectPath: Library\shadercompiler-UnityShaderCompiler.exe0.log
+      originalPath: 
+      status: 3
+      staged: 0
   - commitID: 4dc25a0e167a8564a81efc901405e76c95aaad19
     mergeA: 
     mergeB: 

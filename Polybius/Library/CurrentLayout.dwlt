@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -43,7 +43,7 @@ MonoBehaviour:
     y: 0
     width: 1536
     height: 781
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_MinSize: {x: 538, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 31
+  controlID: 26
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 131
+  controlID: 143
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 58
+  controlID: 98
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -503,8 +503,84 @@ MonoBehaviour:
         keys: []
         values: []
       folders:
-        keys: []
-        values: []
+        keys:
+        - Polybius
+        - Polybius\Library
+        - Polybius\Library\gfu
+        - Polybius\Library\gfu\cache
+        values:
+        - path: Polybius
+          label: Polybius
+          level: 0
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            status: 0
+            staged: 0
+        - path: Polybius\Library
+          label: Library
+          level: 1
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            status: 0
+            staged: 0
+        - path: Polybius\Library\gfu
+          label: gfu
+          level: 2
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            status: 0
+            staged: 0
+        - path: Polybius\Library\gfu\cache
+          label: cache
+          level: 3
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            status: 0
+            staged: 0
       checkedFileNodes:
         keys: []
         values: []
@@ -533,16 +609,33 @@ MonoBehaviour:
           originalPath: 
           status: 0
           staged: 0
-      selectedNode:
-        path: 
-        label: 
+      - path: .gitignore
+        label: .gitignore
         level: 0
         isFolder: 0
         isContainer: 0
         isCollapsed: 0
         isHidden: 0
         isActive: 0
-        treeIsCheckable: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .gitignore
+          fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\.gitignore
+          projectPath: ..\.gitignore
+          originalPath: 
+          status: 3
+          staged: 0
+      - path: Polybius
+        label: Polybius
+        level: 0
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
         checkState: 0
         isLocked: 0
         gitStatusEntry:
@@ -552,16 +645,263 @@ MonoBehaviour:
           originalPath: 
           status: 0
           staged: 0
-    gitStatusEntries: []
-    changedFilesText: No changed files
+      - path: Polybius\Library
+        label: Library
+        level: 1
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          status: 0
+          staged: 0
+      - path: Polybius\Library\gfu
+        label: gfu
+        level: 2
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          status: 0
+          staged: 0
+      - path: Polybius\Library\gfu\cache
+        label: cache
+        level: 3
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          status: 0
+          staged: 0
+      - path: Polybius\Library\gfu\cache\branches.yaml
+        label: branches.yaml
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Polybius\Library\gfu\cache\branches.yaml
+          fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\branches.yaml
+          projectPath: Library\gfu\cache\branches.yaml
+          originalPath: 
+          status: 3
+          staged: 0
+      - path: Polybius\Library\gfu\cache\gitlocks.yaml
+        label: gitlocks.yaml
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Polybius\Library\gfu\cache\gitlocks.yaml
+          fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitlocks.yaml
+          projectPath: Library\gfu\cache\gitlocks.yaml
+          originalPath: 
+          status: 3
+          staged: 0
+      - path: Polybius\Library\gfu\cache\gitlog.yaml
+        label: gitlog.yaml
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Polybius\Library\gfu\cache\gitlog.yaml
+          fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitlog.yaml
+          projectPath: Library\gfu\cache\gitlog.yaml
+          originalPath: 
+          status: 3
+          staged: 0
+      - path: Polybius\Library\gfu\cache\gitstatusentries.yaml
+        label: gitstatusentries.yaml
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Polybius\Library\gfu\cache\gitstatusentries.yaml
+          fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitstatusentries.yaml
+          projectPath: Library\gfu\cache\gitstatusentries.yaml
+          originalPath: 
+          status: 3
+          staged: 0
+      - path: Polybius\Library\gfu\cache\gittrackingstatus.yaml
+        label: gittrackingstatus.yaml
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Polybius\Library\gfu\cache\gittrackingstatus.yaml
+          fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gittrackingstatus.yaml
+          projectPath: Library\gfu\cache\gittrackingstatus.yaml
+          originalPath: 
+          status: 3
+          staged: 0
+      - path: Polybius\Library\gfu\cache\repoinfo.yaml
+        label: repoinfo.yaml
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Polybius\Library\gfu\cache\repoinfo.yaml
+          fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\repoinfo.yaml
+          projectPath: Library\gfu\cache\repoinfo.yaml
+          originalPath: 
+          status: 3
+          staged: 0
+      - path: Polybius\Library\shadercompiler-UnityShaderCompiler.exe0.log
+        label: shadercompiler-UnityShaderCompiler.exe0.log
+        level: 2
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Polybius\Library\shadercompiler-UnityShaderCompiler.exe0.log
+          fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\shadercompiler-UnityShaderCompiler.exe0.log
+          projectPath: Library\shadercompiler-UnityShaderCompiler.exe0.log
+          originalPath: 
+          status: 3
+          staged: 0
+      selectedNode:
+        path: Polybius
+        label: Polybius
+        level: 0
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          status: 0
+          staged: 0
+    gitStatusEntries:
+    - path: .gitignore
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\.gitignore
+      projectPath: ..\.gitignore
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\branches.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\branches.yaml
+      projectPath: Library\gfu\cache\branches.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\gitlocks.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitlocks.yaml
+      projectPath: Library\gfu\cache\gitlocks.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\gitlog.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitlog.yaml
+      projectPath: Library\gfu\cache\gitlog.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\gitstatusentries.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitstatusentries.yaml
+      projectPath: Library\gfu\cache\gitstatusentries.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\gittrackingstatus.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gittrackingstatus.yaml
+      projectPath: Library\gfu\cache\gittrackingstatus.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\gfu\cache\repoinfo.yaml
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\repoinfo.yaml
+      projectPath: Library\gfu\cache\repoinfo.yaml
+      originalPath: 
+      status: 3
+      staged: 0
+    - path: Polybius\Library\shadercompiler-UnityShaderCompiler.exe0.log
+      fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\shadercompiler-UnityShaderCompiler.exe0.log
+      projectPath: Library\shadercompiler-UnityShaderCompiler.exe0.log
+      originalPath: 
+      status: 3
+      staged: 0
+    changedFilesText: 8 changed files
     lastCurrentBranchChangedEvent:
-      updatedTimeString: 2018-09-24T18:48:20.993-04:00
+      updatedTimeString: 2018-09-24T19:16:33.933-04:00
       cacheType: 1
     lastStatusEntriesChangedEvent:
-      updatedTimeString: 2018-09-24T18:59:32.877-04:00
+      updatedTimeString: 2018-09-24T19:16:33.955-04:00
       cacheType: 5
     lastLocksChangedEvent:
-      updatedTimeString: 2018-09-24T18:59:13.397-04:00
+      updatedTimeString: 2018-09-24T19:16:34.012-04:00
       cacheType: 6
   historyView:
     currentLogHasUpdate: 0
@@ -6779,7 +7119,7 @@ MonoBehaviour:
   currentRemoteUrl: https://github.com/csculley/polybius.git
   statusAhead: 0
   statusBehind: 0
-  hasItemsToCommit: 0
+  hasItemsToCommit: 1
   isTrackingRemoteBranch: 1
   currentBranchContent:
     m_Text: master
@@ -6790,13 +7130,13 @@ MonoBehaviour:
     m_Image: {fileID: 0}
     m_Tooltip: Url of the origin remote
   lastCurrentBranchAndRemoteChangedEvent:
-    updatedTimeString: 2018-09-24T18:48:20.993-04:00
+    updatedTimeString: 2018-09-24T19:16:33.933-04:00
     cacheType: 1
   lastTrackingStatusChangedEvent:
-    updatedTimeString: 0001-01-01T00:00:00.000+00:00
+    updatedTimeString: 2018-09-24T19:16:33.993-04:00
     cacheType: 4
   lastStatusEntriesChangedEvent:
-    updatedTimeString: 2018-09-24T18:59:32.877-04:00
+    updatedTimeString: 2018-09-24T19:16:33.955-04:00
     cacheType: 5
   pullButtonContent:
     m_Text: Pull
@@ -7028,9 +7368,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: fa380000
-    m_LastClickedID: 14586
-    m_ExpandedIDs: 2069ffffbee6ffff00000000e8380000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: a4fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -7102,9 +7442,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 8a360000
-    m_LastClickedID: 13962
-    m_ExpandedIDs: 00000000ae35000000ca9a3b
+    m_SelectedIDs: 182e0000
+    m_LastClickedID: 11800
+    m_ExpandedIDs: 00000000222d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -7132,7 +7472,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000222d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -7159,22 +7499,22 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 40d6fdff927bfdff04270000242b000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Main-Menu
-      m_OriginalName: Main-Menu
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 13818
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:
