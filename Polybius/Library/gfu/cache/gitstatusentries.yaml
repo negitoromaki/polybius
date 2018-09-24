@@ -12,6 +12,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 5
-  lastUpdatedAtString: 2018-09-24T18:59:32.877-04:00
-  initializedAtString: 2018-09-24T18:46:50.744-04:00
-  entries: []
+  lastUpdatedAtString: 2018-09-24T19:13:03.292-04:00
+  initializedAtString: 2018-09-24T19:10:26.466-04:00
+  entries:
+  - path: .gitignore
+    fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\.gitignore
+    projectPath: ..\.gitignore
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Polybius\Library\assetDatabase3
+    fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\assetDatabase3
+    projectPath: Library\assetDatabase3
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Polybius\Library\gfu\cache\branches.yaml
+    fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\branches.yaml
+    projectPath: Library\gfu\cache\branches.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Polybius\Library\gfu\cache\gitlocks.yaml
+    fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitlocks.yaml
+    projectPath: Library\gfu\cache\gitlocks.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Polybius\Library\gfu\cache\gitlog.yaml
+    fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitlog.yaml
+    projectPath: Library\gfu\cache\gitlog.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Polybius\Library\gfu\cache\gitstatusentries.yaml
+    fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gitstatusentries.yaml
+    projectPath: Library\gfu\cache\gitstatusentries.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Polybius\Library\gfu\cache\gittrackingstatus.yaml
+    fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\gittrackingstatus.yaml
+    projectPath: Library\gfu\cache\gittrackingstatus.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Polybius\Library\gfu\cache\repoinfo.yaml
+    fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\gfu\cache\repoinfo.yaml
+    projectPath: Library\gfu\cache\repoinfo.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Polybius\Library\shadercompiler-UnityShaderCompiler.exe0.log
+    fullPath: C:\Users\leoth\Desktop\Leo\Classwork\Fall 2018\CS 307\polybius\Polybius\Library\shadercompiler-UnityShaderCompiler.exe0.log
+    projectPath: Library\shadercompiler-UnityShaderCompiler.exe0.log
+    originalPath: 
+    status: 3
+    staged: 0
