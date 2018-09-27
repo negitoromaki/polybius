@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 25, 2018 at 09:12 PM
+-- Generation Time: Sep 27, 2018 at 10:33 PM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -19,10 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `messages`
+-- Database: `users`
 --
-CREATE DATABASE IF NOT EXISTS `messages` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `messages`;
+CREATE DATABASE IF NOT EXISTS `users` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `users`;
 
 -- --------------------------------------------------------
 
@@ -39,11 +39,6 @@ CREATE TABLE IF NOT EXISTS `msgs` (
   `message` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
---
--- Database: `users`
---
-CREATE DATABASE IF NOT EXISTS `users` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `users`;
 
 -- --------------------------------------------------------
 

@@ -3,9 +3,7 @@ $servername="localhost";
 $username="root";
 $password="root";
 $dbname="users";
-
 $mysql = new mysqli($servername, $username, $password, $dbname);
-
 $mysql->select_db($dbname);
 for($g=0;$g<=10000; $g++){
 	$sql = "INSERT INTO userdata (username , password, email, isonline, currentgame, friends, statistics, notification)
@@ -16,17 +14,9 @@ for($g=0;$g<=10000; $g++){
 		echo "Error1";
 	}
 }
-
-
 //$sqls = "INSERT INTO userdata (username , password, email, isonline, currentgame, friends, statistics, notification)
 //VALUES ('G')";
-
-
-
-
-
 /*$data = "SELECT * FROM userdata";
-
 $result= $mysql->query($data);
 echo $result;
 if($mysql->query($sqls)==TRUE){
@@ -34,6 +24,5 @@ if($mysql->query($sqls)==TRUE){
 }else{
 	echo "Error2";
 }*/
-
 $mysql->close();
 ?>
