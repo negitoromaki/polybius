@@ -401,35 +401,9 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114568985169421048, guid: 705cab33fcc797246b6072bf3d9359cd,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114568985169421048, guid: 705cab33fcc797246b6072bf3d9359cd,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114380679614249938, guid: 705cab33fcc797246b6072bf3d9359cd,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114380679614249938, guid: 705cab33fcc797246b6072bf3d9359cd,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114408190707140870, guid: 705cab33fcc797246b6072bf3d9359cd,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114408190707140870, guid: 705cab33fcc797246b6072bf3d9359cd,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+    - target: {fileID: 1667540660094410, guid: 705cab33fcc797246b6072bf3d9359cd, type: 2}
+      propertyPath: m_Name
+      value: GameLobbySelector
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 705cab33fcc797246b6072bf3d9359cd, type: 2}
