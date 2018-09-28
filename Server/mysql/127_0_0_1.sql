@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 27, 2018 at 10:33 PM
+-- Generation Time: Sep 28, 2018 at 07:52 PM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `username` text NOT NULL,
   `password` text NOT NULL,
   `email` text NOT NULL,
+  `dob` date NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `isonline` tinyint(1) NOT NULL,
   `currentgame` int(11) NOT NULL,
