@@ -18,15 +18,15 @@ namespace polybius
         enum status { online, offline, invisible };
 
         // Variables
-        public static User player;
-        public  string ip = "";
-        public  int port = 9933;
-        public  SmartFox sfs = new SmartFox();
-        public  string initZone = "Polybius";
-        public  bool logged = false;
+        public static User player = new User();
 
+        // Server Configuration
+        public string ip = "";
+        public int port = 9933;
+        public SmartFox sfs = new SmartFox();
+        public string initZone = "Polybius";
+        public bool logged = false;
 
-        // Use this for initialization
         void Start()
         {
             sfs.AddEventListener(SFSEvent.LOGIN, onLoggin);
@@ -39,13 +39,10 @@ namespace polybius
 
         }
 
-        // Update is called once per frame
         void Update()
         {
             sfs.ProcessEvents();
-
         }
-
 
         //event listeners
         void onConnect(BaseEvent e)
@@ -61,15 +58,17 @@ namespace polybius
                 Debug.Log("Connection failed");
             }
         }
+
         void onLost(BaseEvent e)
         {
             logged = false;
         }
+
         void onLoggin(BaseEvent e)
         {
             logged = true;
-
         }
+
         void onResponse(BaseEvent e)
         {
 
@@ -102,6 +101,7 @@ namespace polybius
         {
             return sfs;
         }
+
         public bool isLogged()
         {
             return logged;
@@ -116,10 +116,7 @@ namespace polybius
             {
                 sfs.Disconnect();
             }
-
         }
-
-
     }
         public class Message
         {
@@ -134,20 +131,15 @@ namespace polybius
                 this.message = message;
             }
         }
+
         public class User
         {
-            public string username;
+            public string username, password, email;
             public int userID;
-            public string password;
-            public string email;
             public List<Message> messages = new List<Message>();
 
-            public User()
+            public User() : this(null, null, null)
             {
-                username = null;
-                password = null;
-                email = null;
-                userID = -1;
             }
 
             public User(string u, string p, string e)

@@ -10,37 +10,40 @@ namespace polybius {
         public int senderID;
 
         // References
-        public GameObject messageParent;
-        public GameObject title;
-        //public GameObject 
+        public GameObject messageParent, title;
 
-        private GameObject greenMessage, blueMessage;
-        private RectTransform scrollView;
-        private int messageCount;
+        private static GameObject greenMessage, blueMessage;
+        private static TMP_InputField input;
+        private static RectTransform scrollView;
+        private static int messageCount;
 
         void Awake() {
             // DEBUG
-            senderID = 0;
-            senderUsername = "Bob";
-            PolybiusManager.player.userID = 3;
+            /*
             for (int i = 0; i < 10; i++) {
                 Message m = new Message(i, System.DateTime.Now, "Hello: " + i);
                 PolybiusManager.player.messages.Add(m);
             }
+            */
 
             // Initialization
-            greenMessage = (GameObject) Resources.Load("Prefabs/UI/Green Message");
-            blueMessage = (GameObject) Resources.Load("Prefabs/UI/Blue Message");
-            scrollView = messageParent.GetComponent<RectTransform>();
-            title.GetComponent<TextMeshProUGUI>().text = senderUsername;
-            scrollView.sizeDelta = new Vector2(scrollView.sizeDelta.x, 200);
-            messageCount = 0;
+            
 
             // Display messages
             while (PolybiusManager.player.messages.Count > 0) {
                 displayMessage(PolybiusManager.player.messages[0]);
                 PolybiusManager.player.messages.RemoveAt(0);
             }
+        }
+
+        void init() {
+            greenMessage = (GameObject)Resources.Load("Prefabs/UI/Green Message");
+            blueMessage = (GameObject)Resources.Load("Prefabs/UI/Blue Message");
+            input = this.transform.Find("Footer").transform.Find("Input Bar").GetComponent<TMP_InputField>();
+            scrollView = messageParent.GetComponent<RectTransform>();
+            title.GetComponent<TextMeshProUGUI>().text = senderUsername;
+            scrollView.sizeDelta = new Vector2(scrollView.sizeDelta.x, 200);
+            messageCount = 0;
         }
 
         void displayMessage(Message m) {
@@ -61,10 +64,13 @@ namespace polybius {
             messageCount++;
         }
 
-        /*
-        void sendMessage() {
-
+        public void sendMessage() {
+            init();
+            Debug.Log(PolybiusManager.player.userID + ", " + System.DateTime.Now + ", " + input.text);
+            Message m = new Message(PolybiusManager.player.userID, System.DateTime.Now, input.GetComponent<TMP_InputField>().text);
+            PolybiusManager.player.messages.Add(m);
+            displayMessage(m);
         }
-        */
+
     }
 }
