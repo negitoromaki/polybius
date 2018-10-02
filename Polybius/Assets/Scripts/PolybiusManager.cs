@@ -21,7 +21,7 @@ namespace polybius {
     public class Message {
         public int sender;
         public System.DateTime timestamp;
-        public string message;  
+        public string message;
 
         public Message(int sender, System.DateTime timestamp, string message) {
             this.sender = sender;
