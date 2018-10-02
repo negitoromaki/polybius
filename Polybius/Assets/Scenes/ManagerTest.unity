@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c297c2e98562c40b6f864438afb17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 
+  ip: 128.211.248.49
   port: 9933
   initZone: Polybius
   logged: 0
