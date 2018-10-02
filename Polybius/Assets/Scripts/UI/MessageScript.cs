@@ -37,7 +37,7 @@ namespace polybius {
                 } else {
                     message = Instantiate(greenMessage, messageParent.transform);
                 }
-                message.transform.position += new Vector3(0, -150f * PolybiusManager.messages.Count, 0);
+                message.transform.position += new Vector3(0, -150f * i+1, 0);
                 message.transform.Find("Message").gameObject.GetComponent<TextMeshPro>().text = PolybiusManager.messages[i].message;
                 message.transform.Find("Timestamp").gameObject.GetComponent<TextMeshPro>().text = PolybiusManager.messages[i].timestamp.ToString();
             }

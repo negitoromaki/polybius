@@ -3027,12 +3027,29 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1752829168684378, guid: 9ef4316c3d3c75a40b475a64ec2dba85, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1914189183145156, guid: 9ef4316c3d3c75a40b475a64ec2dba85, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114538051237554018, guid: 9ef4316c3d3c75a40b475a64ec2dba85,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dafc4588a90f4e74eaeda407d0fac445,
+        type: 3}
+    - target: {fileID: 114538051237554018, guid: 9ef4316c3d3c75a40b475a64ec2dba85,
+        type: 2}
+      propertyPath: m_Type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114860867010794428, guid: 9ef4316c3d3c75a40b475a64ec2dba85,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3effd98559b54874698c1f5d8d02a37a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ef4316c3d3c75a40b475a64ec2dba85, type: 2}
   m_IsPrefabAsset: 0

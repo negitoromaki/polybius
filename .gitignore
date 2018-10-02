@@ -6,6 +6,9 @@
 
 /Polybius/Assets/AssetStoreTools*
 
+# Docs tmp files
+/docs/~*
+
 # Visual Studio 2015 cache directory
 /Polybius/.vs/
 
