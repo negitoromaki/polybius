@@ -115,19 +115,26 @@ namespace polybius {
         }
     }
     public class User
-    {
+    { 
         public string username;
         public int userID;
         public string password;
         public string email;
         public List<Message> messages = new List<Message>();
+
+        public User() {
+            username = null;
+            password = null;
+            email = null;
+            userID = -1;
+        }
+
         public User(string u, string p, string e)
         {
             username = u;
             password = p;
             email = e;
-            userID = null;
-            messages = null;
+            userID = -1;
         }
     }
 }

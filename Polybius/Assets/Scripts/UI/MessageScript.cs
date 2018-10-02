@@ -12,6 +12,8 @@ namespace polybius {
         // References
         public GameObject messageParent;
         public GameObject title;
+        //public GameObject 
+
         private GameObject greenMessage, blueMessage;
         private RectTransform scrollView;
         private int messageCount;
@@ -20,10 +22,10 @@ namespace polybius {
             // DEBUG
             senderID = 0;
             senderUsername = "Bob";
-            PolybiusManager.userID = 3;
+            PolybiusManager.player.userID = 3;
             for (int i = 0; i < 10; i++) {
                 Message m = new Message(i, System.DateTime.Now, "Hello: " + i);
-                PolybiusManager.messages.Add(m);
+                PolybiusManager.player.messages.Add(m);
             }
 
             // Initialization
@@ -35,15 +37,15 @@ namespace polybius {
             messageCount = 0;
 
             // Display messages
-            while (PolybiusManager.messages.Count > 0) {
-                displayMessage(PolybiusManager.messages[0]);
-                PolybiusManager.messages.RemoveAt(0);
+            while (PolybiusManager.player.messages.Count > 0) {
+                displayMessage(PolybiusManager.player.messages[0]);
+                PolybiusManager.player.messages.RemoveAt(0);
             }
         }
 
         void displayMessage(Message m) {
             GameObject message;
-            if (m.sender == PolybiusManager.userID) {
+            if (m.sender == PolybiusManager.player.userID) {
                 message = Instantiate(blueMessage, messageParent.transform);
             } else {
                 message = Instantiate(greenMessage, messageParent.transform);
@@ -59,8 +61,10 @@ namespace polybius {
             messageCount++;
         }
 
+        /*
         void sendMessage() {
 
         }
+        */
     }
 }
