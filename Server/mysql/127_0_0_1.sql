@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 28, 2018 at 07:52 PM
+-- Generation Time: Oct 02, 2018 at 01:33 AM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `users`
 --
-CREATE DATABASE IF NOT EXISTS `users` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `users`;
 
 -- --------------------------------------------------------
 
@@ -33,8 +31,8 @@ USE `users`;
 DROP TABLE IF EXISTS `msgs`;
 CREATE TABLE IF NOT EXISTS `msgs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sender` text NOT NULL,
-  `reciever` text NOT NULL,
+  `sender` int(11) NOT NULL,
+  `reciever` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `message` text NOT NULL,
   PRIMARY KEY (`id`)
