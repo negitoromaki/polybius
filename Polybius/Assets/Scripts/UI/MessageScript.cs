@@ -5,21 +5,32 @@ using TMPro;
 
 namespace polybius {
     public class MessageScript : MonoBehaviour {
+        // Variables
+        public string senderUsername;
+        public int senderID;
 
         // References
-        public GameObject greenMessage, blueMessage;
-        private GameObject messageParent;
-
-        private void Start() {
-            messageParent = this.transform.Find("Messages").gameObject;
-        }
+        public GameObject messageParent;
+        public GameObject title;
+        private GameObject greenMessage, blueMessage;
 
         void Awake() {
-            PolybiusManager.getMessages();
-            /*
-            for (int i = 0; i < PolybiusManager.messages.Count; i++) {
+            // DEBUG
+            senderID = 0;
+            senderUsername = "Bob";
+            PolybiusManager.userID = 3;
+            for (int i = 0; i < 5; i++) {
+                Message m = new Message(i, System.DateTime.Now, "Hello: " + i);
+                PolybiusManager.messages.Add(m);
+            }
 
-                // Create message
+            // Initialization
+            greenMessage = (GameObject) Resources.Load("Prefabs/UI/Green Message");
+            blueMessage = (GameObject) Resources.Load("Prefabs/UI/Blue Message");
+            title.GetComponent<TextMeshProUGUI>().text = senderUsername;
+
+            // Display messages
+            for (int i = 0; i < PolybiusManager.messages.Count; i++) {
                 GameObject message;
                 if (PolybiusManager.messages[i].sender == PolybiusManager.userID) {
                     message = Instantiate(blueMessage, messageParent.transform);
@@ -27,11 +38,10 @@ namespace polybius {
                     message = Instantiate(greenMessage, messageParent.transform);
                 }
                 message.transform.position += new Vector3(0, -150f * PolybiusManager.messages.Count, 0);
-                message.transform.Find("Message").GetComponent<TextMeshPro>().text = PolybiusManager.messages[i].message;
-                message.transform.Find("Timestamp").GetComponent<TextMeshPro>().text = PolybiusManager.messages[i].time;
-                PolybiusManager.clearMessages();
+                message.transform.Find("Message").gameObject.GetComponent<TextMeshPro>().text = PolybiusManager.messages[i].message;
+                message.transform.Find("Timestamp").gameObject.GetComponent<TextMeshPro>().text = PolybiusManager.messages[i].timestamp.ToString();
             }
-            */
+            PolybiusManager.messages.Clear();
         }
 
     }

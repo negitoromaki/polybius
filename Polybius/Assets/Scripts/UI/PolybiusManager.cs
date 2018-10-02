@@ -10,19 +10,23 @@ namespace polybius {
         // Variables
         public static string username;
         public static int userID;
-        // public static List<ReplaceMe> messages = new List<ReplaceMe>();
+        public static List<Message> messages = new List<Message>();
 
         // Example methods
         // authenticate();
         // establishDatabaseConnection();
         // getUserStatus();
+    }
 
-        public static void getMessages() {
-            //TODO: update messages object
-        }
+    public class Message {
+        public int sender;
+        public System.DateTime timestamp;
+        public string message;  
 
-        public static void clearMessages() {
-            //TODO: Empty messages list, update database if need be
+        public Message(int sender, System.DateTime timestamp, string message) {
+            this.sender = sender;
+            this.timestamp = timestamp;
+            this.message = message;
         }
     }
 }

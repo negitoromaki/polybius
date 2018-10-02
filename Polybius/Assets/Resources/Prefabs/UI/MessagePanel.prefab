@@ -1036,8 +1036,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114220610110769828}
   m_HandleRect: {fileID: 224498667175271060}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1500,7 +1500,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 39.6
+  m_fontSize: 48
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1578,8 +1578,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6093b089afe6ebf458d0bc1ddac82220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenMessage: {fileID: 0}
-  blueMessage: {fileID: 0}
+  senderUsername: Bob
+  senderID: 0
+  messageParent: {fileID: 1589271428900438}
+  title: {fileID: 1460813510954162}
 --- !u!114 &114723240452665722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2261,7 +2263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00003715704}
+  m_AnchoredPosition: {x: 0, y: -0.00014105707}
   m_SizeDelta: {x: 0, y: 500}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224287164559224020
