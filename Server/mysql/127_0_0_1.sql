@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 02, 2018 at 01:33 AM
+-- Generation Time: Oct 03, 2018 at 03:24 AM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `users`
 --
+CREATE DATABASE IF NOT EXISTS `users` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `users`;
 
 -- --------------------------------------------------------
 
@@ -49,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `username` text NOT NULL,
   `password` text NOT NULL,
   `email` text NOT NULL,
-  `dob` date NOT NULL,
+  `dob` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `isonline` tinyint(1) NOT NULL,
   `currentgame` int(11) NOT NULL,
