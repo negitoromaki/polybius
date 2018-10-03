@@ -32,6 +32,8 @@ namespace polybius
         private string username = "";
         private string password = "";
         private string email = "";
+        public UIMain UIChanger;
+        public GameObject mainPanel;
 
         void Start()
         {
@@ -57,7 +59,6 @@ namespace polybius
             {
                 Debug.Log("Connected");
                 sfs.Send(new LoginRequest("guest", "", initZone));
-
             }
             else
             {
@@ -89,6 +90,8 @@ namespace polybius
                 {
                     // login successful
                     Debug.Log("Login successful!");
+                    // switch to menu
+                    UIChanger.ChangeMenu(mainPanel);
                 }
                 else
                 {
@@ -102,6 +105,7 @@ namespace polybius
                 if (result == "success")
                 {
                     Debug.Log("Register successful!");
+                    UILogin(); // login after register is successful
                 }
                 else
                 {
@@ -141,7 +145,6 @@ namespace polybius
         {
             return logged;
         }
-
 
         // UI handling for login/register
         public void SetUsername(InputField _username)
@@ -190,7 +193,7 @@ namespace polybius
             {
                 Debug.Log("Registering new user...");
                 create(username, password, email, ""); // call register (dob default nothing rn)
-                password = "";
+                //password = "";
             }
         }
 
