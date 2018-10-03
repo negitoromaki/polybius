@@ -87,13 +87,14 @@ namespace polybius
             sfs.Send(new ExtensionRequest("UserLogin", l));
         }
 
-        public void create(string username, string password, string email)
+        public void create(string username, string password, string email, string dob)
         {
-            player = new User(username, password, email);
+            player = new User(username, password, email,dob);
             ISFSObject o = new SFSObject();
             o.PutUtfString("username", username);
             o.PutUtfString("password", password);
             o.PutUtfString("email", email);
+            //o.PutUtfString("dob", dob);
             sfs.Send(new ExtensionRequest("CreateUser", o));
         }
 
@@ -134,19 +135,20 @@ namespace polybius
 
         public class User
         {
-            public string username, password, email;
+            public string username, password, email, dob;
             public int userID;
             public List<Message> messages = new List<Message>();
 
-            public User() : this(null, null, null)
+            public User() : this(null, null, null,null)
             {
             }
 
-            public User(string u, string p, string e)
+            public User(string u, string p, string e, string d)
             {
                 username = u;
                 password = p;
                 email = e;
+                dob = d;
                 userID = -1;
             }
         }
