@@ -92,10 +92,13 @@ namespace polybius
                     Debug.Log("Login successful!");
                     // switch to menu
                     UIChanger.ChangeMenu(mainPanel);
+                    player.username = username;
+                    player.password = password;
+                    player.email = email;
                 }
                 else
                 {
-                    Debug.LogError("Error with registration: " + result);
+                    Debug.LogError("Error with login: " + result);
                 }
             }
 
@@ -182,7 +185,7 @@ namespace polybius
             {
                 Debug.Log("Logging in user...");
                 login(username, password); // call login
-                password = ""; // wipe password
+                //password = ""; // wipe password
             }
         }
 
@@ -229,7 +232,7 @@ namespace polybius
         public int userID;
         public List<Message> messages = new List<Message>();
 
-        public User() : this("default" , "default", "default", "default")
+        public User() : this(null, null, null, null)
         {
         }
 
