@@ -229,18 +229,19 @@ namespace polybius
         public int userID;
         public List<Message> messages = new List<Message>();
 
-        public User() : this(null, null, null,null)
+        public User() : this("default" , "default", "default", "default")
         {
         }
 
         public User(string u, string p, string e, string d)
-        {
-            username = u;
+		{
+			username = u;
             password = p;
             email = e;
-            dob = d;
-            userID = -1;
-        }
+		    dob = d;
+			userID = -1;
+		}
+		
     }
     
 }
