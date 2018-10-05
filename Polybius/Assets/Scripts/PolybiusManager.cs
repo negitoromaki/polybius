@@ -49,7 +49,7 @@ namespace polybius {
 
             //DEBUG: Add canned messages
             for (int i = 0; i < 5; i++) {
-                messages.Add(new Message(-1, System.DateTime.Now, "This is message number " + i));
+                messages.Add(new Message(-2, System.DateTime.Now, "This is message number " + i));
             }
 		}
 		
