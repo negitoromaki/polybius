@@ -7,48 +7,42 @@ using Sfs2X.Requests;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 
-public class ManagerTester : MonoBehaviour
-{
+namespace polybius {
+    public class ManagerTester : MonoBehaviour {
 
-
-    // Use this for initialization
-    SmartFox sfs;
-    polybius.PolybiusManager connection;
-    void Start()
-    {
-        connection = GetComponent<polybius.PolybiusManager>();
-        sfs = connection.getConnection();
-        StartCoroutine(tester());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    IEnumerator tester()
-    {
-        while (!connection.isLogged())
-        {
-            yield return null;
+        // Use this for initialization
+        SmartFox sfs;
+        void Start() {
+            sfs = PolybiusManager.dm.getConnection();
+            StartCoroutine(tester());
         }
 
-        Debug.Log("Begin tests");
+        // Update is called once per frame
+        void Update() {
 
-        //test create
-        string username = "gib";
-        string password = "megamind";
-        string email = "tim@gove.com";
-        string dob = System.DateTime.Now.ToString("MM/dd/yyyy");
+        }
+
+        IEnumerator tester() {
+            while (!PolybiusManager.loggedIn) {
+                yield return null;
+            }
+
+            Debug.Log("Begin tests");
+
+            //test create
+            PolybiusManager.player.username = "gib";
+            PolybiusManager.player.password = "megamind";
+            PolybiusManager.player.email = "tim@gove.com";
+            PolybiusManager.player.dob = System.DateTime.Now.ToString("MM/dd/yyyy");
 
 
-        connection.create(username, password, email, dob);
-        connection.login(username, password);
+            PolybiusManager.dm.create();
+            PolybiusManager.dm.login();
+
+
+        }
+
 
 
     }
-
-
-
 }

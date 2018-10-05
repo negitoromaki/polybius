@@ -14,7 +14,6 @@ namespace polybius {
         public int senderID;
  
         private RectTransform scrollView;
-        private InputField messageInput;
         private int count;
 
         public void Start() {
@@ -23,11 +22,12 @@ namespace polybius {
             scrollView.sizeDelta = new Vector2(scrollView.sizeDelta.x, 200);
             count = 0;
 
-            messageInput = this.GetComponentInChildren<InputField>();
-
-            Debug.Assert(messageInput != null);
             Debug.Assert(scrollView != null);
 
+            displayMessages();
+        }
+
+        public void Update() {
             displayMessages();
         }
 
@@ -54,9 +54,9 @@ namespace polybius {
             }
         }
 
-        public void sendMessage() {
-            Debug.Assert(messageInput != null);
-            PolybiusManager.player.messages.Add(new Message(PolybiusManager.player.userID, System.DateTime.Now, messageInput.text));
+        public void sendMessage(InputField inputField) {
+            Message m = new Message(PolybiusManager.player.userID, System.DateTime.Now, inputField.text);
+            PolybiusManager.player.messages.Add(m);
             displayMessages();
         }
     }
