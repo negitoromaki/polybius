@@ -13,16 +13,11 @@ namespace polybius {
         public string senderUsername;
         public int senderID;
  
-        private RectTransform scrollView;
         private int count;
 
         public void Start() {
-            scrollView = messageParent.GetComponent<RectTransform>();
             title.GetComponent<TextMeshProUGUI>().text = senderUsername;
-            scrollView.sizeDelta = new Vector2(scrollView.sizeDelta.x, 200);
             count = 0;
-
-            Debug.Assert(scrollView != null);
 
             displayMessages();
         }
@@ -40,11 +35,7 @@ namespace polybius {
                 } else {
                     newMessage = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Green Message"), messageParent.transform);
                 }
-                Debug.Log(newMessage.transform.position);
 
-                // Make sure there is enough space
-                scrollView.sizeDelta += new Vector2(0, 250);
-                newMessage.transform.position += new Vector3(0, -250 * count, 0);
                 newMessage.transform.Find("Message").gameObject.GetComponent<TextMeshProUGUI>().text = m.message;
                 newMessage.transform.Find("Timestamp").gameObject.GetComponent<TextMeshProUGUI>().text = m.timestamp.ToString();
                 
@@ -55,7 +46,7 @@ namespace polybius {
         }
 
         public void sendMessage(InputField inputField) {
-            Message m = new Message(PolybiusManager.player.userID, System.DateTime.Now, inputField.text);
+            Message m = new Message(PolybiusManager.player.userID, senderID, System.DateTime.Now, inputField.text);
             PolybiusManager.player.messages.Add(m);
             displayMessages();
         }

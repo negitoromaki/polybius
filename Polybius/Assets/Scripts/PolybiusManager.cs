@@ -13,17 +13,17 @@ namespace polybius {
         public static User player = new User();
         public static bool loggedIn = false;
         public static DatabaseManager dm = null;
-
     }
 
     public class Message
     {
-        public int sender;
+        public int sender, receiver;
         public System.DateTime timestamp;
         public string message;
 
-        public Message(int sender, System.DateTime timestamp, string message)
+        public Message(int sender, int receiver, System.DateTime timestamp, string message)
         {
+            this.receiver = receiver;
             this.sender = sender;
             this.timestamp = timestamp;
             this.message = message;
@@ -31,7 +31,7 @@ namespace polybius {
     }
 
     public class User {
-        public string username, password, email, dob; 
+        public string username, password, email, dob;
         public int userID;
         public List<Message> messages = new List<Message>();
 
@@ -47,9 +47,9 @@ namespace polybius {
 		    dob = d;
 			userID = -1;
 
-            //DEBUG: Add canned messages
+            //debug
             for (int i = 0; i < 5; i++) {
-                messages.Add(new Message(-2, System.DateTime.Now, "This is message number " + i));
+                messages.Add(new Message(-2, -1, System.DateTime.Now, "This is message number " + i));
             }
 		}
 		

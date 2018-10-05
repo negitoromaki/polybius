@@ -68,15 +68,20 @@ namespace polybius {
                 } else {
                     Debug.LogError("Error with login: " + result);
                 }
-            }
-
-            if (cmd == "CreateUser") {
+            } else if (cmd == "CreateUser") {
                 string result = paramsa.GetUtfString("result");
                 if (result == "success") {
                     Debug.Log("Register successful!");
                     //UILogin(); // login after register is successful
                 } else {
                     Debug.LogError("Error with registration: " + result);
+                }
+            } else if (cmd == "Messages") {
+                string result = paramsa.GetUtfString("result");
+                if (result == "success") {
+                    Debug.Log("Message successful!");
+                } else {
+                    Debug.LogError("Error with Message: " + result);
                 }
             }
         }
@@ -109,6 +114,30 @@ namespace polybius {
                 //o.PutUtfString("dob", PolybiusManager.player.dob); // TODO: add DOB functionality
                 sfs.Send(new ExtensionRequest("CreateUser", o));
             }
+        }
+
+        // get message
+        public void getMessages(int senderID) {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("level", "private");
+            o.PutUtfString("levelname", "Polybius");
+            o.PutUtfString("mode", "get");
+            o.PutUtfString("mReceiver", PolybiusManager.player.userID.ToString());
+            o.PutUtfString("mSender", senderID.ToString());
+            o.PutInt("amount", 1);
+            sfs.Send(new ExtensionRequest("Messages", o));
+        }
+
+        // send message
+        public void sendMessage(Message m) {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("level", "private");
+            o.PutUtfString("levelname", "Polybius");
+            o.PutUtfString("mode", "send");
+            o.PutUtfString("mReceiver", m.receiver.ToString());
+            o.PutUtfString("mSender", m.sender.ToString());
+            o.PutInt("amount", 1);
+            sfs.Send(new ExtensionRequest("Messages", o));
         }
 
         public SmartFox getConnection() {
