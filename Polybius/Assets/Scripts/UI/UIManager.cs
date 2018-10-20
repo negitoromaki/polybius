@@ -8,6 +8,7 @@ namespace polybius
 {
     public class UIManager : MonoBehaviour
     {
+        // TEMP, will be removed
         public List<TextMeshProUGUI> usernameTexts = new List<TextMeshProUGUI>();
 
         private void Update()

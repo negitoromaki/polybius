@@ -18,7 +18,7 @@ namespace polybius {
         public int port = 9933;
         public SmartFox sfs = new SmartFox();
         public string initZone = "Polybius";
-        public bool logged = false;
+        public bool connected = false;
 
         void Start() {
             PolybiusManager.dm = this;
@@ -39,6 +39,7 @@ namespace polybius {
         void onConnect(BaseEvent e) {
             if ((bool)e.Params["success"]) {
                 Debug.Log("Connected");
+                connected = true;
                 sfs.Send(new LoginRequest("guest", "", initZone));
             } else {
                 Debug.Log("Connection failed");
@@ -46,11 +47,11 @@ namespace polybius {
         }
 
         void onLost(BaseEvent e) {
-            logged = false;
+            connected = false;
         }
 
         void onLogin(BaseEvent e) {
-            logged = true;
+            connected = true;
         }
 
         void onResponse(BaseEvent e) {
