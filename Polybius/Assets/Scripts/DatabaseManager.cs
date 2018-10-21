@@ -48,10 +48,13 @@ namespace polybius {
 
         void onLost(BaseEvent e) {
             connected = false;
+            PolybiusManager.loggedIn = false;
+
         }
 
         void onLogin(BaseEvent e) {
             connected = true;
+            PolybiusManager.loggedIn = true;
         }
 
         void onResponse(BaseEvent e) {
