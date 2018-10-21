@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 03, 2018 at 03:24 AM
+-- Generation Time: Oct 19, 2018 at 03:12 AM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -38,6 +38,22 @@ CREATE TABLE IF NOT EXISTS `msgs` (
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `message` text NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rooms`
+--
+
+DROP TABLE IF EXISTS `rooms`;
+CREATE TABLE IF NOT EXISTS `rooms` (
+  `roomName` text NOT NULL,
+  `roomType` int(11) NOT NULL,
+  `roomID` int(11) NOT NULL AUTO_INCREMENT,
+  `usersInRoom` text NOT NULL,
+  `gameType` text NOT NULL,
+  PRIMARY KEY (`roomID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

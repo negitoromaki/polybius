@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 20, 2018 at 10:05 PM
--- Server version: 5.7.23
--- PHP Version: 7.2.10
+-- Generation Time: Oct 21, 2018 at 05:26 AM
+-- Server version: 5.7.21
+-- PHP Version: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,6 +39,22 @@ CREATE TABLE IF NOT EXISTS `msgs` (
   `levelname` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rooms`
+--
+
+DROP TABLE IF EXISTS `rooms`;
+CREATE TABLE IF NOT EXISTS `rooms` (
+  `roomName` text NOT NULL,
+  `roomType` int(11) NOT NULL,
+  `roomID` int(11) NOT NULL AUTO_INCREMENT,
+  `usersInRoom` text NOT NULL,
+  `gameType` text NOT NULL,
+  PRIMARY KEY (`roomID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
