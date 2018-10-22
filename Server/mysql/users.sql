@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 19, 2018 at 03:12 AM
+-- Generation Time: Oct 21, 2018 at 05:26 AM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `users`
 --
-CREATE DATABASE IF NOT EXISTS `users` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `users`;
 
 -- --------------------------------------------------------
 
@@ -33,12 +31,14 @@ USE `users`;
 DROP TABLE IF EXISTS `msgs`;
 CREATE TABLE IF NOT EXISTS `msgs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sender` int(11) NOT NULL,
-  `reciever` int(11) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `sender` text NOT NULL,
+  `reciever` text NOT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `message` text NOT NULL,
+  `level` text NOT NULL,
+  `levelname` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -69,13 +69,20 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `email` text NOT NULL,
   `dob` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `isonline` tinyint(1) NOT NULL,
-  `currentgame` int(11) NOT NULL,
-  `friends` text NOT NULL,
-  `statistics` text NOT NULL,
-  `notification` text NOT NULL,
+  `isonline` int(1) NOT NULL DEFAULT '0',
+  `currentgame` int(11) DEFAULT NULL,
+  `friends` text,
+  `statistics` text,
+  `notification` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userdata`
+--
+
+INSERT INTO `userdata` (`username`, `password`, `email`, `dob`, `id`, `isonline`, `currentgame`, `friends`, `statistics`, `notification`) VALUES
+('tim', 'bob', 'bob@bob.com', '2018-10-20 16:58:12', 41, 0, NULL, NULL, NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

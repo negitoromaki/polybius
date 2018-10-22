@@ -6,24 +6,25 @@ namespace polybius {
     public class UIPanelSwitcher : MonoBehaviour {
         public GameObject initialPanel;
         public bool setInactive;
-        public List<GameObject> UIPanels;
 
         private GameObject activePanel;
 
         private void Start() {
-            // TODO: Change logic so we take playerprefs and know when they logged in or not
-            if (setInactive) 
-                foreach (GameObject g in UIPanels)
-                    g.SetActive(false);
+            // Set all children
+            if (setInactive) {
+                for (int i = 0; i < transform.childCount; i++)
+                    transform.GetChild(i).gameObject.SetActive(false);
+            }
 
+            // Activate
             Debug.Assert(initialPanel != null);
-            initialPanel.SetActive(true);
-            activePanel = initialPanel;
+            ChangeMenu(initialPanel);
         }
 
         // method to switch panels
         public void ChangeMenu(GameObject panel) {
-            activePanel.SetActive(false);
+            if (activePanel)
+                activePanel.SetActive(false);
             panel.SetActive(true);
 
             activePanel = panel;

@@ -18,8 +18,8 @@ namespace polybius {
         public int port = 9933;
         public SmartFox sfs = new SmartFox();
         public string initZone = "Polybius";
-        public bool logged = false;
-
+        public bool connected = false;
+        public string result="None";
         void Start() {
             PolybiusManager.dm = this;
             sfs.AddEventListener(SFSEvent.LOGIN, onLogin);
@@ -39,6 +39,7 @@ namespace polybius {
         void onConnect(BaseEvent e) {
             if ((bool)e.Params["success"]) {
                 Debug.Log("Connected");
+                connected = true;
                 sfs.Send(new LoginRequest("guest", "", initZone));
             } else {
                 Debug.Log("Connection failed");
@@ -46,11 +47,14 @@ namespace polybius {
         }
 
         void onLost(BaseEvent e) {
-            logged = false;
+            connected = false;
+            PolybiusManager.loggedIn = false;
+
         }
 
         void onLogin(BaseEvent e) {
-            logged = true;
+            connected = true;
+            PolybiusManager.loggedIn = true;
         }
 
         void onResponse(BaseEvent e) {
@@ -58,9 +62,9 @@ namespace polybius {
             ISFSObject paramsa = (SFSObject)e.Params["params"];
             string message = cmd + " " + paramsa.GetUtfString("result") + " message: " + paramsa.GetUtfString("message");
             Debug.Log(cmd + " message: " + message);
+            result = paramsa.GetUtfString("result");
 
             if (cmd == "UserLogin") {
-                string result = paramsa.GetUtfString("result");
                 if (result == "success") {
                     // login successful
                     Debug.Log("Login successful!");
@@ -69,7 +73,6 @@ namespace polybius {
                     Debug.LogError("Error with login: " + result);
                 }
             } else if (cmd == "CreateUser") {
-                string result = paramsa.GetUtfString("result");
                 if (result == "success") {
                     Debug.Log("Register successful!");
                     //UILogin(); // login after register is successful
@@ -77,11 +80,21 @@ namespace polybius {
                     Debug.LogError("Error with registration: " + result);
                 }
             } else if (cmd == "Messages") {
-                string result = paramsa.GetUtfString("result");
                 if (result == "success") {
                     Debug.Log("Message successful!");
                 } else {
                     Debug.LogError("Error with Message: " + result);
+                }
+            }else if (cmd == "UserLogout")
+            {
+                if (result == "success")
+                {
+                    PolybiusManager.loggedIn = false;
+                    Debug.Log("Logout successful!");
+                }
+                else
+                {
+                    Debug.LogError("Error with Logout: " + result);
                 }
             }
         }
@@ -115,6 +128,16 @@ namespace polybius {
                 sfs.Send(new ExtensionRequest("CreateUser", o));
             }
         }
+        public void logout()
+        {
+            PolybiusManager.loggedIn = false;
+            if (!string.IsNullOrEmpty(PolybiusManager.player.username))
+            {
+                ISFSObject ot = new SFSObject();
+                ot.PutUtfString("username", PolybiusManager.player.username);
+                sfs.Send(new ExtensionRequest("UserLogout", ot));
+            }
+        }
 
         // get message
         public void getMessages(int senderID) {
@@ -146,6 +169,7 @@ namespace polybius {
 
         //exit handler
         void OnApplicationQuit() {
+            logout();
             PolybiusManager.loggedIn = false;
             Debug.Log("exiting");
             sfs.RemoveAllEventListeners();

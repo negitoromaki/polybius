@@ -6,14 +6,16 @@ using Sfs2X.Core;
 using Sfs2X.Requests;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
+using UnityEngine.Assertions;
 
 namespace polybius {
-    public class ManagerTester : MonoBehaviour {
+    public class CreateTester : MonoBehaviour {
 
         // Use this for initialization
         SmartFox sfs;
         void Start() {
-            sfs = PolybiusManager.dm.getConnection();
+            
+           
             StartCoroutine(tester());
         }
 
@@ -22,12 +24,14 @@ namespace polybius {
 
         }
 
-        IEnumerator tester() {
-            while (!PolybiusManager.loggedIn) {
+        IEnumerator tester()
+        {
+            while (!PolybiusManager.loggedIn)
+            {
                 yield return null;
             }
-
-            Debug.Log("Begin tests");
+            sfs = PolybiusManager.dm.getConnection();
+            Debug.Log("Begin User Creation Test");
 
             //test create
             PolybiusManager.player.username = "gib";
@@ -37,9 +41,10 @@ namespace polybius {
 
 
             PolybiusManager.dm.create();
+            Assert.IsTrue(PolybiusManager.loggedIn);
             PolybiusManager.dm.login();
-
-
+            Assert.IsTrue(sfs.IsConnected);
+            print("Create Test Succesful");
         }
 
 
