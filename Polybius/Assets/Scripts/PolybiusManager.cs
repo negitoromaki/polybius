@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 namespace polybius {
     public static class PolybiusManager {
-        // Enums
-        enum status { online, offline, invisible };
-
         // Variables
         public static User player = new User();
         public static bool loggedIn = false;
@@ -31,13 +28,15 @@ namespace polybius {
     }
 
     public class User {
+        // Enum
+        public enum status { online, offline, invisible };
+
         public string username, password, email, dob;
+        public status currentStatus;
         public int userID;
         public List<Message> messages = new List<Message>();
 
-        public User() : this(null, null, null, null)
-        {
-        }
+        public User() : this(null, null, null, null) {}
 
         public User(string u, string p, string e, string d)
 		{
@@ -45,6 +44,7 @@ namespace polybius {
             password = p;
             email = e;
 		    dob = d;
+            currentStatus = status.offline;
 			userID = -1;
 
             //debug

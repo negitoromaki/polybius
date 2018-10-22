@@ -16,6 +16,7 @@ namespace polybius {
         private int count;
 
         public void Start() {
+            Debug.Assert(!string.IsNullOrEmpty(senderUsername));
             title.GetComponent<TextMeshProUGUI>().text = senderUsername;
             count = 0;
 
