@@ -13,14 +13,18 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    public void ResetVel()
     {
-        float v = Input.GetAxisRaw("Vertical"); // TODO: change this to allow buttons instead
-        rb.velocity = new Vector3(0, 0, v) * speed;    
+        rb.velocity = Vector3.zero;
     }
 
-    public void Move()
+    public void MoveLeft()
     {
-        
+        rb.velocity = new Vector3(0, 0, 1) * speed;
+    }
+
+    public void MoveRight()
+    {
+        rb.velocity = new Vector3(0, 0, -1) * speed;
     }
 }
