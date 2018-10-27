@@ -34,10 +34,10 @@ namespace polybius {
             Debug.Log("Begin User Creation Test");
 
             //test create
-            PolybiusManager.player.username = "gib";
-            PolybiusManager.player.password = "megamind";
-            PolybiusManager.player.email = "tim@gove.com";
-            PolybiusManager.player.dob = System.DateTime.Now.ToString("MM/dd/yyyy");
+            Assert.IsTrue(  PolybiusManager.player.setUsername("gib") &&
+                            PolybiusManager.player.setPassword("megamind") &&
+                            PolybiusManager.player.setEmail("tim@gove.com") &&
+                            PolybiusManager.player.setDob(System.DateTime.Now.ToString("MM/dd/yyyy")));
 
 
             PolybiusManager.dm.create();
