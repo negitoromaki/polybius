@@ -100,12 +100,15 @@ namespace polybius {
                 } else {
                     Debug.LogError("Error with Logout: " + result);
                 }
+            } else {
+                Debug.LogError("Command Not found: " + cmd + " returned " + result);
             }
         }
 
         //public methods
         // login user
         public void login() {
+            logout();
             PolybiusManager.loggedIn = false;
             if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
                 !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
