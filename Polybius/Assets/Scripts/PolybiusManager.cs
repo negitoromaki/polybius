@@ -102,7 +102,7 @@ namespace polybius {
         public List<User> getFriends() {
             //return PolybiusManager.dm.updateFriends();
             
-            // Debug
+            // User shim
             friends = new List<User>();
             for (int i = 0; i < 5; i++) {
                 string name = "Bob " + i.ToString();
@@ -119,8 +119,8 @@ namespace polybius {
         // Updates the username if it contains appropriate characters
         // Returns true if valid username
         public bool setUsername(string newUser) {
-            if (!string.IsNullOrEmpty(newUser) && !string.IsNullOrEmpty(username)) {
-                if (newUser == username)
+            if (!string.IsNullOrEmpty(newUser)) {
+                if (newUser == username && !string.IsNullOrEmpty(username))
                     return true;
                 Match m = Regex.Match(newUser, "[A-Za-z0-9]+");
                 if (m.Success) {
@@ -135,10 +135,10 @@ namespace polybius {
         // Updates the password if it contains appropriate characters
         // Returns true if valid password
         public bool setPassword(string newPass) {
-            if (!string.IsNullOrEmpty(newPass) && !string.IsNullOrEmpty(password)) {
-                if (newPass == password)
+            if (!string.IsNullOrEmpty(newPass)) {
+                if (newPass == password && !string.IsNullOrEmpty(password))
                     return true;
-                if (newPass.Length > 8) {
+                if (newPass.Length >= 8) {
                     password = newPass;
                     // TODO: call database password update function
                     return true;
@@ -150,8 +150,8 @@ namespace polybius {
         // Updates the email if it contains appropriate characters
         // Returns true if valid email address
         public bool setEmail(string newEmail) {
-            if (!string.IsNullOrEmpty(newEmail) && !string.IsNullOrEmpty(email)) {
-                if (newEmail == email)
+            if (!string.IsNullOrEmpty(newEmail)) {
+                if (newEmail == email && !string.IsNullOrEmpty(email))
                     return true;
                 Match m = Regex.Match(newEmail, "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
                 if (m.Success) {
@@ -166,8 +166,8 @@ namespace polybius {
         // Updates the password if it contains appropriate characters
         // Returns true if valid password
         public bool setDob(string newDob) {
-            if (!string.IsNullOrEmpty(newDob) && !string.IsNullOrEmpty(dob)) {
-                if (newDob == dob)
+            if (!string.IsNullOrEmpty(newDob)) {
+                if (newDob == dob && !string.IsNullOrEmpty(dob))
                     return true;
                 Match m = Regex.Match(newDob, "(1[012]|0?[1-9])\\/(3[01]|[12][0-9]|0?[1-9])\\/((?:19|20)\\d{2})");
                 if (m.Success) {

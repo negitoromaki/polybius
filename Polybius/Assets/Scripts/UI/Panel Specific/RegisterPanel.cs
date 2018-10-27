@@ -8,16 +8,16 @@ namespace polybius {
     public class RegisterPanel : MonoBehaviour {
 
         public GameObject username, password, email;
-        private TextMeshProUGUI usernameText, passwordText, emailText;
+        private TMP_InputField usernameText, passwordText, emailText;
         private Image usernameImage, passwordImage, emailImage;
 
         void Start() {
             Debug.Assert(username != null && password != null && email != null);
 
             // TMP Input fields
-            usernameText    = username.GetComponent<TextMeshProUGUI>();
-            passwordText    = password.GetComponent<TextMeshProUGUI>();
-            emailText       = email.GetComponent<TextMeshProUGUI>();
+            usernameText    = username.GetComponent<TMP_InputField>();
+            passwordText    = password.GetComponent<TMP_InputField>();
+            emailText       = email.GetComponent<TMP_InputField>();
             Debug.Assert(usernameText != null && passwordText != null && emailText != null);
 
             // Images

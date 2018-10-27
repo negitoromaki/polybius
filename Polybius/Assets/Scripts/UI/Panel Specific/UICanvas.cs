@@ -4,30 +4,27 @@ using UnityEngine;
 
 namespace polybius {
     public class UICanvas : MonoBehaviour {
-        
-        private GameObject MainMenuPanel;
-        private GameObject ConnectionPanel;
-        private bool justLoggedIn = true;
+        public GameObject ConnectionPanel, MainMenuPanel, LoginRegisterPanel, LoginPanel, RegisterPanel;
 
         private void Start() {
-            ConnectionPanel = transform.Find("ConnectionPanel").gameObject;
-            MainMenuPanel = transform.Find("MainMenuPanel").gameObject;
-            Debug.Assert(ConnectionPanel != null && MainMenuPanel != null);
+            Debug.Assert(   ConnectionPanel != null &&
+                            MainMenuPanel != null &&
+                            LoginRegisterPanel != null &&
+                            LoginPanel != null &&
+                            RegisterPanel != null);
         }
 
         void Update() {
-            // If loss of connection, switch to connecting panel
-            if (!PolybiusManager.dm.connected && !ConnectionPanel.activeSelf)
-                GetComponent<UIPanelSwitcher>().ChangeMenu(ConnectionPanel);
-
-            // Switch the UI to the main menu panel when logged in
-            // If logged out, reset
-            if (!PolybiusManager.loggedIn)
-                justLoggedIn = true;
-
-            if (justLoggedIn && PolybiusManager.loggedIn) {
-                GetComponent<UIPanelSwitcher>().ChangeMenu(MainMenuPanel);
-                justLoggedIn = false;
+            if (PolybiusManager.dm.connected) {
+                if (PolybiusManager.loggedIn) {
+                    GetComponent<UIPanelSwitcher>().ChangeMenu(ConnectionPanel);
+                } else {
+                    if (!LoginRegisterPanel.activeSelf && !RegisterPanel.activeSelf && !LoginPanel.activeSelf)
+                        GetComponent<UIPanelSwitcher>().ChangeMenu(LoginRegisterPanel);
+                }
+            } else {
+                if (!ConnectionPanel.activeSelf)
+                    GetComponent<UIPanelSwitcher>().ChangeMenu(ConnectionPanel);
             }
         }
     }

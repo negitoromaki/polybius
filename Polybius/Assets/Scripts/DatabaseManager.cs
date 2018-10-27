@@ -32,10 +32,9 @@ namespace polybius {
 
             sfs.Connect(ip, port);
 
-            // User Debug
-            for (int i = 0; i < 5; i++) {
+            // Messages Shim
+            for (int i = 0; i < 5; i++)
                 PolybiusManager.player.sendMessage(new Message(-2, -1, System.DateTime.Now, "This is message number " + i));
-            }
         }
 
         void Update() {
@@ -61,7 +60,6 @@ namespace polybius {
 
         void onLogin(BaseEvent e) {
             connected = true;
-            PolybiusManager.loggedIn = true;
         }
 
         void onResponse(BaseEvent e) {
@@ -95,15 +93,11 @@ namespace polybius {
                 } else {
                     Debug.LogError("Error with Message: " + result);
                 }
-            }else if (cmd == "UserLogout")
-            {
-                if (result == "success")
-                {
+            } else if (cmd == "UserLogout") {
+                if (result == "success") {
                     PolybiusManager.loggedIn = false;
                     Debug.Log("Logout successful!");
-                }
-                else
-                {
+                } else {
                     Debug.LogError("Error with Logout: " + result);
                 }
             }
@@ -200,7 +194,6 @@ namespace polybius {
         //exit handler
         void OnApplicationQuit() {
             logout();
-            PolybiusManager.loggedIn = false;
             Debug.Log("exiting");
             sfs.RemoveAllEventListeners();
             if (sfs.IsConnected) {

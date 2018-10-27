@@ -13,7 +13,7 @@ namespace polybius {
         private User otherUser;
         private List<Message> messages;
 
-        public void OnAwake() {
+        public void OnEnable() {
             Debug.Assert(otherUser != null);
             title.GetComponent<TextMeshProUGUI>().text = otherUser.getUsername();
             messages = PolybiusManager.player.getMessages(otherUser.getUserID());
@@ -47,6 +47,7 @@ namespace polybius {
         // Setter functions for username and id
         public void changeOtherUser(User u) {
             otherUser = u;
+            OnEnable();
         }
     }
 }

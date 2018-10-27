@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 namespace polybius {
@@ -9,17 +10,23 @@ namespace polybius {
         public GameObject parent;
         public User currentUser;
 
+        private Image backButton;
         private List<GameObject> stats = new List<GameObject>();
-        private GameObject titlePrefab;
-        private GameObject statisticPrefab;
+        private GameObject titlePrefab, statisticPrefab;
 
         public void changeUser(User u) {
             currentUser = u;
         }
 
+        public void setCurrentUser() {
+            currentUser = PolybiusManager.player;
+        }
+
         public void Awake() {
             if (currentUser == null)
-                currentUser = PolybiusManager.player;
+                setCurrentUser();
+            backButton = transform.Find("Header").Find("BackButton").GetComponent<Image>();
+            Debug.Assert(backButton != null);
 
             // Load resources
             titlePrefab = Resources.Load<GameObject>("Prefabs/UI/Title");
@@ -27,7 +34,10 @@ namespace polybius {
             Debug.Assert(titlePrefab != null && statisticPrefab != null && parent != null);
         }
 
-        public void OnAwake() {
+        public void OnEnable() {
+            // Enable/Disable back button
+            backButton.enabled = (currentUser != PolybiusManager.player);
+
             // Load Statistics
 
             // multidimensional array, [i,j], where i is number of stats,
@@ -58,6 +68,11 @@ namespace polybius {
                 stat.transform.Find("StatTitle").GetComponent<TextMeshProUGUI>().text = statTexts[i, 0];
                 stat.transform.Find("StatText").GetComponent<TextMeshProUGUI>().text = statTexts[i, 1];
             }
+        }
+
+        public void OnDisable() {
+            foreach (Transform child in parent.transform)
+                GameObject.Destroy(child.gameObject);
         }
     }
 }
