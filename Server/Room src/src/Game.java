@@ -1,17 +1,22 @@
 
+import com.smartfoxserver.v2.SmartFoxServer;
+import com.smartfoxserver.v2.api.ISFSApi;
+import com.smartfoxserver.v2.api.SFSApi;
 import com.smartfoxserver.v2.entities.User;
+import com.smartfoxserver.v2.entities.data.ISFSObject;
 
-public class Game {
+
+public abstract class Game {
 	
 	private String gameName = "Default";
 	
-	public void start() {
-	}
+	public abstract void start();
 	
-	public void end(int endCode){
-		
-		
-	}
+	public abstract void updateScore(int pID, int amount);
+	public abstract int[] getScores();
+	public abstract void end(int endCode);
+	public abstract void input(ISFSObject o);
+	public ISFSApi api = SmartFoxServer.getInstance().getAPIManager().getSFSApi();
 	
 	public void lostUser(User user){
 		end(1);

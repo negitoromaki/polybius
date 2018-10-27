@@ -29,11 +29,14 @@ public class CreateUser extends BaseClientRequestHandler{
 		
 	}
 	public String create(User user, String username, String password, String email, IDBManager db){
+		
+		
 		String sql = "SELECT * FROM users.userdata WHERE username='" + username + "'";
 		String sql2 = "SELECT * FROM users.userdata WHERE email='" + email + "'";
 		ISFSObject ret = new SFSObject();
 		//check user or email exist
 		try {
+			//trace("create");
 			ISFSArray resp = db.executeQuery(sql2, new Object[] {});
 			if(resp.size() >0){
 				//email exist
@@ -49,17 +52,22 @@ public class CreateUser extends BaseClientRequestHandler{
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			trace("message: " + e.getMessage());
-			ret.putUtfString("result", "failed");
-			ret.putUtfString("message", e.getMessage());
-			send("CreateUser", ret, user);
-			return e.getMessage();
+			if(e.getMessage() != null){
+				//trace("message: " + e.getMessage());
+				ret.putUtfString("result", "failed");
+				ret.putUtfString("message", e.getMessage());
+				if(user != null)
+					send("CreateUser", ret, user);
+				return e.getMessage();
+			}
+			return "error";
 		} 
 		
 		ret.putUtfString("result", "success");
 		ret.putUtfString("message", "User created!");
-		send("CreateUser", ret, user);
-		return "Success!";
+		if(user != null)
+			send("CreateUser", ret, user);
+		return "success";
 		
 	}
 
