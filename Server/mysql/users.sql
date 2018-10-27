@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 21, 2018 at 05:26 AM
+-- Generation Time: Oct 27, 2018 at 06:45 PM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -53,6 +53,8 @@ CREATE TABLE IF NOT EXISTS `rooms` (
   `roomID` int(11) NOT NULL AUTO_INCREMENT,
   `usersInRoom` text NOT NULL,
   `gameType` text NOT NULL,
+  `latcord` float NOT NULL,
+  `longcord` float NOT NULL,
   PRIMARY KEY (`roomID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
