@@ -14,8 +14,8 @@ namespace polybius {
         }
 
         void Update() {
-            if (username.text != PolybiusManager.player.username)
-                username.text = PolybiusManager.player.username;
+            if (username.text != PolybiusManager.player.getUsername())
+                username.text = PolybiusManager.player.getUsername();
         }
     }
 }

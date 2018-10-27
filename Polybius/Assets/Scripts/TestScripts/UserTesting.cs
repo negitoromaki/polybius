@@ -36,10 +36,10 @@ namespace polybius
             Debug.Log("Begin User Creation Test");
 
             //test create
-            PolybiusManager.player.username = "ree";
-            PolybiusManager.player.password = "everyone";
-            PolybiusManager.player.email = "eee@gen.com";
-            PolybiusManager.player.dob = System.DateTime.Now.ToString("MM/dd/yyyy");
+            PolybiusManager.player.setUsername("ree");
+            PolybiusManager.player.setPassword("everyone");
+            PolybiusManager.player.setEmail("eee@gen.com");
+            PolybiusManager.player.setDob(System.DateTime.Now.ToString("MM/dd/yyyy"));
 
 
             PolybiusManager.dm.create();
@@ -57,10 +57,10 @@ namespace polybius
             if (PolybiusManager.dm.result.Equals("success")) 
             marks[3] = true;
             PolybiusManager.dm.logout();
-            PolybiusManager.player.username = "Keaton";
-            PolybiusManager.player.password = "everyone";
-            PolybiusManager.player.email = "G";
-            PolybiusManager.player.dob = System.DateTime.Now.ToString("MM/dd/yyyy");
+            PolybiusManager.player.setUsername("Keaton");
+            PolybiusManager.player.setPassword("everyone");
+            PolybiusManager.player.setEmail("G");
+            PolybiusManager.player.setDob(System.DateTime.Now.ToString("MM/dd/yyyy"));
             PolybiusManager.dm.create();
             if (!PolybiusManager.dm.result.Equals("success"))
                 marks[4] = true;

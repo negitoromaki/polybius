@@ -10,14 +10,17 @@ namespace polybius {
 
         public GameObject parent;
 
-        // Username
-        private GameObject username;
-        private TMP_InputField usernameInput;
-
-        // Date of birth
-        private GameObject dob;
+        // Colors
         private Color32 red = new Color32(255, 167, 167, 255);
         private Color32 white = new Color32(255, 255, 255, 255);
+
+        // Username
+        public GameObject username;
+        private TMP_InputField usernameInput;
+        private Image usernameImage;
+
+        // Date of birth
+        public GameObject dob;
         private TMP_InputField dobInput;
         private Image dobImage;
 
@@ -29,27 +32,29 @@ namespace polybius {
 
             // Username
             usernameInput = username.transform.Find("InputField").GetComponent<TMP_InputField>();
-            Debug.Assert(usernameInput != null);
-            usernameInput.text = PolybiusManager.player.username;
+            usernameImage = username.transform.Find("InputField").GetComponent<Image>();
+            Debug.Assert(usernameInput != null && usernameImage != null);
+            usernameImage.color = white;
+            usernameInput.text = PolybiusManager.player.getUsername();
 
             // Date of Birth
             dobInput = dob.transform.Find("InputField").GetComponent<TMP_InputField>();
             dobImage = dob.transform.Find("InputField").GetComponent<Image>();
             Debug.Assert(dobInput != null && dobImage != null);
             dobImage.color = white;
-            dobInput.text = PolybiusManager.player.dob;
+            dobInput.text = PolybiusManager.player.getDob();
         }
 
         void Update() {
             // Username
-            if (usernameInput.text != PolybiusManager.player.username)
-                PolybiusManager.player.username = usernameInput.text;
+            if (PolybiusManager.player.setUsername(usernameInput.text)) {
+                usernameImage.color = white;
+            } else {
+                usernameImage.color = red;
+            }
 
-            // Date of Birth
-            Match m = Regex.Match(dobInput.text, "(1[012]|0?[1-9])\\/(3[01]|[12][0-9]|0?[1-9])\\/((?:19|20)\\d{2})");
-            Debug.Log(m.Success + " " + dobImage.color);
-            if (m.Success) {
-                PolybiusManager.player.dob = dobInput.text;
+            // Dob
+            if (PolybiusManager.player.setDob(dobInput.text)) {
                 dobImage.color = white;
             } else {
                 dobImage.color = red;

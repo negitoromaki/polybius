@@ -7,20 +7,27 @@ namespace polybius {
     public class ProfilePanel : MonoBehaviour {
 
         public GameObject parent;
-
+        public User currentUser;
 
         private List<GameObject> stats = new List<GameObject>();
         private GameObject titlePrefab;
         private GameObject statisticPrefab;
 
-        private void Awake() {
+        public void changeUser(User u) {
+            currentUser = u;
+        }
+
+        public void Awake() {
+            if (currentUser == null)
+                currentUser = PolybiusManager.player;
+
             // Load resources
             titlePrefab = Resources.Load<GameObject>("Prefabs/UI/Title");
             statisticPrefab = Resources.Load<GameObject>("Prefabs/UI/Statistic");
             Debug.Assert(titlePrefab != null && statisticPrefab != null && parent != null);
         }
 
-        void Start() {
+        public void OnAwake() {
             // Load Statistics
 
             // multidimensional array, [i,j], where i is number of stats,
@@ -28,9 +35,9 @@ namespace polybius {
             // Section title is just a string
             string[,] userStats = new string[2,2]; 
             userStats[0, 0] = "Username: ";
-                userStats[0, 1] = PolybiusManager.player.username;
+                userStats[0, 1] = currentUser.getUsername();
             userStats[1, 0] = "Date of Birth: ";
-                userStats[1, 1] = PolybiusManager.player.dob;
+                userStats[1, 1] = currentUser.getDob();
             addSection("User Statistics:", userStats);
 
             string[,] connect4Stats = new string[1,2];

@@ -20,7 +20,9 @@ namespace polybius {
         public string initZone = "Polybius";
         public bool connected = false;
         public string result="None";
-        void Start() {
+
+
+        void Awake() {
             PolybiusManager.dm = this;
             sfs.AddEventListener(SFSEvent.LOGIN, onLogin);
             sfs.AddEventListener(SFSEvent.CONNECTION, onConnect);
@@ -29,6 +31,11 @@ namespace polybius {
             sfs.ThreadSafeMode = true;
 
             sfs.Connect(ip, port);
+
+            // User Debug
+            for (int i = 0; i < 5; i++) {
+                PolybiusManager.player.sendMessage(new Message(-2, -1, System.DateTime.Now, "This is message number " + i));
+            }
         }
 
         void Update() {
@@ -75,13 +82,16 @@ namespace polybius {
             } else if (cmd == "CreateUser") {
                 if (result == "success") {
                     Debug.Log("Register successful!");
-                    //UILogin(); // login after register is successful
+                    // TODO: Get User ID and fill into PolybiusManager.player.userID
                 } else {
                     Debug.LogError("Error with registration: " + result);
                 }
             } else if (cmd == "Messages") {
                 if (result == "success") {
                     Debug.Log("Message successful!");
+                    // TODO
+                    // Message m = new Message(int senderID, PolybiusManager.player.getUserID(), System.DateTime timestamp, string message)
+                    // PolybiusManager.player.addMessage(m);
                 } else {
                     Debug.LogError("Error with Message: " + result);
                 }
@@ -103,12 +113,12 @@ namespace polybius {
         // login user
         public void login() {
             PolybiusManager.loggedIn = false;
-            if (!string.IsNullOrEmpty(PolybiusManager.player.password) &&
-                !string.IsNullOrEmpty(PolybiusManager.player.username)) {
+            if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
+                !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
 
                 ISFSObject l = new SFSObject();
-                l.PutUtfString("username", PolybiusManager.player.username);
-                l.PutUtfString("password", PolybiusManager.player.password);
+                l.PutUtfString("username", PolybiusManager.player.getUsername());
+                l.PutUtfString("password", PolybiusManager.player.getPassword());
                 sfs.Send(new ExtensionRequest("UserLogin", l));
             }
         }
@@ -116,14 +126,14 @@ namespace polybius {
         // register user
         public void create() {
             PolybiusManager.loggedIn = false;
-            if (!string.IsNullOrEmpty(PolybiusManager.player.password) &&
-                !string.IsNullOrEmpty(PolybiusManager.player.username) &&
-                !string.IsNullOrEmpty(PolybiusManager.player.email)) {
+            if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
+                !string.IsNullOrEmpty(PolybiusManager.player.getUsername()) &&
+                !string.IsNullOrEmpty(PolybiusManager.player.getEmail())) {
 
                 ISFSObject o = new SFSObject();
-                o.PutUtfString("username", PolybiusManager.player.username);
-                o.PutUtfString("password", PolybiusManager.player.password);
-                o.PutUtfString("email", PolybiusManager.player.email);
+                o.PutUtfString("username", PolybiusManager.player.getUsername());
+                o.PutUtfString("password", PolybiusManager.player.getPassword());
+                o.PutUtfString("email", PolybiusManager.player.getEmail());
                 //o.PutUtfString("dob", PolybiusManager.player.dob); // TODO: add DOB functionality
                 sfs.Send(new ExtensionRequest("CreateUser", o));
             }
@@ -131,28 +141,28 @@ namespace polybius {
         public void logout()
         {
             PolybiusManager.loggedIn = false;
-            if (!string.IsNullOrEmpty(PolybiusManager.player.username))
+            if (!string.IsNullOrEmpty(PolybiusManager.player.getUsername()))
             {
                 ISFSObject ot = new SFSObject();
-                ot.PutUtfString("username", PolybiusManager.player.username);
+                ot.PutUtfString("username", PolybiusManager.player.getUsername());
                 sfs.Send(new ExtensionRequest("UserLogout", ot));
             }
         }
 
         // get message
-        public void getMessages(int senderID) {
+        public void getMessagesRequest(int senderID) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("level", "private");
             o.PutUtfString("levelname", "Polybius");
             o.PutUtfString("mode", "get");
-            o.PutUtfString("mReceiver", PolybiusManager.player.userID.ToString());
+            o.PutUtfString("mReceiver", PolybiusManager.player.getUserID().ToString());
             o.PutUtfString("mSender", senderID.ToString());
             o.PutInt("amount", 1);
             sfs.Send(new ExtensionRequest("Messages", o));
         }
 
         // send message
-        public void sendMessage(Message m) {
+        public void sendMessageRequest(Message m) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("level", "private");
             o.PutUtfString("levelname", "Polybius");
@@ -165,6 +175,26 @@ namespace polybius {
 
         public SmartFox getConnection() {
             return sfs;
+        }
+
+        // Get Friends
+        public List<User> updateFriends() {
+            List<User> friends = new List<User>();
+            // TODO: get friends from database and add to list
+            return friends;
+        }
+
+        // Search Users
+        public List<User> userSearch(string username) {
+            // TODO: search for users by username
+
+            List<User> users = new List<User>();
+            // Debug
+            for (int i = 0; i < 5; i++) {
+                string name = "Bob" + i;
+                users.Add(new User(name, "bobrocks", "bob@bob.com", "10/10/1901"));
+            }
+            return users;
         }
 
         //exit handler

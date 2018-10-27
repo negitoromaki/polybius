@@ -13,11 +13,11 @@ namespace polybius
 
         private void Update()
         {
-            if (!string.IsNullOrEmpty(PolybiusManager.player.username))
+            if (!string.IsNullOrEmpty(PolybiusManager.player.getUsername()))
             {
                 foreach (TextMeshProUGUI t in usernameTexts)
                 {
-                    t.text = PolybiusManager.player.username;
+                    t.text = PolybiusManager.player.getUsername();
                 }
             }
         }
