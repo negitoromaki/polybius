@@ -9,12 +9,18 @@ namespace polybius {
 
         public GameObject searchBar, MainMenuPanel, ProfilePanel, ButtonPanel, parent;
         public GameObject ProfileButton, SearchButton;
+
         private TMP_InputField searchBarText;
         private string currSearch;
         private List<User> results;
 
         void Start() {
-            Debug.Assert(searchBar != null && parent != null && ProfilePanel != null && ButtonPanel != null);
+            Debug.Assert(   searchBar != null &&
+                            parent != null &&
+                            ProfilePanel != null &&
+                            ButtonPanel != null &&
+                            ProfileButton != null &&
+                            SearchButton != null);
             searchBarText = searchBar.GetComponent<TMP_InputField>();
             Debug.Assert(searchBarText != null);
             currSearch = "";
@@ -34,11 +40,13 @@ namespace polybius {
 
                 GameObject result;
                 for (int i = 0; i < results.Count; i++) {
-                    result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
+                    result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UserButton"), parent.transform);
                     result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = results[i].getUsername();
                     int temp = i;
                     result.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));
-                    result.transform.Find("ChatButton").gameObject.SetActive(false);
+                    result.transform.Find("AddFriend").GetComponent<Button>().onClick.AddListener(() => toggleFriendStatus(temp));
+                    if (PolybiusManager.player.getFriends().Contains(results[i]))
+                        result.transform.Find("AddFriend").GetComponent<FriendButton>().toggleFriendIcon();
                 }
             }
         }
@@ -50,6 +58,15 @@ namespace polybius {
             p.prevButton = SearchButton;
             p.prevPanel = this.gameObject;
             MainMenuPanel.GetComponent<UIPanelSwitcher>().ChangeMenu(ProfilePanel);
+        }
+
+        public void toggleFriendStatus(int i) {
+            // TODO
+            if (PolybiusManager.player.getFriends().Contains(results[i])) {
+                // Is friend, unfriend
+            } else {
+                // Is not friend, friend
+            }
         }
     }
 }

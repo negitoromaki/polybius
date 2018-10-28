@@ -203,7 +203,7 @@ namespace polybius {
             // Debug
             for (int i = 0; i < 5; i++) {
                 string name = username + i;
-                users.Add(new User(name, "bobrocks", "bob@bob.com", "10/10/1901"));
+                users.Add(new User(name, "bobrocks", "bob@bob.com", "10/10/1901", i + 4));
             }
             return users;
         }

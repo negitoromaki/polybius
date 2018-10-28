@@ -69,13 +69,33 @@ namespace polybius {
 
         public User() : this(null, null, null, null) {}
 
-        public User(string username, string password, string email, string dob) {
+        public User(string username, string password, string email, string dob) : this(username, password, email, dob, -1) {}
+
+        public User(string username, string password, string email, string dob, int userID) {
             this.username = username;
             this.password = password;
             this.email = email;
-		    this.dob = dob;
+            this.dob = dob;
             currentStatus = status.offline;
-			userID = -1;
+            this.userID = userID;
+        }
+
+        // ------------------
+        // Overridden Methods
+        // ------------------
+
+        public override bool Equals(object obj) {
+            User item = obj as User;
+
+            if (item == null) {
+                return false;
+            }
+
+            return userID.Equals(item.userID);
+        }
+
+        public override int GetHashCode() {
+            return this.userID.GetHashCode();
         }
 
         // ------------------
@@ -126,7 +146,7 @@ namespace polybius {
             friends = new List<User>();
             for (int i = 0; i < 5; i++) {
                 string name = "Bob " + i.ToString();
-                friends.Add(new User(name, "bobrocks", "bob@bob.com", "10/10/1901"));
+                friends.Add(new User(name, "bobrocks", "bob@bob.com", "10/10/1901", i));
             }
 
             return friends;
