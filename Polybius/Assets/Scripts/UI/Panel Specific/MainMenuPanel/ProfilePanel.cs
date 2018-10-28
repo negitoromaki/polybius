@@ -7,7 +7,7 @@ using TMPro;
 namespace polybius {
     public class ProfilePanel : MonoBehaviour {
 
-        public GameObject parent;
+        public GameObject MainMenuPanel, ButtonPanel, parent, prevPanel, prevButton;
         public User currentUser;
 
         private Image backButton;
@@ -26,7 +26,8 @@ namespace polybius {
             if (currentUser == null)
                 setCurrentUser();
             backButton = transform.Find("Header").Find("BackButton").GetComponent<Image>();
-            Debug.Assert(backButton != null);
+            Debug.Assert(backButton != null && MainMenuPanel != null && ButtonPanel != null);
+
 
             // Load resources
             titlePrefab = Resources.Load<GameObject>("Prefabs/UI/Title");
@@ -37,6 +38,8 @@ namespace polybius {
         public void OnEnable() {
             // Enable/Disable back button
             backButton.enabled = (currentUser != PolybiusManager.player);
+            if (backButton.enabled)
+                Debug.Assert(prevPanel != null && prevButton != null);
 
             // Load Statistics
 
@@ -73,6 +76,11 @@ namespace polybius {
         public void OnDisable() {
             foreach (Transform child in parent.transform)
                 GameObject.Destroy(child.gameObject);
+        }
+
+        public void goBack() {
+            ButtonPanel.GetComponent<ButtonPanel>().PressButton(prevButton);
+            MainMenuPanel.GetComponent<UIPanelSwitcher>().ChangeMenu(prevPanel);
         }
     }
 }

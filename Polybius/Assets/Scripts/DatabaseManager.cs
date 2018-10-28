@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using Sfs2X;
@@ -55,7 +56,7 @@ namespace polybius {
         void onLost(BaseEvent e) {
             connected = false;
             PolybiusManager.loggedIn = false;
-
+            Debug.LogError("Lost Server!");
         }
 
         void onLogin(BaseEvent e) {
@@ -76,6 +77,7 @@ namespace polybius {
                     PolybiusManager.loggedIn = true;
                 } else {
                     Debug.LogError("Error with login: " + result);
+                    logout();
                 }
             } else if (cmd == "CreateUser") {
                 if (result == "success") {
@@ -108,40 +110,43 @@ namespace polybius {
         //public methods
         // login user
         public void login() {
-            logout();
-            PolybiusManager.loggedIn = false;
-            if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
-                !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
+            if (!PolybiusManager.loggedIn) {
+                if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
+                    !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
 
-                ISFSObject l = new SFSObject();
-                l.PutUtfString("username", PolybiusManager.player.getUsername());
-                l.PutUtfString("password", PolybiusManager.player.getPassword());
-                sfs.Send(new ExtensionRequest("UserLogin", l));
+                    ISFSObject l = new SFSObject();
+                    l.PutUtfString("username", PolybiusManager.player.getUsername());
+                    l.PutUtfString("password", PolybiusManager.player.getPassword());
+                    sfs.Send(new ExtensionRequest("UserLogin", l));
+                }
+            } else {
+                logout();
             }
         }
 
         // register user
         public void create() {
-            PolybiusManager.loggedIn = false;
-            if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
-                !string.IsNullOrEmpty(PolybiusManager.player.getUsername()) &&
-                !string.IsNullOrEmpty(PolybiusManager.player.getEmail())) {
+            if (!PolybiusManager.loggedIn) {
+                if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
+                    !string.IsNullOrEmpty(PolybiusManager.player.getUsername()) &&
+                    !string.IsNullOrEmpty(PolybiusManager.player.getEmail())) {
 
-                ISFSObject o = new SFSObject();
-                o.PutUtfString("username", PolybiusManager.player.getUsername());
-                o.PutUtfString("password", PolybiusManager.player.getPassword());
-                o.PutUtfString("email", PolybiusManager.player.getEmail());
-                //o.PutUtfString("dob", PolybiusManager.player.dob); // TODO: add DOB functionality
-                sfs.Send(new ExtensionRequest("CreateUser", o));
+                    ISFSObject o = new SFSObject();
+                    o.PutUtfString("username", PolybiusManager.player.getUsername());
+                    o.PutUtfString("password", PolybiusManager.player.getPassword());
+                    o.PutUtfString("email", PolybiusManager.player.getEmail());
+                    //o.PutUtfString("dob", PolybiusManager.player.dob); // TODO: add DOB functionality
+                    sfs.Send(new ExtensionRequest("CreateUser", o));
+                }
+            } else {
+                logout();
             }
         }
-        public void logout()
-        {
-            PolybiusManager.loggedIn = false;
-            if (!string.IsNullOrEmpty(PolybiusManager.player.getUsername()))
-            {
+        public void logout() {
+            if (!string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
                 ISFSObject ot = new SFSObject();
                 ot.PutUtfString("username", PolybiusManager.player.getUsername());
+                Debug.Log("Logging out " + PolybiusManager.player.getUsername());
                 sfs.Send(new ExtensionRequest("UserLogout", ot));
             }
         }
@@ -174,6 +179,15 @@ namespace polybius {
             return sfs;
         }
 
+        // Get lobbies
+        public List<Game> getLobbies(Game.type type) {
+            List<Game> games = new List<Game>();
+            // TODO: get lobbies from database and add to list
+            for (int i = 0; i < 10; i++)
+                games.Add(new Game(1000 * i, 1000 * i, PolybiusManager.player, Game.type.pong));
+            return games;
+        }
+
         // Get Friends
         public List<User> updateFriends() {
             List<User> friends = new List<User>();
@@ -188,7 +202,7 @@ namespace polybius {
             List<User> users = new List<User>();
             // Debug
             for (int i = 0; i < 5; i++) {
-                string name = "Bob" + i;
+                string name = username + i;
                 users.Add(new User(name, "bobrocks", "bob@bob.com", "10/10/1901"));
             }
             return users;
@@ -196,12 +210,18 @@ namespace polybius {
 
         //exit handler
         void OnApplicationQuit() {
-            logout();
+            for (int i = 0; i < 10 && PolybiusManager.loggedIn; i++) {
+                logout();
+                Thread.Sleep(1);
+            }
+            if (PolybiusManager.loggedIn)
+                Debug.LogError("Could not log out!!!");
             Debug.Log("exiting");
             sfs.RemoveAllEventListeners();
             if (sfs.IsConnected) {
                 sfs.Disconnect();
             }
+            
         }
     }
 }

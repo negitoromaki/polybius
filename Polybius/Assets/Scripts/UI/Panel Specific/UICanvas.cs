@@ -17,7 +17,7 @@ namespace polybius {
         void Update() {
             if (PolybiusManager.dm.connected) {
                 if (PolybiusManager.loggedIn) {
-                    GetComponent<UIPanelSwitcher>().ChangeMenu(ConnectionPanel);
+                    GetComponent<UIPanelSwitcher>().ChangeMenu(MainMenuPanel);
                 } else {
                     if (!LoginRegisterPanel.activeSelf && !RegisterPanel.activeSelf && !LoginPanel.activeSelf)
                         GetComponent<UIPanelSwitcher>().ChangeMenu(LoginRegisterPanel);

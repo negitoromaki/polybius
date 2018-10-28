@@ -7,7 +7,8 @@ using TMPro;
 namespace polybius {
     public class FriendsPanel : MonoBehaviour {
 
-        public GameObject MainMenuPanel, ProfilePanel, MessagePanel, parent;
+        public GameObject MainMenuPanel, ProfilePanel, MessagePanel, ButtonPanel, parent;
+        public GameObject ProfileButton, FriendButton;
         private List<User> friends;
 
         void Start() {
@@ -15,6 +16,9 @@ namespace polybius {
             Debug.Assert(   MainMenuPanel != null &&
                             ProfilePanel != null &&
                             MessagePanel != null &&
+                            ButtonPanel != null &&
+                            ProfileButton != null &&
+                            FriendButton != null &&
                             parent != null);
 
             GameObject friend;
@@ -28,7 +32,11 @@ namespace polybius {
         } 
 
         public void openUserProfile(int i) {
-            ProfilePanel.GetComponent<ProfilePanel>().changeUser(friends[i]);
+            ButtonPanel.GetComponent<ButtonPanel>().PressButton(ProfileButton);
+            ProfilePanel p = ProfilePanel.GetComponent<ProfilePanel>();
+            p.changeUser(friends[i]);
+            p.prevButton = FriendButton;
+            p.prevPanel = this.gameObject;
             MainMenuPanel.GetComponent<UIPanelSwitcher>().ChangeMenu(ProfilePanel);
         }
 

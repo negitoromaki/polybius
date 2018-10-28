@@ -36,6 +36,26 @@ namespace polybius {
         }
     }
 
+    public class Game {
+        // Enum
+        public enum type { pong, connect4, tictactoe, none }
+
+        // Fields
+        public float coordLong, coordLat;
+        public User host, player;
+        public type gameType;
+        public List<User> spectators = new List<User>();
+
+        public Game() : this(0, 0, null, type.none) {}
+        
+        public Game(float coordLong, float coordLat, User host, type gameType) {
+            this.coordLong = coordLong;
+            this.coordLat = coordLat;
+            this.host = host;
+            this.gameType = gameType;
+        }
+    }
+
     public class User {
         // Enum
         public enum status { online, offline, invisible };
