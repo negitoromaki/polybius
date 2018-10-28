@@ -212,7 +212,7 @@ namespace polybius {
         void OnApplicationQuit() {
             for (int i = 0; i < 10 && PolybiusManager.loggedIn; i++) {
                 logout();
-                Thread.Sleep(1);
+                Thread.Sleep(1000);
             }
             if (PolybiusManager.loggedIn)
                 Debug.LogError("Could not log out!!!");

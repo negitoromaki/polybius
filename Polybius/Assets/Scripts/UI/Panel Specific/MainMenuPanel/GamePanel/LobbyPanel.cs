@@ -67,7 +67,7 @@ namespace polybius {
 
             // Wait until service initializes
             for (int i = 0; i < 20 && Input.location.status == LocationServiceStatus.Initializing; i++)
-                Thread.Sleep(1);
+                Thread.Sleep(1000);
 
             // Check if service did not initialize
             if (Input.location.status == LocationServiceStatus.Initializing) {
