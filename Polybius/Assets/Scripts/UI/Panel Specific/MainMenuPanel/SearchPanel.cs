@@ -36,11 +36,11 @@ namespace polybius {
 
                 resultsUpdated = false;
                 PolybiusManager.dm.userSearchQuery(currSearch);
+
                 for (int i = 0; i < 10 && resultsUpdated; i++)
                     System.Threading.Thread.Sleep(1000);
 
                 if (resultsUpdated) {
-
                     Debug.Assert(MainMenuPanel != null &&
                                     ProfilePanel != null &&
                                     parent != null);

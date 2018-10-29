@@ -254,6 +254,11 @@ namespace polybius {
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
+        public void setPrivacy(bool privacy) {
+            // TODO: toggle database user privacy
+
+        }
+
         // Get Friends
         public List<User> updateFriends(SFSArray queryArray) {
             List<User> friends = new List<User>();
@@ -303,12 +308,7 @@ namespace polybius {
 
         //exit handler
         void OnDisable() {
-            for (int i = 0; i < 10 && PolybiusManager.loggedIn; i++) {
-                logout();
-                System.Threading.Thread.Sleep(500);
-            }
-            if (PolybiusManager.loggedIn)
-                Debug.LogError("Could not log out!!!");
+            logout();
             Debug.Log("exiting");
             sfs.RemoveAllEventListeners();
             if (sfs.IsConnected) {

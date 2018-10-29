@@ -53,10 +53,12 @@ namespace polybius {
                 userStats[1, 1] = currentUser.getDob();
             addSection("User Statistics:", userStats);
 
-            string[,] connect4Stats = new string[1,2];
-            connect4Stats[0, 0] = "Games Won: ";
+            if (currentUser.getPrivacy()) {
+                string[,] connect4Stats = new string[1, 2];
+                connect4Stats[0, 0] = "Games Won: ";
                 connect4Stats[0, 1] = "3000";
-            addSection("Connect 4 Statistics:", connect4Stats);
+                addSection("Connect 4 Statistics:", connect4Stats);
+            }
         }
 
         public void addSection(string titleText, string[,] statTexts) {

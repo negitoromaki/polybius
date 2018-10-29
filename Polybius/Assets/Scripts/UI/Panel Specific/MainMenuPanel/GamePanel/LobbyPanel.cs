@@ -8,30 +8,41 @@ using TMPro;
 namespace polybius {
     public class LobbyPanel : MonoBehaviour {
 
-        public GameObject MapPanel, parent, ErrorMessage;
+        public GamePanel gp;
+        public GameObject MapPanel, parent, createPanel, scrollRect, ErrorMessage;
         private List<Game> games;
         private float currLat, currLong;
         private Game.type gameType = Game.type.none;
 
         void OnEnable() {
-            if (getLocation()) {
-                Debug.Assert(gameType != Game.type.none);
-                games = PolybiusManager.dm.getLobbies(gameType);
+            Debug.Assert(gp != null &&
+                            MapPanel != null &&
+                            parent != null &&
+                            createPanel != null &&
+                            scrollRect != null &&
+                            ErrorMessage != null);
 
-                foreach (Transform child in parent.transform)
-                    GameObject.Destroy(child.gameObject);
+            if (gameType != Game.type.none) {
+                if (getLocation()) {
+                    games = PolybiusManager.dm.getLobbies(gameType);
 
-                GameObject game;
-                for (int i = 0; i < games.Count; i++) {
-                    game = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
-                    float delta = getCoordDist(games[i].coordLat, games[i].coordLong, currLat, currLong);
-                    game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta*5280 + "ft";
-                    int temp = i;
-                    game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(temp));
-                    game.transform.Find("Map").GetComponent<Button>().onClick.AddListener(() => displayLocation(temp));
+                    foreach (Transform child in parent.transform)
+                        GameObject.Destroy(child.gameObject);
+
+                    GameObject game;
+                    for (int i = 0; i < games.Count; i++) {
+                        game = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
+                        float delta = getCoordDist(games[i].coordLat, games[i].coordLong, currLat, currLong);
+                        game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta * 5280 + "ft";
+                        int temp = i;
+                        game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(temp));
+                        game.transform.Find("Map").GetComponent<Button>().onClick.AddListener(() => displayLocation(temp));
+                    }
+                } else {
+                    GetComponent<UIPanelSwitcher>().ChangeMenu(ErrorMessage);
                 }
             } else {
-                GetComponent<UIPanelSwitcher>().ChangeMenu(ErrorMessage);
+                Debug.LogError("Gametype == none!!");
             }
         }
 
@@ -93,6 +104,14 @@ namespace polybius {
 
         public void setGameType(Game.type gameType) {
             this.gameType = gameType;
+        }
+
+        public void backButton() {
+            if (createPanel.activeSelf) {
+                GetComponent<UIPanelSwitcher>().ChangeMenu(scrollRect);
+            } else {
+                gp.currGameType = Game.type.none;
+            }
         }
     }
 }

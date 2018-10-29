@@ -24,6 +24,9 @@ namespace polybius {
         private TMP_InputField dobInput;
         private Image dobImage;
 
+        // Privacy
+        public TextMeshProUGUI privacyState;
+
         void Start() {
             // Main Settings
             username    = parent.transform.Find("Username").gameObject;
@@ -43,6 +46,10 @@ namespace polybius {
             Debug.Assert(dobInput != null && dobImage != null);
             dobImage.color = white;
             dobInput.text = PolybiusManager.player.getDob();
+
+            // Privacy
+            Debug.Assert(privacyState != null);
+        
         }
 
         void Update() {
@@ -59,6 +66,17 @@ namespace polybius {
             } else {
                 dobImage.color = red;
             }
+
+            // Social
+            if (PolybiusManager.player.getPrivacy()) {
+                privacyState.text = "Private";
+            } else {
+                privacyState.text = "Public";
+            }
+        }
+
+        public void toggleSocial() {
+            PolybiusManager.player.togglePrivacy();
         }
     }
 }

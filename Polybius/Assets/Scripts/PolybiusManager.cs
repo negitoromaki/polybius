@@ -63,19 +63,21 @@ namespace polybius {
         // Fields
         private string username, password, email, dob;
         private status currentStatus;
+        private bool privacy;
         private int userID;
         public List<Message> messages = new List<Message>();
         public List<User> friends = new List<User>();
 
         public User() : this(null, null, null, null) {}
 
-        public User(string username, string password, string email, string dob) : this(username, password, email, dob, -1) {}
+        public User(string username, string password, string email, string dob) : this(username, password, email, dob, -1, false) {}
 
-        public User(string username, string password, string email, string dob, int userID) {
+        public User(string username, string password, string email, string dob, int userID, bool privacy) {
             this.username = username;
             this.password = password;
             this.email = email;
             this.dob = dob;
+            this.privacy = privacy; // true is private, false is public
             currentStatus = status.offline;
             this.userID = userID;
         }
@@ -121,6 +123,10 @@ namespace polybius {
             return dob;
         }
 
+        public bool getPrivacy() {
+            return privacy;
+        }
+
         // Get Messages from a user
         public List<Message> getMessages(int id) {
             PolybiusManager.dm.getMessagesRequest(id);
@@ -142,6 +148,15 @@ namespace polybius {
         // User Field Setters
         // ------------------
 
+        // Sets user's privacy status
+        public void togglePrivacy() {
+            if (privacy) {
+                PolybiusManager.dm.setPrivacy((privacy = false));
+            } else {
+                PolybiusManager.dm.setPrivacy((privacy = true));
+            }
+        }
+       
         // Updates the username if it contains appropriate characters
         // Returns true if valid username
         public bool setUsername(string newUser) {

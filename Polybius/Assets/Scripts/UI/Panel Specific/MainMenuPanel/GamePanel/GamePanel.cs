@@ -9,7 +9,7 @@ namespace polybius {
 
         private LobbyPanel lobbyPanelScript;
         private UIPanelSwitcher switcher;
-        private Game.type currGameType = Game.type.none;
+        public Game.type currGameType = Game.type.none;
 
         void Start() {
             Debug.Assert(gameTypePanel != null && LobbyPanel != null);
