@@ -15,18 +15,20 @@ namespace polybius {
 
         void OnEnable() {
             if (getLocation()) {
-
                 Debug.Assert(gameType != Game.type.none);
-
                 games = PolybiusManager.dm.getLobbies(gameType);
+
+                foreach (Transform child in parent.transform)
+                    GameObject.Destroy(child.gameObject);
+
                 GameObject game;
                 for (int i = 0; i < games.Count; i++) {
                     game = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
                     float delta = getCoordDist(games[i].coordLat, games[i].coordLong, currLat, currLong);
                     game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta/5280 + "ft";
                     int temp = i;
-                    game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(i));
-                    game.transform.Find("Map").GetComponent<Button>().onClick.AddListener(() => displayLocation(i));
+                    game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(temp));
+                    game.transform.Find("Map").GetComponent<Button>().onClick.AddListener(() => displayLocation(temp));
                 }
             } else {
                 GetComponent<UIPanelSwitcher>().ChangeMenu(ErrorMessage);
@@ -34,7 +36,8 @@ namespace polybius {
         }
 
         public void startGame(int i) {
-
+            // TODO: Switch to game scene
+            Debug.Log("Start game " + i);
         }
 
         public void displayLocation(int i) {
@@ -63,9 +66,9 @@ namespace polybius {
             // Check if location is enabled
             if (!Input.location.isEnabledByUser)
                 return false;
-            Input.location.Start();
 
             // Wait until service initializes
+            Input.location.Start();
             for (int i = 0; i < 20 && Input.location.status == LocationServiceStatus.Initializing; i++)
                 Thread.Sleep(1000);
 

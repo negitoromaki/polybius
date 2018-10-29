@@ -21,12 +21,16 @@ namespace polybius {
         void Update() {
             // Menu switching
             if (currGameType == Game.type.none) {
-                switcher.ChangeMenu(gameTypePanel);
-                Debug.Log("Changing to gameTypePanel");
+                if (!gameTypePanel.activeSelf) {
+                    switcher.ChangeMenu(gameTypePanel);
+                    Debug.Log("Changing to gameTypePanel");
+                }
             } else {
-                lobbyPanelScript.setGameType(currGameType);
-                switcher.ChangeMenu(LobbyPanel);
-                Debug.Log("Changing to LobbyPanel");
+                if (!LobbyPanel.activeSelf) {
+                    lobbyPanelScript.setGameType(currGameType);
+                    switcher.ChangeMenu(LobbyPanel);
+                    Debug.Log("Changing to LobbyPanel");
+                }
             }
         }
 

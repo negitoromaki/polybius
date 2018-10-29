@@ -242,8 +242,8 @@ namespace polybius {
         public List<Game> getLobbies(Game.type type) {
             List<Game> games = new List<Game>();
             // TODO: get lobbies from database and add to list
-            for (int i = 0; i < 10; i++)
-                games.Add(new Game(1000 * i, 1000 * i, PolybiusManager.player, Game.type.pong));
+            for (int i = 0; i < 5; i++)
+                games.Add(new Game(10 * i, 10 * i, PolybiusManager.player, Game.type.pong));
             return games;
         }
 
