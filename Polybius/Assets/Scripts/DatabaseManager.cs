@@ -106,7 +106,7 @@ namespace polybius {
             } else if (cmd == "getFriends") {
                 if (result == "success") {
                     Debug.Log("Got friend list!");
-                    SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("FriendList");
+                    SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("friends");
                     fp.setFriends(updateFriends(returnedList));
                 }
                 else {
@@ -136,7 +136,7 @@ namespace polybius {
             }
             else if (cmd == "getUsers")
             {
-                SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("Users");
+                SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("users");
                 sp.setResults(userSearch(returnedList));
             }
             else {
