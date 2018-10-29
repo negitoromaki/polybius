@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using Sfs2X;
@@ -20,8 +19,11 @@ namespace polybius {
         public SmartFox sfs = new SmartFox();
         public string initZone = "Polybius";
         public bool connected = false;
-        public string result="None";
+        public string result = "None";
 
+        // References
+        public SearchPanel sp;
+        public FriendsPanel fp;
 
         private string userQuery;
 
@@ -35,9 +37,6 @@ namespace polybius {
 
             sfs.Connect(ip, port);
 
-            // Messages Shim
-            for (int i = 0; i < 5; i++)
-                PolybiusManager.player.sendMessage(new Message(-2, -1, System.DateTime.Now, "This is message number " + i));
         }
 
         void Update() {
@@ -108,7 +107,7 @@ namespace polybius {
                 if (result == "success") {
                     Debug.Log("Got friend list!");
                     SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("FriendList");
-                    updateFriends(returnedList);
+                    fp.setFriends(updateFriends(returnedList));
                 }
                 else {
                     Debug.LogError("Error retrieving friend list: " + result);
@@ -138,7 +137,7 @@ namespace polybius {
             else if (cmd == "getUsers")
             {
                 SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("Users");
-                userSearch(returnedList);
+                sp.setResults(userSearch(returnedList));
             }
             else {
                 Debug.LogError("Command Not found: " + cmd + " returned " + result);
@@ -285,12 +284,6 @@ namespace polybius {
             // TODO: search for users by username
             // get users
             List<User> users = new List<User>();
-<<<<<<< HEAD
-            // Debug
-            for (int i = 0; i < 5; i++) {
-                string name = username + i;
-                users.Add(new User(name, "bobrocks", "bob@bob.com", "10/10/1901", i + 4));
-=======
             for (int i = 0; i < queryArray.Size(); i++)
             {
                 SFSObject currentUser = (SFSObject)queryArray.GetSFSObject(i);
@@ -303,7 +296,6 @@ namespace polybius {
                     newUser.setUsername(currentName);
                     users.Add(newUser);
                 }
->>>>>>> Added server calls for friends
             }
 
             return users;
@@ -313,7 +305,7 @@ namespace polybius {
         void OnApplicationQuit() {
             for (int i = 0; i < 10 && PolybiusManager.loggedIn; i++) {
                 logout();
-                Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(1000);
             }
             if (PolybiusManager.loggedIn)
                 Debug.LogError("Could not log out!!!");

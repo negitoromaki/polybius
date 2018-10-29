@@ -9,7 +9,6 @@ using Mapbox.Unity.Utilities;
 namespace polybius {
     public class MapPanel : MonoBehaviour {
 
-        [Geocode]
         public string locationString;
         public Vector2d location;
 
@@ -43,7 +42,8 @@ namespace polybius {
         }
 
         public void setLocation(float dispLat, float dispLong) {
-            locationString = (dispLat + ", " + dispLong);
+            locationString = (dispLat + "," + dispLong);
+            Debug.Log("Set location to: " + locationString);
         }
     }
 }

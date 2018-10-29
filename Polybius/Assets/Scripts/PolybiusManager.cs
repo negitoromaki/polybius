@@ -64,8 +64,8 @@ namespace polybius {
         private string username, password, email, dob;
         private status currentStatus;
         private int userID;
-        private List<Message> messages = new List<Message>();
-        private List<User> friends = new List<User>();
+        public List<Message> messages = new List<Message>();
+        public List<User> friends = new List<User>();
 
         public User() : this(null, null, null, null) {}
 
@@ -136,20 +136,6 @@ namespace polybius {
 
         public status getStatus() {
             return currentStatus;
-        }
-
-        // Returns a list of friends
-        public List<User> getFriends() {
-            //return PolybiusManager.dm.updateFriends();
-            
-            // User shim
-            friends = new List<User>();
-            for (int i = 0; i < 5; i++) {
-                string name = "Bob " + i.ToString();
-                friends.Add(new User(name, "bobrocks", "bob@bob.com", "10/10/1901", i));
-            }
-
-            return friends;
         }
 
         // ------------------

@@ -13,6 +13,7 @@ namespace polybius {
         private TMP_InputField searchBarText;
         private string currSearch;
         private List<User> results;
+        private bool resultsUpdated = false;
 
         void Start() {
             Debug.Assert(   searchBar != null &&
@@ -33,20 +34,29 @@ namespace polybius {
                 foreach (Transform child in parent.transform)
                     GameObject.Destroy(child.gameObject);
 
-                results = PolybiusManager.dm.userSearch(currSearch);
-                Debug.Assert(MainMenuPanel != null &&
-                                ProfilePanel != null &&
-                                parent != null);
+                resultsUpdated = false;
+                PolybiusManager.dm.userSearchQuery(currSearch);
+                for (int i = 0; i < 10 && resultsUpdated; i++)
+                    System.Threading.Thread.Sleep(1000);
 
-                GameObject result;
-                for (int i = 0; i < results.Count; i++) {
-                    result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UserButton"), parent.transform);
-                    result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = results[i].getUsername();
-                    int temp = i;
-                    result.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));
-                    result.transform.Find("AddFriend").GetComponent<Button>().onClick.AddListener(() => toggleFriendStatus(temp));
-                    if (PolybiusManager.player.getFriends().Contains(results[i]))
-                        result.transform.Find("AddFriend").GetComponent<FriendButton>().toggleFriendIcon();
+                if (resultsUpdated) {
+
+                    Debug.Assert(MainMenuPanel != null &&
+                                    ProfilePanel != null &&
+                                    parent != null);
+
+                    GameObject result;
+                    for (int i = 0; i < results.Count; i++) {
+                        result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UserButton"), parent.transform);
+                        result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = results[i].getUsername();
+                        int temp = i;
+                        result.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));
+                        result.transform.Find("AddFriend").GetComponent<Button>().onClick.AddListener(() => toggleFriendStatus(temp));
+                        if (PolybiusManager.player.friends.Contains(results[i]))
+                            result.transform.Find("AddFriend").GetComponent<FriendButton>().toggleFriendIcon();
+                    }
+                } else {
+                    Debug.LogError("Search Results could not be updated");
                 }
             }
         }
@@ -61,12 +71,16 @@ namespace polybius {
         }
 
         public void toggleFriendStatus(int i) {
-            // TODO
-            if (PolybiusManager.player.getFriends().Contains(results[i])) {
-                // Is friend, unfriend
+            if (PolybiusManager.player.friends.Contains(results[i])) {
+                PolybiusManager.dm.RemoveFriend(results[i].getUsername());
             } else {
-                // Is not friend, friend
+                PolybiusManager.dm.AddFriend(results[i].getUsername());
             }
+        }
+
+        public void setResults(List<User> results) {
+            this.results = results;
+            resultsUpdated = true;
         }
     }
 }
