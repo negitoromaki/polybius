@@ -16,7 +16,7 @@ namespace polybius {
             friendsUpdated = false;
 
             PolybiusManager.dm.getFriendsQuery();
-            for (int i = 0; i < 10 && friendsUpdated; i++)
+            for (int i = 0; i < 5 && friendsUpdated; i++)
                 System.Threading.Thread.Sleep(1000);
 
             if (friendsUpdated) {

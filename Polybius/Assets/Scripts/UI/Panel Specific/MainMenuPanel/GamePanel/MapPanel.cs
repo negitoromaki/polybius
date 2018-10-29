@@ -13,23 +13,25 @@ namespace polybius {
         public Vector2d location;
 
         public AbstractMap map;
-        private float _spawnScale = 10f;
-        public GameObject _markerPrefab;
+        private float _spawnScale = 30f;
+        public GameObject _markerPrefab, markerParent;
 
         private List<GameObject> _spawnedObjects;
 
         void OnEnable() {
-            Debug.Assert(map != null);
-            _spawnedObjects = new List<GameObject>();
+            Debug.Assert(map != null && markerParent != null && _markerPrefab != null);
 
+            foreach (Transform child in markerParent.transform)
+                GameObject.Destroy(child.gameObject);
+
+            _spawnedObjects = new List<GameObject>();
             location = Conversions.StringToLatLon(locationString);
             map.SetCenterLatitudeLongitude(location);
             map.Initialize(location, 10);
-            GameObject instance = Instantiate(_markerPrefab);
+            GameObject instance = Instantiate(_markerPrefab, markerParent.transform);
             instance.transform.localPosition = map.GeoToWorldPosition(location, true);
             instance.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
             _spawnedObjects.Add(instance);
-
         }
 
         private void Update() {

@@ -25,7 +25,7 @@ namespace polybius {
                 for (int i = 0; i < games.Count; i++) {
                     game = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
                     float delta = getCoordDist(games[i].coordLat, games[i].coordLong, currLat, currLong);
-                    game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta/5280 + "ft";
+                    game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta*5280 + "ft";
                     int temp = i;
                     game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(temp));
                     game.transform.Find("Map").GetComponent<Button>().onClick.AddListener(() => displayLocation(temp));
@@ -84,6 +84,7 @@ namespace polybius {
             } else {
                 currLat = Input.location.lastData.latitude;
                 currLong = Input.location.lastData.longitude;
+                Debug.Log(currLat + ", " + currLong);
             }
 
             Input.location.Stop();

@@ -6,10 +6,9 @@ using TMPro;
 namespace polybius {
     public class StatusBar : MonoBehaviour {
 
-        private TextMeshProUGUI username;
+        public TextMeshProUGUI username;
 
         private void Start() {
-            username = transform.Find("Username").GetComponent<TextMeshProUGUI>();
             Debug.Assert(username != null);
         }
 

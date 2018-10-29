@@ -23,7 +23,6 @@ namespace polybius {
             } else {
                 if (Time.frameCount % 50 == 0) {
                     if (++counter >= 4) {
-                        PolybiusManager.dm.getConnection();
                         counter = 0;
                         loadingText.text = text;
                     } else {

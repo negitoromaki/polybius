@@ -242,7 +242,7 @@ namespace polybius {
             List<Game> games = new List<Game>();
             // TODO: get lobbies from database and add to list
             for (int i = 0; i < 5; i++)
-                games.Add(new Game(10 * i, 10 * i, PolybiusManager.player, Game.type.pong));
+                games.Add(new Game(10 * (i + 3), 10 * (i + 3), PolybiusManager.player, Game.type.pong));
             return games;
         }
 
@@ -302,10 +302,10 @@ namespace polybius {
         }
 
         //exit handler
-        void OnApplicationQuit() {
+        void OnDisable() {
             for (int i = 0; i < 10 && PolybiusManager.loggedIn; i++) {
                 logout();
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(500);
             }
             if (PolybiusManager.loggedIn)
                 Debug.LogError("Could not log out!!!");
