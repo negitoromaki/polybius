@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -22,6 +22,8 @@ namespace polybius {
         public bool connected = false;
         public string result="None";
 
+
+        private string userQuery;
 
         void Awake() {
             PolybiusManager.dm = this;
@@ -65,7 +67,7 @@ namespace polybius {
 
         void onResponse(BaseEvent e) {
             string cmd = (string)e.Params["cmd"];
-            ISFSObject paramsa = (SFSObject)e.Params["params"];
+            SFSObject paramsa = (SFSObject)e.Params["params"]; // changed ISFSObject to SFSObject **PLEASE CHANGE BACK IF THERE ARE ANY ERRORS**
             string message = cmd + " " + paramsa.GetUtfString("result") + " message: " + paramsa.GetUtfString("message");
             Debug.Log(cmd + " message: " + message);
             result = paramsa.GetUtfString("result");
@@ -102,7 +104,43 @@ namespace polybius {
                 } else {
                     Debug.LogError("Error with Logout: " + result);
                 }
-            } else {
+            } else if (cmd == "getFriends") {
+                if (result == "success") {
+                    Debug.Log("Got friend list!");
+                    SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("FriendList");
+                    updateFriends(returnedList);
+                }
+                else {
+                    Debug.LogError("Error retrieving friend list: " + result);
+                }
+            } else if (cmd == "addFriend")
+            {
+                if (result == "success")
+                {
+                    Debug.Log("Successfully added friend!");
+                }
+                else
+                {
+                    Debug.LogError("Error adding friend: " + result);
+                }
+            }
+            else if (cmd == "removeFriend")
+            {
+                if (result == "success")
+                {
+                    Debug.Log("Successfully removed friend!");
+                }
+                else
+                {
+                    Debug.LogError("Error removing friend: " + result);
+                }
+            }
+            else if (cmd == "getUsers")
+            {
+                SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("Users");
+                userSearch(returnedList);
+            }
+            else {
                 Debug.LogError("Command Not found: " + cmd + " returned " + result);
             }
         }
@@ -179,6 +217,27 @@ namespace polybius {
             return sfs;
         }
 
+        public void getLobbiesQuery()
+        {
+            // query server for lobbies
+        }
+
+        public void AddFriend(string username)
+        {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "addFriend");
+            o.PutUtfString("username", username);
+            sfs.Send(new ExtensionRequest("FriendList", o));
+        }
+
+        public void RemoveFriend(string username)
+        {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "removeFriend");
+            o.PutUtfString("username", username);
+            sfs.Send(new ExtensionRequest("FriendList", o));
+        }
+
         // Get lobbies
         public List<Game> getLobbies(Game.type type) {
             List<Game> games = new List<Game>();
@@ -188,23 +247,65 @@ namespace polybius {
             return games;
         }
 
+        public void getFriendsQuery()
+        {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "getFriends");
+            o.PutUtfString("username", PolybiusManager.player.getUsername());
+            sfs.Send(new ExtensionRequest("FriendList", o));
+        }
+
         // Get Friends
-        public List<User> updateFriends() {
+        public List<User> updateFriends(SFSArray queryArray) {
             List<User> friends = new List<User>();
             // TODO: get friends from database and add to list
+            for (int i = 0; i < queryArray.Size(); i++)
+            {
+                SFSObject currentFriend = (SFSObject)queryArray.GetSFSObject(i);
+                User friendObj = new User();
+                int userID = currentFriend.GetInt("id");
+                string friendUser = currentFriend.GetUtfString("username");
+                friendObj.setUserID(userID);
+                friendObj.setUsername(friendUser);
+                friends.Add(friendObj);
+            }
             return friends;
+        }
+        
+        public void userSearchQuery(string username)
+        {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "getUsers");
+            sfs.Send(new ExtensionRequest("Users", o));
+            userQuery = username;
         }
 
         // Search Users
-        public List<User> userSearch(string username) {
+        public List<User> userSearch(SFSArray queryArray) {
             // TODO: search for users by username
-
+            // get users
             List<User> users = new List<User>();
+<<<<<<< HEAD
             // Debug
             for (int i = 0; i < 5; i++) {
                 string name = username + i;
                 users.Add(new User(name, "bobrocks", "bob@bob.com", "10/10/1901", i + 4));
+=======
+            for (int i = 0; i < queryArray.Size(); i++)
+            {
+                SFSObject currentUser = (SFSObject)queryArray.GetSFSObject(i);
+                string currentName = currentUser.GetUtfString("username");
+                if (currentName.ToLower().Contains(userQuery.ToLower()))
+                {
+                    User newUser = new User();
+                    int userID = currentUser.GetInt("id");
+                    newUser.setUserID(userID);
+                    newUser.setUsername(currentName);
+                    users.Add(newUser);
+                }
+>>>>>>> Added server calls for friends
             }
+
             return users;
         }
 
