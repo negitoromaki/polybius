@@ -21,10 +21,6 @@ namespace polybius {
         public bool connected = false;
         public string result = "None";
 
-        // References
-        public SearchPanel sp;
-        public FriendsPanel fp;
-
         void Awake() {
             PolybiusManager.dm = this;
             sfs.AddEventListener(SFSEvent.LOGIN, onLogin);
@@ -107,7 +103,17 @@ namespace polybius {
                     Debug.Log("Got friend list!");
 
                     SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("friends");
-                    fp.setFriends(updateFriends(returnedList));
+                    PolybiusManager.player.friends.Clear();
+                    for (int i = 0; i < returnedList.Size(); i++) {
+                        SFSObject currentFriend = (SFSObject) returnedList.GetSFSObject(i);
+                        User friendObj = new User();
+                        int userID = currentFriend.GetInt("id");
+                        string friendUser = currentFriend.GetUtfString("username");
+                        friendObj.setUserID(userID);
+                        friendObj.setUsername(friendUser);
+                        PolybiusManager.player.friends.Add(friendObj);
+                    }
+                    PolybiusManager.mutex = false;
                 }
                 else {
                     Debug.LogError("Error retrieving friend list: " + result);
@@ -136,8 +142,13 @@ namespace polybius {
             }
             else if (cmd2 == "getUsers")
             {
-                SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("users");
-                sp.setResults(userSearch(returnedList));
+                SFSArray returnedList = (SFSArray) paramsa.GetSFSArray("users");
+                PolybiusManager.results.Clear();
+                for (int i = 0; i < returnedList.Size(); i++) {
+                    SFSObject currentUser = (SFSObject) returnedList.GetSFSObject(i);
+                    PolybiusManager.results.Add(new User(currentUser.GetUtfString("username"), null, null, null));
+                }
+                PolybiusManager.mutex = false;
             }
             else {
                 Debug.LogError("Command Not found: " + cmd + " returned " + result + "\nCommand2 Not found: " + cmd2);
@@ -260,53 +271,11 @@ namespace polybius {
 
         }
 
-        // Get Friends
-        public List<User> updateFriends(SFSArray queryArray) {
-            List<User> friends = new List<User>();
-            // TODO: get friends from database and add to list
-            for (int i = 0; i < queryArray.Size(); i++)
-            {
-                SFSObject currentFriend = (SFSObject)queryArray.GetSFSObject(i);
-                User friendObj = new User();
-                int userID = currentFriend.GetInt("id");
-                string friendUser = currentFriend.GetUtfString("username");
-                friendObj.setUserID(userID);
-                friendObj.setUsername(friendUser);
-                friends.Add(friendObj);
-            }
-            return friends;
-        }
-
-
-        private string userQuery;
-        public void userSearchQuery(string username)
+        public void getUsersQuery()
         {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "getUsers");
             sfs.Send(new ExtensionRequest("Users", o));
-            userQuery = username;
-        }
-
-        // Search Users
-        public List<User> userSearch(SFSArray queryArray) {
-            // TODO: search for users by username
-            // get users
-            List<User> users = new List<User>();
-            for (int i = 0; i < queryArray.Size(); i++)
-            {
-                SFSObject currentUser = (SFSObject)queryArray.GetSFSObject(i);
-                string currentName = currentUser.GetUtfString("username");
-                if (currentName.ToLower().Contains(userQuery.ToLower()))
-                {
-                    User newUser = new User();
-                    int userID = currentUser.GetInt("id");
-                    newUser.setUserID(userID);
-                    newUser.setUsername(currentName);
-                    users.Add(newUser);
-                }
-            }
-
-            return users;
         }
 
         //exit handler
@@ -317,7 +286,6 @@ namespace polybius {
             if (sfs.IsConnected) {
                 sfs.Disconnect();
             }
-            
         }
     }
 }

@@ -18,7 +18,7 @@ namespace polybius {
         }
 
         void Update() {
-            if (PolybiusManager.dm.connected) {
+            if (PolybiusManager.dm && PolybiusManager.dm.connected) {
                 GetComponentInParent<UIPanelSwitcher>().ChangeMenu(redirect);
             } else {
                 if (Time.frameCount % 50 == 0) {

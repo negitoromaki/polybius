@@ -11,6 +11,8 @@ namespace polybius {
         public static User player = new User();
         public static bool loggedIn = false;
         public static DatabaseManager dm = null;
+        public static bool mutex = false;
+        public static List<User> results = new List<User>();
 
         // Notifications
         static void sendNotification(string title, string message) {
