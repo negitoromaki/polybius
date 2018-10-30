@@ -25,8 +25,6 @@ namespace polybius {
         public SearchPanel sp;
         public FriendsPanel fp;
 
-        private string userQuery;
-
         void Awake() {
             PolybiusManager.dm = this;
             sfs.AddEventListener(SFSEvent.LOGIN, onLogin);
@@ -67,8 +65,9 @@ namespace polybius {
         void onResponse(BaseEvent e) {
             string cmd = (string)e.Params["cmd"];
             SFSObject paramsa = (SFSObject)e.Params["params"]; // changed ISFSObject to SFSObject **PLEASE CHANGE BACK IF THERE ARE ANY ERRORS**
+            string cmd2 = paramsa.GetUtfString("cmd");
             string message = cmd + " " + paramsa.GetUtfString("result") + " message: " + paramsa.GetUtfString("message");
-            Debug.Log(cmd + " message: " + message);
+            Debug.Log(cmd + "/" + cmd2 + " message: " + message);
             result = paramsa.GetUtfString("result");
 
             if (cmd == "UserLogin") {
@@ -103,16 +102,17 @@ namespace polybius {
                 } else {
                     Debug.LogError("Error with Logout: " + result);
                 }
-            } else if (cmd == "getFriends") {
+            } else if (cmd2 == "getFriends") {
                 if (result == "success") {
                     Debug.Log("Got friend list!");
+
                     SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("friends");
                     fp.setFriends(updateFriends(returnedList));
                 }
                 else {
                     Debug.LogError("Error retrieving friend list: " + result);
                 }
-            } else if (cmd == "addFriend")
+            } else if (cmd2 == "addFriend")
             {
                 if (result == "success")
                 {
@@ -123,7 +123,7 @@ namespace polybius {
                     Debug.LogError("Error adding friend: " + result);
                 }
             }
-            else if (cmd == "removeFriend")
+            else if (cmd2 == "removeFriend")
             {
                 if (result == "success")
                 {
@@ -134,13 +134,13 @@ namespace polybius {
                     Debug.LogError("Error removing friend: " + result);
                 }
             }
-            else if (cmd == "getUsers")
+            else if (cmd2 == "getUsers")
             {
                 SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("users");
                 sp.setResults(userSearch(returnedList));
             }
             else {
-                Debug.LogError("Command Not found: " + cmd + " returned " + result);
+                Debug.LogError("Command Not found: " + cmd + " returned " + result + "\nCommand2 Not found: " + cmd2);
             }
         }
 
@@ -250,6 +250,7 @@ namespace polybius {
         {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "getFriends");
+            o.PutInt("id", -1);
             o.PutUtfString("username", PolybiusManager.player.getUsername());
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
@@ -275,7 +276,9 @@ namespace polybius {
             }
             return friends;
         }
-        
+
+
+        private string userQuery;
         public void userSearchQuery(string username)
         {
             ISFSObject o = new SFSObject();

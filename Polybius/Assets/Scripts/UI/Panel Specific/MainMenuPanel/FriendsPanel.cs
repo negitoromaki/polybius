@@ -12,7 +12,7 @@ namespace polybius {
         private List<User> friends = PolybiusManager.player.friends;
         private bool friendsUpdated = false;
 
-        void Start() {
+        void OnEnable() {
             friendsUpdated = false;
 
             PolybiusManager.dm.getFriendsQuery();
@@ -27,11 +27,12 @@ namespace polybius {
                                 ProfileButton != null &&
                                 FriendButton != null &&
                                 parent != null);
-
                 GameObject friend;
+                Debug.Log(friends.Count);
                 for (int i = 0; i < friends.Count; i++) {
                     friend = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
                     friend.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = friends[i].getUsername();
+                    Debug.Log(friend == null ? "woops" : "yeet");
                     int temp = i;
                     friend.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));
                     friend.transform.Find("ChatButton").GetComponent<Button>().onClick.AddListener(() => openMessage(temp));
@@ -56,6 +57,7 @@ namespace polybius {
         }
 
         public void setFriends(List<User> friends) {
+            Debug.Log(friends[0].getUsername());
             PolybiusManager.player.friends = friends;
             friendsUpdated = true;
         }
