@@ -7,6 +7,7 @@ using TMPro;
 namespace polybius {
     public class MessagePanel : MonoBehaviour {
         // References
+        public ScrollRect scrollRect;
         public GameObject title, messageParent;
 
         // Variables
@@ -14,40 +15,51 @@ namespace polybius {
         private List<Message> messages;
 
         public void OnEnable() {
-            Debug.Assert(otherUser != null);
+            Debug.Assert(otherUser != null && scrollRect != null && title != null && messageParent != null);
             title.GetComponent<TextMeshProUGUI>().text = otherUser.getUsername();
-            messages = PolybiusManager.player.getMessages(otherUser.getUserID());
+            messages = PolybiusManager.player.getMessagesForUser(otherUser.getUsername());
         }
 
         public void Update() {
             if (Time.frameCount % 30 == 0)
-                messages = PolybiusManager.player.getMessages(otherUser.getUserID());
-            displayMessages();
+                messages = PolybiusManager.player.getMessagesForUser(otherUser.getUsername());
+            if (messages.Count > 0)
+                displayMessages();
         }
 
         void displayMessages() {
-            while (messages.Count > 0) {
+            for (int i = 0; i < messages.Count; i++) {
                 GameObject newMessage = null;
-                if (messages[0].sender == PolybiusManager.player.getUserID()) {
-                    newMessage = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Blue Message"), messageParent.transform);
+                if (messages[i].sender == PolybiusManager.player.getUsername()) {
+                    newMessage = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Blue Message"), messageParent.transform);
                 } else {
-                    newMessage = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Green Message"), messageParent.transform);
+                    newMessage = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Green Message"), messageParent.transform);
                 }
 
-                newMessage.transform.Find("Message").gameObject.GetComponent<TextMeshProUGUI>().text = messages[0].message;
-                newMessage.transform.Find("Timestamp").gameObject.GetComponent<TextMeshProUGUI>().text = messages[0].timestamp.ToString();
+                newMessage.transform.Find("Message").gameObject.GetComponent<TextMeshProUGUI>().text = messages[i].message;
+                newMessage.transform.Find("Timestamp").gameObject.GetComponent<TextMeshProUGUI>().text = messages[i].timestamp.ToString();
             }
+            messages.Clear();
         }
 
-        public void sendMessage(InputField inputField) {
-            Message m = new Message(PolybiusManager.player.getUserID(), otherUser.getUserID(), System.DateTime.Now, inputField.text);
-            PolybiusManager.player.sendMessage(m);
+        IEnumerator ScrollToBottom() {
+            yield return new WaitForEndOfFrame();
+            scrollRect.verticalNormalizedPosition = 0f;
+        }
+
+
+        public void sendMessage(TMP_InputField inputField) {
+            Message m = new Message(PolybiusManager.player.getUsername(), otherUser.getUsername(), System.DateTime.Now, inputField.text);
+            messages.Add(m);
+            PolybiusManager.dm.sendMessageRequest(m);
+            inputField.text = "";
+            displayMessages();
+            StartCoroutine(ScrollToBottom());
         }
 
         // Setter functions for username and id
         public void changeOtherUser(User u) {
             otherUser = u;
-            OnEnable();
         }
     }
 }

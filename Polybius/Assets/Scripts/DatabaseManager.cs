@@ -60,7 +60,7 @@ namespace polybius {
 
         void onResponse(BaseEvent e) {
             string cmd = (string)e.Params["cmd"];
-            SFSObject paramsa = (SFSObject)e.Params["params"]; // changed ISFSObject to SFSObject **PLEASE CHANGE BACK IF THERE ARE ANY ERRORS**
+            SFSObject paramsa = (SFSObject)e.Params["params"]; // changed ISFSObject to SFSObject, could be errors
             string cmd2 = paramsa.GetUtfString("cmd");
             string message = cmd + " " + paramsa.GetUtfString("result") + " message: " + paramsa.GetUtfString("message");
             Debug.Log(cmd + "/" + cmd2 + " message: " + message);
@@ -84,10 +84,16 @@ namespace polybius {
                 }
             } else if (cmd == "Messages") {
                 if (result == "success") {
-                    Debug.Log("Message successful!");
-                    // TODO
-                    // Message m = new Message(int senderID, PolybiusManager.player.getUserID(), System.DateTime timestamp, string message)
-                    // PolybiusManager.player.addMessage(m);
+                    SFSArray messages = (SFSArray) paramsa.GetSFSArray("messages");
+                    for (int i = 0; i < messages.Size(); i++) {
+                        SFSObject messageObj = (SFSObject)messages.GetSFSObject(i);
+                        Message m = new Message(messageObj.GetUtfString("sender"),
+                                                PolybiusManager.player.getUsername(),
+                                                System.DateTime.Now,
+                                                messageObj.GetUtfString("message"));
+
+                        PolybiusManager.player.addMessage(m);
+                    }
                 } else {
                     Debug.LogError("Error with Message: " + result);
                 }
@@ -100,17 +106,18 @@ namespace polybius {
                 }
             } else if (cmd2 == "getFriends") {
                 if (result == "success") {
-                    Debug.Log("Got friend list!");
-
                     SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("friends");
                     PolybiusManager.player.friends.Clear();
                     for (int i = 0; i < returnedList.Size(); i++) {
-                        SFSObject currentFriend = (SFSObject) returnedList.GetSFSObject(i);
-                        User friendObj = new User();
-                        int userID = currentFriend.GetInt("id");
-                        string friendUser = currentFriend.GetUtfString("username");
-                        friendObj.setUserID(userID);
-                        friendObj.setUsername(friendUser);
+                        SFSObject currentFriend = (SFSObject)returnedList.GetSFSObject(i);
+                        User friendObj = new User(currentFriend.GetUtfString("username"),
+                                                    null,
+                                                    null,
+                                                    null,
+                                                    currentFriend.GetInt("id"),
+                                                    //TODO: get privacy
+                                                    false);
+
                         PolybiusManager.player.friends.Add(friendObj);
                     }
                     PolybiusManager.mutex = false;
@@ -118,30 +125,19 @@ namespace polybius {
                 else {
                     Debug.LogError("Error retrieving friend list: " + result);
                 }
-            } else if (cmd2 == "addFriend")
-            {
-                if (result == "success")
-                {
+            } else if (cmd2 == "addFriend") {
+                if (result == "success") {
                     Debug.Log("Successfully added friend!");
-                }
-                else
-                {
+                } else {
                     Debug.LogError("Error adding friend: " + result);
                 }
-            }
-            else if (cmd2 == "removeFriend")
-            {
-                if (result == "success")
-                {
+            } else if (cmd2 == "removeFriend") {
+                if (result == "success") {
                     Debug.Log("Successfully removed friend!");
-                }
-                else
-                {
+                } else {
                     Debug.LogError("Error removing friend: " + result);
                 }
-            }
-            else if (cmd2 == "getUsers")
-            {
+            } else if (cmd2 == "getUsers") {
                 SFSArray returnedList = (SFSArray) paramsa.GetSFSArray("users");
                 PolybiusManager.results.Clear();
                 for (int i = 0; i < returnedList.Size(); i++) {
@@ -149,8 +145,7 @@ namespace polybius {
                     PolybiusManager.results.Add(new User(currentUser.GetUtfString("username"), null, null, null));
                 }
                 PolybiusManager.mutex = false;
-            }
-            else {
+            } else {
                 Debug.LogError("Command Not found: " + cmd + " returned " + result + "\nCommand2 Not found: " + cmd2);
             }
         }
@@ -200,13 +195,13 @@ namespace polybius {
         }
 
         // get message
-        public void getMessagesRequest(int senderID) {
+        public void getMessagesRequest(string senderUsername) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("level", "private");
-            o.PutUtfString("levelname", "Polybius");
+            o.PutUtfString("levelmode", "");
             o.PutUtfString("mode", "get");
-            o.PutUtfString("mReceiver", PolybiusManager.player.getUserID().ToString());
-            o.PutUtfString("mSender", senderID.ToString());
+            o.PutUtfString("mReceiver", PolybiusManager.player.getUsername());
+            o.PutUtfString("mSender", senderUsername);
             o.PutInt("amount", 1);
             sfs.Send(new ExtensionRequest("Messages", o));
         }
@@ -215,11 +210,11 @@ namespace polybius {
         public void sendMessageRequest(Message m) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("level", "private");
-            o.PutUtfString("levelname", "Polybius");
+            o.PutUtfString("levelmode", "");
             o.PutUtfString("mode", "send");
-            o.PutUtfString("mReceiver", m.receiver.ToString());
-            o.PutUtfString("mSender", m.sender.ToString());
-            o.PutInt("amount", 1);
+            o.PutUtfString("mReceiver", m.receiver);
+            o.PutUtfString("mSender", m.sender);
+            o.PutUtfString("message", m.message);
             sfs.Send(new ExtensionRequest("Messages", o));
         }
 
@@ -227,21 +222,18 @@ namespace polybius {
             return sfs;
         }
 
-        public void getLobbiesQuery()
-        {
+        public void getLobbiesQuery() {
             // query server for lobbies
         }
 
-        public void AddFriend(string username)
-        {
+        public void AddFriend(string username) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "addFriend");
             o.PutUtfString("username", username);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
-        public void RemoveFriend(string username)
-        {
+        public void RemoveFriend(string username) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "removeFriend");
             o.PutUtfString("username", username);
@@ -257,8 +249,7 @@ namespace polybius {
             return games;
         }
 
-        public void getFriendsQuery()
-        {
+        public void getFriendsQuery() {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "getFriends");
             o.PutInt("id", -1);
@@ -271,8 +262,7 @@ namespace polybius {
 
         }
 
-        public void getUsersQuery()
-        {
+        public void getUsersQuery() {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "getUsers");
             sfs.Send(new ExtensionRequest("Users", o));

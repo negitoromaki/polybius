@@ -26,11 +26,11 @@ namespace polybius {
     }
 
     public class Message {
-        public int sender, receiver;
+        public string sender, receiver;
         public System.DateTime timestamp;
         public string message;
 
-        public Message(int sender, int receiver, System.DateTime timestamp, string message) {
+        public Message(string sender, string receiver, System.DateTime timestamp, string message) {
             this.receiver = receiver;
             this.sender = sender;
             this.timestamp = timestamp;
@@ -67,7 +67,7 @@ namespace polybius {
         private status currentStatus;
         private bool privacy;
         private int userID;
-        public List<Message> messages = new List<Message>();
+        private List<Message> messages = new List<Message>();
         public List<User> friends = new List<User>();
 
         public User() : this(null, null, null, null) {}
@@ -130,16 +130,16 @@ namespace polybius {
         }
 
         // Get Messages from a user
-        public List<Message> getMessages(int id) {
-            PolybiusManager.dm.getMessagesRequest(id);
-            List<Message> messagesFromID = new List<Message>();
+        public List<Message> getMessagesForUser(string otherUsername) {
+            PolybiusManager.dm.getMessagesRequest(otherUsername);
+            List<Message> messagesfromUser = new List<Message>();
             for (int i = 0; i < messages.Count; i++) {
-                if (messages[i].sender == id) {
-                    messagesFromID.Add(messages[i]);
+                if (messages[i].sender == otherUsername) {
+                    messagesfromUser.Add(messages[i]);
                     messages.RemoveAt(i);
                 }
             }
-            return messagesFromID;
+            return messagesfromUser;
         }
 
         public status getStatus() {
@@ -240,12 +240,6 @@ namespace polybius {
         }
 
         public void addMessage(Message m) {
-            messages.Add(m);
-        }
-
-        // Sends message from current user to another
-        public void sendMessage(Message m) {
-            PolybiusManager.dm.sendMessageRequest(m);
             messages.Add(m);
         }
     }

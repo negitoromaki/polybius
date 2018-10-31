@@ -12316,6 +12316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6093b089afe6ebf458d0bc1ddac82220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrollRect: {fileID: 1144795764}
   title: {fileID: 1321794678}
   messageParent: {fileID: 1809184342}
 --- !u!222 &1152488051
@@ -14148,8 +14149,6 @@ MonoBehaviour:
   initZone: Polybius
   connected: 0
   result: None
-  sp: {fileID: 2108777446}
-  fp: {fileID: 2122695178}
 --- !u!114 &1467872494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15247,8 +15246,8 @@ MonoBehaviour:
         m_MethodName: sendMessage
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
+          m_ObjectArgument: {fileID: 1090329803}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_InputField, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
