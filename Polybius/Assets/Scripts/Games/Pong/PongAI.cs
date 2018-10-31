@@ -15,7 +15,7 @@ public class PongAI : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector3(0, 0, ball.transform.position.z - transform.position.z).normalized * speed;
+        rb.velocity = (rb.transform.forward * (ball.transform.position.z - transform.position.z) * speed).normalized;
         //transform.position = new Vector3(transform.position.x, 0, ball.transform.position.z);
     }
 }
