@@ -237,6 +237,7 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "addFriend");
             o.PutUtfString("username", username);
+			o.PutInt ("id", id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
@@ -244,6 +245,7 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "removeFriend");
             o.PutUtfString("username", username);
+			o.PutInt ("id", id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
@@ -260,6 +262,7 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "getFriends");
             o.PutUtfString("username", PolybiusManager.player.getUsername());
+			o.PutInt ("id", -1);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
