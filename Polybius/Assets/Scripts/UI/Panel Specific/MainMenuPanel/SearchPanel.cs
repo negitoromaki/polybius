@@ -14,8 +14,8 @@ namespace polybius {
         private string currSearch;
         private static bool runOnce = false;
 
-        void Start() {
-            Debug.Assert(   searchBar != null &&
+        private void OnEnable() {
+            Debug.Assert(searchBar != null &&
                             parent != null &&
                             ProfilePanel != null &&
                             ButtonPanel != null &&
@@ -23,7 +23,9 @@ namespace polybius {
                             SearchButton != null);
             searchBarText = searchBar.GetComponent<TMP_InputField>();
             Debug.Assert(searchBarText != null);
-            currSearch = "";
+            foreach (Transform child in parent.transform)
+                GameObject.Destroy(child.gameObject);
+            searchBarText.text = currSearch = "";
         }
 
         // Update is called once per frame
@@ -47,8 +49,8 @@ namespace polybius {
                 GameObject result;
                 for (int i = 0; i < PolybiusManager.results.Count; i++) {
 					if (PolybiusManager.results[i].getUsername() != null &&
-                        PolybiusManager.results[i].getUsername().ToLower().Contains(currSearch.ToLower())
-						&& PolybiusManager.player.getUsername() != PolybiusManager.results[i].getUsername()) {
+                        PolybiusManager.results[i].getUsername().ToLower().Contains(currSearch.ToLower()) &&
+                        PolybiusManager.player.getUsername() != PolybiusManager.results[i].getUsername()) {
                         result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UserButton"), parent.transform);
                         result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.results[i].getUsername();
                         int temp = i;
@@ -57,7 +59,7 @@ namespace polybius {
                         if (PolybiusManager.player.friends.Contains(PolybiusManager.results[i]))
                             result.transform.Find("AddFriend").GetComponent<FriendButton>().toggleFriendIcon();
                     } else {
-                        Debug.Log("User " + PolybiusManager.results[i].getUsername() + " does not match search");
+                        //Debug.Log("User " + PolybiusManager.results[i].getUsername() + " does not match search");
                     }
                 }
             }

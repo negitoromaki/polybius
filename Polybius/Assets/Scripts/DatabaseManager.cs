@@ -111,6 +111,7 @@ namespace polybius {
                     SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("friends");
                     PolybiusManager.player.friends.Clear();
                     for (int i = 0; i < returnedList.Size(); i++) {
+                        Debug.Log("Adding friend");
                         SFSObject currentFriend = (SFSObject)returnedList.GetSFSObject(i);
                         User friendObj = new User(currentFriend.GetUtfString("username"),
                                                     null,
@@ -123,8 +124,7 @@ namespace polybius {
                         PolybiusManager.player.friends.Add(friendObj);
                     }
                     PolybiusManager.mutex = false;
-                }
-                else {
+                } else {
                     Debug.LogError("Error retrieving friend list: " + result);
                 }
             } else if (cmd2 == "addFriend") {
@@ -237,7 +237,6 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "addFriend");
             o.PutUtfString("username", username);
-			o.PutInt ("id", id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
@@ -245,7 +244,6 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "removeFriend");
             o.PutUtfString("username", username);
-			o.PutInt ("id", id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
@@ -261,7 +259,6 @@ namespace polybius {
         public void getFriendsQuery() {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "getFriends");
-            o.PutInt("id", -1);
             o.PutUtfString("username", PolybiusManager.player.getUsername());
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
