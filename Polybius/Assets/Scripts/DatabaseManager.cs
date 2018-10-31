@@ -42,7 +42,7 @@ namespace polybius {
             if ((bool)e.Params["success"]) {
                 Debug.Log("Connected");
                 connected = true;
-                sfs.Send(new LoginRequest("guest", "", initZone));
+                
             } else {
                 Debug.Log("Connection failed");
             }
@@ -85,14 +85,16 @@ namespace polybius {
             } else if (cmd == "Messages") {
                 if (result == "success") {
                     SFSArray messages = (SFSArray) paramsa.GetSFSArray("messages");
+					//PolybiusManager.player.resetMsg ();
+
                     for (int i = 0; i < messages.Size(); i++) {
                         SFSObject messageObj = (SFSObject)messages.GetSFSObject(i);
                         Message m = new Message(messageObj.GetUtfString("sender"),
                                                 PolybiusManager.player.getUsername(),
                                                 System.DateTime.Now,
                                                 messageObj.GetUtfString("message"));
-
-                        PolybiusManager.player.addMessage(m);
+						//if(PolybiusManager.player.containsmsg(m)==false)
+                        	PolybiusManager.player.addMessage(m);
                     }
                 } else {
                     Debug.LogError("Error with Message: " + result);
@@ -142,7 +144,9 @@ namespace polybius {
                 PolybiusManager.results.Clear();
                 for (int i = 0; i < returnedList.Size(); i++) {
                     SFSObject currentUser = (SFSObject) returnedList.GetSFSObject(i);
-                    PolybiusManager.results.Add(new User(currentUser.GetUtfString("username"), null, null, null));
+					User u = new User (currentUser.GetUtfString ("username"), null, null, null);
+					u.setUserID(currentUser.GetInt("id"));
+                    PolybiusManager.results.Add(u);
                 }
                 PolybiusManager.mutex = false;
             } else {
@@ -160,6 +164,7 @@ namespace polybius {
                     ISFSObject l = new SFSObject();
                     l.PutUtfString("username", PolybiusManager.player.getUsername());
                     l.PutUtfString("password", PolybiusManager.player.getPassword());
+					sfs.Send(new LoginRequest(PolybiusManager.player.getUsername(), "", initZone));
                     sfs.Send(new ExtensionRequest("UserLogin", l));
                 }
             } else {
@@ -198,11 +203,12 @@ namespace polybius {
         public void getMessagesRequest(string senderUsername) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("level", "private");
-            o.PutUtfString("levelmode", "");
+            o.PutUtfString("levelname", "none");
             o.PutUtfString("mode", "get");
-            o.PutUtfString("mReceiver", PolybiusManager.player.getUsername());
-            o.PutUtfString("mSender", senderUsername);
+            o.PutUtfString("receiver", PolybiusManager.player.getUsername());
+            o.PutUtfString("sender", senderUsername);
             o.PutInt("amount", 1);
+			o.PutUtfString ("message", "none");
             sfs.Send(new ExtensionRequest("Messages", o));
         }
 
@@ -210,11 +216,12 @@ namespace polybius {
         public void sendMessageRequest(Message m) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("level", "private");
-            o.PutUtfString("levelmode", "");
+            o.PutUtfString("levelname", "none");
             o.PutUtfString("mode", "send");
-            o.PutUtfString("mReceiver", m.receiver);
-            o.PutUtfString("mSender", m.sender);
+            o.PutUtfString("receiver", m.receiver);
+            o.PutUtfString("sender", m.sender);
             o.PutUtfString("message", m.message);
+			o.PutInt ("amount", 1);
             sfs.Send(new ExtensionRequest("Messages", o));
         }
 
@@ -226,17 +233,19 @@ namespace polybius {
             // query server for lobbies
         }
 
-        public void AddFriend(string username) {
+		public void AddFriend(string username, int id) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "addFriend");
             o.PutUtfString("username", username);
+			o.PutInt ("id", id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
-        public void RemoveFriend(string username) {
+		public void RemoveFriend(string username, int id) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "removeFriend");
             o.PutUtfString("username", username);
+			o.PutInt ("id", id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 

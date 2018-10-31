@@ -46,8 +46,9 @@ namespace polybius {
 
                 GameObject result;
                 for (int i = 0; i < PolybiusManager.results.Count; i++) {
-                    if (PolybiusManager.results[i].getUsername() != null &&
-                        PolybiusManager.results[i].getUsername().ToLower().Contains(currSearch.ToLower())) {
+					if (PolybiusManager.results[i].getUsername() != null &&
+                        PolybiusManager.results[i].getUsername().ToLower().Contains(currSearch.ToLower())
+						&& PolybiusManager.player.getUsername() != PolybiusManager.results[i].getUsername()) {
                         result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UserButton"), parent.transform);
                         result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.results[i].getUsername();
                         int temp = i;
@@ -73,9 +74,9 @@ namespace polybius {
 
         public void toggleFriendStatus(int i) {
             if (PolybiusManager.player.friends.Contains(PolybiusManager.results[i])) {
-                PolybiusManager.dm.RemoveFriend(PolybiusManager.results[i].getUsername());
+				PolybiusManager.dm.RemoveFriend(PolybiusManager.player.getUsername(),PolybiusManager.results[i].getUserID());
             } else {
-                PolybiusManager.dm.AddFriend(PolybiusManager.results[i].getUsername());
+				PolybiusManager.dm.AddFriend(PolybiusManager.player.getUsername(),PolybiusManager.results[i].getUserID());
             }
         }
     }

@@ -40,7 +40,7 @@ public class Connection : MonoBehaviour {
 	void onConnect(BaseEvent e){
 		if ((bool)e.Params ["success"]) {
 			Debug.Log ("Connected");
-			sfs.Send (new LoginRequest ("guest", "", initZone));
+
 
 		} else {
 			Debug.Log ("Connection failed");
@@ -66,6 +66,7 @@ public class Connection : MonoBehaviour {
 		ISFSObject l = new SFSObject();
 		l.PutUtfString ("username", username);
 		l.PutUtfString ("password", password);
+		sfs.Send (new LoginRequest (username, "", initZone));
 		sfs.Send (new ExtensionRequest ("UserLogin", l));
 	}
 
