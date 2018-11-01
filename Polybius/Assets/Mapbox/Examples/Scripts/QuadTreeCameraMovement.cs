@@ -48,7 +48,7 @@
 
 		public void Update()
 		{
-			if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
+			if (Input.GetMouseButtonDown(0))
 			{
 				_dragStartedOnUI = true;
 			}
@@ -184,7 +184,7 @@
 				//_mapManager.UpdateMap(latlongDelta, _mapManager.Zoom);
 			}
 
-			if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+			if (Input.GetMouseButton(0))
 			{
 				var mousePosScreen = Input.mousePosition;
 				//assign distance of camera to ground plane to z, otherwise ScreenToWorldPoint() will always return the position of the camera
@@ -231,10 +231,6 @@
 				}
 				else
 				{
-					if (EventSystem.current.IsPointerOverGameObject())
-					{
-						return;
-					}
 					_mousePositionPrevious = _mousePosition;
 					_origin = _mousePosition;
 				}
@@ -243,7 +239,7 @@
 
 		void UseDegreeConversion()
 		{
-			if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+			if (Input.GetMouseButton(0))
 			{
 				var mousePosScreen = Input.mousePosition;
 				//assign distance of camera to ground plane to z, otherwise ScreenToWorldPoint() will always return the position of the camera
@@ -292,10 +288,6 @@
 				}
 				else
 				{
-					if (EventSystem.current.IsPointerOverGameObject())
-					{
-						return;
-					}
 					_mousePositionPrevious = _mousePosition;
 					_origin = _mousePosition;
 				}
