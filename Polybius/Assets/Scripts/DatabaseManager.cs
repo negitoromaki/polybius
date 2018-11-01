@@ -21,6 +21,8 @@ namespace polybius {
         public bool connected = false;
         public string result = "None";
 
+        public Game.type currentGameType;
+
         void Awake() {
             PolybiusManager.dm = this;
             sfs.AddEventListener(SFSEvent.LOGIN, onLogin);
@@ -116,7 +118,35 @@ namespace polybius {
                 } else {
                     Debug.LogError("Error with Logout: " + result);
                 }
-            } else if (cmd2 == "getFriends") {
+            }
+            else if (cmd == "host")
+            {
+                if (result == "success")
+                {
+                    // TODO: Change scene to a game
+                    // Use currentGameType to create a new lobby with the game type
+                    switch (currentGameType)
+                    {
+                        // set cases for each game mode and which scene to switch to
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Error hosting game: " + result);
+                }
+            }
+            else if (cmd == "join")
+            {
+                if (result == "success")
+                {
+                    // joined game successfully, go to the scene
+                }
+                else
+                {
+                    Debug.LogError("Error joining game: " + result);
+                }
+            }
+            else if (cmd2 == "getFriends") {
                 if (result == "success") {
                     SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("friends");
                     PolybiusManager.player.friends.Clear();
@@ -275,7 +305,37 @@ namespace polybius {
             // Use getLobbiesQuery to query the server
             List<Game> games = new List<Game>();
             // TODO: Parse room data
+            for (int i = 0; i < roomData.Size(); i++)
+            {
+                SFSObject currentRoom = (SFSObject)roomData.GetSFSObject(i);
+                string roomName = currentRoom.GetUtfString("roomname");
+                // TODO: Get the longitude and latitude and gametype
+                Game game = new Game();
+                game.roomName = roomName;
+
+                games.Add(game);
+            }
             return games;
+        }
+
+        public void hostQuery(string roomName, Game.type gameType)
+        {
+            // query to host a lobby/room
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "host");
+            o.PutUtfString("roomname", roomName);
+            o.PutUtfString("game", gameType.ToString());
+            currentGameType = gameType;
+            sfs.Send(new ExtensionRequest("Lobby", o));
+        }
+
+        public void joinQuery(string roomName)
+        {
+            // query to join a lobby/room
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "join");
+            o.PutUtfString("roomname", roomName);
+            sfs.Send(new ExtensionRequest("Lobby", o));
         }
 
         public void getFriendsQuery() {

@@ -49,6 +49,7 @@ namespace polybius {
         public User host, player;
         public type gameType;
         public List<User> spectators = new List<User>();
+        public string roomName;
 
         public Game() : this(0, 0, null, type.none) {}
 
