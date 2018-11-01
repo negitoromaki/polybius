@@ -9,7 +9,6 @@ using Mapbox.Unity.Utilities;
 namespace polybius {
     public class MapPanel : MonoBehaviour {
 
-        public LobbyPanel lp;
         public string locationString;
         public Vector2d location, userLoc;
 
@@ -21,7 +20,10 @@ namespace polybius {
         private List<GameObject> _spawnedObjects;
 
         void OnEnable() {
-            Debug.Assert(lp != null && map != null && markerParent != null && _markerPrefab != null && userPrefab != null);
+            locationString = (PolybiusManager.currGame.coordLat + "," + PolybiusManager.currGame.coordLong);
+            Debug.Log("Set location to: " + locationString);
+
+            Debug.Assert(!string.IsNullOrEmpty(locationString) && map != null && markerParent != null && _markerPrefab != null && userPrefab != null);
 
             foreach (Transform child in markerParent.transform)
                 GameObject.Destroy(child.gameObject);
@@ -39,7 +41,7 @@ namespace polybius {
 
             // User marker prefab
             {
-                userLoc = Conversions.StringToLatLon(lp.currLat + ", " + lp.currLong);
+                userLoc = Conversions.StringToLatLon(PolybiusManager.currLat + ", " + PolybiusManager.currLong);
                 userLocObj = Instantiate(userPrefab, markerParent.transform);
                 userLocObj.transform.localPosition = map.GeoToWorldPosition(userLoc, true);
                 userLocObj.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
@@ -55,11 +57,6 @@ namespace polybius {
             }
             userLocObj.transform.localPosition = map.GeoToWorldPosition(userLoc, true);
             userLocObj.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
-        }
-
-        public void setLocation(float dispLat, float dispLong) {
-            locationString = (dispLat + "," + dispLong);
-            Debug.Log("Set location to: " + locationString);
         }
     }
 }

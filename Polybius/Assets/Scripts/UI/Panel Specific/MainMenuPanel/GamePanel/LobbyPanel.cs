@@ -10,7 +10,6 @@ namespace polybius {
 
         public GamePanel gp;
         public GameObject MapPanel, parent, createPanel, scrollRect, ErrorMessage;
-        public float currLat, currLong;
         private bool runOnce;
 
         void OnEnable() {
@@ -60,7 +59,7 @@ namespace polybius {
                 for (int i = 0; i < PolybiusManager.games.Count; i++) {
                     if (PolybiusManager.games[i].gameType == gp.currGameType) {
                         game = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
-                        float delta = getCoordDist(PolybiusManager.games[i].coordLat, PolybiusManager.games[i].coordLong, currLat, currLong);
+                        float delta = getCoordDist(PolybiusManager.games[i].coordLat, PolybiusManager.games[i].coordLong, PolybiusManager.currLat, PolybiusManager.currLong);
                         game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta * 5280 + "ft";
                         int temp = i;
                         game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(temp));
@@ -71,14 +70,14 @@ namespace polybius {
         }
 
         public void startGame(int i) {
-            PolybiusManager.currGame = i;
-            if (PolybiusManager.games[i].gameType == Game.type.none) {
+            PolybiusManager.currGame = PolybiusManager.games[i];
+            if (PolybiusManager.currGame.gameType == Game.type.none) {
                 Debug.Log("Tried to start game with type NONE");
-            } else if (PolybiusManager.games[i].gameType == Game.type.pong) {
+            } else if (PolybiusManager.currGame.gameType == Game.type.pong) {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Pong");
-            } else if (PolybiusManager.games[i].gameType == Game.type.connect4) {
+            } else if (PolybiusManager.currGame.gameType == Game.type.connect4) {
                 //UnityEngine.SceneManagement.SceneManager.LoadScene("Connect4");
-            } else if (PolybiusManager.games[i].gameType == Game.type.tictactoe) {
+            } else if (PolybiusManager.currGame.gameType == Game.type.tictactoe) {
                 //UnityEngine.SceneManagement.SceneManager.LoadScene("TicTacToe");
             } else {
                 Debug.LogError("Gametype not found: " + gp.currGameType);
@@ -86,7 +85,7 @@ namespace polybius {
         }
 
         public void displayLocation(int i) {
-            MapPanel.GetComponent<MapPanel>().setLocation(PolybiusManager.games[i].coordLat, PolybiusManager.games[i].coordLong);
+            PolybiusManager.currGame = PolybiusManager.games[i];
             GetComponent<UIPanelSwitcher>().ChangeMenu(MapPanel);
         }
 
@@ -127,9 +126,9 @@ namespace polybius {
                 Debug.LogError("Unable to determine device location");
                 return false;
             } else {
-                currLat = Input.location.lastData.latitude;
-                currLong = Input.location.lastData.longitude;
-                Debug.Log(currLat + ", " + currLong);
+                PolybiusManager.currLat = Input.location.lastData.latitude;
+                PolybiusManager.currLong = Input.location.lastData.longitude;
+                Debug.Log(PolybiusManager.currLat + ", " + PolybiusManager.currLong);
             }
 
             Input.location.Stop();
