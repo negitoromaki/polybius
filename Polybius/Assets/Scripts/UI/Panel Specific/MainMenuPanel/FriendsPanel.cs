@@ -14,12 +14,12 @@ namespace polybius {
         void OnEnable() {
             foreach (Transform child in parent.transform)
                 GameObject.Destroy(child.gameObject);
-            PolybiusManager.mutex = true;
+            PolybiusManager.mutex = false;
             runOnce = true;
             PolybiusManager.dm.getFriendsQuery();
-        }
+      //  }
 
-        private void Update() {
+      //  private void Update() {
             if (!PolybiusManager.mutex && runOnce) {
                 runOnce = false;
                 Debug.Log("running");
@@ -33,6 +33,8 @@ namespace polybius {
 
                 GameObject friend;
                 for (int i = 0; i < PolybiusManager.player.friends.Count; i++) {
+                  Debug.Log("runnin2g");
+
                     friend = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
                     friend.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.player.friends[i].getUsername();
                     int temp = i;
@@ -40,7 +42,7 @@ namespace polybius {
                     friend.transform.Find("ChatButton").GetComponent<Button>().onClick.AddListener(() => openMessage(temp));
                 }
             }
-        }
+       }
 
         public void openUserProfile(int i) {
             ButtonPanel.GetComponent<ButtonPanel>().PressButton(ProfileButton);

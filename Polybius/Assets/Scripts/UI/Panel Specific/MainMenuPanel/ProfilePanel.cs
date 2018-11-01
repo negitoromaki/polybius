@@ -46,14 +46,14 @@ namespace polybius {
             // multidimensional array, [i,j], where i is number of stats,
             // j == 0 for stat title, and j == 1 for the value.
             // Section title is just a string
-            string[,] userStats = new string[2,2]; 
+            string[,] userStats = new string[2,2];
             userStats[0, 0] = "Username: ";
                 userStats[0, 1] = currentUser.getUsername();
             userStats[1, 0] = "Date of Birth: ";
                 userStats[1, 1] = currentUser.getDob();
             addSection("User Statistics:", userStats);
 
-            if (!currentUser.getPrivacy() || currentUser == PolybiusManager.player) {
+            if (currentUser.getPrivacy()==0 || currentUser == PolybiusManager.player) {
                 string[,] connect4Stats = new string[1, 2];
                 connect4Stats[0, 0] = "Games Won: ";
                 connect4Stats[0, 1] = "3000";

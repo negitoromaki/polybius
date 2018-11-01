@@ -50,7 +50,7 @@ namespace polybius {
         public List<User> spectators = new List<User>();
 
         public Game() : this(0, 0, null, type.none) {}
-        
+
         public Game(float coordLong, float coordLat, User host, type gameType) {
             this.coordLong = coordLong;
             this.coordLat = coordLat;
@@ -66,16 +66,16 @@ namespace polybius {
         // Fields
         private string username, password, email, dob;
         private status currentStatus;
-        private bool privacy;
+        private int privacy;
         private int userID;
         private List<Message> messages = new List<Message>();
         public List<User> friends = new List<User>();
 
         public User() : this(null, null, null, null) {}
 
-        public User(string username, string password, string email, string dob) : this(username, password, email, dob, -1, false) {}
+        public User(string username, string password, string email, string dob) : this(username, password, email, dob, -1, 0) {}
 
-        public User(string username, string password, string email, string dob, int userID, bool privacy) {
+        public User(string username, string password, string email, string dob, int userID, int privacy) {
             this.username = username;
             this.password = password;
             this.email = email;
@@ -141,7 +141,7 @@ namespace polybius {
             return dob;
         }
 
-        public bool getPrivacy() {
+        public int getPrivacy() {
             return privacy;
         }
 
@@ -168,11 +168,11 @@ namespace polybius {
 
         // Sets user's privacy status
         // Choose to set privacy to true or not
-        public void setPrivacy(bool privacy) {
+        public void setPrivacy(int privacy) {
             this.privacy = privacy;
             PolybiusManager.dm.setPrivacy(username, privacy);
         }
-       
+
         // Updates the username if it contains appropriate characters
         // Returns true if valid username
         public bool setUsername(string newUser) {

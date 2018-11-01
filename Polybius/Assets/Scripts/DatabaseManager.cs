@@ -42,7 +42,7 @@ namespace polybius {
             if ((bool)e.Params["success"]) {
                 Debug.Log("Connected");
                 connected = true;
-                
+
             } else {
                 Debug.Log("Connection failed");
             }
@@ -131,7 +131,7 @@ namespace polybius {
                                                     null,
                                                     currentFriend.GetInt("id"),
                                                     //TODO: get privacy
-                                                    false);
+                                                    0);
 
                         PolybiusManager.player.friends.Add(friendObj);
                     }
@@ -158,7 +158,7 @@ namespace polybius {
                     SFSObject currentUser = (SFSObject) returnedList.GetSFSObject(i);
 					User u = new User (currentUser.GetUtfString ("username"), null, null, null);
 					u.setUserID(currentUser.GetInt("id"));
-                    u.setPrivacy(currentUser.GetBool("private"));
+                    u.setPrivacy(currentUser.GetInt("private"));
                     PolybiusManager.results.Add(u);
                 }
                 PolybiusManager.mutex = false;
@@ -259,16 +259,16 @@ namespace polybius {
 		public void AddFriend(string username, int id) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "addFriend");
-            o.PutUtfString("username", username);
-			o.PutInt ("id", id); //stop deleting this leo!
+            o.PutUtfString("username", PolybiusManager.player.getUsername());
+            o.PutInt("id",id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
 		public void RemoveFriend(string username, int id) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "removeFriend");
-            o.PutUtfString("username", username);
-			o.PutInt ("id", id); //stop deleting this also leo!
+            o.PutUtfString("username", PolybiusManager.player.getUsername());
+            o.PutInt("id",id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
@@ -284,16 +284,16 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "getFriends");
             o.PutUtfString("username", PolybiusManager.player.getUsername());
-			o.PutInt ("id", -1); //yes! even this one needs to stay leo
+            o.PutInt("id",-1);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
-        public void setPrivacy(string username, bool privacy) {
+        public void setPrivacy(string username, int privacy) {
             // TODO: toggle database user privacy
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "setPrivate");
             o.PutUtfString("username", username);
-            o.PutBool("private", privacy);
+            o.PutInt("private", privacy);
             sfs.Send(new ExtensionRequest("Users", o));
         }
 

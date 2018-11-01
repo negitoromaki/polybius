@@ -49,7 +49,7 @@ namespace polybius {
 
             // Privacy
             Debug.Assert(privacyState != null);
-        
+
         }
 
         void Update() {
@@ -68,7 +68,7 @@ namespace polybius {
             }
 
             // Social
-            if (PolybiusManager.player.getPrivacy()) {
+            if (PolybiusManager.player.getPrivacy()==1) {
                 privacyState.text = "Private";
             } else {
                 privacyState.text = "Public";
@@ -76,7 +76,12 @@ namespace polybius {
         }
 
         public void toggleSocial() {
-            PolybiusManager.player.setPrivacy(!PolybiusManager.player.getPrivacy());
+          if(PolybiusManager.player.getPrivacy()==0){
+            PolybiusManager.player.setPrivacy(1);
+          }else{
+            PolybiusManager.player.setPrivacy(0);
+
+          }
         }
     }
 }
