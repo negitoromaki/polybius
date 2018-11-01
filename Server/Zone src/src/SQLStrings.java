@@ -1,6 +1,6 @@
 
 public class SQLStrings {
-	
+
 	//messages
 	public String publicMSG = "SELECT message, sender FROM users.msgs WHERE level=? AND levelname=? ORDER BY time DESC LIMIT ?";
 	public String privateMSG = "SELECT message, sender, reciever FROM users.msgs WHERE level=? AND (sender=? OR reciever=?)  ORDER BY time DESC LIMIT ?";
@@ -13,7 +13,7 @@ public class SQLStrings {
 	public String login = "SELECT * FROM users.userdata WHERE username =? AND password=?";
 	public String goOnline = "UPDATE users.userdata SET isonline = ? WHERE username=?";
 	public String logout = "UPDATE users.userdata SET isonline = 0 WHERE username=?";
-	
-	
+	public String clearMSG = "DELETE FROM users.msgs WHERE sender = ? AND reciever=?" ;
+
 
 }

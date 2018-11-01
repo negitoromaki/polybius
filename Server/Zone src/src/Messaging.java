@@ -14,7 +14,7 @@ public class Messaging  extends BaseClientRequestHandler{
 
 	@Override
 	public void handleClientRequest(User user, ISFSObject o) {
-		
+
 		String level = o.getUtfString("level"); //zone, room, private
 		String levelname = o.getUtfString("levelname");//name of room or zone message origionated
 		String mode = o.getUtfString("mode"); //get, send
@@ -24,11 +24,11 @@ public class Messaging  extends BaseClientRequestHandler{
 		String message = o.getUtfString("message");
 		IDBManager db = getParentExtension().getParentZone().getDBManager();
 		messanger(user,level,levelname,mode,mReciever,mSender,number,message,db);
-		
-		
-		
+
+
+
 	}
-	
+
 	public ISFSObject messanger(User user, String level, String levelname, String mode, String mReciever, String mSender, int number, String message,IDBManager db){
 		SQLStrings sqls = new SQLStrings();
 		if(mode.equals("get")){
@@ -36,7 +36,7 @@ public class Messaging  extends BaseClientRequestHandler{
 			if(level.equals("zone") || level.equals("room")){
 				String sql = sqls.publicMSG;
 				Object[] obj = {level, levelname, number};
-				
+
 				try {
 					ISFSArray res = db.executeQuery(sql, obj);
 					ISFSObject ret = new SFSObject();
@@ -44,7 +44,7 @@ public class Messaging  extends BaseClientRequestHandler{
 					if(user != null)
 						send("Messages", ret, user);
 					return ret;
-					
+
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -60,15 +60,19 @@ public class Messaging  extends BaseClientRequestHandler{
 			}else if(level.equals("private")){
 				String sql = sqls.privateMSG;
 				Object[] obj = {level, mSender, mReciever, number};
-				
+
 				try {
 					ISFSArray res = db.executeQuery(sql, obj);
 					ISFSObject ret = new SFSObject();
 					ret.putSFSArray("messages", res);
-					if(user != null)
+					if(user != null){
 						send("Messages", ret, user);
+						String nsql= sqls.clearMSG;
+						Object[] nobj = {mSender, mReciever};
+						db.executeQuery(nsql,nobj);
+					}
 					return ret;
-					
+
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -82,14 +86,14 @@ public class Messaging  extends BaseClientRequestHandler{
 					return ret;
 				}
 			}
-			
-			
-			
+
+
+
 		}else if(mode.equals("send")){
 			String sql = sqls.sendMSG;
 			Object[] obj = {mSender, mReciever, new Date(System.currentTimeMillis()), message, level, levelname};
-			
-			
+
+
 			try{
 				db.executeInsert(sql, obj);
 				ISFSObject ret = new SFSObject();
@@ -100,7 +104,7 @@ public class Messaging  extends BaseClientRequestHandler{
 				ar.addSFSObject(dif);
 				ret.putSFSArray("messages", ar);
 				return ret;
-				
+
 			}catch(Exception e){
 				ISFSObject ret = new SFSObject();
 				ISFSArray ar = new SFSArray();
@@ -115,8 +119,8 @@ public class Messaging  extends BaseClientRequestHandler{
 			return null;
 		}
 		return null;
-		
+
 	}
-	
+
 
 }
