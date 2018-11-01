@@ -260,6 +260,7 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "addFriend");
             o.PutUtfString("username", username);
+			o.PutInt ("id", id); //stop deleting this leo!
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
@@ -267,6 +268,7 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "removeFriend");
             o.PutUtfString("username", username);
+			o.PutInt ("id", id); //stop deleting this also leo!
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
@@ -282,6 +284,7 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "getFriends");
             o.PutUtfString("username", PolybiusManager.player.getUsername());
+			o.PutInt ("id", -1); //yes! even this one needs to stay leo
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
