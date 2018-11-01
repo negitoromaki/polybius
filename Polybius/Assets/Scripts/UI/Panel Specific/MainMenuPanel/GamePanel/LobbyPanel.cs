@@ -58,12 +58,14 @@ namespace polybius {
 
                 GameObject game;
                 for (int i = 0; i < PolybiusManager.games.Count; i++) {
-                    game = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
-                    float delta = getCoordDist(PolybiusManager.games[i].coordLat, PolybiusManager.games[i].coordLong, currLat, currLong);
-                    game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta * 5280 + "ft";
-                    int temp = i;
-                    game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(temp));
-                    game.transform.Find("Map").GetComponent<Button>().onClick.AddListener(() => displayLocation(temp));
+                    if (PolybiusManager.games[i].gameType == gp.currGameType) {
+                        game = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
+                        float delta = getCoordDist(PolybiusManager.games[i].coordLat, PolybiusManager.games[i].coordLong, currLat, currLong);
+                        game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta * 5280 + "ft";
+                        int temp = i;
+                        game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(temp));
+                        game.transform.Find("Map").GetComponent<Button>().onClick.AddListener(() => displayLocation(temp));
+                    }
                 }
             }
         }

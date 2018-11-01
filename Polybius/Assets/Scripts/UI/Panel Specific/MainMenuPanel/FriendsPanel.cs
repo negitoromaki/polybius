@@ -17,9 +17,9 @@ namespace polybius {
             PolybiusManager.mutex = false;
             runOnce = true;
             PolybiusManager.dm.getFriendsQuery();
-      //  }
+        }
 
-      //  private void Update() {
+        private void Update() {
             if (!PolybiusManager.mutex && runOnce) {
                 runOnce = false;
                 Debug.Log("running");
@@ -33,7 +33,6 @@ namespace polybius {
 
                 GameObject friend;
                 for (int i = 0; i < PolybiusManager.player.friends.Count; i++) {
-                  Debug.Log("runnin2g");
 
                     friend = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
                     friend.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.player.friends[i].getUsername();

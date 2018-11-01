@@ -80,6 +80,7 @@ namespace polybius {
             } else {
 				PolybiusManager.dm.AddFriend(PolybiusManager.player.getUsername(),PolybiusManager.results[i].getUserID());
             }
+            PolybiusManager.dm.getFriendsQuery();
         }
     }
 }

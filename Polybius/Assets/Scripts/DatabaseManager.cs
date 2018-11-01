@@ -97,7 +97,6 @@ namespace polybius {
             else if (cmd == "Messages") {
                 if (result == "success") {
                     SFSArray messages = (SFSArray) paramsa.GetSFSArray("messages");
-					//PolybiusManager.player.resetMsg ();
 
                     for (int i = 0; i < messages.Size(); i++) {
                         SFSObject messageObj = (SFSObject)messages.GetSFSObject(i);
@@ -105,7 +104,6 @@ namespace polybius {
                                                 PolybiusManager.player.getUsername(),
                                                 System.DateTime.Now,
                                                 messageObj.GetUtfString("message"));
-						//if(PolybiusManager.player.containsmsg(m)==false)
                         	PolybiusManager.player.addMessage(m);
                     }
                 } else {
@@ -123,17 +121,15 @@ namespace polybius {
                     SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("friends");
                     PolybiusManager.player.friends.Clear();
                     for (int i = 0; i < returnedList.Size(); i++) {
-                        Debug.Log("Adding friend");
                         SFSObject currentFriend = (SFSObject)returnedList.GetSFSObject(i);
                         User friendObj = new User(currentFriend.GetUtfString("username"),
                                                     null,
                                                     null,
                                                     null,
                                                     currentFriend.GetInt("id"),
-                                                    //TODO: get privacy
-                                                    0);
-
-                        PolybiusManager.player.friends.Add(friendObj);
+                                                    currentFriend.GetInt("private"));
+                        if (!string.IsNullOrEmpty(friendObj.getUsername()))
+                            PolybiusManager.player.friends.Add(friendObj);
                     }
                     PolybiusManager.mutex = false;
                 } else {
@@ -156,10 +152,12 @@ namespace polybius {
                 PolybiusManager.results.Clear();
                 for (int i = 0; i < returnedList.Size(); i++) {
                     SFSObject currentUser = (SFSObject) returnedList.GetSFSObject(i);
-					User u = new User (currentUser.GetUtfString ("username"), null, null, null);
-					u.setUserID(currentUser.GetInt("id"));
-                    u.setPrivacy(currentUser.GetInt("private"));
-                    PolybiusManager.results.Add(u);
+                    PolybiusManager.results.Add(new User(   currentUser.GetUtfString("username"),
+                                                            null,
+                                                            null,
+                                                            null,
+                                                            currentUser.GetInt("id"),
+                                                            currentUser.GetInt("private")));
                 }
                 PolybiusManager.mutex = false;
             }
