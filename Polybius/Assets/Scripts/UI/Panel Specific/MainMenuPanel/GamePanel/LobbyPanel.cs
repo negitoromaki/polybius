@@ -24,7 +24,7 @@ namespace polybius {
 
             if (gameType != Game.type.none) {
                 if (getLocation()) {
-                    games = PolybiusManager.dm.getLobbies(gameType); // TODO: Change this to use getLobbiesQuery
+                    //games = PolybiusManager.dm.getLobbies(gameType); // TODO: Change this to use getLobbiesQuery
 
                     foreach (Transform child in parent.transform)
                         GameObject.Destroy(child.gameObject);

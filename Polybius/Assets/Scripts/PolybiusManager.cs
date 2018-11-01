@@ -167,9 +167,9 @@ namespace polybius {
 
         // Sets user's privacy status
         // Choose to set privacy to true or not
-        public void setPrivacy(bool privacy)
-        {
+        public void setPrivacy(bool privacy) {
             this.privacy = privacy;
+            PolybiusManager.dm.setPrivacy(username, privacy);
         }
        
         // Updates the username if it contains appropriate characters

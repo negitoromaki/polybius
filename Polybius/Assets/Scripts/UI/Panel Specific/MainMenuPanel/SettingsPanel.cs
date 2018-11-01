@@ -76,12 +76,7 @@ namespace polybius {
         }
 
         public void toggleSocial() {
-            if (PolybiusManager.player.getPrivacy()) {
-                PolybiusManager.player.setPrivacy(false);
-            } else {
-                PolybiusManager.player.setPrivacy(true);
-            }
-            PolybiusManager.dm.setPrivacy(PolybiusManager.player.getPrivacy());
+            PolybiusManager.player.setPrivacy(!PolybiusManager.player.getPrivacy());
         }
     }
 }
