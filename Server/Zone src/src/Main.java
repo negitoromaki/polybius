@@ -10,6 +10,8 @@ import com.smartfoxserver.v2.db.IDBManager;
 import com.smartfoxserver.v2.entities.SFSRoom;
 import com.smartfoxserver.v2.entities.SFSUser;
 import com.smartfoxserver.v2.entities.User;
+import com.smartfoxserver.v2.entities.data.ISFSArray;
+import com.smartfoxserver.v2.entities.data.ISFSObject;
 
 public class Main extends SFSExtension{
 
@@ -28,14 +30,15 @@ public class Main extends SFSExtension{
 		addRequestHandler("FriendList", FriendList.class);
 		addRequestHandler("Users", Users2.class);
 		addRequestHandler("UserLogout", UserLogout.class);
-		
-		
+		addRequestHandler("Lobby", Lobby.class);
+		addEventHandler(SFSEventType.ROOM_REMOVED,CleanUp.class);
 		
 		
 		
 		
 		trace("307 Extension loaded!");
 		trace("Let the games begin!");
+		
 		UTest2 ut = new UTest2();
 		if(ut == null)
 			trace("Test File Not Found");

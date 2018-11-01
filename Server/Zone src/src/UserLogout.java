@@ -10,7 +10,7 @@ public class UserLogout extends BaseClientRequestHandler{
 	public void handleClientRequest(User arg0, ISFSObject obj) {
 		IDBManager db = getParentExtension().getParentZone().getDBManager();
 		String username = obj.getUtfString("username");
-		
+		trace("user ditching the fun: " + username );
 		String res = logOut(arg0,username,db);
 		SFSObject ret = new SFSObject();
 		ret.putUtfString("result", (res.equals("success")?"success":"fail"));
@@ -23,10 +23,11 @@ public class UserLogout extends BaseClientRequestHandler{
 		try{
 			SQLStrings sqls = new SQLStrings();
 			String sql = sqls.logout;
-			Object[] params = {userName};
+			Object[] params = {new Integer(0), userName};
 			db.executeUpdate(sql, params);
 			if(user != null){
 				ISFSObject ret = new SFSObject();
+				getParentExtension().getParentZone().removeUser(user);
 				ret.putUtfString("result", "success");
 				ret.putUtfString("message", "User logged out");
 				send("UserLogout", ret, user);

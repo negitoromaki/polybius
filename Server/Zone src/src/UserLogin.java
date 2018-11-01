@@ -29,6 +29,7 @@ public class UserLogin extends BaseClientRequestHandler{
 		
 		
 		String username = obj.getUtfString("username");
+		trace("user login: " + username );
 		String pass = obj.getUtfString("password");
 		
 		trace(user + " : " + username + " : " + pass);
@@ -69,7 +70,7 @@ public class UserLogin extends BaseClientRequestHandler{
 					
 					if(user != null){
 						SFSZone zone = (SFSZone) getParentExtension().getParentZone();
-						user.setName(username);
+						
 						zone.getRoomByName("Lobby").addUser(user);
 					}
 					
@@ -102,7 +103,7 @@ public class UserLogin extends BaseClientRequestHandler{
 		ret.putUtfString("message", "User logged in!");
 		if(user != null)
 			send("UserLogin", ret, user);
-		return "Login success!";
+		return "success";
 		
 	}
 

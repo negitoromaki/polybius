@@ -2,6 +2,7 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import com.smartfoxserver.v2.SmartFoxServer;
 import com.smartfoxserver.v2.db.IDBManager;
 import com.smartfoxserver.v2.entities.SFSZone;
 import com.smartfoxserver.v2.entities.User;
@@ -14,19 +15,21 @@ import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
 public class FriendList extends BaseClientRequestHandler{
 
-	private String splitter = "[[S]]";
+	private String splitter = "S";
 	
 	@Override
 	public void handleClientRequest(User arg0, ISFSObject arg1) {
 		// TODO Auto-generated method stub
+		trace("friends requested");
 		String cmd = arg1.getUtfString("cmd"); //addFriend, getFriends, removeFriend
 		String username = arg1.getUtfString("username");
 		int id = arg1.getInt("id");
 		IDBManager db = getParentExtension().getParentZone().getDBManager();
 		SFSObject ret = new SFSObject();
+		
 		if(cmd.equals("addFriend")){
 				if(addFriend(username,id,db)){
-					
+					ret.putUtfString("cmd", "addFriend");
 				ret.putUtfString("result", "success");
 				ret.putUtfString("message", "added a friend");
 				send("FriendList", ret,arg0);
@@ -37,12 +40,15 @@ public class FriendList extends BaseClientRequestHandler{
 				
 			}
 		}else if(cmd.equals("getFriends")){
+			ret.putUtfString("cmd", "getFriends");
 			ret.putSFSArray("friends", getFriends(username,db));
+			ret.putUtfString("result", "success");
+			ret.putUtfString("message", "got friends");
 			send("FriendList", ret,arg0);
 			
 		}else if(cmd.equals("removeFriend")){
 			if(removeFriend(username,id,db)){
-				
+				ret.putUtfString("cmd", "removeFriend");
 				ret.putUtfString("result", "success");
 				ret.putUtfString("message", "ditched a friend");
 				send("FriendList", ret,arg0);
@@ -59,20 +65,30 @@ public class FriendList extends BaseClientRequestHandler{
 			ret.putUtfString("message", "not a valid request");
 			send("FriendList", ret,arg0);
 			
+			
 		}
 		
 	}
 	
 	public Integer[] convertIDs(String ids){
-		String[] ida = ids.split(splitter);
+		if(ids.equals("") || ids == null){
+			return null;
+		}
+		String[] ida = ids.split("S");
+		
 		ArrayList<Integer> converted = new ArrayList<Integer>();
 		for(String s : ida){
+			try{
 			int t = Integer.parseInt(s);
-			converted.add(t);
+			if(!converted.contains(new Integer(t)))
+				converted.add(t);
+			}catch (Exception e){
+				
+			}
 		}
 		
-		
-		return (Integer[]) converted.toArray();
+		Integer[] i = new Integer[converted.size()];
+		return converted.toArray(i);
 		
 	}
 	
@@ -86,26 +102,29 @@ public class FriendList extends BaseClientRequestHandler{
 			ISFSArray res;
 			try {
 				res = db.executeQuery(sql, new Object[] {username});
-				ISFSObject o = res.getSFSObject(0);
-				
-				String idList = o.getUtfString("friends");
-				
-				Integer[] ids = convertIDs(idList);
-				idList = "";
-				for(Integer i : ids){
-					if(i != new Integer(ID)){
-						idList = idList+ splitter + i;
+				if(res.size()>0){
+					ISFSObject o = res.getSFSObject(0);
+					
+					String idList = o.getUtfString("friends");
+					
+					Integer[] ids = convertIDs(idList);
+					idList = "";
+					for(Integer i : ids){
+						if(i != null && !i.equals(new Integer(ID)) && i != ID){
+							idList = idList+ splitter + i;
+						}
+						
 					}
 					
+					
+					
+					sql = sqls.updateFriend;
+					db.executeUpdate(sql, new Object[] {idList,username});
+					
+					
+					return true;
 				}
-				
-				
-				
-				sql = sqls.updateFriend;
-				db.executeUpdate(sql, new Object[] {idList,username});
-				
-				
-				return true;
+				return false;
 				
 				
 			} catch (SQLException e1) {
@@ -120,16 +139,35 @@ public class FriendList extends BaseClientRequestHandler{
 	
 	public boolean addFriend(String username, int ID, IDBManager db){
 		if(ID != -1){
+			String id = "" + ID;
 			//get current friend list
 			SQLStrings sqls = new SQLStrings();
 			String sql = sqls.getFriends;
 			ISFSArray res;
 			try {
 				res = db.executeQuery(sql, new Object[] {username});
-				ISFSObject o = res.getSFSObject(0);
+				String idList = "";
+				if(res.size() >0){
+					ISFSObject o = res.getSFSObject(0);
 				
-				String idList = o.getUtfString("friends");
-				idList = idList + splitter + ID;
+					idList = o.getUtfString("friends");
+				}
+				
+				if(idList == null || idList == "NULL")
+					idList = "" + id;
+				else
+					idList = idList + splitter + id;
+				
+					Integer[] ids = convertIDs(idList);
+					
+					
+					idList = "";
+				for(Integer i : ids){
+					idList = idList + i.toString() + splitter;
+					
+					
+				}
+				
 				sql = sqls.updateFriend;
 				db.executeUpdate(sql, new Object[] {idList,username});
 				return true;
@@ -154,28 +192,44 @@ public class FriendList extends BaseClientRequestHandler{
 		String sql = sqls.getFriends;
 		ISFSArray res;
 		try {
+			String idList = "";
 			res = db.executeQuery(sql, new Object[] {username});
-			ISFSObject o = res.getSFSObject(0);
 			
-			String idList = o.getUtfString("friends");
-			Integer[] ids = convertIDs(idList);
+			if(res == null)
+				return null;
 			
-			SFSArray friends = new SFSArray();
-			sql = sqls.getUserFromID;
-			for(Integer i : ids){
-				//get usernames and add to final array
-				res = db.executeQuery(sql, new Object[] {i});
+			ISFSObject o = new SFSObject();
+			if(res.size()>0){
 				o = res.getSFSObject(0);
-				SFSObject f = new SFSObject();
-				f.putUtfString("username", o.getUtfString("username"));
-				f.putInt("id", i);
-				friends.addSFSObject(f);
-			}
+				idList = o.getUtfString("friends");
 			
-			return friends;
+			
+				//trace(idList);
+				
+				Integer[] ids = convertIDs(idList);
+				
+				SFSArray friends = new SFSArray();
+				sql = sqls.getUserFromID;
+				for(Integer i : ids){
+					//get usernames and add to final array
+					
+					
+					res = db.executeQuery(sql, new Object[] {i});
+					if(res == null || res.size()==0)
+						break;
+					o = res.getSFSObject(0);
+					SFSObject f = new SFSObject();
+					f.putUtfString("username", o.getUtfString("username"));
+					f.putInt("id", i);
+					friends.addSFSObject(f);
+				}
+				
+				return friends;
+			}
 			
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
+			
 			SFSObject err = new SFSObject();
 			err.putUtfString("result", "fail");
 			err.putUtfString("message", e1.getMessage()!=null?e1.getMessage():"eror");
@@ -184,6 +238,13 @@ public class FriendList extends BaseClientRequestHandler{
 			return ret;
 			
 		}
+		
+		SFSObject err = new SFSObject();
+		err.putUtfString("result", "fail");
+		err.putUtfString("message", "eror");
+		SFSArray ret = new SFSArray();
+		ret.addSFSObject(err);
+		return ret;
 	}
 
 }

@@ -17,6 +17,7 @@ public class CreateUser extends BaseClientRequestHandler{
 	@Override
 	public void handleClientRequest(User user, ISFSObject o) {
 		String username = o.getUtfString("username");
+		trace("user creating: " + username );
 		String password = o.getUtfString("password");
 		String email = o.getUtfString("email");
 		

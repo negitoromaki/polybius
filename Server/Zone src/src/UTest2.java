@@ -1,6 +1,7 @@
 
 
 import com.smartfoxserver.v2.db.IDBManager;
+import com.smartfoxserver.v2.entities.SFSUser;
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
@@ -26,15 +27,22 @@ public class UTest2 extends BaseClientRequestHandler {
 		int amount = 1;
 		
 		String URes = "";
+		URes = URes + "testAddRoom: " + testAddRoom(db) + "\n";
+		URes = URes + "testRemoveRoom: " + testRemoveRoom(db) + "\n";
 		URes = URes + "testCreateUser: " + testCreate(testUser,testPass,testEmail,db) + "\n";
 		URes = URes + "testLogin: " + testLogin(testUser,testPass,db) + "\n";
 		URes = URes + "testSendMessageZone: " + testSendZoneMessage(testUser,testZoneMessage,testZone,amount,db) + "\n";
-		URes = URes + "testSendMessageZone: " + testSendRoomMessage(testUser,testRoomMessage,testRoom,amount,db) + "\n";
-		URes = URes + "testSendMessageZone: " + testSendPrivateMessage(testUser,testPrivateMessage,amount,db) + "\n";
+		URes = URes + "testSendMessageRoom: " + testSendRoomMessage(testUser,testRoomMessage,testRoom,amount,db) + "\n";
+		URes = URes + "testSendMessagePrivate: " + testSendPrivateMessage(testUser,testPrivateMessage,amount,db) + "\n";
 		URes = URes + "testGetMessageZone: " + testGetZoneMessage(testUser, testZone, amount, testZoneMessage,db) + "\n";
 		URes = URes + "testGetMessageRoom: " + testGetRoomMessage(testUser, testRoom, amount, testRoomMessage,db) + "\n";
+		URes = URes + "testAddFriends: " + testAddFriends(testUser,db) + "\n";
+		URes = URes + "testGetFriends: " + testGetFriends(testUser,db) + "\n";
+		URes = URes + "testRemove1Friends: " + testRemoveFriends(testUser,db) + "\n";
+		URes = URes + "testGet1Friends: " + testGetFriends(testUser,db) + "\n";
 		URes = URes + "testGetMessagePrivate: " + testGetPrivateMessage(testUser, testRoom, amount, testPrivateMessage,db) + "\n";
 		URes = URes + "testLogoutGame: " + testLogout(testUser,db) + "\n";
+		URes = URes + "testGetUsers: " + testGetUsers(testUser,db) + "\n";
 		
 		URes += "\n\n=====End Tests=====\n";
 		URes += "\n=====Start Clean=====\n\n";
@@ -56,8 +64,81 @@ public class UTest2 extends BaseClientRequestHandler {
 		
 		return URes;
 	}
+	
+	
+	
+	private String testAddRoom(IDBManager db){
+		Lobby l = new Lobby();
 		
-
+		return l.hostLobby(null, "tester", 0, 0, 0, null, db) == true? "pass" : "fail";
+		
+		
+	}
+	
+	private String testRemoveRoom(IDBManager db){
+		CleanUp c = new CleanUp();
+		
+		return c.cleanerS("tester", db)== true? "pass" : "fail";
+		
+		
+	}
+	
+	
+	
+	
+	private String testAddFriends(String testUser, IDBManager db) {
+		
+		
+		
+		FriendList f = new FriendList();
+		boolean ar = f.addFriend(testUser, 94, db);
+		f.addFriend(testUser, 91, db);
+		f.addFriend(testUser, 94, db);
+		
+		return ar == true? "pass" : "fail";
+		
+		
+	}
+	private String testRemoveFriends(String testUser, IDBManager db) {
+		
+		
+		
+		FriendList f = new FriendList();
+		boolean ar = f.removeFriend(testUser, 94, db);
+		
+		
+		return ar == true? "pass" : "fail";
+		
+		
+	}
+	private String testGetFriends(String testUser, IDBManager db) {
+		
+		
+		
+		FriendList f = new FriendList();
+		ISFSArray ar = f.getFriends(testUser, db);
+		
+		if (ar == null)
+			return "no friend";
+		return ar.size()>0? ar.getSFSObject(0).getUtfString("username") : "fail";
+		
+		
+	}
+	
+	private String testGetUsers(String testUser, IDBManager db) {
+		
+		
+		
+		Users2 u2 = new Users2();
+		ISFSArray ar = u2.getUsers(db);
+		
+		if (ar == null)
+			return "fail";
+		return ar.size()>0? "pass" : "fail";
+		
+		
+	}
+	
 	private String testCreate(String testUser, String testPass, String testEmail, IDBManager db) {
 		
 		
@@ -84,6 +165,7 @@ public class UTest2 extends BaseClientRequestHandler {
 		
 		UserLogout ul = new UserLogout();
 		String t = ul.logOut(null, testUser,db);
+		
 		return t.equals("success")? "pass" : "fail: " + t;
 		
 		
@@ -94,7 +176,7 @@ public class UTest2 extends BaseClientRequestHandler {
 		if(ret == null)
 			return "fail";
 		ISFSArray ar = ret.getSFSArray("messages");
-		String msg = ar.getSFSObject(0).getUtfString("message");
+		String msg = ret.getUtfString("result");
 		if(msg.equals("success"))
 			return "pass";
 		
@@ -107,7 +189,7 @@ public class UTest2 extends BaseClientRequestHandler {
 		if(ret == null)
 			return "fail";
 		ISFSArray ar = ret.getSFSArray("messages");
-		String msg = ar.getSFSObject(0).getUtfString("message");
+		String msg = ret.getUtfString("result");;
 		if(msg.equals("success"))
 			return "pass";
 		
@@ -120,7 +202,7 @@ public class UTest2 extends BaseClientRequestHandler {
 		if(ret == null)
 			return "fail";
 		ISFSArray ar = ret.getSFSArray("messages");
-		String msg = ar.getSFSObject(0).getUtfString("message");
+		String msg = ret.getUtfString("result");;
 		if(msg.equals("success"))
 			return "pass";
 		

@@ -43,6 +43,7 @@ public class Messaging  extends BaseClientRequestHandler{
 					ret.putSFSArray("messages", res);
 					if(user != null)
 						send("Messages", ret, user);
+					ret.putUtfString("result", "success");
 					return ret;
 
 				} catch (SQLException e) {
@@ -54,6 +55,7 @@ public class Messaging  extends BaseClientRequestHandler{
 					dif.putUtfString("message", e.getMessage());
 					dif.putUtfString("sender", "fail");
 					ar.addSFSObject(dif);
+					ret.putUtfString("result", "fail");
 					ret.putSFSArray("messages", ar);
 					return ret;
 				}
@@ -67,10 +69,12 @@ public class Messaging  extends BaseClientRequestHandler{
 					ret.putSFSArray("messages", res);
 					if(user != null){
 						send("Messages", ret, user);
-						String nsql= sqls.clearMSG;
-						Object[] nobj = {mSender, mReciever};
-						db.executeQuery(nsql,nobj);
 					}
+						//String nsql= sqls.clearMSG;
+						//Object[] nobj = {mSender, mReciever};
+						//db.executeUpdate(nsql,nobj);
+					
+					ret.putUtfString("result", "success");
 					return ret;
 
 				} catch (SQLException e) {
@@ -82,6 +86,7 @@ public class Messaging  extends BaseClientRequestHandler{
 					dif.putUtfString("message", e.getMessage());
 					dif.putUtfString("sender", "fail");
 					ar.addSFSObject(dif);
+					ret.putUtfString("result", "fail");
 					ret.putSFSArray("messages", ar);
 					return ret;
 				}
@@ -102,6 +107,7 @@ public class Messaging  extends BaseClientRequestHandler{
 				dif.putUtfString("message", "success");
 				dif.putUtfString("sender", mSender);
 				ar.addSFSObject(dif);
+				ret.putUtfString("result", "success");
 				ret.putSFSArray("messages", ar);
 				return ret;
 
@@ -113,6 +119,7 @@ public class Messaging  extends BaseClientRequestHandler{
 				dif.putUtfString("sender", "fail");
 				ar.addSFSObject(dif);
 				ret.putSFSArray("messages", ar);
+				ret.putUtfString("result", "fail");
 				return ret;
 			}
 		}else{
