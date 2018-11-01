@@ -242,6 +242,7 @@ namespace polybius {
             o.PutUtfString("message", m.message);
 			o.PutInt ("amount", 1);
             sfs.Send(new ExtensionRequest("Messages", o));
+            PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
         }
 
         public SmartFox getConnection() {

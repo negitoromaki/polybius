@@ -64,7 +64,7 @@
 		{
 			if (!_isInitialized) { return; }
 
-			if (!_dragStartedOnUI)
+			if (_dragStartedOnUI)
 			{
 				if (Input.touchSupported && Input.touchCount > 0)
 				{
@@ -96,7 +96,7 @@
 			PanMapUsingTouchOrMouse();
 		}
 
-		void HandleTouch()
+		public void HandleTouch()
 		{
 			float zoomFactor = 0.0f;
 			//pinch to zoom.
@@ -171,18 +171,22 @@
 
 		void UseMeterConversion()
 		{
-			if (Input.GetMouseButtonUp(1))
-			{
+			if (Input.GetMouseButtonUp(1)) {
 				var mousePosScreen = Input.mousePosition;
 				//assign distance of camera to ground plane to z, otherwise ScreenToWorldPoint() will always return the position of the camera
 				//http://answers.unity3d.com/answers/599100/view.html
 				mousePosScreen.z = _referenceCamera.transform.localPosition.y;
 				var pos = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
+                _shouldDrag = false;
 
 				var latlongDelta = _mapManager.WorldToGeoPosition(pos);
 				Debug.Log("Latitude: " + latlongDelta.x + " Longitude: " + latlongDelta.y);
 				//_mapManager.UpdateMap(latlongDelta, _mapManager.Zoom);
 			}
+
+            if (Input.GetMouseButtonDown(0)) {
+
+            }
 
 			if (Input.GetMouseButton(0))
 			{
@@ -192,8 +196,7 @@
 				mousePosScreen.z = _referenceCamera.transform.localPosition.y;
 				_mousePosition = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
 
-				if (_shouldDrag == false)
-				{
+				if (_shouldDrag == false) {
 					_shouldDrag = true;
 					_origin = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
 				}
@@ -206,6 +209,10 @@
 			if (_shouldDrag == true)
 			{
 				var changeFromPreviousPosition = _mousePositionPrevious - _mousePosition;
+
+                if (Input.GetMouseButtonDown(0))
+                    changeFromPreviousPosition = new Vector3(0, 0, 0);
+
 				if (Mathf.Abs(changeFromPreviousPosition.x) > 0.0f || Mathf.Abs(changeFromPreviousPosition.y) > 0.0f)
 				{
 					_mousePositionPrevious = _mousePosition;

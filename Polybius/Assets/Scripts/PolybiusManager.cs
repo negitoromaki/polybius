@@ -13,9 +13,10 @@ namespace polybius {
         public static DatabaseManager dm = null;
         public static bool mutex = false;
         public static List<User> results = new List<User>();
+        public static List<Game> games = new List<Game>();
 
         // Notifications
-        static void sendNotification(string title, string message) {
+        public static void sendNotification(string title, string message) {
             Assets.SimpleAndroidNotifications.NotificationManager.SendWithAppIcon(
                 System.TimeSpan.FromSeconds(5),
                 title,

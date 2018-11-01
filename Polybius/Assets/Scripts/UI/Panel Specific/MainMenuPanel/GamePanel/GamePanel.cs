@@ -27,7 +27,6 @@ namespace polybius {
                 }
             } else {
                 if (!LobbyPanel.activeSelf) {
-                    lobbyPanelScript.setGameType(currGameType);
                     switcher.ChangeMenu(LobbyPanel);
                     Debug.Log("Changing to LobbyPanel");
                 }
