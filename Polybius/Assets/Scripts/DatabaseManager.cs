@@ -82,7 +82,19 @@ namespace polybius {
                 } else {
                     Debug.LogError("Error with registration: " + result);
                 }
-            } else if (cmd == "Messages") {
+            }
+            else if (cmd == "setPrivate")
+            {
+                if (result == "success")
+                {
+                    Debug.Log("Privacy set");
+                }
+                else
+                {
+                    Debug.LogError("Error with setting privacy: " + result);
+                }
+            }
+            else if (cmd == "Messages") {
                 if (result == "success") {
                     SFSArray messages = (SFSArray) paramsa.GetSFSArray("messages");
 					//PolybiusManager.player.resetMsg ();
@@ -146,10 +158,17 @@ namespace polybius {
                     SFSObject currentUser = (SFSObject) returnedList.GetSFSObject(i);
 					User u = new User (currentUser.GetUtfString ("username"), null, null, null);
 					u.setUserID(currentUser.GetInt("id"));
+                    u.setPrivacy(currentUser.GetBool("private"));
                     PolybiusManager.results.Add(u);
                 }
                 PolybiusManager.mutex = false;
-            } else {
+            }
+            else if (cmd2 == "getRooms")
+            {
+                SFSArray roomData = (SFSArray)paramsa.GetSFSArray("Lobby");
+                getLobbies(roomData);
+            }
+            else {
                 Debug.LogError("Command Not found: " + cmd + " returned " + result + "\nCommand2 Not found: " + cmd2);
             }
         }
@@ -231,6 +250,9 @@ namespace polybius {
 
         public void getLobbiesQuery() {
             // query server for lobbies
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "getRooms");
+            sfs.Send(new ExtensionRequest("Lobby", o));
         }
 
 		public void AddFriend(string username, int id) {
@@ -250,11 +272,10 @@ namespace polybius {
         }
 
         // Get lobbies
-        public List<Game> getLobbies(Game.type type) {
+        public List<Game> getLobbies(SFSArray roomData) {
+            // Use getLobbiesQuery to query the server
             List<Game> games = new List<Game>();
-            // TODO: get lobbies from database and add to list
-            for (int i = 0; i < 5; i++)
-                games.Add(new Game(10 * (i + 3), 10 * (i + 3), PolybiusManager.player, Game.type.pong));
+            // TODO: Parse room data
             return games;
         }
 
@@ -266,9 +287,13 @@ namespace polybius {
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
-        public void setPrivacy(bool privacy) {
+        public void setPrivacy(string username, bool privacy) {
             // TODO: toggle database user privacy
-
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "setPrivate");
+            o.PutUtfString("username", username);
+            o.PutBool("private", privacy);
+            sfs.Send(new ExtensionRequest("Users", o));
         }
 
         public void getUsersQuery() {
