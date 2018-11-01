@@ -14,6 +14,7 @@ namespace polybius {
         public static bool mutex = false;
         public static List<User> results = new List<User>();
         public static List<Game> games = new List<Game>();
+        public static int currGame = 0;
 
         // Notifications
         public static void sendNotification(string title, string message) {

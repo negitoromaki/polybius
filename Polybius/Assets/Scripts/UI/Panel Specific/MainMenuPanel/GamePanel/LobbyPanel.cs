@@ -71,8 +71,18 @@ namespace polybius {
         }
 
         public void startGame(int i) {
-            // TODO: Switch to game scene
-            Debug.Log("Start game " + i);
+            PolybiusManager.currGame = i;
+            if (PolybiusManager.games[i].gameType == Game.type.none) {
+                Debug.Log("Tried to start game with type NONE");
+            } else if (PolybiusManager.games[i].gameType == Game.type.pong) {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Pong");
+            } else if (PolybiusManager.games[i].gameType == Game.type.connect4) {
+                //UnityEngine.SceneManagement.SceneManager.LoadScene("Connect4");
+            } else if (PolybiusManager.games[i].gameType == Game.type.tictactoe) {
+                //UnityEngine.SceneManagement.SceneManager.LoadScene("TicTacToe");
+            } else {
+                Debug.LogError("Gametype not found: " + gp.currGameType);
+            }
         }
 
         public void displayLocation(int i) {
