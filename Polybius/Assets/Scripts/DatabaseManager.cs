@@ -21,8 +21,6 @@ namespace polybius {
         public bool connected = false;
         public string result = "None";
 
-        public Game.type currentGameType;
-
         void Awake() {
             PolybiusManager.dm = this;
             sfs.AddEventListener(SFSEvent.LOGIN, onLogin);
@@ -123,15 +121,22 @@ namespace polybius {
             {
                 if (result == "success")
                 {
-                    // TODO: Change scene to a game
-                    // Use currentGameType to create a new lobby with the game type
-                    switch (currentGameType)
-                    {
-                        // set cases for each game mode and which scene to switch to
+                    PolybiusManager.games.Add(PolybiusManager.currGame);
+                    if (PolybiusManager.currGame.gameType == Game.type.none) {
+                        Debug.Log("Tried to start game with type NONE");
+                    } else if (PolybiusManager.currGame.gameType == Game.type.pong) {
+                        UnityEngine.SceneManagement.SceneManager.LoadScene("Pong");
+                    } else if (PolybiusManager.currGame.gameType == Game.type.connect4) {
+                        //UnityEngine.SceneManagement.SceneManager.LoadScene("Connect4");
+                    } else if (PolybiusManager.currGame.gameType == Game.type.tictactoe) {
+                        //UnityEngine.SceneManagement.SceneManager.LoadScene("TicTacToe");
+                    } else {
+                        Debug.LogError("Gametype not found: " + PolybiusManager.currGame.gameType);
                     }
                 }
                 else
                 {
+                    PolybiusManager.currGame = null;
                     Debug.LogError("Error hosting game: " + result);
                 }
             }
@@ -325,8 +330,8 @@ namespace polybius {
             o.PutUtfString("cmd", "host");
             o.PutUtfString("roomname", roomName);
             o.PutUtfString("game", gameType.ToString());
-            currentGameType = gameType;
             sfs.Send(new ExtensionRequest("Lobby", o));
+            PolybiusManager.currGame = new Game(PolybiusManager.currLat, PolybiusManager.currLong, PolybiusManager.player, gameType);
         }
 
         public void joinQuery(string roomName)
