@@ -82,19 +82,13 @@ namespace polybius {
                 } else {
                     Debug.LogError("Error with registration: " + result);
                 }
-            }
-            else if (cmd == "setPrivate")
-            {
-                if (result == "success")
-                {
+            } else if (cmd == "setPrivate") {
+                if (result == "success") {
                     Debug.Log("Privacy set");
-                }
-                else
-                {
+                } else {
                     Debug.LogError("Error with setting privacy: " + result);
                 }
-            }
-            else if (cmd == "Messages") {
+            } else if (cmd == "Messages") {
                 if (result == "success") {
                     SFSArray messages = (SFSArray) paramsa.GetSFSArray("messages");
 
@@ -319,6 +313,7 @@ namespace polybius {
             o.PutUtfString("cmd", "host");
             o.PutUtfString("roomname", roomName);
             o.PutUtfString("game", gameType.ToString());
+            o.PutInt("gameID", roomName.GetHashCode());
             o.PutFloat("latcord", PolybiusManager.currLat);
             o.PutFloat("longcord", PolybiusManager.currLong);
             sfs.Send(new ExtensionRequest("Lobby", o));

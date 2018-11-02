@@ -15,7 +15,7 @@ namespace polybius {
             foreach (Transform child in parent.transform)
                 GameObject.Destroy(child.gameObject);
 
-            PolybiusManager.mutex = false;
+            PolybiusManager.mutex = true;
             runOnce = true;
             PolybiusManager.dm.getFriendsQuery();
         }
