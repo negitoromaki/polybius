@@ -35,17 +35,7 @@ namespace polybius {
 
         // for UI buttons
         public void setGameType(string s) {
-            if (s == "none") {
-                currGameType = Game.type.none;
-            } else if (s == "pong") {
-                currGameType = Game.type.pong;
-            } else if (s == "connect4") {
-                currGameType = Game.type.connect4;
-            } else if (s == "tictactoe") {
-                currGameType = Game.type.tictactoe;
-            } else {
-                Debug.LogError("Gametype not found: " + s);
-            }
+            currGameType = Game.stringToGameType(s);
         }
     }
 }

@@ -23,7 +23,11 @@ namespace polybius {
             locationString = (PolybiusManager.currGame.coordLat + "," + PolybiusManager.currGame.coordLong);
             Debug.Log("Set location to: " + locationString);
 
-            Debug.Assert(!string.IsNullOrEmpty(locationString) && map != null && markerParent != null && _markerPrefab != null && userPrefab != null);
+            Debug.Assert(   !string.IsNullOrEmpty(locationString) &&
+                            map != null &&
+                            markerParent != null &&
+                            _markerPrefab != null &&
+                            userPrefab != null);
 
             foreach (Transform child in markerParent.transform)
                 GameObject.Destroy(child.gameObject);

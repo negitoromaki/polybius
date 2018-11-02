@@ -56,7 +56,7 @@ namespace polybius {
             if (currentUser.getPrivacy() == 0 || currentUser == PolybiusManager.player) {
                 string[,] connect4Stats = new string[1, 2];
                 connect4Stats[0, 0] = "Games Won: ";
-                connect4Stats[0, 1] = ((int) Random.Range(0f, 25f)).ToString();
+                connect4Stats[0, 1] = currentUser.getUsername().GetHashCode().ToString();
                 addSection("Connect 4 Statistics:", connect4Stats);
             }
         }

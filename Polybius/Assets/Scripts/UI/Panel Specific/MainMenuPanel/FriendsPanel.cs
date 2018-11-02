@@ -34,8 +34,7 @@ namespace polybius {
 
                 GameObject friend;
                 for (int i = 0; i < PolybiusManager.player.friends.Count; i++) {
-
-                    friend = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
+                    friend = Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
                     friend.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.player.friends[i].getUsername();
                     int temp = i;
                     friend.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));

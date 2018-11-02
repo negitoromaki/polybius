@@ -59,6 +59,21 @@ namespace polybius {
             this.host = host;
             this.gameType = gameType;
         }
+
+        public static type stringToGameType(string s) {
+            if (s == "none") {
+                return type.none;
+            } else if (s == "pong" || s == "Pong") {
+                return type.pong;
+            } else if (s == "connect4") {
+                return type.connect4;
+            } else if (s == "tictactoe") {
+                return type.tictactoe;
+            } else {
+                Debug.LogError("Gametype not found: " + s);
+                return type.none;
+            }
+        }
     }
 
     public class User {

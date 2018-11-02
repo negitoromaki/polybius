@@ -98,7 +98,7 @@ namespace polybius {
                                                 PolybiusManager.player.getUsername(),
                                                 System.DateTime.Now,
                                                 messageObj.GetUtfString("message"));
-                        	PolybiusManager.player.addMessage(m);
+                        PolybiusManager.player.addMessage(m);
                     }
                 } else {
                     Debug.LogError("Error with Message: " + result);
@@ -110,7 +110,7 @@ namespace polybius {
                 } else {
                     Debug.LogError("Error with Logout: " + result);
                 }
-            } else if (cmd == "host") {
+            } else if (cmd2 == "host") {
                 if (result == "success") {
                     Debug.Log("Host success, switching to scene...");
                     PolybiusManager.games.Add(PolybiusManager.currGame);
@@ -129,7 +129,7 @@ namespace polybius {
                     PolybiusManager.currGame = null;
                     Debug.LogError("Error hosting game: " + result);
                 }
-            } else if (cmd == "join") {
+            } else if (cmd2 == "join") {
                 if (result == "success") {
                     if (PolybiusManager.currGame.gameType == Game.type.none) {
                         Debug.Log("Tried to start game with type NONE");
@@ -193,13 +193,25 @@ namespace polybius {
             else if (cmd2 == "getRooms") {
                 PolybiusManager.games.Clear();
                 SFSArray roomData = (SFSArray)paramsa.GetSFSArray("roomdata");
+                /*
                 for (int i = 0; i < roomData.Size(); i++) {
                     SFSObject currentRoom = (SFSObject)roomData.GetSFSObject(i);
-                    PolybiusManager.games.Add(new Game( currentRoom.GetUtfString("roomname"),
-                                                        (Game.type) currentRoom.GetInt("gameType"),
+                    Debug.Log(currentRoom.GetUtfString("roomname") + ", " + currentRoom.GetUtfString("gameType"));
+                    PolybiusManager.games.Add(new Game(currentRoom.GetUtfString("roomname"),
+                                                        Game.stringToGameType(currentRoom.GetUtfString("gameType")),
                                                         null,
-                                                        currentRoom.GetFloat("latcord"),
-                                                        currentRoom.GetFloat("longcord")));
+                                                        (float) currentRoom.GetDouble("latcord"),
+                                                        (float) currentRoom.GetDouble("longcord")));
+                }
+                */
+
+                // Debug
+                for (int i = 0; i < (int) Random.Range(0f, 5f); i++) {
+                    PolybiusManager.games.Add(new Game(i.ToString(),
+                                                        Game.type.pong,
+                                                        PolybiusManager.player,
+                                                        22f * (i+1),
+                                                        22f * (i + 1)));
                 }
                 PolybiusManager.mutex = false;
             }
@@ -295,7 +307,7 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "addFriend");
             o.PutUtfString("username", PolybiusManager.player.getUsername());
-            o.PutInt("id",id);
+            o.PutInt("id", id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
 
@@ -312,7 +324,7 @@ namespace polybius {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "host");
             o.PutUtfString("roomname", roomName);
-            o.PutUtfString("game", gameType.ToString());
+            o.PutUtfString("game", "Pong");
             o.PutInt("gameID", roomName.GetHashCode());
             o.PutFloat("latcord", PolybiusManager.currLat);
             o.PutFloat("longcord", PolybiusManager.currLong);
@@ -321,11 +333,17 @@ namespace polybius {
             PolybiusManager.currGame = new Game(roomName, gameType, PolybiusManager.player, PolybiusManager.currLat, PolybiusManager.currLong);
         }
 
-        public void joinQuery(string roomName)
-        {
+        public void joinQuery(string roomName) {
             // query to join a lobby/room
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "join");
+            o.PutUtfString("roomname", roomName);
+            sfs.Send(new ExtensionRequest("Lobby", o));
+        }
+
+        public void leaveQuery(string roomName) {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "leave");
             o.PutUtfString("roomname", roomName);
             sfs.Send(new ExtensionRequest("Lobby", o));
         }

@@ -49,12 +49,14 @@ namespace polybius {
 
 
         public void sendMessage(TMP_InputField inputField) {
-            Message m = new Message(PolybiusManager.player.getUsername(), otherUser.getUsername(), System.DateTime.Now, inputField.text);
-            messages.Add(m);
-            PolybiusManager.dm.sendMessageRequest(m);
-            inputField.text = "";
-            displayMessages();
-            StartCoroutine(ScrollToBottom());
+            if (!string.IsNullOrEmpty(inputField.text)) {
+                Message m = new Message(PolybiusManager.player.getUsername(), otherUser.getUsername(), System.DateTime.Now, inputField.text);
+                messages.Add(m);
+                PolybiusManager.dm.sendMessageRequest(m);
+                inputField.text = "";
+                displayMessages();
+                StartCoroutine(ScrollToBottom());
+            }
         }
 
         // Setter functions for username and id

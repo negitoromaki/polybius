@@ -17,7 +17,7 @@ namespace polybius {
                 if (getLocation()) {
                     PolybiusManager.mutex = true;
                     runOnce = true;
-                    PolybiusManager.dm.getLobbiesQuery(); // TODO: Change this to use getLobbiesQuery
+                    PolybiusManager.dm.getLobbiesQuery();
 
                     // Debug
                     /*
