@@ -57,7 +57,7 @@ namespace polybius {
                 string[,] connect4Stats = new string[1, 2];
                 connect4Stats[0, 0] = "Games Won: ";
                 connect4Stats[0, 1] = currentUser.getUsername().GetHashCode().ToString();
-                addSection("Connect 4 Statistics:", connect4Stats);
+                addSection("Pong Statistics:", connect4Stats);
             }
         }
 

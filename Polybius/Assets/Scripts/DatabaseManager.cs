@@ -210,8 +210,8 @@ namespace polybius {
                     PolybiusManager.games.Add(new Game(i.ToString(),
                                                         Game.type.pong,
                                                         PolybiusManager.player,
-                                                        22f * (i+1),
-                                                        22f * (i + 1)));
+                                                        40.426733f,
+                                                        -86.916391f));
                 }
                 PolybiusManager.mutex = false;
             }
@@ -274,7 +274,6 @@ namespace polybius {
             o.PutUtfString("receiver", PolybiusManager.player.getUsername());
             o.PutUtfString("sender", senderUsername);
             o.PutInt("amount", 1);
-            o.PutInt("id", -1);
             o.PutUtfString ("message", "none");
             sfs.Send(new ExtensionRequest("Messages", o));
         }
@@ -289,7 +288,6 @@ namespace polybius {
             o.PutUtfString("sender", m.sender);
             o.PutUtfString("message", m.message);
 			o.PutInt ("amount", 1);
-            o.PutInt("id", -1);
             sfs.Send(new ExtensionRequest("Messages", o));
             PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
         }

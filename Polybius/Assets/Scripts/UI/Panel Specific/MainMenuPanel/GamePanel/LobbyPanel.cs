@@ -98,8 +98,8 @@ namespace polybius {
         bool getLocation() {
 
             // Debug
-            PolybiusManager.currLat = 25f;
-            PolybiusManager.currLong = 25f;
+            PolybiusManager.currLat = 40.426970f;
+            PolybiusManager.currLong = -86.916468f;
             return true;
 
             /*
