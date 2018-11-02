@@ -47,7 +47,6 @@ namespace polybius {
             scrollRect.verticalNormalizedPosition = 0f;
         }
 
-
         public void sendMessage(TMP_InputField inputField) {
             if (!string.IsNullOrEmpty(inputField.text)) {
                 Message m = new Message(PolybiusManager.player.getUsername(), otherUser.getUsername(), System.DateTime.Now, inputField.text);
