@@ -2803,8 +2803,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 941634505}
-        m_MethodName: 
+      - m_Target: {fileID: 941634510}
+        m_MethodName: createGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5177,8 +5177,6 @@ MonoBehaviour:
   createPanel: {fileID: 941634505}
   scrollRect: {fileID: 444364058}
   ErrorMessage: {fileID: 845722322}
-  currLat: 0
-  currLong: 0
 --- !u!114 &447228103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11445,7 +11443,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gp: {fileID: 2138526106}
-  errorMessage: {fileID: 845722322}
   header: {fileID: 1883110142}
 --- !u!1 &1003696280
 GameObject:
@@ -17776,7 +17773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2d803ff8f71864a8035080f121e572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lp: {fileID: 447228102}
   locationString: 0, 0
   location:
     x: 0

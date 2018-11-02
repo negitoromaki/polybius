@@ -52,9 +52,8 @@ namespace polybius {
         public List<User> spectators = new List<User>();
         public string roomName;
 
-        public Game() : this(0, 0, null, type.none) {}
-
-        public Game(float coordLong, float coordLat, User host, type gameType) {
+        public Game(string roomName, type gameType, User host, float coordLat, float coordLong) {
+            this.roomName = roomName;
             this.coordLong = coordLong;
             this.coordLat = coordLat;
             this.host = host;
@@ -124,21 +123,6 @@ namespace polybius {
         public string getEmail() {
             return email;
         }
-		public bool containsmsg(Message m){
-			bool t = false;
-			foreach(Message mc in messages){
-				if (mc.timestamp == m.timestamp && mc.message == m.message) {
-					t = true;
-					Debug.Log ("message exists!");
-					break;
-				}
-			}
-			return t;
-		}
-
-		public void resetMsg(){
-			messages = new List<Message> ();
-		}
 
         public string getDob() {
             return dob;

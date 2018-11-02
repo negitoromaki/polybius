@@ -71,17 +71,7 @@ namespace polybius {
 
         public void startGame(int i) {
             PolybiusManager.currGame = PolybiusManager.games[i];
-            if (PolybiusManager.currGame.gameType == Game.type.none) {
-                Debug.Log("Tried to start game with type NONE");
-            } else if (PolybiusManager.currGame.gameType == Game.type.pong) {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Pong");
-            } else if (PolybiusManager.currGame.gameType == Game.type.connect4) {
-                //UnityEngine.SceneManagement.SceneManager.LoadScene("Connect4");
-            } else if (PolybiusManager.currGame.gameType == Game.type.tictactoe) {
-                //UnityEngine.SceneManagement.SceneManager.LoadScene("TicTacToe");
-            } else {
-                Debug.LogError("Gametype not found: " + gp.currGameType);
-            }
+            PolybiusManager.dm.joinQuery(PolybiusManager.games[i].roomName);
         }
 
         public void displayLocation(int i) {
@@ -106,6 +96,13 @@ namespace polybius {
         }
 
         bool getLocation() {
+
+            // Debug
+            PolybiusManager.currLat = 25f;
+            PolybiusManager.currLong = 25f;
+            return true;
+
+            /*
             // Get Location
             // Check if location is enabled
             if (!Input.location.isEnabledByUser)
@@ -133,6 +130,7 @@ namespace polybius {
 
             Input.location.Stop();
             return true;
+            */
         }
 
         public void backButton() {

@@ -59,7 +59,7 @@ namespace polybius {
                         if (PolybiusManager.player.friends.Contains(PolybiusManager.results[i]))
                             result.transform.Find("AddFriend").GetComponent<FriendButton>().toggleFriendIcon();
                     } else {
-                        //Debug.Log("User " + PolybiusManager.results[i].getUsername() + " does not match search");
+                        Debug.Log("User " + PolybiusManager.results[i].getUsername() + " does not match search");
                     }
                 }
             }

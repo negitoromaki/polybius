@@ -14,6 +14,7 @@ namespace polybius {
         void OnEnable() {
             foreach (Transform child in parent.transform)
                 GameObject.Destroy(child.gameObject);
+
             PolybiusManager.mutex = false;
             runOnce = true;
             PolybiusManager.dm.getFriendsQuery();
@@ -21,8 +22,8 @@ namespace polybius {
 
         private void Update() {
             if (!PolybiusManager.mutex && runOnce) {
+                Debug.Log("Number of friends: " + PolybiusManager.player.friends.Count);
                 runOnce = false;
-                Debug.Log("running");
                 Debug.Assert(MainMenuPanel != null &&
                                 ProfilePanel != null &&
                                 MessagePanel != null &&
