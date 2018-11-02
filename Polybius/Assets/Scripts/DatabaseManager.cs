@@ -274,7 +274,8 @@ namespace polybius {
             o.PutUtfString("receiver", PolybiusManager.player.getUsername());
             o.PutUtfString("sender", senderUsername);
             o.PutInt("amount", 1);
-			o.PutUtfString ("message", "none");
+            o.PutInt("id", -1);
+            o.PutUtfString ("message", "none");
             sfs.Send(new ExtensionRequest("Messages", o));
         }
 
@@ -288,6 +289,7 @@ namespace polybius {
             o.PutUtfString("sender", m.sender);
             o.PutUtfString("message", m.message);
 			o.PutInt ("amount", 1);
+            o.PutInt("id", -1);
             sfs.Send(new ExtensionRequest("Messages", o));
             PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
         }
