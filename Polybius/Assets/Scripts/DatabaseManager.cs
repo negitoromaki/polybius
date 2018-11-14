@@ -291,7 +291,12 @@ namespace polybius {
             sfs.Send(new ExtensionRequest("Messages", o));
             PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
         }
-
+		public void sendFeedBack(string feedback){
+			ISFSObject o = new SFSObject();
+			o.PutUtfString ("user", PolybiusManager.player.getUsername());
+			o.PutUtfString("feedback", feedback);
+			sfs.Send(new ExtensionRequest("feedback", o));
+		}
         public SmartFox getConnection() {
             return sfs;
         }
