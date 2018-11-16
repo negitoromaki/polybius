@@ -26,6 +26,7 @@ namespace polybius {
             foreach (Transform child in parent.transform)
                 GameObject.Destroy(child.gameObject);
             searchBarText.text = currSearch = "";
+            PolybiusManager.dm.getBlockQuery();
         }
 
         // Update is called once per frame
@@ -50,7 +51,8 @@ namespace polybius {
                 for (int i = 0; i < PolybiusManager.results.Count; i++) {
 					if (PolybiusManager.results[i].getUsername() != null &&
                         PolybiusManager.results[i].getUsername().ToLower().Contains(currSearch.ToLower()) &&
-                        PolybiusManager.player.getUsername() != PolybiusManager.results[i].getUsername()) {
+                        PolybiusManager.player.getUsername() != PolybiusManager.results[i].getUsername() &&
+                        !PolybiusManager.player.blockedUsers.Contains(PolybiusManager.player.friends[i].getUsername())) {
                         result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UserButton"), parent.transform);
                         result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.results[i].getUsername();
                         int temp = i;

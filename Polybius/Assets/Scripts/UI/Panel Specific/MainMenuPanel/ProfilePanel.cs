@@ -57,6 +57,7 @@ namespace polybius {
             if (currentUser.getPrivacy() == 0 || currentUser == PolybiusManager.player) {
                 string[,] connect4Stats = new string[1, 2];
                 connect4Stats[0, 0] = "Games Won: ";
+                Debug.Log("Current profile's username: " + currentUser.getUsername());
                 connect4Stats[0, 1] = currentUser.getUsername().GetHashCode().ToString();
                 addSection("Pong Statistics:", connect4Stats);
             }
@@ -86,8 +87,16 @@ namespace polybius {
             MainMenuPanel.GetComponent<UIPanelSwitcher>().ChangeMenu(prevPanel);
         }
 
-        public void block() {
-            PolybiusManager.dm.blockUserQuery(currentUser);
+        public void blockUser() {
+            if (!PolybiusManager.player.blockedUsers.Contains(currentUser.getUsername())) {
+                PolybiusManager.dm.BlockPlayer(currentUser.getUsername(), currentUser.getUserID());
+                PolybiusManager.player.blockedUsers.Add(currentUser.getUsername());
+            }
+            goBack();
+        }
+
+        public void reportUser() {
+            PolybiusManager.dm.reportUserQuery(currentUser.getUsername());
         }
     }
 }

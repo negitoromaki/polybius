@@ -17,6 +17,7 @@ namespace polybius {
 
             PolybiusManager.mutex = true;
             runOnce = true;
+            PolybiusManager.dm.getBlockQuery();
             PolybiusManager.dm.getFriendsQuery();
         }
 
@@ -34,11 +35,13 @@ namespace polybius {
 
                 GameObject friend;
                 for (int i = 0; i < PolybiusManager.player.friends.Count; i++) {
-                    friend = Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
-                    friend.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.player.friends[i].getUsername();
-                    int temp = i;
-                    friend.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));
-                    friend.transform.Find("ChatButton").GetComponent<Button>().onClick.AddListener(() => openMessage(temp));
+                    if (!PolybiusManager.player.blockedUsers.Contains(PolybiusManager.player.friends[i].getUsername())) {
+                        friend = Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
+                        friend.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.player.friends[i].getUsername();
+                        int temp = i;
+                        friend.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));
+                        friend.transform.Find("ChatButton").GetComponent<Button>().onClick.AddListener(() => openMessage(temp));
+                    }    
                 }
             }
        }

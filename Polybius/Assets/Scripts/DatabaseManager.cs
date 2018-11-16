@@ -262,18 +262,12 @@ namespace polybius {
                 if (result == "success")
                 {
                     SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("blocklist");
-                    PolybiusManager.player.blocklist.Clear();
+                    PolybiusManager.player.blockedUsers.Clear();
                     for (int i = 0; i < returnedList.Size(); i++)
                     {
                         SFSObject blocked = (SFSObject)returnedList.GetSFSObject(i);
-                        User blockObj = new User(blocked.GetUtfString("username"),
-                                                    null,
-                                                    null,
-                                                    null,
-                                                    blocked.GetInt("id"),
-                                                    0);
-                        if (!string.IsNullOrEmpty(blockObj.getUsername()))
-                            PolybiusManager.player.blocklist.Add(blockObj);
+                        if (!string.IsNullOrEmpty(blocked.GetUtfString("username")))
+                            PolybiusManager.player.blockedUsers.Add(blocked.GetUtfString("username"));
                     }
                     PolybiusManager.mutex = false;
                 }
@@ -431,8 +425,8 @@ namespace polybius {
             o.PutUtfString("subject", subject);
 			o.PutUtfString("feedback", feedback);
 			sfs.Send(new ExtensionRequest("feedback", o));
-
         }
+
         public SmartFox getConnection() {
             return sfs;
         }
@@ -538,8 +532,11 @@ namespace polybius {
             sfs.Send(new ExtensionRequest("Users", o));
         }
 
-        public void blockUserQuery(User u) {
-            // TODO: blocking users
+        public void reportUserQuery(string u) {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("username", u);
+            // TODO: Use proper report query format
+            //sfs.Send(new ExtensionRequest("Report", o));
         }
 
         //exit handler

@@ -29,8 +29,6 @@ namespace polybius {
 
         void Start() {
             // Main Settings
-            username    = parent.transform.Find("Username").gameObject;
-            dob         = parent.transform.Find("Date of Birth").gameObject;
             Debug.Assert(username != null && dob != null);
 
             // Username
