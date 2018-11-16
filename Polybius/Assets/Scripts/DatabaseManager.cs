@@ -66,33 +66,84 @@ namespace polybius {
             Debug.Log(cmd + "/" + cmd2 + " message: " + message);
             result = paramsa.GetUtfString("result");
 
-            if (cmd == "UserLogin") {
-                if (result == "success") {
+            if (cmd == "UserLogin")
+            {
+                if (result == "success")
+                {
                     // login successful
                     Debug.Log("Login successful!");
                     PolybiusManager.loggedIn = true;
-                } else {
+                }
+                else
+                {
                     Debug.LogError("Error with login: " + result);
                     logout();
                 }
-            } else if (cmd == "CreateUser") {
-                if (result == "success") {
+            }
+            else if (cmd2 == "sendFeedback")
+            {
+                if (result == "success")
+                {
+                    PolybiusManager.sendNotification("Thank you!", "Your feedback is important to use and we work to improve Polybius with your help!");
+                }
+                else
+                {
+                    Debug.LogError("Error with feedback: " + result);
+                }
+            }
+            else if (cmd2 == "blockPlayer")
+            {
+                if (result == "success")
+                {
+                    Debug.Log("Block Success");
+                }
+                else
+                {
+                    Debug.LogError("Error with blocking: " + result);
+                }
+            }
+            else if (cmd2 == "reportPlayer")
+            {
+                if (result == "success")
+                {
+                    Debug.Log("Report Success");
+                }
+                else
+                {
+                    Debug.LogError("Error with reporting: " + result);
+                }
+            }
+            else if (cmd == "CreateUser")
+            {
+                if (result == "success")
+                {
                     Debug.Log("Register successful!");
                     // TODO: Get User ID and fill into PolybiusManager.player.userID
-                } else {
+                }
+                else
+                {
                     Debug.LogError("Error with registration: " + result);
                 }
-            } else if (cmd == "setPrivate") {
-                if (result == "success") {
+            }
+            else if (cmd == "setPrivate")
+            {
+                if (result == "success")
+                {
                     Debug.Log("Privacy set");
-                } else {
+                }
+                else
+                {
                     Debug.LogError("Error with setting privacy: " + result);
                 }
-            } else if (cmd == "Messages") {
-                if (result == "success") {
-                    SFSArray messages = (SFSArray) paramsa.GetSFSArray("messages");
+            }
+            else if (cmd == "Messages")
+            {
+                if (result == "success")
+                {
+                    SFSArray messages = (SFSArray)paramsa.GetSFSArray("messages");
 
-                    for (int i = 0; i < messages.Size(); i++) {
+                    for (int i = 0; i < messages.Size(); i++)
+                    {
                         SFSObject messageObj = (SFSObject)messages.GetSFSObject(i);
                         Message m = new Message(messageObj.GetUtfString("sender"),
                                                 PolybiusManager.player.getUsername(),
@@ -100,56 +151,95 @@ namespace polybius {
                                                 messageObj.GetUtfString("message"));
                         PolybiusManager.player.addMessage(m);
                     }
-                } else {
+                }
+                else
+                {
                     Debug.LogError("Error with Message: " + result);
                 }
-            } else if (cmd == "UserLogout") {
-                if (result == "success") {
+            }
+            else if (cmd == "UserLogout")
+            {
+                if (result == "success")
+                {
                     PolybiusManager.loggedIn = false;
                     Debug.Log("Logout successful!");
-                } else {
+                }
+                else
+                {
                     Debug.LogError("Error with Logout: " + result);
                 }
-            } else if (cmd2 == "host") {
-                if (result == "success") {
+            }
+            else if (cmd2 == "host")
+            {
+                if (result == "success")
+                {
                     Debug.Log("Host success, switching to scene...");
                     PolybiusManager.games.Add(PolybiusManager.currGame);
-                    if (PolybiusManager.currGame.gameType == Game.type.none) {
+                    if (PolybiusManager.currGame.gameType == Game.type.none)
+                    {
                         Debug.Log("Tried to start game with type NONE");
-                    } else if (PolybiusManager.currGame.gameType == Game.type.pong) {
+                    }
+                    else if (PolybiusManager.currGame.gameType == Game.type.pong)
+                    {
                         UnityEngine.SceneManagement.SceneManager.LoadScene("Pong");
-                    } else if (PolybiusManager.currGame.gameType == Game.type.connect4) {
+                    }
+                    else if (PolybiusManager.currGame.gameType == Game.type.connect4)
+                    {
                         //UnityEngine.SceneManagement.SceneManager.LoadScene("Connect4");
-                    } else if (PolybiusManager.currGame.gameType == Game.type.tictactoe) {
+                    }
+                    else if (PolybiusManager.currGame.gameType == Game.type.tictactoe)
+                    {
                         //UnityEngine.SceneManagement.SceneManager.LoadScene("TicTacToe");
-                    } else {
+                    }
+                    else
+                    {
                         Debug.LogError("Gametype not found: " + PolybiusManager.currGame.gameType);
                     }
-                } else {
+                }
+                else
+                {
                     PolybiusManager.currGame = null;
                     Debug.LogError("Error hosting game: " + result);
                 }
-            } else if (cmd2 == "join") {
-                if (result == "success") {
-                    if (PolybiusManager.currGame.gameType == Game.type.none) {
+            }
+            else if (cmd2 == "join")
+            {
+                if (result == "success")
+                {
+                    if (PolybiusManager.currGame.gameType == Game.type.none)
+                    {
                         Debug.Log("Tried to start game with type NONE");
-                    } else if (PolybiusManager.currGame.gameType == Game.type.pong) {
+                    }
+                    else if (PolybiusManager.currGame.gameType == Game.type.pong)
+                    {
                         UnityEngine.SceneManagement.SceneManager.LoadScene("Pong");
-                    } else if (PolybiusManager.currGame.gameType == Game.type.connect4) {
+                    }
+                    else if (PolybiusManager.currGame.gameType == Game.type.connect4)
+                    {
                         //UnityEngine.SceneManagement.SceneManager.LoadScene("Connect4");
-                    } else if (PolybiusManager.currGame.gameType == Game.type.tictactoe) {
+                    }
+                    else if (PolybiusManager.currGame.gameType == Game.type.tictactoe)
+                    {
                         //UnityEngine.SceneManagement.SceneManager.LoadScene("TicTacToe");
-                    } else {
+                    }
+                    else
+                    {
                         Debug.LogError("Gametype not found: " + PolybiusManager.currGame.gameType);
                     }
-                } else {
+                }
+                else
+                {
                     Debug.LogError("Error joining game: " + result);
                 }
-            } else if (cmd2 == "getFriends") {
-                if (result == "success") {
+            }
+            else if (cmd2 == "getFriends")
+            {
+                if (result == "success")
+                {
                     SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("friends");
                     PolybiusManager.player.friends.Clear();
-                    for (int i = 0; i < returnedList.Size(); i++) {
+                    for (int i = 0; i < returnedList.Size(); i++)
+                    {
                         SFSObject currentFriend = (SFSObject)returnedList.GetSFSObject(i);
                         User friendObj = new User(currentFriend.GetUtfString("username"),
                                                     null,
@@ -161,27 +251,67 @@ namespace polybius {
                             PolybiusManager.player.friends.Add(friendObj);
                     }
                     PolybiusManager.mutex = false;
-                } else {
+                }
+                else
+                {
                     Debug.LogError("Error retrieving friend list: " + result);
                 }
-            } else if (cmd2 == "addFriend") {
-                if (result == "success") {
+            }
+            else if (cmd2 == "getBlocked")
+            {
+                if (result == "success")
+                {
+                    SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("blocklist");
+                    PolybiusManager.player.blocklist.Clear();
+                    for (int i = 0; i < returnedList.Size(); i++)
+                    {
+                        SFSObject blocked = (SFSObject)returnedList.GetSFSObject(i);
+                        User blockObj = new User(blocked.GetUtfString("username"),
+                                                    null,
+                                                    null,
+                                                    null,
+                                                    blocked.GetInt("id"),
+                                                    0);
+                        if (!string.IsNullOrEmpty(blockObj.getUsername()))
+                            PolybiusManager.player.blocklist.Add(blockObj);
+                    }
+                    PolybiusManager.mutex = false;
+                }
+                else
+                {
+                    Debug.LogError("Error retrieving block list: " + result);
+                }
+            }
+            else if (cmd2 == "addFriend")
+            {
+                if (result == "success")
+                {
                     Debug.Log("Successfully added friend!");
-                } else {
+                }
+                else
+                {
                     Debug.LogError("Error adding friend: " + result);
                 }
-            } else if (cmd2 == "removeFriend") {
-                if (result == "success") {
+            }
+            else if (cmd2 == "removeFriend")
+            {
+                if (result == "success")
+                {
                     Debug.Log("Successfully removed friend!");
-                } else {
+                }
+                else
+                {
                     Debug.LogError("Error removing friend: " + result);
                 }
-            } else if (cmd2 == "getUsers") {
-                SFSArray returnedList = (SFSArray) paramsa.GetSFSArray("users");
+            }
+            else if (cmd2 == "getUsers")
+            {
+                SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("users");
                 PolybiusManager.results.Clear();
-                for (int i = 0; i < returnedList.Size(); i++) {
-                    SFSObject currentUser = (SFSObject) returnedList.GetSFSObject(i);
-                    PolybiusManager.results.Add(new User(   currentUser.GetUtfString("username"),
+                for (int i = 0; i < returnedList.Size(); i++)
+                {
+                    SFSObject currentUser = (SFSObject)returnedList.GetSFSObject(i);
+                    PolybiusManager.results.Add(new User(currentUser.GetUtfString("username"),
                                                             null,
                                                             null,
                                                             null,
@@ -190,7 +320,8 @@ namespace polybius {
                 }
                 PolybiusManager.mutex = false;
             }
-            else if (cmd2 == "getRooms") {
+            else if (cmd2 == "getRooms")
+            {
                 PolybiusManager.games.Clear();
                 SFSArray roomData = (SFSArray)paramsa.GetSFSArray("roomdata");
                 /*
@@ -206,7 +337,8 @@ namespace polybius {
                 */
 
                 // Debug
-                for (int i = 0; i < (int) Random.Range(0f, 5f); i++) {
+                for (int i = 0; i < (int)Random.Range(0f, 5f); i++)
+                {
                     PolybiusManager.games.Add(new Game(i.ToString(),
                                                         Game.type.pong,
                                                         PolybiusManager.player,
@@ -215,7 +347,8 @@ namespace polybius {
                 }
                 PolybiusManager.mutex = false;
             }
-            else {
+            else
+            {
                 Debug.LogError("Command Not found: " + cmd + " returned " + result + "\nCommand2 Not found: " + cmd2);
             }
         }
@@ -291,12 +424,15 @@ namespace polybius {
             sfs.Send(new ExtensionRequest("Messages", o));
             PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
         }
-		public void sendFeedBack(string feedback){
+		public void sendFeedBack(string feedback, string subject){
 			ISFSObject o = new SFSObject();
-			o.PutUtfString ("user", PolybiusManager.player.getUsername());
+            o.PutUtfString("cmd", "sendFeedback");
+            o.PutUtfString ("user", PolybiusManager.player.getUsername());
+            o.PutUtfString("subject", subject);
 			o.PutUtfString("feedback", feedback);
 			sfs.Send(new ExtensionRequest("feedback", o));
-		}
+
+        }
         public SmartFox getConnection() {
             return sfs;
         }
@@ -315,7 +451,24 @@ namespace polybius {
             o.PutInt("id", id);
             sfs.Send(new ExtensionRequest("FriendList", o));
         }
+        public void BlockPlayer(string username, int id)
+        {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "blockPlayer");
+            o.PutUtfString("username", PolybiusManager.player.getUsername());
+            o.PutInt("id", id);
+            sfs.Send(new ExtensionRequest("FriendList", o));
 
+        }
+        public void ReportPlayer(string username, int id,string reason)
+        {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "reportPlayer");
+            o.PutUtfString("username", PolybiusManager.player.getUsername());
+            o.PutUtfString("reason", reason);
+            o.PutInt("id", id);
+            sfs.Send(new ExtensionRequest("FriendList", o));
+        }
 		public void RemoveFriend(string username, int id) {
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "removeFriend");
@@ -359,6 +512,15 @@ namespace polybius {
             o.PutUtfString("username", PolybiusManager.player.getUsername());
             o.PutInt("id", -1);
             sfs.Send(new ExtensionRequest("FriendList", o));
+        }
+        public void getBlockQuery()
+        {
+            ISFSObject o = new SFSObject();
+            o.PutUtfString("cmd", "getBlocked");
+            o.PutUtfString("username", PolybiusManager.player.getUsername());
+            o.PutInt("id", -1);
+            sfs.Send(new ExtensionRequest("FriendList", o));
+
         }
 
         public void setPrivacy(string username, int privacy) {

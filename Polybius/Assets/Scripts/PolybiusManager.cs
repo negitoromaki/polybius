@@ -87,6 +87,7 @@ namespace polybius {
         private int userID;
         private List<Message> messages = new List<Message>();
         public List<User> friends = new List<User>();
+        public List<User> blocklist = new List<User>();
 
         public User() : this(null, null, null, null) {}
 
