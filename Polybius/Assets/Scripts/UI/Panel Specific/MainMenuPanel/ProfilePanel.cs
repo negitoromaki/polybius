@@ -7,7 +7,7 @@ using TMPro;
 namespace polybius {
     public class ProfilePanel : MonoBehaviour {
 
-        public GameObject MainMenuPanel, ButtonPanel, parent, prevPanel, prevButton;
+        public GameObject MainMenuPanel, ButtonPanel, parent, prevPanel, prevButton, blockButton;
         public User currentUser;
 
         private Image backButton;
@@ -38,6 +38,7 @@ namespace polybius {
         public void OnEnable() {
             // Enable/Disable back button
             backButton.enabled = (currentUser != PolybiusManager.player);
+            blockButton.SetActive(currentUser != PolybiusManager.player);
             if (backButton.enabled)
                 Debug.Assert(prevPanel != null && prevButton != null);
 
@@ -83,6 +84,10 @@ namespace polybius {
         public void goBack() {
             ButtonPanel.GetComponent<ButtonPanel>().PressButton(prevButton);
             MainMenuPanel.GetComponent<UIPanelSwitcher>().ChangeMenu(prevPanel);
+        }
+
+        public void block() {
+            PolybiusManager.dm.blockUserQuery(currentUser);
         }
     }
 }

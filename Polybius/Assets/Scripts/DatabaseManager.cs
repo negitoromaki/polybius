@@ -538,6 +538,10 @@ namespace polybius {
             sfs.Send(new ExtensionRequest("Users", o));
         }
 
+        public void blockUserQuery(User u) {
+            // TODO: blocking users
+        }
+
         //exit handler
         void OnDisable() {
             logout();
