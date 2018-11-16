@@ -14,7 +14,7 @@ namespace polybius {
 
 
         void sendFeedback() {
-            PolybiusManager.dm.sendFeedBack("Topic: " + topic.GetComponent<TMP_InputField>().text + "\n" +
+            PolybiusManager.dm.sendFeedBack("Topic: " + topic.GetComponent<TMP_InputField>().text,
                 feedback.GetComponent<TMP_InputField>().text);
         }
     }
