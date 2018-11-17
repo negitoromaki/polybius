@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using Sfs2X;
 using Sfs2X.Logging;
@@ -12,6 +14,158 @@ using Sfs2X.Requests;
 
 namespace polybius {
     public class DatabaseManager : MonoBehaviour {
+
+        // ------------
+        // Flask Server
+        // ------------
+
+        private string flaskIP = "http://128.211.240.229:5000";
+
+        private string postJson(string method, string jsonStr, string url) {
+            UnityWebRequest request;
+            byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
+            request = UnityWebRequest.Put(url, bytes);
+
+            switch (method) {
+                case "POST":
+                case "PATCH":
+                case "PUT":
+                    request.SetRequestHeader("X-HTTP-Method-Override", method);
+                    break;
+
+                case "GET":
+                    request = UnityWebRequest.Get(url);
+                    break;
+
+                case "DELETE":
+                    request = UnityWebRequest.Delete(url);
+                    break;
+
+                default:
+                    Debug.LogError("Invalid HTTP Method");
+                    return "";
+            }
+
+            request.SetRequestHeader("accept", "application/json; charset=UTF-8");
+            request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
+            request.SendWebRequest();
+
+            if (request.isNetworkError || request.isHttpError) {
+                Debug.Log(request.error);
+                return "";
+            } else {
+                return request.downloadHandler.text;
+            }
+        }
+
+        // login user
+        class loginJson {
+            public string username;
+            public string password;
+        }
+
+        public void login() {
+            if (!PolybiusManager.loggedIn) {
+                if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
+                    !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
+
+                    // Create JSON class
+                    loginJson l = new loginJson();
+                    l.username = PolybiusManager.player.getUsername();
+
+                    // Call post method
+                    string json = JsonUtility.ToJson(l);
+                    JsonUtility.FromJsonOverwrite(postJson("GET", json, flaskIP + "/users"), l);
+                    if (l.password == PolybiusManager.player.getPassword()) {
+                        // TODO: Flask send login request
+                    }
+                }
+            }
+        }
+
+        // register user
+        public void create() {
+            if (!PolybiusManager.loggedIn) {
+                if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
+                    !string.IsNullOrEmpty(PolybiusManager.player.getUsername()) &&
+                    !string.IsNullOrEmpty(PolybiusManager.player.getEmail())) {
+
+                    // TODO: Flask register query
+                }
+            }
+        }
+
+        public void logout() {
+            if (!PolybiusManager.loggedIn) {
+                // TODO: Flask logout query
+            }
+        }
+
+        // get message
+        public void getMessagesRequest(string senderUsername) {
+            // TODO: Flask get messages query
+        }
+
+        // send message
+        public void sendMessageRequest(Message m) {
+            // TODO: Flask send messages query
+            PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
+        }
+
+        public void sendFeedBack(string feedback, string subject) {
+            // TODO: Flask send feedback query
+        }
+
+        public void getLobbiesQuery() {
+            // TODO: Flask get lobbies query
+        }
+
+        public void AddFriend(string username, int id) {
+            // TODO: Flask add friend query
+        }
+
+        public void BlockPlayer(string username, int id) {
+            // TODO: Flask block player query
+
+        }
+        public void ReportPlayer(string username, int id, string reason) {
+            // TODO: Flask report player query
+        }
+        public void RemoveFriend(string username, int id) {
+            // TODO: Flask remove friend query
+        }
+
+        public void host(string name, Game.type gameType) {
+            // TODO: Flask create lobby query
+            PolybiusManager.currGame = new Game(roomName, gameType, PolybiusManager.player, PolybiusManager.currLat, PolybiusManager.currLong);
+        }
+
+        public void getFriendsQuery() {
+            // TODO: Flask get friends query
+        }
+        public void getBlockQuery() {
+            // TODO: Flask block user query
+        }
+
+        public void setPrivacy(int userID, int privacy) {
+            // TODO: Flask set privacy query
+        }
+
+        public void searchUsers(string search) {
+            // TODO: Flask search users query
+        }
+
+        public void getUsersQuery() {
+            // TODO: Flask get users query
+        }
+
+        public void reportUserQuery(string u) {
+            // TODO: Flask report users query
+        }
+
+        // ---------------
+        // SmartFox Server
+        // ---------------
 
         // Server Configuration
         public string ip = "";
@@ -346,150 +500,26 @@ namespace polybius {
             }
         }
 
-        //public methods
-        // login user
-        public void login() {
-            if (!PolybiusManager.loggedIn) {
-                if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
-                    !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
-
-                    ISFSObject l = new SFSObject();
-                    l.PutUtfString("username", PolybiusManager.player.getUsername());
-                    l.PutUtfString("password", PolybiusManager.player.getPassword());
-					sfs.Send(new LoginRequest(PolybiusManager.player.getUsername(), "", initZone));
-                    sfs.Send(new ExtensionRequest("UserLogin", l));
-                }
-            } else {
-                logout();
-            }
-        }
-
-        // register user
-        public void create() {
-            if (!PolybiusManager.loggedIn) {
-                if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
-                    !string.IsNullOrEmpty(PolybiusManager.player.getUsername()) &&
-                    !string.IsNullOrEmpty(PolybiusManager.player.getEmail())) {
-
-                    ISFSObject o = new SFSObject();
-                    o.PutUtfString("username", PolybiusManager.player.getUsername());
-                    o.PutUtfString("password", PolybiusManager.player.getPassword());
-                    o.PutUtfString("email", PolybiusManager.player.getEmail());
-                    //o.PutUtfString("dob", PolybiusManager.player.dob); // TODO: add DOB functionality
-                    sfs.Send(new ExtensionRequest("CreateUser", o));
-                }
-            } else {
-                logout();
-            }
-        }
-        public void logout() {
-            if (!string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
-                ISFSObject ot = new SFSObject();
-                ot.PutUtfString("username", PolybiusManager.player.getUsername());
-                Debug.Log("Logging out " + PolybiusManager.player.getUsername());
-                sfs.Send(new ExtensionRequest("UserLogout", ot));
-            }
-        }
-
-        // get message
-        public void getMessagesRequest(string senderUsername) {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("level", "private");
-            o.PutUtfString("levelname", "none");
-            o.PutUtfString("mode", "get");
-            o.PutUtfString("receiver", PolybiusManager.player.getUsername());
-            o.PutUtfString("sender", senderUsername);
-            o.PutInt("amount", 1);
-            o.PutUtfString ("message", "none");
-            sfs.Send(new ExtensionRequest("Messages", o));
-        }
-
-        // send message
-        public void sendMessageRequest(Message m) {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("level", "private");
-            o.PutUtfString("levelname", "none");
-            o.PutUtfString("mode", "send");
-            o.PutUtfString("receiver", m.receiver);
-            o.PutUtfString("sender", m.sender);
-            o.PutUtfString("message", m.message);
-			o.PutInt ("amount", 1);
-            sfs.Send(new ExtensionRequest("Messages", o));
-            PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
-        }
-		public void sendFeedBack(string feedback, string subject){
-			ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "sendFeedback");
-            o.PutUtfString ("user", PolybiusManager.player.getUsername());
-            o.PutUtfString("subject", subject);
-			o.PutUtfString("feedback", feedback);
-			sfs.Send(new ExtensionRequest("feedback", o));
-        }
-
         public SmartFox getConnection() {
             return sfs;
         }
 
-        public void getLobbiesQuery() {
-            // query server for lobbies
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "getRooms");
-            sfs.Send(new ExtensionRequest("Lobby", o));
-        }
-
-		public void AddFriend(string username, int id) {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "addFriend");
-            o.PutUtfString("username", PolybiusManager.player.getUsername());
-            o.PutInt("id", id);
-            sfs.Send(new ExtensionRequest("FriendList", o));
-        }
-        public void BlockPlayer(string username, int id)
-        {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "blockPlayer");
-            o.PutUtfString("username", PolybiusManager.player.getUsername());
-            o.PutInt("id", id);
-            sfs.Send(new ExtensionRequest("FriendList", o));
-
-        }
-        public void ReportPlayer(string username, int id,string reason)
-        {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "reportPlayer");
-            o.PutUtfString("username", PolybiusManager.player.getUsername());
-            o.PutUtfString("reason", reason);
-            o.PutInt("id", id);
-            sfs.Send(new ExtensionRequest("FriendList", o));
-        }
-		public void RemoveFriend(string username, int id) {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "removeFriend");
-            o.PutUtfString("username", PolybiusManager.player.getUsername());
-            o.PutInt("id",id);
-            sfs.Send(new ExtensionRequest("FriendList", o));
-        }
-
-        public void hostQuery(string roomName, Game.type gameType) {
-            // query to host a lobby/room
+        public void hostQuery(int lobbyID, Game.type gameType) {
+            // TODO: Fix SmartFox server lobby
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "host");
-            o.PutUtfString("roomname", roomName);
-            o.PutUtfString("game", "Pong");
-            o.PutInt("gameID", roomName.GetHashCode());
-            o.PutFloat("latcord", PolybiusManager.currLat);
-            o.PutFloat("longcord", PolybiusManager.currLong);
+            o.PutUtfString("roomname", lobbyID.ToString());
             sfs.Send(new ExtensionRequest("Lobby", o));
-
-            PolybiusManager.currGame = new Game(roomName, gameType, PolybiusManager.player, PolybiusManager.currLat, PolybiusManager.currLong);
         }
 
-        public void joinQuery(string roomName) {
+        public void joinQuery(int lobbyID) {
             // query to join a lobby/room
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "join");
-            o.PutUtfString("roomname", roomName);
+            o.PutUtfString("roomname", lobbyID.ToString());
             sfs.Send(new ExtensionRequest("Lobby", o));
+
+            // TODO: Flask update currLobbyID
         }
 
         public void leaveQuery(string roomName) {
@@ -497,44 +527,8 @@ namespace polybius {
             o.PutUtfString("cmd", "leave");
             o.PutUtfString("roomname", roomName);
             sfs.Send(new ExtensionRequest("Lobby", o));
-        }
 
-        public void getFriendsQuery() {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "getFriends");
-            o.PutUtfString("username", PolybiusManager.player.getUsername());
-            o.PutInt("id", -1);
-            sfs.Send(new ExtensionRequest("FriendList", o));
-        }
-        public void getBlockQuery()
-        {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "getBlocked");
-            o.PutUtfString("username", PolybiusManager.player.getUsername());
-            o.PutInt("id", -1);
-            sfs.Send(new ExtensionRequest("FriendList", o));
-        }
-
-        public void setPrivacy(string username, int privacy) {
-            // TODO: toggle database user privacy
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "setPrivate");
-            o.PutUtfString("username", username);
-            o.PutInt("private", privacy);
-            sfs.Send(new ExtensionRequest("Users", o));
-        }
-
-        public void getUsersQuery() {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "getUsers");
-            sfs.Send(new ExtensionRequest("Users", o));
-        }
-
-        public void reportUserQuery(string u) {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("username", u);
-            // TODO: Use proper report query format
-            //sfs.Send(new ExtensionRequest("Report", o));
+            // TODO: Flask update currLobbyID
         }
 
         //exit handler

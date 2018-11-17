@@ -338,7 +338,6 @@ def api_count():
 	db.close()
 	return resp
 
-
 @app.route('/lobbies', methods=['GET', 'POST', 'PUT', 'DELETE'])
 #@requires_auth
 def api_lobbies():
@@ -408,7 +407,6 @@ def api_lobbies():
 	c.close()
 	db.close()
 	return resp
-
 
 @app.route('/report', methods=['GET', 'POST'])
 #@requires_auth
@@ -543,6 +541,33 @@ def api_stats():
 	c.close()
 	db.close()
 	return resp
+
+
+@app.route('/login', methods=['GET'])
+#@requires_auth
+def api_lobbies():
+	db = sqlite3.connect('polybius.db')
+	c = db.cursor()
+	json = request.get_json()
+
+	# Get vars
+	gameType = json.get('gameType')
+
+	if gameType:
+		c.execute('SELECT * FROM lobbies WHERE gameType = ?', (gameType,))
+
+		# Get column names and desc and turn into json
+		columns = c.description
+		resp = jsonify([{columns[index][0]:column for index,
+						column in enumerate(value)} for value in c.fetchall()])
+	else:
+		resp = jsonify(dict(success=False, message="gameType not specified"))
+
+	# Close db connection and return data
+	c.close()
+	db.close()
+	return resp
+
 
 # Run server
 if __name__ == '__main__':
