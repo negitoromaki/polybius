@@ -78,13 +78,10 @@ namespace polybius {
 
     public class User {
         // Enum
-        public enum status { online, offline, invisible };
 
         // Fields
         private string username, password, email, dob;
-        private status currentStatus;
-        private int privacy;
-        private int userID;
+        private int privacy, userID, isOnline;
         private List<Message> messages = new List<Message>();
         public List<User> friends = new List<User>();
         public List<string> blockedUsers = new List<string>();
@@ -98,8 +95,8 @@ namespace polybius {
             this.password = password;
             this.email = email;
             this.dob = dob;
-            this.privacy = privacy; // true is private, false is public
-            currentStatus = status.offline;
+            this.privacy = privacy;
+            isOnline = 0;
             this.userID = userID;
         }
 
@@ -148,6 +145,10 @@ namespace polybius {
             return privacy;
         }
 
+        public int getStatus() {
+            return isOnline;
+        }
+
         // Get Messages from a user
         public List<Message> getMessagesForUser(string otherUsername) {
             PolybiusManager.dm.getMessagesRequest(otherUsername);
@@ -161,10 +162,6 @@ namespace polybius {
             return messagesfromUser;
         }
 
-        public status getStatus() {
-            return currentStatus;
-        }
-
         // ------------------
         // User Field Setters
         // ------------------
@@ -173,7 +170,7 @@ namespace polybius {
         // Choose to set privacy to true or not
         public void setPrivacy(int privacy) {
             this.privacy = privacy;
-            PolybiusManager.dm.setPrivacy(username, privacy);
+            PolybiusManager.dm.setPrivacy(userID, privacy);
         }
 
         // Updates the username if it contains appropriate characters
@@ -240,9 +237,9 @@ namespace polybius {
         }
 
         // Updates user's status
-        public void setStatus(status newStatus) {
+        public void setStatus(int newStatus) {
             // TODO: call database get status function
-            currentStatus = newStatus;
+            isOnline = newStatus;
         }
 
         // Sets user's ID once

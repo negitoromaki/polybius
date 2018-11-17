@@ -15,7 +15,7 @@ namespace polybius {
         }
 
         public void createGame() {
-            PolybiusManager.dm.hostQuery(Random.Range(0f, 100000000000000000000000000000f).ToString(), gp.currGameType);
+            //PolybiusManager.dm.hostQuery(Random.Range(0f, 100000000000000000000000000000f).ToString(), gp.currGameType);
         }
     }
 }
