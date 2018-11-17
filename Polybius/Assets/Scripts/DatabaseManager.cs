@@ -63,7 +63,6 @@ namespace polybius {
             SFSObject paramsa = (SFSObject)e.Params["params"]; // changed ISFSObject to SFSObject, could be errors
             string cmd2 = paramsa.GetUtfString("cmd");
             string message = cmd + " " + paramsa.GetUtfString("result") + " message: " + paramsa.GetUtfString("message");
-            Debug.Log(cmd + "/" + cmd2 + " message: " + message);
             result = paramsa.GetUtfString("result");
 
             if (cmd == "UserLogin")
@@ -154,7 +153,7 @@ namespace polybius {
                 }
                 else
                 {
-                    Debug.LogError("Error with Message: " + result);
+                    Debug.LogError("Error with Message: " + cmd2 + ", Message: " + message + ", Result: " + result);
                 }
             }
             else if (cmd == "UserLogout")
@@ -343,7 +342,7 @@ namespace polybius {
             }
             else
             {
-                Debug.LogError("Command Not found: " + cmd + " returned " + result + "\nCommand2 Not found: " + cmd2);
+                Debug.LogError("cmd: " + cmd + ", result: " + result + ", message: " + message + "\ncmd2: " + cmd2);
             }
         }
 
@@ -514,7 +513,6 @@ namespace polybius {
             o.PutUtfString("username", PolybiusManager.player.getUsername());
             o.PutInt("id", -1);
             sfs.Send(new ExtensionRequest("FriendList", o));
-
         }
 
         public void setPrivacy(string username, int privacy) {

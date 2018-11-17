@@ -52,7 +52,7 @@ namespace polybius {
 					if (PolybiusManager.results[i].getUsername() != null &&
                         PolybiusManager.results[i].getUsername().ToLower().Contains(currSearch.ToLower()) &&
                         PolybiusManager.player.getUsername() != PolybiusManager.results[i].getUsername() &&
-                        !PolybiusManager.player.blockedUsers.Contains(PolybiusManager.player.friends[i].getUsername())) {
+                        !PolybiusManager.player.blockedUsers.Contains(PolybiusManager.results[i].getUsername())) {
                         result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UserButton"), parent.transform);
                         result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.results[i].getUsername();
                         int temp = i;
