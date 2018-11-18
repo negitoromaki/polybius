@@ -71,7 +71,7 @@ namespace polybius {
 
         public void startGame(int i) {
             PolybiusManager.currGame = PolybiusManager.games[i];
-            //PolybiusManager.dm.joinQuery(PolybiusManager.games[i].roomName);
+            PolybiusManager.dm.joinQuery(PolybiusManager.games[i].roomName);
         }
 
         public void displayLocation(int i) {

@@ -19,8 +19,9 @@ c.execute("""
 		password 	text not null,
 		email 		text unique not null,
 		dob 		text not null,
-		isOnline 	bit not null,
+		isonline 	bit not null,
 		privacy		bit not null,
+		loggedIn	bit not null,
 		currLobbyID integer,
 		reports		integer
 	);
