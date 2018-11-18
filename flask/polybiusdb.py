@@ -139,7 +139,7 @@ def api_users():
 
 		# String search
 		elif search:
-			c.execute('SELECT * FROM users WHERE username LIKE \'%?%\')', (search,))
+			c.execute("SELECT * FROM users WHERE username LIKE ?", ("%" +search+ "%",))
 
 		# Search for user in lobby
 		elif lobby:
@@ -298,9 +298,9 @@ def api_count():
 
 		# Get vars
 		receiverID  = json.get('receiverID')
-                senderID    = json.get('senderID')
+		senderID = json.get('senderID')
 
-		if receiverID:
+		if receiverID and senderID:
 			c.execute('SELECT * FROM messages WHERE receiverID = ? AND senderID = ?', (receiverID, senderID))
 
 			# Get column names and desc and turn into json
@@ -470,7 +470,7 @@ def api_block():
 		blockerID = json.get('blockerID')
 		blockedID = json.get('blockedID')
 
-		if blocker and blocked:
+		if blockerID and blockedID:
 			c.execute('SELECT COUNT(*) FROM blocked WHERE blockerID = ? AND WHERE blockedID = ?', (blockerID, blockedID))
 			resp = jsonify(dict(result=int(c.fetchone())))
 		else:
@@ -557,9 +557,9 @@ def api_friends():
 		user1ID = json.get('user1ID')
 		user2ID = json.get('user2ID')
 
-		if blocker and blocked:
-			c.execute('SELECT COUNT(*) FROM blocked WHERE user1ID = ? AND WHERE user2ID = ?', (user1ID, user2ID))
-			resp = jsonify(dict(result=int(c.fetchone())))
+		if user1ID and user2ID:
+			c.execute('SELECT COUNT(*) FROM friends WHERE user1ID = ? AND user2ID = ?', (user1ID, user2ID,))
+			resp = jsonify(dict(result=(c.fetchone())))
 		else:
 			resp = jsonify(dict(success=False, message="user1ID/user2ID not specified"))
 
@@ -570,16 +570,17 @@ def api_friends():
 		user1ID = json.get('user1ID')
 		user2ID = json.get('user2ID')
 
-		if blocker and blocked:
-			c.execute('INSERT or IGNORE INTO friends (user1ID, user2ID) VALUES (?, ?)',
-			          (blocker, blocked))
+		if user1ID and user2ID:
+			c.execute('INSERT or IGNORE INTO friends (user1ID, user2ID) VALUES (?, ?)', (user1ID, user2ID,))
 			db.commit()
 			resp = jsonify(dict(success=True, message="Friend successfully added"))
 		else:
 			resp = jsonify(dict(success=False, message="user1ID/user2ID not specified"))
 
 	# Close db connection and return data
+
 	c.close()
+	
 	db.close()
 	return resp
 
