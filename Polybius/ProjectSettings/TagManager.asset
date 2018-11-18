@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LeftWall
   - RightWall
+  - TicTacBox
   layers:
   - Default
   - TransparentFX

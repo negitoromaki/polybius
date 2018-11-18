@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class Connect4Controller : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class Connect4Controller : MonoBehaviour
 
     public GameObject gameOverPanel;
     public GameObject buttonPanel;
-    public Text gameOverText;
+    public TextMeshProUGUI gameOverText;
 
     // 7x6 gameboard, 7 columns 6 rows
     public int[,] gameBoard = new int[7,6]; // 0 is red; 1 is yellow; -1 means uninitialized
@@ -94,7 +94,18 @@ public class Connect4Controller : MonoBehaviour
         if (checkRightDiagonal(turn, x, y))
             return turn;
 
-        return -1;
+        for (int i = 0; i < 7; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                if (gameBoard[i, j] == -1)
+                {
+                    return -1;
+                }
+            }
+        }
+
+        return -2;
     }
 
     private bool checkVertical(int turn, int x, int y)
@@ -265,9 +276,13 @@ public class Connect4Controller : MonoBehaviour
         {
             gameOverText.text += "Red Wins!";
         }
-        else
+        else if (turn == 1)
         {
             gameOverText.text += "Yellow Wins!";
+        }
+        else if (turn == -2)
+        {
+            gameOverText.text += "Tie game!";
         }
 
         gameOverPanel.SetActive(true);
