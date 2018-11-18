@@ -59,6 +59,7 @@ namespace polybius {
         }
 
         public void login() {
+			Debug.Log ("here");
             if (!PolybiusManager.loggedIn) {
                 if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
                     !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
@@ -77,6 +78,14 @@ namespace polybius {
                         JsonUtility.FromJsonOverwrite(postJson("PUT", json, flaskIP + "/users"), u);
                         PolybiusManager.loggedIn = true;
                     }
+
+					//smartfox
+					SFSObject logdata = new SFSObject();
+					logdata.PutUtfString ("username", PolybiusManager.player.getUsername ());
+					logdata.PutUtfString ("password", PolybiusManager.player.getPassword ());
+					sfs.Send (new ExtensionRequest ("UserLogin", logdata));
+
+
                 }
             }
         }

@@ -6,6 +6,7 @@ using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 using Sfs2X.Core;
 using Sfs2X.Requests;
+using UnityEngine.UI;
 
 
 public class Connection : MonoBehaviour {
@@ -15,6 +16,7 @@ public class Connection : MonoBehaviour {
 	public SmartFox sfs = new SmartFox();
 	public string initZone = "Polybius";
 	public bool logged = false;
+	public GameObject userName, passWord, switcher,MainMenu;
 
 
 	// Use this for initialization
@@ -50,6 +52,8 @@ public class Connection : MonoBehaviour {
 		logged = false;
 	}
 	void onLoggin(BaseEvent e){
+		sfs.Send (new JoinRoomRequest ("Lobby"));
+		switcher.GetComponent<polybius.UIPanelSwitcher> ().ChangeMenu (MainMenu);
 		logged = true;
 
 	}
@@ -62,12 +66,24 @@ public class Connection : MonoBehaviour {
 	}
 
 	//public methods
-	public void loggin(string username, string password){
-		ISFSObject l = new SFSObject();
-		l.PutUtfString ("username", username);
-		l.PutUtfString ("password", password);
-		sfs.Send (new LoginRequest (username, "", initZone));
-		sfs.Send (new ExtensionRequest ("UserLogin", l));
+	public void loggin(){
+		if (userName.GetComponent<InputField> ().text != null && userName.GetComponent<InputField> ().text != null) {
+
+			ISFSObject l = new SFSObject ();
+			l.PutUtfString ("username",userName.GetComponent<InputField> ().text);
+			l.PutUtfString ("password", userName.GetComponent<InputField> ().text);
+			sfs.Send (new LoginRequest (userName.GetComponent<InputField> ().text, "", initZone));
+			sfs.Send (new ExtensionRequest ("UserLogin", l));
+		}
+	}
+	public void logout(){
+		if (userName.GetComponent<InputField> ().text != null && userName.GetComponent<InputField> ().text != null) {
+
+			ISFSObject l = new SFSObject ();
+			l.PutUtfString ("username",userName.GetComponent<InputField> ().text);
+			l.PutUtfString ("password", userName.GetComponent<InputField> ().text);
+			sfs.Send (new ExtensionRequest ("UserLogout", l));
+		}
 	}
 
 	public void create(string username, string password, string email){
@@ -87,6 +103,7 @@ public class Connection : MonoBehaviour {
 
 	//exit handler
 	void OnApplicationQuit(){
+		logout ();
 		Debug.Log ("exiting");
 		sfs.RemoveAllEventListeners ();
 		if (sfs.IsConnected) {

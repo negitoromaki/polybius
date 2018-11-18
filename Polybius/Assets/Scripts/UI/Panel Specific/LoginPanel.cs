@@ -8,15 +8,16 @@ namespace polybius {
     public class LoginPanel : MonoBehaviour {
 
         public GameObject username, password;
-        private TMP_InputField usernameText, passwordText;
+        private InputField usernameText, passwordText;
         private Image usernameImage, passwordImage;
+
 
         void Start() {
             Debug.Assert(username != null && password != null);
             
             // TMP Input fields
-            usernameText = username.GetComponent<TMP_InputField>();
-            passwordText = password.GetComponent<TMP_InputField>();
+            usernameText = username.GetComponent<InputField>();
+            passwordText = password.GetComponent<InputField>();
             Debug.Assert(usernameText != null && passwordText != null);
 
             // Images
@@ -28,16 +29,16 @@ namespace polybius {
         void Update() {
             // Username
             if (PolybiusManager.player.setUsername(usernameText.text)) {
-                usernameImage.color = Color.white;
+                //usernameImage.color = Color.white;
             } else {
-                usernameImage.color = new Color32(255, 0, 0, 150);
+                //usernameImage.color = new Color32(255, 0, 0, 150);
             }
 
             // Password
             if (PolybiusManager.player.setPassword(passwordText.text)) {
-                passwordImage.color = Color.white;
+               // passwordImage.color = Color.white;
             } else {
-                passwordImage.color = new Color32(255, 0, 0, 150);
+               // passwordImage.color = new Color32(255, 0, 0, 150);
             }
         }
 
