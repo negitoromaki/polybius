@@ -173,7 +173,7 @@ namespace polybius {
         // Choose to set privacy to true or not
         public void setPrivacy(int privacy) {
             this.privacy = privacy;
-            PolybiusManager.dm.setPrivacy(username, privacy);
+            PolybiusManager.dm.setPrivacy(userID, privacy);
         }
 
         // Updates the username if it contains appropriate characters

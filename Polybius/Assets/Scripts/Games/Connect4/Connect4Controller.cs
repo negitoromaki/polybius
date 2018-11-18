@@ -1,9 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Connect4Controller : MonoBehaviour
 {
+    public Connect4Player player;
+    public GameObject redPuck;
+    public GameObject yellowPuck;
+
+    public GameObject gameOverPanel;
+    public GameObject buttonPanel;
+    public Text gameOverText;
+
+    // 7x6 gameboard, 7 columns 6 rows
     public int[,] gameBoard = new int[7,6]; // 0 is red; 1 is yellow; -1 means uninitialized
 
     private int turn = 0; // 0 is red; 1 is yellow
@@ -26,13 +36,30 @@ public class Connect4Controller : MonoBehaviour
         {
             if (gameBoard[x,i] == -1)
             {
+                Debug.Log("Found point: " + x + "," + i);
                 gameBoard[x,i] = turn;
+                if (turn == 0)
+                {
+                    GameObject newPuck = (GameObject)Instantiate(redPuck, new Vector3(0.1f - (3f - x) * 8.7f, 1.7f + (i * 7.3f), 0), Quaternion.identity);
+                }
+                else if (turn == 1)
+                {
+                    GameObject newPuck = (GameObject)Instantiate(yellowPuck, new Vector3(0.1f - (3f - x) * 8.7f, 1.7f + (i * 7.3f), 0), Quaternion.identity);
+                }
                 // check win condition
                 int winner = checkWin(turn, x, i);
                 // change turn
                 if (winner == -1)
                 {
                     switchTurn();
+                    player.changeInstantiated();
+                }
+                else
+                {
+                    // game won
+                    Debug.Log("Game won by: " + turn);
+                    gameOver = true;
+                    EndGame();
                 }
                 return;
             }
@@ -76,7 +103,7 @@ public class Connect4Controller : MonoBehaviour
         int row = y;
         int column = x;
 
-        if (row <= 3)
+        if (row <= 2)
         {
             return false;
         }
@@ -130,11 +157,119 @@ public class Connect4Controller : MonoBehaviour
 
     private bool checkLeftDiagonal(int turn, int x, int y)
     {
-        return true; // TODO: fill out method
+        int row = y - 1;
+        int column = x - 1;
+        int counter = 1;
+
+        while (row >= 0 && column >= 0)
+        {
+            if (gameBoard[column, row] == turn)
+            {
+                counter++;
+                row--;
+                column--;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        row = y + 1;
+        column = x + 1;
+        while (row < 6 && column < 7)
+        {
+            if (gameBoard[column, row] == turn)
+            {
+                counter++;
+                row++;
+                column++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        if (counter >= 4)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private bool checkRightDiagonal(int turn, int x, int y)
     {
-        return true; // TODO: fill out method
+        int column = x - 1;
+        int row = y + 1;
+        int counter = 1;
+
+        while (row < 6 && column >= 0)
+        {
+            if (gameBoard[column, row] == turn)
+            {
+                counter++;
+                row++;
+                column--;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        row = y - 1;
+        column = x + 1;
+        while (row >= 0 && column < 7)
+        {
+            if (gameBoard[column, row] == turn)
+            {
+                counter++;
+                row--;
+                column++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        if (counter >= 4)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int getTurn()
+    {
+        return turn;
+    }
+
+    public bool GameOver()
+    {
+        return gameOver;
+    }
+
+    private void EndGame()
+    {
+        buttonPanel.SetActive(false);
+        gameOverText.text = "Game Over!\n";
+        if (turn == 0)
+        {
+            gameOverText.text += "Red Wins!";
+        }
+        else
+        {
+            gameOverText.text += "Yellow Wins!";
+        }
+
+        gameOverPanel.SetActive(true);
     }
 }
