@@ -55,9 +55,9 @@ db.commit()
 # Make sure friends database exists
 c.execute("""
 	CREATE TABLE IF NOT EXISTS friends (
-		id		integer primary key autoincrement unique,
-		user1	text not null,
-		user2	text not null
+		id	integer primary key autoincrement unique,
+		user1ID	integer not null,
+		user2ID	integer not null
 	);
 """)
 db.commit()
@@ -65,9 +65,9 @@ db.commit()
 # Make sure block database exists
 c.execute("""
 	CREATE TABLE IF NOT EXISTS blocked (
-		id		integer primary key autoincrement unique,
-		blocker	text not null,
-		blocked	text not null
+		id          integer primary key autoincrement unique,
+		blockerID   text not null,
+		blockedID   text not null
 	);
 """)
 db.commit()
@@ -75,7 +75,7 @@ db.commit()
 # Make sure statistics database exists
 c.execute("""
 	CREATE TABLE IF NOT EXISTS stats (
-		id			integer primary key autoincrement unique,
+		id		integer primary key autoincrement unique,
 		userID		integer not null,
 		pongWins	integer not null
 	);
@@ -136,7 +136,7 @@ def api_users():
 		# Search by username
 		elif username:
 			c.execute('SELECT * FROM users WHERE username = ?', (username,))
-		
+
 		# String search
 		elif search:
 			c.execute('SELECT * FROM users WHERE username LIKE \'%?%\')', (search,))
@@ -148,7 +148,7 @@ def api_users():
 		# Get all users
 		else:
 			c.execute('SELECT * FROM users')
-			
+
 		# Get column names and desc and turn into json
 		columns = c.description
 		resp = jsonify([{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
@@ -297,17 +297,18 @@ def api_count():
 	if request.method == "GET":
 
 		# Get vars
-		receiverID = json.get('receiverID')
+		receiverID  = json.get('receiverID')
+                senderID    = json.get('senderID')
 
 		if receiverID:
-			c.execute('SELECT * FROM messages WHERE receiverID = ?', (receiverID, ))
-			
+			c.execute('SELECT * FROM messages WHERE receiverID = ? AND senderID = ?', (receiverID, senderID))
+
 			# Get column names and desc and turn into json
 			columns = c.description
 			resp = jsonify([{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
 
 			# Delete messages once read
-			c.execute('DELETE FROM messages WHERE receiverID = ?', (receiverID,))
+			c.execute('DELETE FROM messages WHERE receiverID = ? AND senderID = ?', (receiverID, senderID))
 			db.commit()
 		else:
 			resp = jsonify(dict(success=False, message = "receiverID not specified"))
@@ -332,7 +333,7 @@ def api_count():
 				resp = jsonify(dict(success=False, message="Could not send message"))
 		else:
 			resp = jsonify(dict(success=False, message = "senderID/receiverID/message not specified"))
-	
+
 	# Close db connection and return data
 	c.close()
 	db.close()
@@ -417,7 +418,7 @@ def api_report():
 
 	# Get messages
 	if request.method == 'GET':
-		
+
 		# Get vars
 		userID = json.get('userID')
 
@@ -427,7 +428,7 @@ def api_report():
 			resp = jsonify(dict(reports=numReports))
 		else:
 			resp = jsonify(dict(success=False, message="userID not specified"))
-		
+
 
 	# Add messages
 	elif request.method == 'POST':
@@ -466,29 +467,29 @@ def api_block():
 	if request.method == 'GET':
 
 		# Get vars
-		blocker = json.get('blocker')
-		blocked = json.get('blocked')
+		blockerID = json.get('blockerID')
+		blockedID = json.get('blockedID')
 
 		if blocker and blocked:
-			c.execute('SELECT COUNT(*) FROM blocked WHERE blocker = ? AND WHERE blocked = ?', (blocker, blocked))
+			c.execute('SELECT COUNT(*) FROM blocked WHERE blockerID = ? AND WHERE blockedID = ?', (blockerID, blockedID))
 			resp = jsonify(dict(result=int(c.fetchone())))
 		else:
-			resp = jsonify(dict(success=False, message="Blocker/Blocked not specified"))
+			resp = jsonify(dict(success=False, message="blockerID/blockedID not specified"))
 
 	# Add messages
 	elif request.method == 'POST':
 
 		# Get vars
-		blocker = json.get('blocker')
-		blocked = json.get('blocked')
+		blocker = json.get('blockerID')
+		blocked = json.get('blockedID')
 
 		if blocker and blocked:
-			c.execute('INSERT or IGNORE INTO blocked (blocker, blocked) VALUES (?, ?)',
-			          (blocker, blocked))
+			c.execute('INSERT or IGNORE INTO blocked (blockerID, blockedID) VALUES (?, ?)',
+			          (blockerID, blockedID))
 			db.commit()
 			resp = jsonify(dict(success=True, message="User successfully blocked"))
 		else:
-			resp = jsonify(dict(success=False, message="Blocker/Blocked not specified"))
+			resp = jsonify(dict(success=False, message="blockerID/blockedID not specified"))
 
 	# Close db connection and return data
 	c.close()
@@ -510,7 +511,7 @@ def api_stats():
 
 		if userID:
 			c.execute('SELECT * FROM stats WHERE userID = ?', (userID,))
-			
+
 			# Get column names and desc and turn into json
 			columns = c.description
 			resp = jsonify([{columns[index][0]:column for index,
@@ -542,32 +543,45 @@ def api_stats():
 	db.close()
 	return resp
 
-
-@app.route('/login', methods=['GET'])
+@app.route('/friends', methods=['GET', 'POST'])
 #@requires_auth
-def api_lobbies():
+def api_friends():
 	db = sqlite3.connect('polybius.db')
 	c = db.cursor()
 	json = request.get_json()
 
-	# Get vars
-	gameType = json.get('gameType')
+	# Get messages
+	if request.method == 'GET':
 
-	if gameType:
-		c.execute('SELECT * FROM lobbies WHERE gameType = ?', (gameType,))
+		# Get vars
+		user1ID = json.get('user1ID')
+		user2ID = json.get('user2ID')
 
-		# Get column names and desc and turn into json
-		columns = c.description
-		resp = jsonify([{columns[index][0]:column for index,
-						column in enumerate(value)} for value in c.fetchall()])
-	else:
-		resp = jsonify(dict(success=False, message="gameType not specified"))
+		if blocker and blocked:
+			c.execute('SELECT COUNT(*) FROM blocked WHERE user1ID = ? AND WHERE user2ID = ?', (user1ID, user2ID))
+			resp = jsonify(dict(result=int(c.fetchone())))
+		else:
+			resp = jsonify(dict(success=False, message="user1ID/user2ID not specified"))
+
+	# Add messages
+	elif request.method == 'POST':
+
+		# Get vars
+		user1ID = json.get('user1ID')
+		user2ID = json.get('user2ID')
+
+		if blocker and blocked:
+			c.execute('INSERT or IGNORE INTO friends (user1ID, user2ID) VALUES (?, ?)',
+			          (blocker, blocked))
+			db.commit()
+			resp = jsonify(dict(success=True, message="Friend successfully added"))
+		else:
+			resp = jsonify(dict(success=False, message="user1ID/user2ID not specified"))
 
 	# Close db connection and return data
 	c.close()
 	db.close()
 	return resp
-
 
 # Run server
 if __name__ == '__main__':
