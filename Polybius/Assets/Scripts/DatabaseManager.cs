@@ -144,9 +144,9 @@ namespace polybius {
             // TODO: Flask remove friend query
         }
 
-        public void host(string name, Game.type gameType) {
+        public void host(string rname, Game.type gameType) {
             // TODO: Flask create lobby query
-            PolybiusManager.currGame = new Game(roomName, gameType, PolybiusManager.player, PolybiusManager.currLat, PolybiusManager.currLong);
+            PolybiusManager.currGame = new Game(rname, gameType, PolybiusManager.player, PolybiusManager.currLat, PolybiusManager.currLong);
         }
 
         public void getFriendsQuery() {
@@ -513,19 +513,19 @@ namespace polybius {
             return sfs;
         }
 
-        public void hostQuery(int lobbyID, Game.type gameType) {
+        public void hostQuery(string lobbyID, Game.type gameType) {
             // TODO: Fix SmartFox server lobby
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "host");
-            o.PutUtfString("roomname", lobbyID.ToString());
+            o.PutUtfString("roomname", lobbyID);
             sfs.Send(new ExtensionRequest("Lobby", o));
         }
 
-        public void joinQuery(int lobbyID) {
+        public void joinQuery(string lobbyID) {
             // query to join a lobby/room
             ISFSObject o = new SFSObject();
             o.PutUtfString("cmd", "join");
-            o.PutUtfString("roomname", lobbyID.ToString());
+            o.PutUtfString("roomname", lobbyID);
             sfs.Send(new ExtensionRequest("Lobby", o));
 
             // TODO: Flask update currLobbyID
