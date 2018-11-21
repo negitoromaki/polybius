@@ -170,8 +170,14 @@ def api_users():
 			# Insert into server or ignore if duplicate
 			c.execute('INSERT or IGNORE INTO users (username, password, email, dob, privacy, isOnline, loggedIn, reports) VALUES (?, ?, ?, ?, ?, 1, 1, 0)', (username, password, email, dob, privacy))
 			db.commit()
+
 			if c.rowcount > 0:
 				resp = jsonify(dict(success=True, message="Added new user"))
+				c.execute('SELECT userID FROM users WHERE username = ?',(username,))
+				r= int(c.fetchone()[0])
+				print(r)
+				c.execute('INSERT or IGNORE INTO stats (userID,pongWins) VALUES (?,0)',(r,))
+				db.commit()
 			else:
 				resp = jsonify(dict(success=False, message="User fields not unique"))
 
@@ -423,8 +429,8 @@ def api_report():
 		userID = json.get('userID')
 
 		if userID:
-			c.execute('SELECT reports FROM users WHERE id = ?', (userID,))
-			numReports = int(c.fetchone())
+			c.execute('SELECT reports FROM users WHERE userID = ?', (userID,))
+			numReports = (c.fetchone())
 			resp = jsonify(dict(reports=numReports))
 		else:
 			resp = jsonify(dict(success=False, message="userID not specified"))
@@ -437,14 +443,14 @@ def api_report():
 		userID = json.get('userID')
 
 		if userID:
-			c.execute('SELECT reports FROM users WHERE id = ?', (userID,))
-			numReports = int(c.fetchone()) + 1
+			c.execute('SELECT reports FROM users WHERE userID = ?', (userID,))
+			numReports = int(c.fetchone()[0]) + 1
 
 			# Deleting user if above 5
 			if numReports > 5:
-				c.execute('DELETE FROM users WHERE id= ?', (numReports, userID))
+				c.execute('DELETE FROM users WHERE userID= ?', (numReports, userID))
 			else:
-				c.execute('UPDATE users SET reports = ? WHERE id = ?',
+				c.execute('UPDATE users SET reports = ? WHERE userID = ?',
 				          (numReports, userID))
 			db.commit()
 			resp = jsonify(dict(success=True, message="User has been reported"))
@@ -471,8 +477,8 @@ def api_block():
 		blockedID = json.get('blockedID')
 
 		if blockerID and blockedID:
-			c.execute('SELECT COUNT(*) FROM blocked WHERE blockerID = ? AND WHERE blockedID = ?', (blockerID, blockedID))
-			resp = jsonify(dict(result=int(c.fetchone())))
+			c.execute('SELECT COUNT(*) FROM blocked WHERE blockerID = ? AND blockedID = ?', (blockerID, blockedID))
+			resp = jsonify(dict(result=int(c.fetchone()[0])))
 		else:
 			resp = jsonify(dict(success=False, message="blockerID/blockedID not specified"))
 
@@ -480,10 +486,10 @@ def api_block():
 	elif request.method == 'POST':
 
 		# Get vars
-		blocker = json.get('blockerID')
-		blocked = json.get('blockedID')
+		blockerID = json.get('blockerID')
+		blockedID = json.get('blockedID')
 
-		if blocker and blocked:
+		if blockerID and blockedID:
 			c.execute('INSERT or IGNORE INTO blocked (blockerID, blockedID) VALUES (?, ?)',
 			          (blockerID, blockedID))
 			db.commit()
@@ -580,7 +586,7 @@ def api_friends():
 	# Close db connection and return data
 
 	c.close()
-	
+
 	db.close()
 	return resp
 
