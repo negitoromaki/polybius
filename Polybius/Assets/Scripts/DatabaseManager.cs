@@ -183,6 +183,8 @@ namespace polybius {
         public string initZone = "Polybius";
         public bool connected = false;
         public string result = "None";
+		private bool isHost = false;
+		private string tmpRoomName = "";
 
         void Awake() {
             PolybiusManager.dm = this;
@@ -190,6 +192,7 @@ namespace polybius {
             sfs.AddEventListener(SFSEvent.CONNECTION, onConnect);
             sfs.AddEventListener(SFSEvent.CONNECTION_LOST, onLost);
             sfs.AddEventListener(SFSEvent.EXTENSION_RESPONSE, onResponse);
+			sfs.AddEventListener(SFSEvent.ROOM_JOIN, onJoin);
             sfs.ThreadSafeMode = true;
 
             sfs.Connect(ip, port);
@@ -224,321 +227,167 @@ namespace polybius {
         void onResponse(BaseEvent e) {
             string cmd = (string)e.Params["cmd"];
             SFSObject paramsa = (SFSObject)e.Params["params"]; // changed ISFSObject to SFSObject, could be errors
-            string cmd2 = paramsa.GetUtfString("cmd");
-            string message = cmd + " " + paramsa.GetUtfString("result") + " message: " + paramsa.GetUtfString("message");
-            result = paramsa.GetUtfString("result");
+            
+			if (cmd.Equals ("Sync")) {
+				onSync (paramsa);
+			} else if (cmd.Equals ("ChangeHost") && paramsa.GetUtfString("result").Equals("success")) {
+				onHostChange ();
+			} else if (cmd.Equals ("ChangeHost") && paramsa.GetUtfString("result").Equals("last")) {
+				SFSObject o = new SFSObject ();
+				o.PutUtfString ("roomName", tmpRoomName);
+				sfs.Send (new ExtensionRequest ("RemoveRoom", o));
+			}else if (cmd.Equals ("BecameHost")) {
+				becameHost ();
+			} else if (cmd.Equals ("LeftRoom")) {
+				onUserLeft (paramsa);
+			} else if (cmd.Equals ("LeaveRoom")) {
+				leaveRoomB ();
+			} else if (cmd.Equals ("ReqData")) {
+				sendRoomData (paramsa);
+			} else if (cmd.Equals ("ReqDataRes")) {
+				gotData (paramsa);
+			} else if (cmd.Equals ("SetHost")) {
+				becameHost ();
+			} else if (cmd.Equals ("CreateRoom") && paramsa.GetUtfString ("result").Equals ("success")) {
+				onCreate (tmpRoomName);
+			} else if (cmd.Equals ("RemoveRoom") && paramsa.GetUtfString ("result").Equals ("success")) {
+				leaveRoomB ();
+			}
 
-            if (cmd == "UserLogin")
-            {
-                if (result == "success")
-                {
-                    // login successful
-                    Debug.Log("Login successful!");
-                    PolybiusManager.loggedIn = true;
-                }
-                else
-                {
-                    Debug.LogError("Error with login: " + result);
-                    logout();
-                }
-            }
-            else if (cmd2 == "sendFeedback")
-            {
-                if (result == "success")
-                {
-                    PolybiusManager.sendNotification("Thank you!", "Your feedback is important to use and we work to improve Polybius with your help!");
-                }
-                else
-                {
-                    Debug.LogError("Error with feedback: " + result);
-                }
-            }
-            else if (cmd2 == "blockPlayer")
-            {
-                if (result == "success")
-                {
-                    Debug.Log("Block Success");
-                }
-                else
-                {
-                    Debug.LogError("Error with blocking: " + result);
-                }
-            }
-            else if (cmd2 == "reportPlayer")
-            {
-                if (result == "success")
-                {
-                    Debug.Log("Report Success");
-                }
-                else
-                {
-                    Debug.LogError("Error with reporting: " + result);
-                }
-            }
-            else if (cmd == "CreateUser")
-            {
-                if (result == "success")
-                {
-                    Debug.Log("Register successful!");
-                    // TODO: Get User ID and fill into PolybiusManager.player.userID
-                }
-                else
-                {
-                    Debug.LogError("Error with registration: " + result);
-                }
-            }
-            else if (cmd == "setPrivate")
-            {
-                if (result == "success")
-                {
-                    Debug.Log("Privacy set");
-                }
-                else
-                {
-                    Debug.LogError("Error with setting privacy: " + result);
-                }
-            }
-            else if (cmd == "Messages")
-            {
-                if (result == "success")
-                {
-                    SFSArray messages = (SFSArray)paramsa.GetSFSArray("messages");
-
-                    for (int i = 0; i < messages.Size(); i++)
-                    {
-                        SFSObject messageObj = (SFSObject)messages.GetSFSObject(i);
-                        Message m = new Message(messageObj.GetUtfString("sender"),
-                                                PolybiusManager.player.getUsername(),
-                                                System.DateTime.Now,
-                                                messageObj.GetUtfString("message"));
-                        PolybiusManager.player.addMessage(m);
-                    }
-                }
-                else
-                {
-                    Debug.LogError("Error with Message: " + cmd2 + ", Message: " + message + ", Result: " + result);
-                }
-            }
-            else if (cmd == "UserLogout")
-            {
-                if (result == "success")
-                {
-                    PolybiusManager.loggedIn = false;
-                    Debug.Log("Logout successful!");
-                }
-                else
-                {
-                    Debug.LogError("Error with Logout: " + result);
-                }
-            }
-            else if (cmd2 == "host")
-            {
-                if (result == "success")
-                {
-                    Debug.Log("Host success, switching to scene...");
-                    PolybiusManager.games.Add(PolybiusManager.currGame);
-                    if (PolybiusManager.currGame.gameType == Game.type.none)
-                    {
-                        Debug.Log("Tried to start game with type NONE");
-                    }
-                    else if (PolybiusManager.currGame.gameType == Game.type.pong)
-                    {
-                        UnityEngine.SceneManagement.SceneManager.LoadScene("Pong");
-                    }
-                    else if (PolybiusManager.currGame.gameType == Game.type.connect4)
-                    {
-                        //UnityEngine.SceneManagement.SceneManager.LoadScene("Connect4");
-                    }
-                    else if (PolybiusManager.currGame.gameType == Game.type.tictactoe)
-                    {
-                        //UnityEngine.SceneManagement.SceneManager.LoadScene("TicTacToe");
-                    }
-                    else
-                    {
-                        Debug.LogError("Gametype not found: " + PolybiusManager.currGame.gameType);
-                    }
-                }
-                else
-                {
-                    PolybiusManager.currGame = null;
-                    Debug.LogError("Error hosting game: " + result);
-                }
-            }
-            else if (cmd2 == "join")
-            {
-                if (result == "success")
-                {
-                    if (PolybiusManager.currGame.gameType == Game.type.none)
-                    {
-                        Debug.Log("Tried to start game with type NONE");
-                    }
-                    else if (PolybiusManager.currGame.gameType == Game.type.pong)
-                    {
-                        UnityEngine.SceneManagement.SceneManager.LoadScene("Pong");
-                    }
-                    else if (PolybiusManager.currGame.gameType == Game.type.connect4)
-                    {
-                        //UnityEngine.SceneManagement.SceneManager.LoadScene("Connect4");
-                    }
-                    else if (PolybiusManager.currGame.gameType == Game.type.tictactoe)
-                    {
-                        //UnityEngine.SceneManagement.SceneManager.LoadScene("TicTacToe");
-                    }
-                    else
-                    {
-                        Debug.LogError("Gametype not found: " + PolybiusManager.currGame.gameType);
-                    }
-                }
-                else
-                {
-                    Debug.LogError("Error joining game: " + result);
-                }
-            }
-            else if (cmd2 == "getFriends")
-            {
-                if (result == "success")
-                {
-                    SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("friends");
-                    PolybiusManager.player.friends.Clear();
-                    for (int i = 0; i < returnedList.Size(); i++)
-                    {
-                        SFSObject currentFriend = (SFSObject)returnedList.GetSFSObject(i);
-                        User friendObj = new User(currentFriend.GetUtfString("username"),
-                                                    null,
-                                                    null,
-                                                    null,
-                                                    currentFriend.GetInt("id"),
-                                                    0);
-                        if (!string.IsNullOrEmpty(friendObj.getUsername()))
-                            PolybiusManager.player.friends.Add(friendObj);
-                    }
-                    PolybiusManager.mutex = false;
-                }
-                else
-                {
-                    Debug.LogError("Error retrieving friend list: " + result);
-                }
-            }
-            else if (cmd2 == "getBlocked")
-            {
-                if (result == "success")
-                {
-                    SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("blocklist");
-                    PolybiusManager.player.blockedUsers.Clear();
-                    for (int i = 0; i < returnedList.Size(); i++)
-                    {
-                        SFSObject blocked = (SFSObject)returnedList.GetSFSObject(i);
-                        if (!string.IsNullOrEmpty(blocked.GetUtfString("username")))
-                            PolybiusManager.player.blockedUsers.Add(blocked.GetUtfString("username"));
-                    }
-                    PolybiusManager.mutex = false;
-                }
-                else
-                {
-                    Debug.LogError("Error retrieving block list: " + result);
-                }
-            }
-            else if (cmd2 == "addFriend")
-            {
-                if (result == "success")
-                {
-                    Debug.Log("Successfully added friend!");
-                }
-                else
-                {
-                    Debug.LogError("Error adding friend: " + result);
-                }
-            }
-            else if (cmd2 == "removeFriend")
-            {
-                if (result == "success")
-                {
-                    Debug.Log("Successfully removed friend!");
-                }
-                else
-                {
-                    Debug.LogError("Error removing friend: " + result);
-                }
-            }
-            else if (cmd2 == "getUsers")
-            {
-                SFSArray returnedList = (SFSArray)paramsa.GetSFSArray("users");
-                PolybiusManager.results.Clear();
-                for (int i = 0; i < returnedList.Size(); i++)
-                {
-                    SFSObject currentUser = (SFSObject)returnedList.GetSFSObject(i);
-                    PolybiusManager.results.Add(new User(currentUser.GetUtfString("username"),
-                                                            null,
-                                                            null,
-                                                            null,
-                                                            currentUser.GetInt("id"),
-                                                            currentUser.GetInt("private")));
-                }
-                PolybiusManager.mutex = false;
-            }
-            else if (cmd2 == "getRooms")
-            {
-                PolybiusManager.games.Clear();
-                SFSArray roomData = (SFSArray)paramsa.GetSFSArray("roomdata");
-                /*
-                for (int i = 0; i < roomData.Size(); i++) {
-                    SFSObject currentRoom = (SFSObject)roomData.GetSFSObject(i);
-                    Debug.Log(currentRoom.GetUtfString("roomname") + ", " + currentRoom.GetUtfString("gameType"));
-                    PolybiusManager.games.Add(new Game(currentRoom.GetUtfString("roomname"),
-                                                        Game.stringToGameType(currentRoom.GetUtfString("gameType")),
-                                                        null,
-                                                        (float) currentRoom.GetDouble("latcord"),
-                                                        (float) currentRoom.GetDouble("longcord")));
-                }
-                */
-
-                // Debug
-                for (int i = 0; i < (int)Random.Range(0f, 5f); i++)
-                {
-                    PolybiusManager.games.Add(new Game(i.ToString(),
-                                                        Game.type.pong,
-                                                        PolybiusManager.player,
-                                                        40.426733f,
-                                                        -86.916391f));
-                }
-                PolybiusManager.mutex = false;
-            }
-            else
-            {
-                Debug.LogError("cmd: " + cmd + ", result: " + result + ", message: " + message + "\ncmd2: " + cmd2);
-            }
+           
         }
 
         public SmartFox getConnection() {
             return sfs;
         }
 
-        public void hostQuery(string lobbyID, Game.type gameType) {
-            // TODO: Fix SmartFox server lobby
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "host");
-            o.PutUtfString("roomname", lobbyID);
-            sfs.Send(new ExtensionRequest("Lobby", o));
-        }
+		// ---------------
+		// Host
+		// ---------------
+		public void hostLobby(string roomName){
+			SFSObject o = new SFSObject ();
+			o.PutUtfString ("roomName", roomName);
+			sfs.Send (new ExtensionRequest ("CreateRoom",o));
+		}
 
-        public void joinQuery(string lobbyID) {
-            // query to join a lobby/room
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "join");
-            o.PutUtfString("roomname", lobbyID);
-            sfs.Send(new ExtensionRequest("Lobby", o));
+		void onCreate(string roomName){
+			SFSObject o = new SFSObject ();
+			o.PutUtfString ("roomName", roomName);
+			sfs.Send(new ExtensionRequest("SetHost", o));
+			isHost = true;
 
-            // TODO: Flask update currLobbyID
-        }
 
-        public void leaveQuery(string roomName) {
-            ISFSObject o = new SFSObject();
-            o.PutUtfString("cmd", "leave");
-            o.PutUtfString("roomname", roomName);
-            sfs.Send(new ExtensionRequest("Lobby", o));
+		}
 
-            // TODO: Flask update currLobbyID
-        }
+
+		//TODO things when this user becomes host
+		void becameHost(){
+			isHost = true;
+		}
+
+		// ---------------
+		// Join Room
+		// ---------------
+		public void joinRoom(string roomName){
+			tmpRoomName = roomName;
+			sfs.Send (new JoinRoomRequest (roomName));
+		}
+
+
+
+		void onJoin (BaseEvent e){
+			//get initial data
+			if (!isHost) {
+				SFSObject o = new SFSObject ();
+				o.PutUtfString ("roomName", tmpRoomName);
+				sfs.Send (new ExtensionRequest ("ReqData", o));
+			}
+
+		}
+
+
+		void gotData(SFSObject data){
+			//TODO what to do with the data
+		}
+
+		// ---------------
+		// Send data as host
+		// ---------------
+		void sendRoomData(SFSObject o){
+			//TODO edit as needed
+			SFSObject data = new SFSObject();
+
+
+			o.PutSFSObject ("data", data);
+			if (isHost) {
+
+				sfs.Send (new ExtensionRequest ("SendData", o));
+			}
+
+
+		}
+
+		// ---------------
+		// sync data
+		// ---------------
+		public void syncActions(){
+			SFSObject syncData = new SFSObject ();
+
+			sfs.Send (new ExtensionRequest ("Sync", syncData));
+
+
+		}
+
+		void onSync(SFSObject data){
+			//data was recieved
+		}
+
+		// ---------------
+		// leave room
+		// ---------------
+		public void leaveRoom(string roomName){
+
+			if (isHost) {
+				//change host before leaving
+				SFSObject o = new SFSObject();
+				o.PutUtfString ("roomName", roomName);
+				tmpRoomName = roomName;
+				sfs.Send (new ExtensionRequest ("ChangeHost", o));
+			} else {
+				leaveRoomB ();
+			}
+
+		}
+
+		void onHostChange(){
+			broadCastLeave ();
+		}
+
+		void broadCastLeave(){
+			SFSObject o = new SFSObject ();
+			o.PutUtfString ("roomName", tmpRoomName);
+			sfs.Send (new ExtensionRequest ("LeaveRoom", o));
+			leaveRoomB ();
+		}
+
+		void leaveRoomB(){
+			sfs.Send (new LeaveRoomRequest ());
+		}
+
+
+
+		void onLeaveRoom(BaseEvent e){
+			
+			tmpRoomName = "Lobby";
+			sfs.Send (new JoinRoomRequest ("Lobby"));
+		}
+
+		//other user left
+		void onUserLeft(SFSObject o){
+
+		}
+
+
 
         //exit handler
         void OnDisable() {
