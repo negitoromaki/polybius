@@ -59,10 +59,7 @@ namespace polybius {
         }
 
         // login user
-        class loginJson {
-            public string username;
-            public string password;
-        }
+     
 
         public void login() {
 			Debug.Log ("here");
@@ -70,22 +67,19 @@ namespace polybius {
                 if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
                     !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
 
-                    // Create JSON class
-                    loginJson l = new loginJson();
-                    l.username = PolybiusManager.player.getUsername();
+					string json = "{ \"username\": \"" + PolybiusManager.player.getUsername() + "\"}";	                    
+					User u = new User();	                    
+					JsonUtility.FromJsonOverwrite(postJson("GET", json, flaskIP + "/users"), u);
 
-                    // Call post method
-                    string json = JsonUtility.ToJson(l);
-                    JsonUtility.FromJsonOverwrite(postJson("GET", json, flaskIP + "/users"), l);
-                    if (l.password == PolybiusManager.player.getPassword()) {
-                        // TODO: Flask send login request
-                    }
-
-					//smartfox
-					SFSObject logdata = new SFSObject();
-					logdata.PutUtfString ("username", PolybiusManager.player.getUsername ());
-					logdata.PutUtfString ("password", PolybiusManager.player.getPassword ());
-					sfs.Send (new ExtensionRequest ("UserLogin", logdata));
+					if (u.getPassword() == PolybiusManager.player.getPassword()) {	
+						PolybiusManager.player = u;	
+						// Set isOnline to true	
+						json =   "{ \"userID\": \"" + PolybiusManager.player.getUserID() + "\", \"isOnline\": 1}";	
+						u = new User();	
+						JsonUtility.FromJsonOverwrite(postJson("PUT", json, flaskIP + "/users"), u);	
+						PolybiusManager.loggedIn = true;	
+					}
+                   
 
 
                 }
@@ -99,25 +93,54 @@ namespace polybius {
                     !string.IsNullOrEmpty(PolybiusManager.player.getUsername()) &&
                     !string.IsNullOrEmpty(PolybiusManager.player.getEmail())) {
 
-                    // TODO: Flask register query
+					string json = "{ \"username\":  \"" + PolybiusManager.player.getUsername()  + "\", " +	
+						"\"password\":  \"" + PolybiusManager.player.getPassword()  + "\", " +	
+						"\"email\":     \"" + PolybiusManager.player.getEmail()     + "\", " +	
+						"\"dob\": \"\", " + "\"privacy\": 0, " + "}";	
+					Debug.Log("Register: " + postJson("GET", json, flaskIP + "/users"));
                 }
             }
         }
 
         public void logout() {
             if (!PolybiusManager.loggedIn) {
-                // TODO: Flask logout query
+				string json = "{ \"userID\": \"" + PolybiusManager.player.getUserID() + "\", \"isOnline\": 0}";	
+				Debug.Log("Logout: " + postJson("PUT", json, flaskIP + "/users"));	
+				PolybiusManager.loggedIn = false;
             }
         }
-
+		public User getUser(string username){
+			User u = new User();
+			string json="{\"username\":\""+ username+"\"}";
+			JsonUtility.FromJsonOverwrite(postJson("GET", json, flaskIP + "/users"), u);
+			if (u.getUserID() != null) {
+				return u;
+			} else {
+				return null;
+			}
+				
+		}
         // get message
         public void getMessagesRequest(string senderUsername) {
             // TODO: Flask get messages query
+			User u;
+			string json;
+			if ((u=getUser(senderUsername)) != null) {
+				json = "{ \"senderID\": \"" + u.getUserID() + "\", \"receiverID\":\"" + PolybiusManager.player.getUserID() + " }";	
+			}
+
         }
 
         // send message
         public void sendMessageRequest(Message m) {
             // TODO: Flask send messages query
+			User u;
+			string json=null;
+			if ((u=getUser(m.receiver)) != null) {
+				json = "{ \"receiverID\": \"" + u.getUserID() + "\", \"senderID\":\"" + PolybiusManager.player.getUserID() + ",\"message\":\""+m.message+"\"}";	
+			}
+			Debug.Log("Send Message: " + postJson("POST", json, flaskIP + "/messages"));	
+
             PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
         }
 
@@ -127,21 +150,70 @@ namespace polybius {
 
         public void getLobbiesQuery() {
             // TODO: Flask get lobbies query
+			//string json = "{ \"gameType\": \"" + gameType + "\"}";	
+
+
         }
 
-        public void AddFriend(string username, int id) {
-            // TODO: Flask add friend query
-        }
+		public bool checkFriend(int friendid){
+			string json="{\"user1ID\":"+ PolybiusManager.player.getUserID()+",\"user2ID\":"+friendid+"}";
+			string js = postJson ("GET", json, flaskIP + "/friends");
+			if (js != null && js.Contains ("0")) {
+				return true;
+			} else {
+				return false;
+			}
 
+
+		}
+
+        public void AddFriend(string username, int friendid) {
+
+			if (!checkFriend (friendid)) {
+				return;
+			}
+			User u = new User();
+
+			string json="{\"user1ID\":"+ PolybiusManager.player.getUserID()+",\"user2ID\":"+friendid+"}";
+			Debug.Log("Add Friend: " + postJson("POST", json, flaskIP + "/friends"));	
+
+        }
+		public bool checkBlocked(int blockID){
+			string json="{\"user1ID\":"+ PolybiusManager.player.getUserID()+",\"user2ID\":"+blockID+"}";
+			string js = postJson ("GET", json, flaskIP + "/block");
+			if (js != null && js.Contains ("0")) {
+				return true;
+			} else {
+				return false;
+			}
+
+
+		}
         public void BlockPlayer(string username, int id) {
-            // TODO: Flask block player query
+			if (!checkBlocked (id)) {
+				return;
+			}
+			User u;
+			if ((u = getUser (username)) != null) {
+				string json = "{\"blocker\":" + PolybiusManager.player.getUserID() + ",\"blocked\":" + id + "}";
+				Debug.Log ("Blocked: " + postJson ("POST", json, flaskIP + "/block"));
+			}
 
         }
         public void ReportPlayer(string username, int id, string reason) {
-            // TODO: Flask report player query
+			User u;
+			if ((u = getUser (username)) != null) {
+				string json = "{\"userID\":" + u.getUserID()+"}";
+				Debug.Log ("Reported: " + postJson ("POST", json, flaskIP + "/report"));
+			}
         }
         public void RemoveFriend(string username, int id) {
             // TODO: Flask remove friend query
+			User u;
+			if ((u = getUser (username)) != null) {
+				// TODO: Add Removeable Friends
+
+			}
         }
 
         public void host(string rname, Game.type gameType) {
@@ -158,6 +230,9 @@ namespace polybius {
 
         public void setPrivacy(int userID, int privacy) {
             // TODO: Flask set privacy query
+			string json = "{\"userID\":" + userID+", \"privacy\":"+privacy+"}";
+			Debug.Log ("Privacy: " + postJson ("PUT", json, flaskIP + "/users"));
+
         }
 
         public void searchUsers(string search) {
@@ -166,6 +241,8 @@ namespace polybius {
 
         public void getUsersQuery() {
             // TODO: Flask get users query
+			string json = "{ \"userID\": \"" + PolybiusManager.player.getUserID() + "\"}";
+			postJson ("GET", json, flaskIP + "/users");
         }
 
         public void reportUserQuery(string u) {
