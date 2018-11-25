@@ -113,7 +113,7 @@ def requires_auth(f):
     return decorated
 
 # Routes
-@app.route('/users', methods = ['GET', 'POST', 'PUT', 'DELETE'])
+@app.route('/users/<user_id>', methods = ['GET', 'POST', 'PUT', 'DELETE'])
 #@requires_auth
 def api_users():
 	db = sqlite3.connect('polybius.db')
@@ -124,10 +124,10 @@ def api_users():
 	if request.method == 'GET':
 
 		# Get vars
-		userID 		= json.get('userID')
-		username 	= json.get('username')
-		search 		= json.get('search')
-		lobby		= json.get('lobby')
+		userID 		= request.args.get('userID')
+		username 	= request.args.get('username')
+		search 		= request.args.get('search')
+		lobby		= request.args.get('lobby')
 
 		# Search by id
 		if userID:
@@ -185,14 +185,15 @@ def api_users():
 	elif request.method == "PUT":
 
 		# Get vars
-		userID 		= json.get('userID')
-		username 	= json.get('username')
-		password 	= json.get('password')
-		email 		= json.get('email')
-		dob			= json.get('dob')
-		isOnline	= json.get('isOnline')
-		privacy 	= json.get('privacy')
-		currLobbyID 	= json.get('currLobbyID')
+		if json:
+			userID 			= json.get('userID')
+			username 		= json.get('username')
+			password 		= json.get('password')
+			email 			= json.get('email')
+			dob				= json.get('dob')
+			isOnline		= json.get('isOnline')
+			privacy 		= json.get('privacy')
+			currLobbyID 	= json.get('currLobbyID')
 
 		# ID is required to update user
 		if userID:
@@ -272,10 +273,10 @@ def api_users():
 			resp = jsonify(dict(success=False, message = "userID not specified"))
 
 	# Delete user
-	elif request.method == "DELETE":
+	elif request.method == 'DELETE':
 
 		# Get vars
-		userID = json.get('userID')
+		userID = user_id
 
 		if userID:
 			c.execute('DELETE FROM users WHERE userID = ?', (userID,))
@@ -303,8 +304,8 @@ def api_count():
 	if request.method == "GET":
 
 		# Get vars
-		receiverID  = json.get('receiverID')
-		senderID = json.get('senderID')
+		receiverID  = request.args.get('receiverID')
+		senderID 	= request.args.get('senderID')
 
 		if receiverID and senderID:
 			c.execute('SELECT * FROM messages WHERE receiverID = ? AND senderID = ?', (receiverID, senderID))
@@ -317,7 +318,7 @@ def api_count():
 			c.execute('DELETE FROM messages WHERE receiverID = ? AND senderID = ?', (receiverID, senderID))
 			db.commit()
 		else:
-			resp = jsonify(dict(success=False, message = "receiverID not specified"))
+			resp = jsonify(dict(success=False, message = "receiverID/senderID not specified"))
 
 	# Add messages
 	elif request.method == "POST":
@@ -345,7 +346,7 @@ def api_count():
 	db.close()
 	return resp
 
-@app.route('/lobbies', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@app.route('/lobbies/<lobby_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 #@requires_auth
 def api_lobbies():
 	db = sqlite3.connect('polybius.db')
@@ -356,7 +357,7 @@ def api_lobbies():
 	if request.method == 'GET':
 
 		# Get vars
-		gameType = json.get('gameType')
+		gameType = request.args.get('gameType')
 
 		if gameType:
 			c.execute('SELECT * FROM lobbies WHERE gameType = ?', (gameType,))
@@ -394,7 +395,7 @@ def api_lobbies():
 	elif request.method == 'DELETE':
 
 		# Get vars
-		lobbyID = json.get('lobbyID')
+		lobbyID = lobby_id
 
 		# Error checking
 		if lobbyID:
@@ -426,7 +427,7 @@ def api_report():
 	if request.method == 'GET':
 
 		# Get vars
-		userID = json.get('userID')
+		userID = request.args.get('userID')
 
 		if userID:
 			c.execute('SELECT reports FROM users WHERE userID = ?', (userID,))
@@ -434,7 +435,6 @@ def api_report():
 			resp = jsonify(dict(reports=numReports))
 		else:
 			resp = jsonify(dict(success=False, message="userID not specified"))
-
 
 	# Add messages
 	elif request.method == 'POST':
@@ -473,8 +473,8 @@ def api_block():
 	if request.method == 'GET':
 
 		# Get vars
-		blockerID = json.get('blockerID')
-		blockedID = json.get('blockedID')
+		blockerID = request.args.get('blockerID')
+		blockedID = request.args.get('blockedID')
 
 		if blockerID and blockedID:
 			c.execute('SELECT COUNT(*) FROM blocked WHERE blockerID = ? AND blockedID = ?', (blockerID, blockedID))
@@ -513,7 +513,7 @@ def api_stats():
 	if request.method == 'GET':
 
 		# Get vars
-		userID = json.get('userID')
+		userID = request.args.get('userID')
 
 		if userID:
 			c.execute('SELECT * FROM stats WHERE userID = ?', (userID,))
@@ -560,8 +560,8 @@ def api_friends():
 	if request.method == 'GET':
 
 		# Get vars
-		user1ID = json.get('user1ID')
-		user2ID = json.get('user2ID')
+		user1ID = request.args.get('user1ID')
+		user2ID = request.args.get('user2ID')
 
 		if user1ID and user2ID:
 			c.execute('SELECT COUNT(*) FROM friends WHERE user1ID = ? AND user2ID = ?', (user1ID, user2ID,))
@@ -592,4 +592,4 @@ def api_friends():
 
 # Run server
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", port="5000")

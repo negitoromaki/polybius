@@ -21,48 +21,53 @@ namespace polybius {
 
         private string flaskIP = "http://128.211.240.229:5000";
 
-        private string postJson(string method, string jsonStr, string url) {
+        public string postJson(string method, WWWForm json, string url) {
             UnityWebRequest request;
-            byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
-            request = UnityWebRequest.Put(url, bytes);
+            //byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
 
             switch (method) {
-                case "POST":
-                case "PATCH":
-                case "PUT":
-                    request.SetRequestHeader("X-HTTP-Method-Override", method);
-                    break;
-
                 case "GET":
                     request = UnityWebRequest.Get(url);
                     break;
 
+                case "POST":
+                    request = UnityWebRequest.Post(url, json);
+                    request.SetRequestHeader("accept", "application/json; charset=UTF-8");
+                    request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
+                    break;
+
+                case "PATCH":
+                    // I don't think we ever use patch
+
+                case "PUT":
+                    request = UnityWebRequest.Put(url, json.data);
+                    request.SetRequestHeader("accept", "application/json; charset=UTF-8");
+                    request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
+                    break;
+
                 case "DELETE":
                     request = UnityWebRequest.Delete(url);
+                    request.SetRequestHeader("accept", "application/json; charset=UTF-8");
+                    request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
                     break;
 
                 default:
-                    Debug.LogError("Invalid HTTP Method");
-                    return "";
+                    Debug.LogError("Invalid HTTP Method: " + method);
+                    return "{\"message\": \"Invalid HTTP Method\",\"success\": false}";
             }
 
-            request.SetRequestHeader("accept", "application/json; charset=UTF-8");
-            request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
             request.SendWebRequest();
 
             if (request.isNetworkError || request.isHttpError) {
                 Debug.Log(request.error);
-                return "";
+                return "{\"message\": \"Network/HTTP Error\",\"success\": false}";
             } else {
                 return request.downloadHandler.text;
             }
         }
 
         // login user
-     
-
         public void login() {
-			Debug.Log ("here");
             if (!PolybiusManager.loggedIn) {
                 if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
                     !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
@@ -79,9 +84,6 @@ namespace polybius {
 						JsonUtility.FromJsonOverwrite(postJson("PUT", json, flaskIP + "/users"), u);	
 						PolybiusManager.loggedIn = true;	
 					}
-                   
-
-
                 }
             }
         }
@@ -109,11 +111,12 @@ namespace polybius {
 				PolybiusManager.loggedIn = false;
             }
         }
+
 		public User getUser(string username){
 			User u = new User();
 			string json="{\"username\":\""+ username+"\"}";
 			JsonUtility.FromJsonOverwrite(postJson("GET", json, flaskIP + "/users"), u);
-			if (u.getUserID() != null) {
+			if (!string.IsNullOrEmpty(u.getUsername())) {
 				return u;
 			} else {
 				return null;
