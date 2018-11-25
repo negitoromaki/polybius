@@ -12,9 +12,10 @@ namespace polybius {
 
         private TMP_InputField searchBarText;
         private string currSearch;
-        private static bool runOnce = false;
+        private List<User> results;
 
         private void OnEnable() {
+            // Checking
             Debug.Assert(searchBar != null &&
                             parent != null &&
                             ProfilePanel != null &&
@@ -23,45 +24,47 @@ namespace polybius {
                             SearchButton != null);
             searchBarText = searchBar.GetComponent<TMP_InputField>();
             Debug.Assert(searchBarText != null);
+
+            // Clear results
             foreach (Transform child in parent.transform)
                 GameObject.Destroy(child.gameObject);
             searchBarText.text = currSearch = "";
-            PolybiusManager.dm.getBlockQuery();
         }
 
         // Update is called once per frame
         void Update() {
             if (searchBarText.text != currSearch) {
+                // Clear results
                 currSearch = searchBarText.text;
                 foreach (Transform child in parent.transform)
                     GameObject.Destroy(child.gameObject);
 
-                PolybiusManager.mutex = true;
-                runOnce = true;
-                PolybiusManager.dm.getUsersQuery();
-            }
-
-            if (!PolybiusManager.mutex && runOnce) {
-                runOnce = false;
+                // Checking
                 Debug.Assert(MainMenuPanel != null &&
                                 ProfilePanel != null &&
                                 parent != null);
 
+                results = PolybiusManager.dm.searchUsers(currSearch);
+
+                // Display results
                 GameObject result;
-                for (int i = 0; i < PolybiusManager.results.Count; i++) {
-					if (PolybiusManager.results[i].getUsername() != null &&
-                        PolybiusManager.results[i].getUsername().ToLower().Contains(currSearch.ToLower()) &&
-                        PolybiusManager.player.getUsername() != PolybiusManager.results[i].getUsername() &&
-                        !PolybiusManager.player.blockedUsers.Contains(PolybiusManager.results[i].getUsername())) {
+                for (int i = 0; i < results.Count; i++) {
+					if (results[i].getUsername() != null &&
+                        results[i].getUsername().ToLower().Contains(currSearch.ToLower()) &&
+                        PolybiusManager.player.getUsername() != results[i].getUsername() &&
+                        !PolybiusManager.player.blockedUsers.Contains(results[i].getUsername())) {
+
                         result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UserButton"), parent.transform);
-                        result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.results[i].getUsername();
+                        result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = results[i].getUsername();
+
+                        // Ensure buttons work when clicked
                         int temp = i;
                         result.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));
                         result.transform.Find("AddFriend").GetComponent<Button>().onClick.AddListener(() => toggleFriendStatus(temp));
-                        if (PolybiusManager.player.friends.Contains(PolybiusManager.results[i]))
+                        if (PolybiusManager.player.friends.Contains(results[i]))
                             result.transform.Find("AddFriend").GetComponent<FriendButton>().toggleFriendIcon();
                     } else {
-                        Debug.Log("User " + PolybiusManager.results[i].getUsername() + " does not match search");
+                        Debug.Log("User " + results[i].getUsername() + " does not match search");
                     }
                 }
             }
@@ -70,17 +73,17 @@ namespace polybius {
         public void openUserProfile(int i) {
             ButtonPanel.GetComponent<ButtonPanel>().PressButton(ProfileButton);
             ProfilePanel p = ProfilePanel.GetComponent<ProfilePanel>();
-            p.changeUser(PolybiusManager.results[i]);
+            p.changeUser(results[i]);
             p.prevButton = SearchButton;
             p.prevPanel = this.gameObject;
             MainMenuPanel.GetComponent<UIPanelSwitcher>().ChangeMenu(ProfilePanel);
         }
 
         public void toggleFriendStatus(int i) {
-            if (PolybiusManager.player.friends.Contains(PolybiusManager.results[i])) {
-				PolybiusManager.dm.RemoveFriend(PolybiusManager.player.getUsername(),PolybiusManager.results[i].getUserID());
+            if (PolybiusManager.player.friends.Contains(results[i])) {
+				PolybiusManager.dm.RemoveFriend(PolybiusManager.player.getUsername(),results[i].getUserID());
             } else {
-				PolybiusManager.dm.AddFriend(PolybiusManager.player.getUsername(),PolybiusManager.results[i].getUserID());
+				PolybiusManager.dm.AddFriend(PolybiusManager.player.getUsername(),results[i].getUserID());
             }
             PolybiusManager.dm.getFriendsQuery();
         }

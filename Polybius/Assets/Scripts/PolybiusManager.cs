@@ -11,9 +11,7 @@ namespace polybius {
         public static User player = new User();
         public static bool loggedIn = false;
         public static DatabaseManager dm = null;
-        public static bool mutex = false;
-        public static List<User> results = new List<User>();
-        public static List<Game> games = new List<Game>();
+        
         public static Game currGame;
         public static float currLat, currLong;
 
@@ -45,34 +43,21 @@ namespace polybius {
         // Enum
         public enum type { pong, connect4, tictactoe, none }
 
-        // Fields
-        public float coordLong, coordLat;
-        public User host, player;
-        public type gameType;
-        public List<User> spectators = new List<User>();
-        public string roomName;
+        // Database Fields
+        public int lobbyID;
+        public float latCoord, longCoord;
+        public string gameType, name;
 
-        public Game(string roomName, type gameType, User host, float coordLat, float coordLong) {
-            this.roomName = roomName;
-            this.coordLong = coordLong;
-            this.coordLat = coordLat;
+        // Client-side fields (Must populate)
+        public User host, player;
+        public List<User> spectators = new List<User>();
+
+        public Game(string roomName, string gameType, User host, float coordLat, float coordLong) {
+            this.name = roomName;
+            this.longCoord = coordLong;
+            this.latCoord = coordLat;
             this.host = host;
             this.gameType = gameType;
-        }
-
-        public static type stringToGameType(string s) {
-            if (s == "none") {
-                return type.none;
-            } else if (s == "pong" || s == "Pong") {
-                return type.pong;
-            } else if (s == "connect4") {
-                return type.connect4;
-            } else if (s == "tictactoe") {
-                return type.tictactoe;
-            } else {
-                Debug.LogError("Gametype not found: " + s);
-                return type.none;
-            }
         }
     }
 
@@ -146,19 +131,6 @@ namespace polybius {
 
         public int getPrivacy() {
             return privacy;
-        }
-
-        // Get Messages from a user
-        public List<Message> getMessagesForUser(string otherUsername) {
-            PolybiusManager.dm.getMessagesRequest(otherUsername);
-            List<Message> messagesfromUser = new List<Message>();
-            for (int i = 0; i < messages.Count; i++) {
-                if (messages[i].sender == otherUsername) {
-                    messagesfromUser.Add(messages[i]);
-                    messages.RemoveAt(i);
-                }
-            }
-            return messagesfromUser;
         }
 
         public status getStatus() {

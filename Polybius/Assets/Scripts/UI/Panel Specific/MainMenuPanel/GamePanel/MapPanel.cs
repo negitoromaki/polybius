@@ -20,7 +20,7 @@ namespace polybius {
         private List<GameObject> _spawnedObjects;
 
         void OnEnable() {
-            locationString = (PolybiusManager.currGame.coordLat + "," + PolybiusManager.currGame.coordLong);
+            locationString = (PolybiusManager.currGame.latCoord + "," + PolybiusManager.currGame.longCoord);
             Debug.Log("Set location to: " + locationString);
 
             Debug.Assert(   !string.IsNullOrEmpty(locationString) &&

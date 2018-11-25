@@ -9,7 +9,7 @@ namespace polybius {
 
         private LobbyPanel lobbyPanelScript;
         private UIPanelSwitcher switcher;
-        public Game.type currGameType = Game.type.none;
+        public string currGameType = "none";
 
         void Start() {
             Debug.Assert(gameTypePanel != null && LobbyPanel != null);
@@ -20,7 +20,7 @@ namespace polybius {
 
         void Update() {
             // Menu switching
-            if (currGameType == Game.type.none) {
+            if (currGameType == "none") {
                 if (!gameTypePanel.activeSelf) {
                     switcher.ChangeMenu(gameTypePanel);
                     Debug.Log("Changing to gameTypePanel");
@@ -35,7 +35,7 @@ namespace polybius {
 
         // for UI buttons
         public void setGameType(string s) {
-            currGameType = Game.stringToGameType(s);
+            currGameType = s;
         }
     }
 }

@@ -96,7 +96,7 @@ namespace polybius {
         }
 
         public void reportUser() {
-            PolybiusManager.dm.reportUserQuery(currentUser.getUsername());
+            PolybiusManager.dm.reportUser(currentUser.getUsername());
         }
     }
 }

@@ -20,7 +20,6 @@ namespace polybius {
         // ------------
 
         private string flaskIP = "http://128.211.240.229:5000";
-
         public string postJson(string method, WWWForm json, string url) {
             UnityWebRequest request;
 
@@ -75,7 +74,7 @@ namespace polybius {
 					if (u.getPassword() == PolybiusManager.player.getPassword()) {
                         // Login successful, set player as returned user
                         PolybiusManager.player = u;	
-						
+
                         // Set isOnline to true
                         WWWForm form = new WWWForm();
                         form.AddField("userID", PolybiusManager.player.getUserID());
@@ -114,7 +113,7 @@ namespace polybius {
                 WWWForm form = new WWWForm();
                 form.AddField("userID", PolybiusManager.player.getUserID());
                 form.AddField("isOnline", 0);
-                
+
 				Debug.Log("Logout: " + postJson("PUT", form, flaskIP + "/users"));	
 				PolybiusManager.loggedIn = false;
             }
@@ -129,21 +128,9 @@ namespace polybius {
 				return u;
 			} else {
 				return null;
-			}	
+			}
 		}
 
-        // get message
-        public void getMessagesRequest(string senderUsername) {
-            // TODO: Flask get messages query
-			User u;
-			string json;
-			if ((u=getUser(senderUsername)) != null) {
-				json = "{ \"senderID\": \"" + u.getUserID() + "\", \"receiverID\":\"" + PolybiusManager.player.getUserID() + " }";	
-			}
-
-        }
-
-        // send message
         public void sendMessageRequest(Message m) {
             // TODO: Flask send messages query
 			User u = getUser(m.receiver);
@@ -163,13 +150,6 @@ namespace polybius {
 
         public void sendFeedBack(string feedback, string subject) {
             // TODO: Flask send feedback query
-        }
-
-        public void getLobbiesQuery() {
-            // TODO: Flask get lobbies query
-			//string json = "{ \"gameType\": \"" + gameType + "\"}";	
-
-
         }
 
 		public bool checkFriend(int friendID){
@@ -217,7 +197,7 @@ namespace polybius {
             }
         }
 
-        public void ReportPlayer(string username, int id, string reason) {
+        public void reportUser(string username) {
 			User u = getUser(username);
             if (u != null) {
                 // JSON
@@ -231,17 +211,20 @@ namespace polybius {
         }
 
         public void RemoveFriend(string username, int id) {
-            // TODO: Flask remove friend query
 			User u = getUser(username);
 			if (u != null) {
-                // TODO: Add Removeable Friends
-                Debug.Log("Removed Friend: " + postJson("DELETE", null, flaskIP + "/report/" + u.getUserID()));
+                // JSON
+                WWWForm form = new WWWForm();
+                form.AddField("user1ID", PolybiusManager.player.getUserID());
+                form.AddField("user2ID", u.getUserID());
+
+                Debug.Log("Removed Friend: " + postJson("PUT", form, flaskIP + "/friend"));
             } else {
                 Debug.LogError("Could not remove friend, user null");
             }
         }
 
-        public void host(string rname, Game.type gameType) {
+        public void host(string rname, string gameType) {
             // TODO: Flask create lobby query
             PolybiusManager.currGame = new Game(rname, gameType, PolybiusManager.player, PolybiusManager.currLat, PolybiusManager.currLong);
         }
@@ -249,29 +232,95 @@ namespace polybius {
         public void getFriendsQuery() {
             // TODO: Flask get friends query
         }
+
         public void getBlockQuery() {
             // TODO: Flask block user query
         }
 
         public void setPrivacy(int userID, int privacy) {
-            // TODO: Flask set privacy query
-			string json = "{\"userID\":" + userID+", \"privacy\":"+privacy+"}";
-			Debug.Log ("Privacy: " + postJson ("PUT", json, flaskIP + "/users"));
+            // JSON
+            WWWForm form = new WWWForm();
+            form.AddField("userID", userID);
+            form.AddField("privacy", privacy);
+        
+			Debug.Log ("Privacy: " + postJson ("PUT", form, flaskIP + "/users"));
+        }
+        
+        // JSON Responses with arrays
 
+        // Helper JSON Wrapper
+        private class Wrapper<T> {
+            public T[] items;
         }
 
-        public void searchUsers(string search) {
-            // TODO: Flask search users query
+        public List<User> searchUsers(string search) {
+            string url = flaskIP + "/users?search=" + search;
+            string resp = postJson("GET", null, url);
+
+            Wrapper<User> wrapper = JsonUtility.FromJson<Wrapper<User>>(resp);
+
+            List<User> results = new List<User>();
+            for (int i = 0; i < wrapper.items.Length; i++)
+                results.Add(wrapper.items[i]);
+            return results;
         }
 
-        public void getUsersQuery() {
-            // TODO: Flask get users query
-			string json = "{ \"userID\": \"" + PolybiusManager.player.getUserID() + "\"}";
-			postJson ("GET", json, flaskIP + "/users");
+        public List<User> getAllUsers() {
+            string url = flaskIP + "/users";
+            string resp = postJson("GET", null, url);
+
+            Wrapper<User> wrapper = JsonUtility.FromJson<Wrapper<User>>(resp);
+
+            List<User> results = new List<User>();
+            for (int i = 0; i < wrapper.items.Length; i++)
+                results.Add(wrapper.items[i]);
+            return results;
         }
 
-        public void reportUserQuery(string u) {
-            // TODO: Flask report users query
+        public List<User> getFriends(int userID) {
+            string url = flaskIP + "/friends?user1ID=" + userID.ToString();
+            string resp = postJson("GET", null, url);
+
+            Wrapper<User> wrapper = JsonUtility.FromJson<Wrapper<User>>(resp);
+
+            List<User> results = new List<User>();
+            for (int i = 0; i < wrapper.items.Length; i++)
+                results.Add(wrapper.items[i]);
+            return results;
+        }
+
+        public List<Message> getMessages(string senderUsername) {
+            User u = getUser(senderUsername);
+            List<Message> results = new List<Message>();
+
+            if (u != null) {
+                string url =    flaskIP + "/messages?user1ID=" + PolybiusManager.player.getUserID().ToString() +
+                                "&user2ID=" + u.getUserID().ToString();
+                string resp = postJson("GET", null, url);
+
+                Wrapper<Message> wrapper = JsonUtility.FromJson<Wrapper<Message>>(resp);
+
+                for (int i = 0; i < wrapper.items.Length; i++)
+                    results.Add(wrapper.items[i]);
+            } else {
+                Debug.LogError("Could not get messages, other user is null");
+            }
+
+            return results;
+        }
+
+        public List<Game> getLobbies(Game.type gameType) {
+            List<Game> lobbies = new List<Game>();
+
+            string url = flaskIP + "/lobbies?gameType=" + gameType.ToString();
+            string resp = postJson("GET", null, url);
+
+            Wrapper<Game> wrapper = JsonUtility.FromJson<Wrapper<Game>>(resp);
+
+            for (int i = 0; i < wrapper.items.Length; i++)
+                lobbies.Add(wrapper.items[i]);
+
+            return lobbies;
         }
 
         // ---------------

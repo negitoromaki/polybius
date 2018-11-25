@@ -12,17 +12,24 @@ namespace polybius {
         }
 
         public void addBob() {
-            string json = "{ \"username\":  \"bob\", " +
-                        "\"password\":  \"asdfasdf\", " +
-                        "\"email\":     \"asdf@asdf.com\", " +
-                        "\"dob\": \"\", " + "\"privacy\": 0, " + "}";
-            Debug.Log("Register: " + PolybiusManager.dm.postJson("GET", json, flaskIP + "/users"));
+            // JSON
+            WWWForm form = new WWWForm();
+            form.AddField("username", "bob");
+            form.AddField("password", "asdfasdf");
+            form.AddField("email", "asdf@asdf.com");
+            form.AddField("dob", "");
+            form.AddField("privacy", 0);
+
+            Debug.Log("Register: " + PolybiusManager.dm.postJson("GET", form, flaskIP + "/users"));
         }
 
         public void loginBob() {
-            string json = "{ \"username\": \"bob\"}";
+            // JSON
+            WWWForm form = new WWWForm();
+            form.AddField("username", "bob");
+
             User u = new User();
-            JsonUtility.FromJsonOverwrite(PolybiusManager.dm.postJson("GET", json, flaskIP + "/users"), u);
+            JsonUtility.FromJsonOverwrite(PolybiusManager.dm.postJson("GET", form, flaskIP + "/users"), u);
             Debug.Log(
                 "Username: " + u.getUsername() + "\n" +
                 "Password: " + u.getPassword()

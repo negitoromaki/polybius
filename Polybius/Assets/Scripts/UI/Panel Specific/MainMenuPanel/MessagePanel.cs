@@ -17,12 +17,12 @@ namespace polybius {
         public void OnEnable() {
             Debug.Assert(otherUser != null && scrollRect != null && title != null && messageParent != null);
             title.GetComponent<TextMeshProUGUI>().text = otherUser.getUsername();
-            messages = PolybiusManager.player.getMessagesForUser(otherUser.getUsername());
+            messages = PolybiusManager.dm.getMessages(otherUser.getUsername());
         }
 
         public void Update() {
             if (Time.frameCount % 30 == 0)
-                messages = PolybiusManager.player.getMessagesForUser(otherUser.getUsername());
+                messages = PolybiusManager.dm.getMessages(otherUser.getUsername());
             if (messages.Count > 0)
                 displayMessages();
         }

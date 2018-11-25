@@ -9,42 +9,36 @@ namespace polybius {
 
         public GameObject MainMenuPanel, ProfilePanel, MessagePanel, ButtonPanel, parent;
         public GameObject ProfileButton, FriendButton;
-        private bool runOnce = false;
 
         void OnEnable() {
             foreach (Transform child in parent.transform)
                 GameObject.Destroy(child.gameObject);
 
-            PolybiusManager.mutex = true;
-            runOnce = true;
-            PolybiusManager.dm.getBlockQuery();
-            PolybiusManager.dm.getFriendsQuery();
-        }
+            // Update friends
+            PolybiusManager.player.friends = PolybiusManager.dm.getFriends(PolybiusManager.player.getUserID());
+            Debug.Log("Number of friends: " + PolybiusManager.player.friends.Count);
 
-        private void Update() {
-            if (!PolybiusManager.mutex && runOnce) {
-                Debug.Log("Number of friends: " + PolybiusManager.player.friends.Count);
-                runOnce = false;
-                Debug.Assert(MainMenuPanel != null &&
-                                ProfilePanel != null &&
-                                MessagePanel != null &&
-                                ButtonPanel != null &&
-                                ProfileButton != null &&
-                                FriendButton != null &&
-                                parent != null);
+            // Checking
+            Debug.Assert(MainMenuPanel != null &&
+                            ProfilePanel != null &&
+                            MessagePanel != null &&
+                            ButtonPanel != null &&
+                            ProfileButton != null &&
+                            FriendButton != null &&
+                            parent != null);
 
-                GameObject friend;
-                for (int i = 0; i < PolybiusManager.player.friends.Count; i++) {
-                    if (!PolybiusManager.player.blockedUsers.Contains(PolybiusManager.player.friends[i].getUsername())) {
-                        friend = Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
-                        friend.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.player.friends[i].getUsername();
-                        int temp = i;
-                        friend.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));
-                        friend.transform.Find("ChatButton").GetComponent<Button>().onClick.AddListener(() => openMessage(temp));
-                    }    
+            // Display friends
+            GameObject friend;
+            for (int i = 0; i < PolybiusManager.player.friends.Count; i++) {
+                if (!PolybiusManager.player.blockedUsers.Contains(PolybiusManager.player.friends[i].getUsername())) {
+                    friend = Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
+                    friend.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.player.friends[i].getUsername();
+                    int temp = i;
+                    friend.transform.Find("FriendProfile").GetComponent<Button>().onClick.AddListener(() => openUserProfile(temp));
+                    friend.transform.Find("ChatButton").GetComponent<Button>().onClick.AddListener(() => openMessage(temp));
                 }
             }
-       }
+        }
 
         public void openUserProfile(int i) {
             ButtonPanel.GetComponent<ButtonPanel>().PressButton(ProfileButton);

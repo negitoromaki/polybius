@@ -113,9 +113,10 @@ def requires_auth(f):
     return decorated
 
 # Routes
+@app.route('/users', methods = ['GET', 'POST', 'PUT', 'DELETE'])
 @app.route('/users/<user_id>', methods = ['GET', 'POST', 'PUT', 'DELETE'])
 #@requires_auth
-def api_users():
+def api_users(user_id):
 	db = sqlite3.connect('polybius.db')
 	c = db.cursor()
 	json = request.get_json()
@@ -346,14 +347,15 @@ def api_count():
 	db.close()
 	return resp
 
+@app.route('/lobbies', methods=['GET', 'POST', 'PUT', 'DELETE'])
 @app.route('/lobbies/<lobby_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 #@requires_auth
-def api_lobbies():
+def api_lobbies(lobby_id):
 	db = sqlite3.connect('polybius.db')
 	c = db.cursor()
 	json = request.get_json()
 
-	# Get messages
+	# Get lobbies
 	if request.method == 'GET':
 
 		# Get vars
@@ -369,7 +371,7 @@ def api_lobbies():
 		else:
 			resp = jsonify(dict(success=False, message="gameType not specified"))
 
-	# Add messages
+	# Add lobby
 	elif request.method == 'POST':
 
 		# Get vars
@@ -392,6 +394,7 @@ def api_lobbies():
 			resp = jsonify(
 			    dict(success=False, message="name/gameType/latCoord/longCoord not specified"))
 
+	# Delete lobby
 	elif request.method == 'DELETE':
 
 		# Get vars
@@ -409,7 +412,6 @@ def api_lobbies():
 		else:
 			resp = jsonify(
 			    dict(success=False, message="lobbyID not specified"))
-
 
 	# Close db connection and return data
 	c.close()
@@ -496,14 +498,14 @@ def api_block():
 			resp = jsonify(dict(success=True, message="User successfully blocked"))
 		else:
 			resp = jsonify(dict(success=False, message="blockerID/blockedID not specified"))
-			
+
 	# Remove blocking relationship
-	elif request.method = 'PUT':
-		
+	elif request.method == 'PUT':
+
 		# Get vars
 		blockerID = json.get('blockerID')
 		blockedID = json.get('blockedID')
-		
+
 		if blockerID and blockedID:
 			c.execute('DELETE FROM blocked WHERE blockerID = ? AND blockedID = ?', (blockerID, blockedID,))
 			db.commit()
@@ -577,11 +579,29 @@ def api_friends():
 		user1ID = request.args.get('user1ID')
 		user2ID = request.args.get('user2ID')
 
-		if user1ID and user2ID:
-			c.execute('SELECT COUNT(*) FROM friends WHERE user1ID = ? AND user2ID = ?', (user1ID, user2ID,))
-			resp = jsonify(dict(result=(c.fetchone())))
+		if user1ID:
+			# Check if 2 userIDs, return friend status
+			if user2ID:
+				# Eliminate double entries
+				if (user2ID < user1ID):
+					temp = user2ID
+					user2ID = user1ID
+					user1ID = temp
+
+				c.execute('SELECT COUNT(*) FROM friends WHERE user1ID = ? AND user2ID = ?', (user1ID, user2ID))
+				resp = jsonify(dict(result=(c.fetchone())))
+
+			# Only 1 userID, return all friends
+			else:
+				c.execute('SELECT * from friends WHERE user1ID = ? OR user2ID = ?', (user1ID, user1ID));
+
+				# Get column names and desc and turn into json
+				columns = c.description
+				resp = jsonify([{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
+
+		# No user1ID
 		else:
-			resp = jsonify(dict(success=False, message="user1ID/user2ID not specified"))
+			resp = jsonify(dict(success=False, message="user1ID not specified"))
 
 	# Add friends
 	elif request.method == 'POST':
@@ -590,20 +610,32 @@ def api_friends():
 		user1ID = json.get('user1ID')
 		user2ID = json.get('user2ID')
 
+		# Eliminate double entries
+		if (user2ID < user1ID):
+			temp = user2ID
+			user2ID = user1ID
+			user1ID = temp
+
 		if user1ID and user2ID:
 			c.execute('INSERT or IGNORE INTO friends (user1ID, user2ID) VALUES (?, ?)', (user1ID, user2ID,))
 			db.commit()
 			resp = jsonify(dict(success=True, message="Friend successfully added"))
 		else:
 			resp = jsonify(dict(success=False, message="user1ID/user2ID not specified"))
-			
+
 	# Remove friends
-	elif request.method = 'PUT':
-		
+	elif request.method == 'PUT':
+
 		# Get vars
 		user1ID = json.get('user1ID')
 		user2ID = json.get('user2ID')
-		
+
+		# Eliminate double entries
+		if (user2ID < user1ID):
+			temp = user2ID
+			user2ID = user1ID
+			user1ID = temp
+
 		if user1ID and user2ID:
 			c.execute('DELETE FROM friends WHERE user1ID = ? AND user2ID = ?', (user1ID, user2ID,))
 			db.commit()
