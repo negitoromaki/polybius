@@ -53,7 +53,7 @@ namespace polybius {
             request.SendWebRequest();
 
             if (request.isNetworkError || request.isHttpError) {
-                Debug.Log(request.error);
+                Debug.Log("Network Error: " + request.error);
                 return "{\"message\": \"Network/HTTP Error\",\"success\": false}";
             } else {
                 return request.downloadHandler.text;

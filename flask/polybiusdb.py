@@ -116,7 +116,7 @@ def requires_auth(f):
 @app.route('/users', methods = ['GET', 'POST', 'PUT', 'DELETE'])
 @app.route('/users/<user_id>', methods = ['GET', 'POST', 'PUT', 'DELETE'])
 #@requires_auth
-def api_users(user_id):
+def api_users(user_id = -1):
 	db = sqlite3.connect('polybius.db')
 	c = db.cursor()
 	json = request.get_json()
@@ -140,7 +140,7 @@ def api_users(user_id):
 
 		# String search
 		elif search:
-			c.execute("SELECT * FROM users WHERE username LIKE ?", ("%" +search+ "%",))
+			c.execute('SELECT * FROM users WHERE username LIKE ?', ("%" + search + "%",))
 
 		# Search for user in lobby
 		elif lobby:
@@ -165,8 +165,8 @@ def api_users(user_id):
 		privacy 	= json.get('privacy')
 
 		# Error checking
-		if not username or not password or not email or not dob or not privacy:
-			resp = jsonify(dict(success=False, message="Username/Password/Email/Dob/Privacy not specified"))
+		if not username or not password or not email or not dob:
+			resp = jsonify(dict(success=False, message="Username/Password/Email/Dob not specified"))
 		else:
 			# Insert into server or ignore if duplicate
 			c.execute('INSERT or IGNORE INTO users (username, password, email, dob, privacy, isOnline, loggedIn, reports) VALUES (?, ?, ?, ?, ?, 1, 1, 0)', (username, password, email, dob, privacy))
@@ -277,7 +277,8 @@ def api_users(user_id):
 	elif request.method == 'DELETE':
 
 		# Get vars
-		userID = user_id
+		if user_id is not -1:
+			userID = user_id
 
 		if userID:
 			c.execute('DELETE FROM users WHERE userID = ?', (userID,))
@@ -350,7 +351,7 @@ def api_count():
 @app.route('/lobbies', methods=['GET', 'POST', 'PUT', 'DELETE'])
 @app.route('/lobbies/<lobby_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 #@requires_auth
-def api_lobbies(lobby_id):
+def api_lobbies(lobby_id = -1):
 	db = sqlite3.connect('polybius.db')
 	c = db.cursor()
 	json = request.get_json()
@@ -398,7 +399,8 @@ def api_lobbies(lobby_id):
 	elif request.method == 'DELETE':
 
 		# Get vars
-		lobbyID = lobby_id
+		if lobby_id is not -1:
+			lobbyID = lobby_id
 
 		# Error checking
 		if lobbyID:
