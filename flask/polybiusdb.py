@@ -462,14 +462,14 @@ def api_report():
 	db.close()
 	return resp
 
-@app.route('/block', methods=['GET', 'POST'])
+@app.route('/block', methods=['GET', 'POST', 'PUT'])
 #@requires_auth
 def api_block():
 	db = sqlite3.connect('polybius.db')
 	c = db.cursor()
 	json = request.get_json()
 
-	# Get messages
+	# Get blocking relationship
 	if request.method == 'GET':
 
 		# Get vars
@@ -482,7 +482,7 @@ def api_block():
 		else:
 			resp = jsonify(dict(success=False, message="blockerID/blockedID not specified"))
 
-	# Add messages
+	# Add blocking relationship
 	elif request.method == 'POST':
 
 		# Get vars
@@ -494,6 +494,20 @@ def api_block():
 			          (blockerID, blockedID))
 			db.commit()
 			resp = jsonify(dict(success=True, message="User successfully blocked"))
+		else:
+			resp = jsonify(dict(success=False, message="blockerID/blockedID not specified"))
+			
+	# Remove blocking relationship
+	elif request.method = 'PUT':
+		
+		# Get vars
+		blockerID = json.get('blockerID')
+		blockedID = json.get('blockedID')
+		
+		if blockerID and blockedID:
+			c.execute('DELETE FROM blocked WHERE blockerID = ? AND blockedID = ?', (blockerID, blockedID,))
+			db.commit()
+			resp = jsonify(dict(success=True, message="Block successfully deleted"))
 		else:
 			resp = jsonify(dict(success=False, message="blockerID/blockedID not specified"))
 
@@ -509,7 +523,7 @@ def api_stats():
 	c = db.cursor()
 	json = request.get_json()
 
-	# Get messages
+	# Get STATs
 	if request.method == 'GET':
 
 		# Get vars
@@ -525,7 +539,7 @@ def api_stats():
 		else:
 			resp = jsonify(dict(success=False, message="userID not specified"))
 
-	# Add messages
+	# Modify stats
 	elif request.method == 'PUT':
 
 		# Get vars
@@ -549,14 +563,14 @@ def api_stats():
 	db.close()
 	return resp
 
-@app.route('/friends', methods=['GET', 'POST'])
+@app.route('/friends', methods=['GET', 'POST', 'PUT'])
 #@requires_auth
 def api_friends():
 	db = sqlite3.connect('polybius.db')
 	c = db.cursor()
 	json = request.get_json()
 
-	# Get messages
+	# Get friends
 	if request.method == 'GET':
 
 		# Get vars
@@ -569,7 +583,7 @@ def api_friends():
 		else:
 			resp = jsonify(dict(success=False, message="user1ID/user2ID not specified"))
 
-	# Add messages
+	# Add friends
 	elif request.method == 'POST':
 
 		# Get vars
@@ -582,11 +596,23 @@ def api_friends():
 			resp = jsonify(dict(success=True, message="Friend successfully added"))
 		else:
 			resp = jsonify(dict(success=False, message="user1ID/user2ID not specified"))
+			
+	# Remove friends
+	elif request.method = 'PUT':
+		
+		# Get vars
+		user1ID = json.get('user1ID')
+		user2ID = json.get('user2ID')
+		
+		if user1ID and user2ID:
+			c.execute('DELETE FROM friends WHERE user1ID = ? AND user2ID = ?', (user1ID, user2ID,))
+			db.commit()
+			resp = jsonify(dict(success=True, message="Friend successfully deleted"))
+		else:
+			resp = jsonify(dict(success=False, message="user1ID/user2ID not specified"))
 
 	# Close db connection and return data
-
 	c.close()
-
 	db.close()
 	return resp
 

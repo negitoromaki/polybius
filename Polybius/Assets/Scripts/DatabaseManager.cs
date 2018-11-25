@@ -23,7 +23,6 @@ namespace polybius {
 
         public string postJson(string method, WWWForm json, string url) {
             UnityWebRequest request;
-            //byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
 
             switch (method) {
                 case "GET":
@@ -32,23 +31,14 @@ namespace polybius {
 
                 case "POST":
                     request = UnityWebRequest.Post(url, json);
-                    request.SetRequestHeader("accept", "application/json; charset=UTF-8");
-                    request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
                     break;
-
-                case "PATCH":
-                    // I don't think we ever use patch
 
                 case "PUT":
                     request = UnityWebRequest.Put(url, json.data);
-                    request.SetRequestHeader("accept", "application/json; charset=UTF-8");
-                    request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
                     break;
 
                 case "DELETE":
                     request = UnityWebRequest.Delete(url);
-                    request.SetRequestHeader("accept", "application/json; charset=UTF-8");
-                    request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
                     break;
 
                 default:
@@ -56,6 +46,11 @@ namespace polybius {
                     return "{\"message\": \"Invalid HTTP Method\",\"success\": false}";
             }
 
+            // Ensure headers for JSON data say JSON
+            if (method == "POST" || method == "PUT") {
+                request.SetRequestHeader("accept", "application/json; charset=UTF-8");
+                request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
+            }
             request.SendWebRequest();
 
             if (request.isNetworkError || request.isHttpError) {
@@ -72,17 +67,22 @@ namespace polybius {
                 if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
                     !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
 
-					string json = "{ \"username\": \"" + PolybiusManager.player.getUsername() + "\"}";	                    
-					User u = new User();	                    
-					JsonUtility.FromJsonOverwrite(postJson("GET", json, flaskIP + "/users"), u);
+                    // Get user request
+                    User u = new User();
+					JsonUtility.FromJsonOverwrite(
+                        postJson("GET", null, flaskIP + "/users?username=" + PolybiusManager.player.getUsername()), u);
 
-					if (u.getPassword() == PolybiusManager.player.getPassword()) {	
-						PolybiusManager.player = u;	
-						// Set isOnline to true	
-						json =   "{ \"userID\": \"" + PolybiusManager.player.getUserID() + "\", \"isOnline\": 1}";	
-						u = new User();	
-						JsonUtility.FromJsonOverwrite(postJson("PUT", json, flaskIP + "/users"), u);	
-						PolybiusManager.loggedIn = true;	
+					if (u.getPassword() == PolybiusManager.player.getPassword()) {
+                        // Login successful, set player as returned user
+                        PolybiusManager.player = u;	
+						
+                        // Set isOnline to true
+                        WWWForm form = new WWWForm();
+                        form.AddField("userID", PolybiusManager.player.getUserID());
+                        form.AddField("isOnline", 1);
+
+                        Debug.Log("Set user online: " + postJson("PUT", form, flaskIP + "/users"));
+						PolybiusManager.loggedIn = true;
 					}
                 }
             }
@@ -95,34 +95,43 @@ namespace polybius {
                     !string.IsNullOrEmpty(PolybiusManager.player.getUsername()) &&
                     !string.IsNullOrEmpty(PolybiusManager.player.getEmail())) {
 
-					string json = "{ \"username\":  \"" + PolybiusManager.player.getUsername()  + "\", " +	
-						"\"password\":  \"" + PolybiusManager.player.getPassword()  + "\", " +	
-						"\"email\":     \"" + PolybiusManager.player.getEmail()     + "\", " +	
-						"\"dob\": \"\", " + "\"privacy\": 0, " + "}";	
-					Debug.Log("Register: " + postJson("GET", json, flaskIP + "/users"));
+                    // JSON
+                    WWWForm form = new WWWForm();
+                    form.AddField("username", PolybiusManager.player.getUsername());
+                    form.AddField("password", PolybiusManager.player.getPassword());
+                    form.AddField("email", PolybiusManager.player.getEmail());
+                    form.AddField("dob", "");
+                    form.AddField("privacy", 0);
+
+					Debug.Log("Register: " + postJson("POST", form, flaskIP + "/users"));
                 }
             }
         }
 
         public void logout() {
             if (!PolybiusManager.loggedIn) {
-				string json = "{ \"userID\": \"" + PolybiusManager.player.getUserID() + "\", \"isOnline\": 0}";	
-				Debug.Log("Logout: " + postJson("PUT", json, flaskIP + "/users"));	
+                // JSON
+                WWWForm form = new WWWForm();
+                form.AddField("userID", PolybiusManager.player.getUserID());
+                form.AddField("isOnline", 0);
+                
+				Debug.Log("Logout: " + postJson("PUT", form, flaskIP + "/users"));	
 				PolybiusManager.loggedIn = false;
             }
         }
 
 		public User getUser(string username){
-			User u = new User();
-			string json="{\"username\":\""+ username+"\"}";
-			JsonUtility.FromJsonOverwrite(postJson("GET", json, flaskIP + "/users"), u);
-			if (!string.IsNullOrEmpty(u.getUsername())) {
+            // Get user request
+            User u = new User();
+            JsonUtility.FromJsonOverwrite(postJson("GET", null, flaskIP + "/users?username=" + username), u);
+
+            if (!string.IsNullOrEmpty(u.getUsername())) {
 				return u;
 			} else {
 				return null;
-			}
-				
+			}	
 		}
+
         // get message
         public void getMessagesRequest(string senderUsername) {
             // TODO: Flask get messages query
@@ -137,14 +146,19 @@ namespace polybius {
         // send message
         public void sendMessageRequest(Message m) {
             // TODO: Flask send messages query
-			User u;
-			string json=null;
-			if ((u=getUser(m.receiver)) != null) {
-				json = "{ \"receiverID\": \"" + u.getUserID() + "\", \"senderID\":\"" + PolybiusManager.player.getUserID() + ",\"message\":\""+m.message+"\"}";	
-			}
-			Debug.Log("Send Message: " + postJson("POST", json, flaskIP + "/messages"));	
+			User u = getUser(m.receiver);
+			if (u != null) {
+                // JSON
+                WWWForm form = new WWWForm();
+                form.AddField("receiverID", u.getUserID());
+                form.AddField("senderID", PolybiusManager.player.getUserID());
+                form.AddField("message", m.message);
 
-            PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
+                Debug.Log("Send Message: " + postJson("POST", form, flaskIP + "/messages"));
+                PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
+            } else {
+                Debug.LogError("Could not send message, user null");
+            }
         }
 
         public void sendFeedBack(string feedback, string subject) {
@@ -158,65 +172,73 @@ namespace polybius {
 
         }
 
-		public bool checkFriend(int friendid){
-			string json="{\"user1ID\":"+ PolybiusManager.player.getUserID()+",\"user2ID\":"+friendid+"}";
-			string js = postJson ("GET", json, flaskIP + "/friends");
-			if (js != null && js.Contains ("0")) {
-				return true;
-			} else {
-				return false;
-			}
+		public bool checkFriend(int friendID){
+            string url =    flaskIP + "/friends?user1ID=" + PolybiusManager.player.getUserID() +
+                            "&user2ID=" + friendID.ToString();
+			string resp = postJson ("GET", null, url);
 
-
-		}
-
-        public void AddFriend(string username, int friendid) {
-
-			if (!checkFriend (friendid)) {
-				return;
-			}
-			User u = new User();
-
-			string json="{\"user1ID\":"+ PolybiusManager.player.getUserID()+",\"user2ID\":"+friendid+"}";
-			Debug.Log("Add Friend: " + postJson("POST", json, flaskIP + "/friends"));	
-
+			return resp != null && resp.Contains("0");
         }
+
+        public void AddFriend(string username, int friendID) {
+			if (!checkFriend(friendID))
+				return;
+
+            // JSON
+            WWWForm form = new WWWForm();
+            form.AddField("user1ID", PolybiusManager.player.getUserID());
+            form.AddField("user2ID", friendID);
+
+            Debug.Log("Add Friend: " + postJson("POST", form, flaskIP + "/friends"));
+        }
+
 		public bool checkBlocked(int blockID){
-			string json="{\"user1ID\":"+ PolybiusManager.player.getUserID()+",\"user2ID\":"+blockID+"}";
-			string js = postJson ("GET", json, flaskIP + "/block");
-			if (js != null && js.Contains ("0")) {
-				return true;
-			} else {
-				return false;
-			}
+            string url =    flaskIP + "/block?user1ID=" + PolybiusManager.player.getUserID() +
+                            "&user2ID=" + blockID.ToString();
+            string resp = postJson("GET", null, url);
 
-
+            return resp != null && resp.Contains("0");
 		}
-        public void BlockPlayer(string username, int id) {
-			if (!checkBlocked (id)) {
-				return;
-			}
-			User u;
-			if ((u = getUser (username)) != null) {
-				string json = "{\"blocker\":" + PolybiusManager.player.getUserID() + ",\"blocked\":" + id + "}";
-				Debug.Log ("Blocked: " + postJson ("POST", json, flaskIP + "/block"));
-			}
 
+        public void BlockPlayer(string username, int id) {
+			if (!checkBlocked(id))
+				return;
+
+			User u = getUser(username);
+			if (u != null) {
+                // JSON
+                WWWForm form = new WWWForm();
+                form.AddField("blockerID", PolybiusManager.player.getUserID());
+                form.AddField("blockedID", id);
+
+				Debug.Log ("Blocked: " + postJson ("POST", form, flaskIP + "/block"));
+			} else {
+                Debug.LogError("Could not block player, other user null");
+            }
         }
+
         public void ReportPlayer(string username, int id, string reason) {
-			User u;
-			if ((u = getUser (username)) != null) {
-				string json = "{\"userID\":" + u.getUserID()+"}";
-				Debug.Log ("Reported: " + postJson ("POST", json, flaskIP + "/report"));
-			}
+			User u = getUser(username);
+            if (u != null) {
+                // JSON
+                WWWForm form = new WWWForm();
+                form.AddField("userID", u.getUserID());
+
+                Debug.Log("Reported: " + postJson("POST", form, flaskIP + "/report"));
+            } else {
+                Debug.LogError("Could not report player, user null");
+            }
         }
+
         public void RemoveFriend(string username, int id) {
             // TODO: Flask remove friend query
-			User u;
-			if ((u = getUser (username)) != null) {
-				// TODO: Add Removeable Friends
-
-			}
+			User u = getUser(username);
+			if (u != null) {
+                // TODO: Add Removeable Friends
+                Debug.Log("Removed Friend: " + postJson("DELETE", null, flaskIP + "/report/" + u.getUserID()));
+            } else {
+                Debug.LogError("Could not remove friend, user null");
+            }
         }
 
         public void host(string rname, Game.type gameType) {
