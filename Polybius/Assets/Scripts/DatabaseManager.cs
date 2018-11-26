@@ -47,15 +47,21 @@ namespace polybius {
 
             // Ensure headers for JSON data say JSON
             if (method == "POST" || method == "PUT") {
-                request.SetRequestHeader("accept", "application/json; charset=UTF-8");
-                request.SetRequestHeader("content-type", "application/json; charset=UTF-8");
+                request.SetRequestHeader("accept", "application/json");
+                request.SetRequestHeader("content-type", "application/json");
+                request.chunkedTransfer = false;
+
             }
             request.SendWebRequest();
+            while (!request.isDone)
+            {
 
+            }
             if (request.isNetworkError || request.isHttpError) {
                 Debug.Log("Network Error: " + request.error);
                 return "{\"message\": \"Network/HTTP Error\",\"success\": false}";
             } else {
+                Debug.Log(request.downloadHandler.text);
                 return request.downloadHandler.text;
             }
         }
