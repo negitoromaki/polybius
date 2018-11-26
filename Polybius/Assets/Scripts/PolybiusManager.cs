@@ -67,11 +67,11 @@ namespace polybius {
         public enum status { online, offline, invisible };
 
         // Fields
-        private string username, password, email, dob;
-        private status currentStatus;
-        private int privacy;
-        private int userID;
-        private List<Message> messages = new List<Message>();
+        public string username, password, email, dob;
+        public status currentStatus;
+        public int privacy;
+        public int userID;
+        public List<Message> messages = new List<Message>();
         public List<User> friends = new List<User>();
         public List<string> blockedUsers = new List<string>();
 

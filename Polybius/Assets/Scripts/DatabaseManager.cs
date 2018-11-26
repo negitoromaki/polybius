@@ -242,6 +242,7 @@ namespace polybius {
             public T[] items;
         }
 
+
         public List<User> searchUsers(string search) {
             string url = flaskIP + "/users?search=" + search;
             string resp = postJson("GET", null, url);

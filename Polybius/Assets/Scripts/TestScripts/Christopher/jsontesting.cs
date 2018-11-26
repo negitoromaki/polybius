@@ -16,8 +16,12 @@ namespace polybius {
 
         public void addBob() {
             // JSON
-            User u = new User("bob", "asdfasdf", "asdf@asdf.com", "--/--/----", -1, 1);
-            RestClient.Post<User>(flaskIP + "/users", u).Then(resp => { Debug.Log(JsonUtility.ToJson(resp)); });
+            User us = new User("bob", "asdfasdf", "asdf@asdf.com", "--/--/----", -1, 1);
+			Debug.Log("Hello:" +JsonUtility.ToJson(us));
+			RestClient.Post<User>(new RequestHelper{
+				Uri="http://128.211.240.229:5000/users",
+				BodyString=JsonUtility.ToJson(us)
+			}).Then(resp => { Debug.Log(JsonUtility.ToJson(resp)); });
         }
 
         public void loginBob() {
@@ -36,6 +40,8 @@ namespace polybius {
                 "Password: " + u.getPassword()
                 );
         }
+
+
 
         public void logoutBob() {
             WWWForm form = new WWWForm();
