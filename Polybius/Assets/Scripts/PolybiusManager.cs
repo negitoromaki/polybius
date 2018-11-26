@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
-
+using Proyecto26;
+using System;
 namespace polybius {
     public static class PolybiusManager {
         // Variables
@@ -60,7 +61,7 @@ namespace polybius {
             this.gameType = gameType;
         }
     }
-
+    [Serializable]
     public class User {
         // Enum
         public enum status { online, offline, invisible };

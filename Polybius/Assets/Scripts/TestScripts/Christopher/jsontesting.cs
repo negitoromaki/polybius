@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using Proyecto26;
-
+using System;
 namespace polybius {
+   
     public class jsontesting : MonoBehaviour {
 
         string flaskIP = "http://128.211.240.229:5000";
@@ -16,7 +17,7 @@ namespace polybius {
         public void addBob() {
             // JSON
             User u = new User("bob", "asdfasdf", "asdf@asdf.com", "--/--/----", -1, 1);
-            RestClient.Post<User>(flaskIP + "/users", u).Then(resp => { Debug.Log(JsonUtility.ToJson(resp, true)); });
+            RestClient.Post<User>(flaskIP + "/users", u).Then(resp => { Debug.Log(JsonUtility.ToJson(resp)); });
         }
 
         public void loginBob() {
