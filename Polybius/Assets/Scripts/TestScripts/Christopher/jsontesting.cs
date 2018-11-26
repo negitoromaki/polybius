@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using Proyecto26;
 
 namespace polybius {
     public class jsontesting : MonoBehaviour {
@@ -9,19 +10,13 @@ namespace polybius {
         string flaskIP = "http://128.211.240.229:5000";
 
         void Start() {
-            loginBob();
+            addBob();
         }
 
         public void addBob() {
             // JSON
-            WWWForm form = new WWWForm();
-            form.AddField("username", "bob");
-            form.AddField("password", "asdfasdf");
-            form.AddField("email", "asdf@asdf.com");
-            form.AddField("dob", "--/--/----");
-            form.AddField("privacy", 0);
-
-            Debug.Log("Register: " + PolybiusManager.dm.postJson("POST", form, flaskIP + "/users"));
+            User u = new User("bob", "asdfasdf", "asdf@asdf.com", "--/--/----", -1, 1);
+            RestClient.Post<User>(flaskIP + "/users", u).Then(resp => { Debug.Log(JsonUtility.ToJson(resp, true)); });
         }
 
         public void loginBob() {
@@ -39,6 +34,14 @@ namespace polybius {
                 "Username: " + u.getUsername() + "\n" +
                 "Password: " + u.getPassword()
                 );
+        }
+
+        public void logoutBob() {
+            WWWForm form = new WWWForm();
+            form.AddField("userID", 19);
+            form.AddField("isOnline", 0);
+
+            Debug.Log("Logout: " + PolybiusManager.dm.postJson("PUT", form, flaskIP + "/users"));
         }
     }
 }

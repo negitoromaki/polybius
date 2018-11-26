@@ -20,48 +20,31 @@ namespace polybius {
         // ------------
 
         private string flaskIP = "http://128.211.240.229:5000";
+
         public string postJson(string method, WWWForm json, string url) {
-            UnityWebRequest request;
-
-            switch (method) {
-                case "GET":
-                    request = UnityWebRequest.Get(url);
-                    break;
-
-                case "POST":
-                    request = UnityWebRequest.Post(url, json);
-                    break;
-
-                case "PUT":
-                    request = UnityWebRequest.Put(url, json.data);
-                    break;
-
-                case "DELETE":
-                    request = UnityWebRequest.Delete(url);
-                    break;
-
-                default:
-                    Debug.LogError("Invalid HTTP Method: " + method);
-                    return "{\"message\": \"Invalid HTTP Method\",\"success\": false}";
-            }
+            // Create request
+            UnityWebRequest request = new UnityWebRequest(url, method);
+            request.downloadHandler = new DownloadHandlerBuffer();
 
             // Ensure headers for JSON data say JSON
             if (method == "POST" || method == "PUT") {
+                // Set upload handler
+                request.uploadHandler   = new UploadHandlerRaw(json.data);
+
                 request.SetRequestHeader("accept", "application/json");
                 request.SetRequestHeader("content-type", "application/json");
                 request.chunkedTransfer = false;
-
             }
+            
+            // Send and wait until done
             request.SendWebRequest();
-            while (!request.isDone)
-            {
+            while (!request.isDone) { }
 
-            }
+            // Get result
             if (request.isNetworkError || request.isHttpError) {
                 Debug.Log("Network Error: " + request.error);
                 return "{\"message\": \"Network/HTTP Error\",\"success\": false}";
             } else {
-                Debug.Log(request.downloadHandler.text);
                 return request.downloadHandler.text;
             }
         }
