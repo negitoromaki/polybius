@@ -22,7 +22,13 @@ namespace polybius {
 
         public void Update() {
             if (Time.frameCount % 30 == 0)
-                messages = PolybiusManager.dm.getMessages(otherUser.getUsername());
+            {
+                List<Message> m = PolybiusManager.dm.getMessages(otherUser.getUsername());
+                if(m!=null)
+                messages = m;
+
+            }
+
             if (messages.Count > 0)
                 displayMessages();
         }
