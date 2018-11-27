@@ -460,11 +460,13 @@ namespace polybius {
             }
             return results;
         }
+
         [Serializable]
         public class gMsg
         {
             public List<msg> msg;
         }
+
         [Serializable]
         public class msg
         {
@@ -494,31 +496,29 @@ namespace polybius {
                     {
                         r.Add(new Message(PolybiusManager.player, u, results.msg[i].time, results.msg[i].message));
                     }
-
                 }
-
-
-
-
             }
             else {
                 Debug.LogError("Could not get messages, other user is null");
             }
-
             return r;
         }
 
-        public List<Game> getLobbies(Game.type gameType) {
-            string url = flaskIP + "/lobbies?gameType=" + gameType.ToString();
+        [Serializable]
+        public class Games {
+            public List<Game> games;
+        }
+
+        public List<Game> getLobbies(string gameType) {
+            string url = flaskIP + "/lobbies?gameType=" + gameType;
             List<Game> lobbies = new List<Game>();
-            
-            // REST: Get array of games
-            RestClient.GetArray<Game>(url).Then(respArray => {
-                for (int i = 0; i < respArray.Length; i++)
-                    lobbies.Add(respArray[i]);
-            }).Catch(err => {
-                Debug.LogError("Error: " + err.Message);
-            });
+
+            string j = "{\"games\":" + PolybiusManager.dm.getRequest("GET", null, url) + "}";
+            Debug.Log(j);
+            Games results = JsonUtility.FromJson<Games>(j);
+
+            foreach (Game g in results.games)
+                lobbies.Add(g);
 
             return lobbies;
         }

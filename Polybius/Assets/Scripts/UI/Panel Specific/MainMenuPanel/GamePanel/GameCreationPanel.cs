@@ -8,14 +8,21 @@ namespace polybius {
 
         public GamePanel gp;
         public TextMeshProUGUI header;
+        public TMP_InputField name;
 
         public void OnEnable() {
-            Debug.Assert(header != null);
+            Debug.Assert(header != null && name != null);
             header.text = "Create new " + gp.currGameType.ToString() + " game";
         }
 
+        public void Update() {
+            if (PolybiusManager.currGame != null) {
+                // TODO: Open correct game scene
+            }
+        }
+
         public void createGame() {
-			PolybiusManager.dm.hostLobby("testRoom" + Random.Range(0,1000000000));
+			PolybiusManager.dm.host(name.text, gp.currGameType);
         }
     }
 }

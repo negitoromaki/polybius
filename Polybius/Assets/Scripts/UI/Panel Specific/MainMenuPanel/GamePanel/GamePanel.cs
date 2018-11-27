@@ -9,17 +9,19 @@ namespace polybius {
 
         private LobbyPanel lobbyPanelScript;
         private UIPanelSwitcher switcher;
-        public string currGameType = "none";
+        public string currGameType;
 
         void Start() {
             Debug.Assert(gameTypePanel != null && LobbyPanel != null);
             lobbyPanelScript = LobbyPanel.GetComponent<LobbyPanel>();
             switcher = GetComponent<UIPanelSwitcher>();
             Debug.Assert(switcher != null);
+            currGameType = "none";
         }
 
         void Update() {
             // Menu switching
+            Debug.Log("currGameType: " + currGameType);
             if (currGameType == "none") {
                 if (!gameTypePanel.activeSelf) {
                     switcher.ChangeMenu(gameTypePanel);

@@ -13,7 +13,7 @@ namespace polybius {
         public static bool loggedIn = false;
         public static DatabaseManager dm = null;
         
-        public static Game currGame;
+        public static Game currGame = null;
         public static float currLat, currLong;
 
         // Notifications

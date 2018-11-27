@@ -16,15 +16,18 @@ namespace polybius {
             if (gp.currGameType != "none") {
                 if (getLocation()) {
                     // Checking
-                    Debug.Assert(gp != null &&
-                            MapPanel != null &&
-                            parent != null &&
-                            createPanel != null &&
-                            scrollRect != null &&
-                            ErrorMessage != null);
+                    Debug.Assert(   gp != null &&
+                                    MapPanel != null &&
+                                    parent != null &&
+                                    createPanel != null &&
+                                    scrollRect != null &&
+                                    ErrorMessage != null);
 
                     foreach (Transform child in parent.transform)
                         GameObject.Destroy(child.gameObject);
+
+                    // Get games
+                    games = PolybiusManager.dm.getLobbies(gp.currGameType);
 
                     GameObject game;
                     for (int i = 0; i < games.Count; i++) {
