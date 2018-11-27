@@ -186,7 +186,6 @@ namespace polybius {
 		public bool checkBlocked(int blockID){
             string url =    flaskIP + "/block?user1ID=" + PolybiusManager.player.getUserID() +
                             "&user2ID=" + blockID.ToString();
-
             bool toReturn = false;
 
             // REST: Check blocked

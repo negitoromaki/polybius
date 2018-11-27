@@ -78,7 +78,7 @@ namespace polybius {
         public List<User> friends = new List<User>();
         public List<string> blockedUsers = new List<string>();
 
-        public User() : this(null, null, null, null) {}
+        public User() : this(null, null, null, "--/--/----") {}
 
         public User(string username, string password, string email, string dob) : this(username, password, email, dob, -1, 0) {}
 
