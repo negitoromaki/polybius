@@ -66,7 +66,7 @@ namespace polybius {
             }
 
             // Social
-            if (PolybiusManager.player.getPrivacy()==1) {
+            if (PolybiusManager.player.getPrivacy()) {
                 privacyState.text = "Private";
             } else {
                 privacyState.text = "Public";
@@ -74,11 +74,7 @@ namespace polybius {
         }
 
         public void toggleSocial() {
-            if (PolybiusManager.player.getPrivacy() == 0) {
-                PolybiusManager.player.setPrivacy(1);
-            } else {
-                PolybiusManager.player.setPrivacy(0);
-            }
+            PolybiusManager.player.setPrivacy(!PolybiusManager.player.getPrivacy());
         }
     }
 }

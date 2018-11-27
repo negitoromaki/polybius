@@ -54,7 +54,7 @@ namespace polybius {
                 userStats[1, 1] = currentUser.getDob();
             addSection("User Statistics:", userStats);
 
-            if (currentUser.getPrivacy() == 0 || currentUser == PolybiusManager.player) {
+            if (!currentUser.getPrivacy() || currentUser == PolybiusManager.player) {
                 string[,] connect4Stats = new string[1, 2];
                 connect4Stats[0, 0] = "Games Won: ";
                 Debug.Log("Current profile's username: " + currentUser.getUsername());

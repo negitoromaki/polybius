@@ -21,7 +21,6 @@ namespace polybius {
 
         void Update() {
             // Menu switching
-            Debug.Log("currGameType: " + currGameType);
             if (currGameType == "none") {
                 if (!gameTypePanel.activeSelf) {
                     switcher.ChangeMenu(gameTypePanel);

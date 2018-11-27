@@ -72,7 +72,7 @@ namespace polybius {
         // Fields
         public string username, password, email, dob;
         public status currentStatus;
-        public int privacy;
+        public bool privacy;
         public int userID;
         public List<Message> messages = new List<Message>();
         public List<User> friends = new List<User>();
@@ -80,9 +80,9 @@ namespace polybius {
 
         public User() : this(null, null, null, "--/--/----") {}
 
-        public User(string username, string password, string email, string dob) : this(username, password, email, dob, -1, 0) {}
+        public User(string username, string password, string email, string dob) : this(username, password, email, dob, -1, false) {}
 
-        public User(string username, string password, string email, string dob, int userID, int privacy) {
+        public User(string username, string password, string email, string dob, int userID, bool privacy) {
             this.username = username;
             this.password = password;
             this.email = email;
@@ -133,7 +133,7 @@ namespace polybius {
             return dob;
         }
 
-        public int getPrivacy() {
+        public bool getPrivacy() {
             return privacy;
         }
 
@@ -147,7 +147,7 @@ namespace polybius {
 
         // Sets user's privacy status
         // Choose to set privacy to true or not
-        public void setPrivacy(int privacy) {
+        public void setPrivacy(bool privacy) {
             this.privacy = privacy;
             PolybiusManager.dm.setPrivacy(userID, privacy);
         }

@@ -72,6 +72,7 @@ namespace polybius {
         {
             public List<User> users;
         }
+
         // login user
         public void login()
         {
@@ -82,9 +83,7 @@ namespace polybius {
                 {
 
                     // REST: Get user
-
-
-                    string j = PolybiusManager.dm.getRequest("GET", null, flaskIP + "/users?username=" + PolybiusManager.player.getUsername());
+                    string j = "{\"users\":" + PolybiusManager.dm.getRequest("GET", null, flaskIP + "/users?username=" + PolybiusManager.player.getUsername()) + "}";
                     Debug.Log(j);
                     Uarr u = JsonUtility.FromJson<Uarr>(j);
 
@@ -96,7 +95,6 @@ namespace polybius {
 
                         // Set isOnline to true
                         setOnline(true);
-                        PolybiusManager.loggedIn = true;
                     }
                     else
                     {
@@ -127,14 +125,11 @@ namespace polybius {
         }
 
         public void logout() {
-            if (!PolybiusManager.loggedIn) {
+            if (PolybiusManager.loggedIn)
                 setOnline(false);
-            }
         }
 
 		public User getUser(string username){
-            
-
             // REST: Get array of users with username
             string url = flaskIP + "/users?username=" + username;
             string j = PolybiusManager.dm.getRequest("GET", null, url);
@@ -350,15 +345,16 @@ namespace polybius {
 
         [Serializable]
         public class ServerPrivacy {
-            public int userID, privacy;
+            public int userID;
+            public bool privacy;
 
-            public ServerPrivacy(int uID, int p) {
+            public ServerPrivacy(int uID, bool p) {
                 userID = uID;
-                privacy = (p > 0) ? 1 : 0;
+                privacy = p;
             }
         }
 
-        public void setPrivacy(int userID, int privacy) {
+        public void setPrivacy(int userID, bool privacy) {
             // JSON
             ServerPrivacy p = new ServerPrivacy(userID, privacy);
 
@@ -376,22 +372,24 @@ namespace polybius {
 
         [Serializable]
         public class ServerOnline {
-            public int userID, isOnline;
+            public int userID;
+            public bool isOnline;
 
             public ServerOnline(int uID, bool o) {
                 userID = uID;
-                isOnline = o ? 1 : 0;
+                isOnline = o;
             }
         }
 
         public void setOnline(bool isOnline) {
             // JSON
             ServerOnline o = new ServerOnline(PolybiusManager.player.getUserID(), isOnline);
-
+            Debug.Log(JsonUtility.ToJson(o));
             // REST: Set privacy
             RestClient.Put<ServerResponse>(flaskIP + "/users", o).Then(resp => {
                 if (resp.success) {
                     Debug.Log("Successfully set currentUser's isOnline to: " + isOnline.ToString());
+                    PolybiusManager.loggedIn = isOnline;
                 } else {
                     Debug.LogError("Could not set currentUser's isOnline: " + resp.message);
                 }
@@ -449,7 +447,7 @@ namespace polybius {
             string url = flaskIP + "/friends?user1ID=" + userID.ToString();
 
             // REST: Get array of friends
-            string j = PolybiusManager.dm.getRequest("GET", null, url);
+            string j = "{\"friends\":" + PolybiusManager.dm.getRequest("GET", null, url) + "}";
             Debug.Log(j);
             Lfrds fri = JsonUtility.FromJson<Lfrds>(j);
             List < User > results = new List<User>();
@@ -567,7 +565,6 @@ namespace polybius {
 
         void onLost(BaseEvent e) {
             connected = false;
-            PolybiusManager.loggedIn = false;
             Debug.LogError("Lost Server!");
         }
 

@@ -168,7 +168,7 @@ def api_users(user_id = -1):
 			resp = jsonify(dict(success=False, message="Username/Password/Email/Dob not specified"))
 		else:
 			# Insert into server or ignore if duplicate
-			c.execute('INSERT or IGNORE INTO users (username, password, email, dob, privacy, isOnline, loggedIn, reports) VALUES (?, ?, ?, ?, ?, 1, 1, 0)', (username, password, email, dob, privacy))
+			c.execute('INSERT or IGNORE INTO users (username, password, email, dob, privacy, isOnline, loggedIn, reports) VALUES (?, ?, ?, ?, ?, 1, 0)', (username, password, email, dob, privacy))
 			db.commit()
 
 			if c.rowcount > 0:
@@ -236,9 +236,9 @@ def api_users(user_id = -1):
 					resp = jsonify(dict(success=False, message="Could not update dob"))
 
 			# Update isOnline
-			elif isOnline:
+			elif isOnline is not None:
 				c.execute('UPDATE users SET isOnline = ? WHERE userID = ?',
-				          (isOnline, userID))
+				          (1 if isOnline else 0, userID))
 				db.commit()
 				if c.rowcount > 0:
 					resp = jsonify(dict(success=True, message="Updated isOnline"))
@@ -246,8 +246,8 @@ def api_users(user_id = -1):
 					resp = jsonify(dict(success=False, message="Could not update isOnline"))
 
 			# Update privacy
-			elif privacy:
-				c.execute('UPDATE users SET privacy = ? WHERE userID = ?', (privacy, userID))
+			elif privacy is not None:
+				c.execute('UPDATE users SET privacy = ? WHERE userID = ?', (1 if privacy else 0, userID))
 				db.commit()
 				if c.rowcount > 0:
 					resp = jsonify(dict(success=True, message="Updated privacy"))
