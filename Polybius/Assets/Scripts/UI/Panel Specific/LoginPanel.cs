@@ -7,22 +7,14 @@ using TMPro;
 namespace polybius {
     public class LoginPanel : MonoBehaviour {
 
-        public GameObject username, password;
-        private InputField usernameText, passwordText;
-        private Image usernameImage, passwordImage;
-
+        public TMP_InputField usernameText, passwordText;
+        public Image usernameImage, passwordImage;
 
         void Start() {
-            Debug.Assert(username != null && password != null);
-            
             // TMP Input fields
-            usernameText = username.GetComponent<InputField>();
-            passwordText = password.GetComponent<InputField>();
             Debug.Assert(usernameText != null && passwordText != null);
 
             // Images
-            usernameImage = username.GetComponent<Image>();
-            passwordImage = password.GetComponent<Image>();
             Debug.Assert(usernameImage != null && passwordImage != null);
         }
 

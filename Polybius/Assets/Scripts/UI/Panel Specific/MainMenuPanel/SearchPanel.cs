@@ -85,7 +85,9 @@ namespace polybius {
             } else {
 				PolybiusManager.dm.AddFriend(PolybiusManager.player.getUsername(),results[i].getUserID());
             }
-            PolybiusManager.dm.getFriendsQuery();
+
+            // Update friends
+            PolybiusManager.player.friends = PolybiusManager.dm.getFriends(PolybiusManager.player.getUserID());
         }
     }
 }
