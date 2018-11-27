@@ -71,7 +71,7 @@ namespace polybius {
                     form.AddField("username", PolybiusManager.player.getUsername());
                     form.AddField("password", PolybiusManager.player.getPassword());
                     form.AddField("email", PolybiusManager.player.getEmail());
-                    form.AddField("dob", "");
+                    form.AddField("dob", "--/--/----");
                     form.AddField("privacy", 0);
 
                     // REST: Create user

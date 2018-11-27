@@ -23,9 +23,6 @@ namespace polybius {
                     if (!LoginRegisterPanel.activeSelf && !RegisterPanel.activeSelf && !LoginPanel.activeSelf)
                         GetComponent<UIPanelSwitcher>().ChangeMenu(LoginRegisterPanel);
                 }
-            } else {
-                if (!ConnectionPanel.activeSelf)
-                    GetComponent<UIPanelSwitcher>().ChangeMenu(ConnectionPanel);
             }
         }
     }
