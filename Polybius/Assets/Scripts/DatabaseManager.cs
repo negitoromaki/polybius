@@ -73,7 +73,9 @@ namespace polybius {
                     form.AddField("email", PolybiusManager.player.getEmail());
                     form.AddField("dob", "--/--/----");
                     form.AddField("privacy", 0);
+                    PolybiusManager.player.setDob("11/26/2018");
 
+                    Debug.Log("hello:"+JsonUtility.ToJson(form));
                     // REST: Create user
                     RestClient.Post<ServerResponse>(flaskIP + "/users", form.data).Then(resp => {
                         if (resp.success) {
