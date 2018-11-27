@@ -89,7 +89,7 @@ namespace polybius {
 
         public void blockUser() {
             if (!PolybiusManager.player.blockedUsers.Contains(currentUser.getUsername())) {
-                PolybiusManager.dm.BlockPlayer(currentUser.getUsername(), currentUser.getUserID());
+                PolybiusManager.dm.BlockPlayer(currentUser);
                 PolybiusManager.player.blockedUsers.Add(currentUser.getUsername());
             }
             goBack();

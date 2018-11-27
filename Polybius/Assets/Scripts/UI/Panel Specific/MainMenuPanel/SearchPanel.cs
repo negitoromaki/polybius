@@ -81,9 +81,9 @@ namespace polybius {
 
         public void toggleFriendStatus(int i) {
             if (PolybiusManager.player.friends.Contains(results[i])) {
-				PolybiusManager.dm.RemoveFriend(PolybiusManager.player.getUsername(),results[i].getUserID());
+				PolybiusManager.dm.RemoveFriend(results[i]);
             } else {
-				PolybiusManager.dm.AddFriend(PolybiusManager.player.getUsername(),results[i].getUserID());
+				PolybiusManager.dm.AddFriend(results[i]);
             }
 
             // Update friends

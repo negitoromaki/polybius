@@ -27,12 +27,13 @@ namespace polybius {
         }
     }
 
+    [Serializable]
     public class Message {
-        public string sender, receiver;
+        public User sender, receiver;
         public System.DateTime timestamp;
         public string message;
 
-        public Message(string sender, string receiver, System.DateTime timestamp, string message) {
+        public Message(User sender, User receiver, System.DateTime timestamp, string message) {
             this.receiver = receiver;
             this.sender = sender;
             this.timestamp = timestamp;
@@ -40,6 +41,7 @@ namespace polybius {
         }
     }
 
+    [Serializable]
     public class Game {
         // Enum
         public enum type { pong, connect4, tictactoe, none }
@@ -61,6 +63,7 @@ namespace polybius {
             this.gameType = gameType;
         }
     }
+
     [Serializable]
     public class User {
         // Enum

@@ -29,73 +29,37 @@ namespace polybius {
         // ------------
 
         private string flaskIP = "http://128.211.240.229:5000";
-        public string postJson(string method, WWWForm json, string url)
-        {
-            // Create request
-            UnityWebRequest request = new UnityWebRequest(url, method);
-            request.downloadHandler = new DownloadHandlerBuffer();
 
-            // Ensure headers for JSON data say JSON
-            if (method == "POST" || method == "PUT")
-            {
-                // Set upload handler
-                request.uploadHandler = new UploadHandlerRaw(json.data);
-
-                request.SetRequestHeader("accept", "application/json");
-                request.SetRequestHeader("content-type", "application/json");
-                request.chunkedTransfer = false;
-            }
-
-            // Send and wait until done
-            request.SendWebRequest();
-            while (!request.isDone) { }
-
-            // Get result
-            if (request.isNetworkError || request.isHttpError)
-            {
-                Debug.Log("Network Error: " + request.error);
-                return "{\"message\": \"Network/HTTP Error\",\"success\": false}";
-            }
-            else
-            {
-                return request.downloadHandler.text;
-            }
-        }
+        [Serializable]
         public class ServerResponse {
             public bool success;
             public string message;
         }
-        [Serializable]
-        public class Uarr
-        {
-            public User[] users;
-        }
+
         // login user
         public void login() {
             if (!PolybiusManager.loggedIn) {
                 if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
                     !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
 
-                    // REST: Get user
+                    // REST: Get array of users with username
+                    string url = flaskIP + "/users?username=" + PolybiusManager.player.getUsername();
 
-                   
-                    string j = PolybiusManager.dm.postJson("GET", null, flaskIP + "/users?username="+PolybiusManager.player.getUsername());
-                    Debug.Log(j);
-                    Uarr u= JsonUtility.FromJson<Uarr>(j);
-                    
-                    if (u.users[0].getPassword() == PolybiusManager.player.getPassword())
-                    {
-                        // Login successful, set player as returned user
-                        PolybiusManager.player = u.users[0];
-                        Debug.Log("Login successfull");
+                    RestClient.GetArray<User>(url).Then(respArray => {
+                        if (respArray.Length > 0 &&
+                            respArray[0].getPassword() == PolybiusManager.player.getPassword()) {
+                            // Login successful, set player as returned user
+                            PolybiusManager.player = respArray[0];
+                            Debug.Log("Login successfull");
 
-                        // Set isOnline to true
-                        setOnline(true);
-                    }
-                    else
-                    {
-                        Debug.LogError("Login unsuccessful");
-                    }
+                            // Set isOnline to true
+                            setOnline(true);
+                        } else {
+                            Debug.LogError("Login unsuccessful");
+                        }
+                    }).Catch(err => {
+                        Debug.LogError("Error: " + err.Message);
+                    });
                 }
             }
         }
@@ -107,16 +71,6 @@ namespace polybius {
                     !string.IsNullOrEmpty(PolybiusManager.player.getUsername()) &&
                     !string.IsNullOrEmpty(PolybiusManager.player.getEmail())) {
 
-                    // JSON
-                    WWWForm form = new WWWForm();
-                    form.AddField("username", PolybiusManager.player.getUsername());
-                    form.AddField("password", PolybiusManager.player.getPassword());
-                    form.AddField("email", PolybiusManager.player.getEmail());
-                    form.AddField("dob", "--/--/----");
-                    form.AddField("privacy", 0);
-                    PolybiusManager.player.setDob("11/26/2018");
-
-                    Debug.Log("hello:"+JsonUtility.ToJson(form));
                     // REST: Create user
                     RestClient.Post<ServerResponse>(flaskIP + "/users", PolybiusManager.player).Then(resp => {
                         if (resp.success) {
@@ -138,14 +92,11 @@ namespace polybius {
 
 		public User getUser(string username){
             User u = null;
-            
-            // REST: Get user
-            RestClient.Get<User>(flaskIP + "/users?username=" + PolybiusManager.player.getUsername()).Then(resp => {
-                if (resp != null && !string.IsNullOrEmpty(resp.getUsername())) {
-                    // Set return var
-                    u = resp;
-                    Debug.Log("Got user: " + u.getUsername());
-                }
+
+            // REST: Get array of users with username
+            string url = flaskIP + "/users?username=" + username;
+            RestClient.GetArray<User>(url).Then(respArray => {
+                    u = respArray[0];
             }).Catch(err => {
                 Debug.LogError("Error: " + err.Message);
             });
@@ -153,39 +104,42 @@ namespace polybius {
             return u;
         }
 
-        public void sendMessageRequest(Message m) {
-			User u = getUser(m.receiver);
-			if (u != null) {
-                // JSON
-                WWWForm form = new WWWForm();
-                form.AddField("receiverID", u.getUserID());
-                form.AddField("senderID", PolybiusManager.player.getUserID());
-                form.AddField("message", m.message);
+        [Serializable]
+        public class ServerMessage {
+            public int receiverID, senderID;
+            public string message;
 
-                // REST: Send message
-                RestClient.Post<ServerResponse>(flaskIP + "/messages", form.data).Then(resp => {
-                    if (resp.success) {
-                        Debug.Log("Successfully sent message");
-                        PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
-                    } else {
-                        Debug.LogError("Could not send message: " + resp.message);
-                    }
-                }).Catch(err => {
-                    Debug.LogError("Error: " + err.Message);
-                });
-
-            } else {
-                Debug.LogError("Could not send message, user null");
+            public ServerMessage(int rID, int sID, string m) {
+                receiverID = rID;
+                senderID = sID;
+                message = m;
             }
+        }
+
+        public void sendMessageRequest(Message m) {
+            // JSON
+            ServerMessage s = new ServerMessage(m.receiver.getUserID(), m.sender.getUserID(), m.message);
+
+            // REST: Send message
+            RestClient.Post<ServerResponse>(flaskIP + "/messages", s).Then(resp => {
+                if (resp.success) {
+                    Debug.Log("Successfully sent message");
+                    PolybiusManager.sendNotification("Message sent", "Your message was sent successfully");
+                } else {
+                    Debug.LogError("Could not send message: " + resp.message);
+                }
+            }).Catch(err => {
+                Debug.LogError("Error: " + err.Message);
+            });
         }
 
         public void sendFeedBack(string feedback, string subject) {
             // TODO: Flask send feedback query
         }
 
-		public bool checkFriend(int friendID){
+        public bool checkFriend(User friend){
             string url =    flaskIP + "/friends?user1ID=" + PolybiusManager.player.getUserID() +
-                            "&user2ID=" + friendID.ToString();
+                            "&user2ID=" + friend.getUserID().ToString();
 
             bool toReturn = false;
 
@@ -200,17 +154,25 @@ namespace polybius {
             return toReturn;
         }
 
-        public void AddFriend(string username, int friendID) {
-			if (!checkFriend(friendID))
+        [Serializable]
+        public class ServerFriend {
+            public int user1ID, user2ID;
+
+            public ServerFriend(int u1ID, int u2ID) {
+                user1ID = u1ID;
+                user2ID = u2ID;
+            }
+        }
+
+        public void AddFriend(User friend) {
+			if (!checkFriend(friend))
 				return;
 
             // JSON
-            WWWForm form = new WWWForm();
-            form.AddField("user1ID", PolybiusManager.player.getUserID());
-            form.AddField("user2ID", friendID);
+            ServerFriend f = new ServerFriend(PolybiusManager.player.getUserID(), friend.getUserID());
 
             // REST: Add friend
-            RestClient.Post<ServerResponse>(flaskIP + "/friends", form.data).Then(resp => {
+            RestClient.Post<ServerResponse>(flaskIP + "/friends", f).Then(resp => {
                 if (resp.success) {
                     Debug.Log("Successfully added friend");
                 } else {
@@ -238,29 +200,31 @@ namespace polybius {
             return toReturn;
         }
 
-        public void BlockPlayer(string username, int id) {
-			if (!checkBlocked(id))
+        public void BlockPlayer(User user) {
+			if (!checkBlocked(user.getUserID()))
 				return;
 
-			User u = getUser(username);
-			if (u != null) {
-                // JSON
-                WWWForm form = new WWWForm();
-                form.AddField("blockerID", PolybiusManager.player.getUserID());
-                form.AddField("blockedID", id);
+            // JSON
+            ServerFriend f = new ServerFriend(PolybiusManager.player.getUserID(), user.getUserID());
 
-                // REST: Block player
-                RestClient.Post<ServerResponse>(flaskIP + "/block", form.data).Then(resp => {
-                    if (resp.success) {
-                        Debug.Log("Successfully blocked player");
-                    } else {
-                        Debug.LogError("Could not block player: " + resp.message);
-                    }
-                }).Catch(err => {
-                    Debug.LogError("Error: " + err.Message);
-                });
-            } else {
-                Debug.LogError("Could not block player, other user null");
+            // REST: Block player
+            RestClient.Post<ServerResponse>(flaskIP + "/block", f).Then(resp => {
+                if (resp.success) {
+                    Debug.Log("Successfully blocked player");
+                } else {
+                    Debug.LogError("Could not block player: " + resp.message);
+                }
+            }).Catch(err => {
+                Debug.LogError("Error: " + err.Message);
+            });
+        }
+
+        [Serializable]
+        public class ServerReport {
+            public int userID;
+
+            public ServerReport(int uID) {
+                userID = uID;
             }
         }
 
@@ -268,11 +232,10 @@ namespace polybius {
 			User u = getUser(username);
             if (u != null) {
                 // JSON
-                WWWForm form = new WWWForm();
-                form.AddField("userID", u.getUserID());
+                ServerReport f = new ServerReport(u.getUserID());
 
                 // REST: Report user
-                RestClient.Post<ServerResponse>(flaskIP + "/report", form.data).Then(resp => {
+                RestClient.Post<ServerResponse>(flaskIP + "/report", f).Then(resp => {
                     if (resp.success) {
                         Debug.Log("Successfully reported player");
                     } else {
@@ -286,39 +249,41 @@ namespace polybius {
             }
         }
 
-        public void RemoveFriend(string username, int id) {
-			User u = getUser(username);
-			if (u != null) {
-                // JSON
-                WWWForm form = new WWWForm();
-                form.AddField("user1ID", PolybiusManager.player.getUserID());
-                form.AddField("user2ID", u.getUserID());
+        public void RemoveFriend(User user) {
+            // JSON
+            ServerFriend f = new ServerFriend(PolybiusManager.player.getUserID(), user.getUserID());
 
-                // REST: Remove Friend
-                RestClient.Put<ServerResponse>(flaskIP + "/friends", form.data).Then(resp => {
-                    if (resp.success) {
-                        Debug.Log("Successfully remove friend");
-                    } else {
-                        Debug.LogError("Could not remove friend: " + resp.message);
-                    }
-                }).Catch(err => {
-                    Debug.LogError("Error: " + err.Message);
-                });
-            } else {
-                Debug.LogError("Could not remove friend, user null");
+            // REST: Remove Friend
+            RestClient.Put<ServerResponse>(flaskIP + "/friends", f).Then(resp => {
+                if (resp.success) {
+                    Debug.Log("Successfully remove friend");
+                } else {
+                    Debug.LogError("Could not remove friend: " + resp.message);
+                }
+            }).Catch(err => {
+                Debug.LogError("Error: " + err.Message);
+            });
+        }
+
+        [Serializable]
+        public class ServerGame {
+            public string name, gameType;
+            public float latCoord, longCoord;
+
+            public ServerGame(string n, string gt, float latC, float longC) {
+                name = n;
+                gameType = gt;
+                latCoord = latC;
+                longCoord = longC;
             }
         }
 
         public void host(string rname, string gameType) {
             // JSON
-            WWWForm form = new WWWForm();
-            form.AddField("name", rname);
-            form.AddField("gameType", gameType);
-            form.AddField("latCoord", PolybiusManager.currLat.ToString());
-            form.AddField("longCoord", PolybiusManager.currLong.ToString());
+            ServerGame g = new ServerGame(rname, gameType, PolybiusManager.currLat, PolybiusManager.currLong);
 
             // REST: Create lobby
-            RestClient.Post<ServerResponse>(flaskIP + "/lobbies", form.data).Then(resp => {
+            RestClient.Post<ServerResponse>(flaskIP + "/lobbies", g).Then(resp => {
                 if (resp.success) {
                     PolybiusManager.currGame = new Game(rname, gameType, PolybiusManager.player, PolybiusManager.currLat, PolybiusManager.currLong);
                     Debug.Log("Successfully created new lobby");
@@ -330,14 +295,22 @@ namespace polybius {
             });
         }
 
+        [Serializable]
+        public class ServerPrivacy {
+            public int userID, privacy;
+
+            public ServerPrivacy(int uID, int p) {
+                userID = uID;
+                privacy = p;
+            }
+        }
+
         public void setPrivacy(int userID, int privacy) {
             // JSON
-            WWWForm form = new WWWForm();
-            form.AddField("userID", userID);
-            form.AddField("privacy", privacy);
+            ServerPrivacy p = new ServerPrivacy(userID, privacy);
 
             // REST: Set privacy
-            RestClient.Put<ServerResponse>(flaskIP + "/users", form.data).Then(resp => {
+            RestClient.Put<ServerResponse>(flaskIP + "/users", p).Then(resp => {
                 if (resp.success) {
                     Debug.Log("Successfully set user " + userID.ToString() + " privacy to " + privacy);
                 } else {
@@ -348,14 +321,23 @@ namespace polybius {
             });
         }
 
+        [Serializable]
+        public class ServerOnline {
+            public int userID;
+            public bool isOnline;
+
+            public ServerOnline(int uID, bool o) {
+                userID = uID;
+                isOnline = o;
+            }
+        }
+
         public void setOnline(bool isOnline) {
             // JSON
-            WWWForm form = new WWWForm();
-            form.AddField("userID", PolybiusManager.player.getUserID());
-            form.AddField("isOnline", isOnline.ToString());
+            ServerOnline o = new ServerOnline(PolybiusManager.player.getUserID(), isOnline);
 
             // REST: Set privacy
-            RestClient.Put<ServerResponse>(flaskIP + "/users", PolybiusManager.player).Then(resp => {
+            RestClient.Put<ServerResponse>(flaskIP + "/users", o).Then(resp => {
                 if (resp.success) {
                     Debug.Log("Successfully set currentUser's isOnline to: " + isOnline.ToString());
                 } else {
@@ -366,12 +348,7 @@ namespace polybius {
             });
         }
 
-        // JSON Responses with arrays
-
-        // Helper JSON Wrapper
-        private class Wrapper<T> {
-            public T[] items;
-        }
+        // Functions returning a List
 
         public List<User> searchUsers(string search) {
             string url = flaskIP + "/users?search=" + search;

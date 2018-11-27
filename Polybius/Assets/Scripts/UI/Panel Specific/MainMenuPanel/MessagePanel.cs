@@ -30,7 +30,7 @@ namespace polybius {
         void displayMessages() {
             for (int i = 0; i < messages.Count; i++) {
                 GameObject newMessage = null;
-                if (messages[i].sender == PolybiusManager.player.getUsername()) {
+                if (messages[i].sender == PolybiusManager.player) {
                     newMessage = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Blue Message"), messageParent.transform);
                 } else {
                     newMessage = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Green Message"), messageParent.transform);
@@ -49,7 +49,7 @@ namespace polybius {
 
         public void sendMessage(TMP_InputField inputField) {
             if (!string.IsNullOrEmpty(inputField.text)) {
-                Message m = new Message(PolybiusManager.player.getUsername(), otherUser.getUsername(), System.DateTime.Now, inputField.text);
+                Message m = new Message(PolybiusManager.player, otherUser, System.DateTime.Now, inputField.text);
                 messages.Add(m);
                 PolybiusManager.dm.sendMessageRequest(m);
                 inputField.text = "";
