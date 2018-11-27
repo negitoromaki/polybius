@@ -19,6 +19,7 @@ using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
+using System;
 
 namespace polybius {
     public class DatabaseManager : MonoBehaviour {
@@ -28,12 +29,47 @@ namespace polybius {
         // ------------
 
         private string flaskIP = "http://128.211.240.229:5000";
+        public string postJson(string method, WWWForm json, string url)
+        {
+            // Create request
+            UnityWebRequest request = new UnityWebRequest(url, method);
+            request.downloadHandler = new DownloadHandlerBuffer();
 
+            // Ensure headers for JSON data say JSON
+            if (method == "POST" || method == "PUT")
+            {
+                // Set upload handler
+                request.uploadHandler = new UploadHandlerRaw(json.data);
+
+                request.SetRequestHeader("accept", "application/json");
+                request.SetRequestHeader("content-type", "application/json");
+                request.chunkedTransfer = false;
+            }
+
+            // Send and wait until done
+            request.SendWebRequest();
+            while (!request.isDone) { }
+
+            // Get result
+            if (request.isNetworkError || request.isHttpError)
+            {
+                Debug.Log("Network Error: " + request.error);
+                return "{\"message\": \"Network/HTTP Error\",\"success\": false}";
+            }
+            else
+            {
+                return request.downloadHandler.text;
+            }
+        }
         public class ServerResponse {
             public bool success;
             public string message;
         }
-
+        [Serializable]
+        public class Uarr
+        {
+            public User[] users;
+        }
         // login user
         public void login() {
             if (!PolybiusManager.loggedIn) {
@@ -41,20 +77,25 @@ namespace polybius {
                     !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
 
                     // REST: Get user
-                    RestClient.Get<User>(flaskIP + "/users?username=" + PolybiusManager.player.getUsername()).Then(resp => {
-                        if (resp.getPassword() == PolybiusManager.player.getPassword()) {
-                            // Login successful, set player as returned user
-                            PolybiusManager.player = resp;
-                            Debug.Log("Login successfull");
 
-                            // Set isOnline to true
-                            setOnline(true);
-                        } else {
-                            Debug.LogError("Login unsuccessful");
-                        }
-                    }).Catch(err => {
-                        Debug.LogError("Error: " + err.Message);
-                    });
+                   
+                    string j = PolybiusManager.dm.postJson("GET", null, flaskIP + "/users?username="+PolybiusManager.player.getUsername());
+                    Debug.Log(j);
+                    Uarr u= JsonUtility.FromJson<Uarr>(j);
+                    
+                    if (u.users[0].getPassword() == PolybiusManager.player.getPassword())
+                    {
+                        // Login successful, set player as returned user
+                        PolybiusManager.player = u.users[0];
+                        Debug.Log("Login successfull");
+
+                        // Set isOnline to true
+                        setOnline(true);
+                    }
+                    else
+                    {
+                        Debug.LogError("Login unsuccessful");
+                    }
                 }
             }
         }
@@ -77,7 +118,7 @@ namespace polybius {
 
                     Debug.Log("hello:"+JsonUtility.ToJson(form));
                     // REST: Create user
-                    RestClient.Post<ServerResponse>(flaskIP + "/users", form.data).Then(resp => {
+                    RestClient.Post<ServerResponse>(flaskIP + "/users", PolybiusManager.player).Then(resp => {
                         if (resp.success) {
                             PolybiusManager.loggedIn = true;
                             Debug.Log("Successfully created and logged in user");
@@ -314,7 +355,7 @@ namespace polybius {
             form.AddField("isOnline", isOnline.ToString());
 
             // REST: Set privacy
-            RestClient.Put<ServerResponse>(flaskIP + "/users", form.data).Then(resp => {
+            RestClient.Put<ServerResponse>(flaskIP + "/users", PolybiusManager.player).Then(resp => {
                 if (resp.success) {
                     Debug.Log("Successfully set currentUser's isOnline to: " + isOnline.ToString());
                 } else {
