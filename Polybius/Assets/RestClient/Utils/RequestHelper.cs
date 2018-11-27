@@ -49,7 +49,7 @@ namespace Proyecto26
             set { _timeout = value; }
         }
 
-        private bool? _chunkedTransfer;
+        private bool? _chunkedTransfer = false;
         public bool? ChunkedTransfer
         {
             get { return _chunkedTransfer; }

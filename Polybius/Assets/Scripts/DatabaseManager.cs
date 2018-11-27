@@ -354,7 +354,7 @@ namespace polybius {
 
             public ServerPrivacy(int uID, int p) {
                 userID = uID;
-                privacy = p;
+                privacy = (p > 0) ? 1 : 0;
             }
         }
 
@@ -376,12 +376,11 @@ namespace polybius {
 
         [Serializable]
         public class ServerOnline {
-            public int userID;
-            public bool isOnline;
+            public int userID, isOnline;
 
             public ServerOnline(int uID, bool o) {
                 userID = uID;
-                isOnline = o;
+                isOnline = o ? 1 : 0;
             }
         }
 
