@@ -7561,8 +7561,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 470418728}
-        m_MethodName: loginButton
+      - m_Target: {fileID: 1467872493}
+        m_MethodName: login
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17914,8 +17914,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1475553448}
-        m_MethodName: RegisterButton
+      - m_Target: {fileID: 1467872493}
+        m_MethodName: create
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

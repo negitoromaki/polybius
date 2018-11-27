@@ -21,23 +21,17 @@ namespace polybius {
         void Update() {
             // Username
             if (PolybiusManager.player.setUsername(usernameText.text)) {
-                //usernameImage.color = Color.white;
+                usernameImage.color = Color.white;
             } else {
-                //usernameImage.color = new Color32(255, 0, 0, 150);
+                usernameImage.color = new Color32(255, 0, 0, 150);
             }
 
             // Password
             if (PolybiusManager.player.setPassword(passwordText.text)) {
-               // passwordImage.color = Color.white;
+               passwordImage.color = Color.white;
             } else {
-               // passwordImage.color = new Color32(255, 0, 0, 150);
+               passwordImage.color = new Color32(255, 0, 0, 150);
             }
-        }
-
-        public void loginButton() {
-            if (!string.IsNullOrEmpty(PolybiusManager.player.getUsername()) &&
-                !string.IsNullOrEmpty(PolybiusManager.player.getPassword()))
-                PolybiusManager.dm.login();
         }
     }
 }
