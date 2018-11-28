@@ -9,6 +9,8 @@ public class TicTacToeController : MonoBehaviour
     private int turn = 0;
     private bool gameOver = false;
 
+    public GameObject gameMesh; // for vuforia support
+
     // pieces
     public GameObject xPiece;
     public GameObject oPiece;
@@ -83,10 +85,12 @@ public class TicTacToeController : MonoBehaviour
             {
                 // instantiate game objects respective to the player piece
                 GameObject newPiece = (GameObject)Instantiate(xPiece, instantiatePos, Quaternion.identity);
+                newPiece.transform.SetParent(gameMesh.transform);
             }
             else if (turn == 1)
             {
                 GameObject newPiece = (GameObject)Instantiate(oPiece, instantiatePos, Quaternion.identity);
+                newPiece.transform.SetParent(gameMesh.transform);
             }
 
             int winner = checkWin(turn, x, y);

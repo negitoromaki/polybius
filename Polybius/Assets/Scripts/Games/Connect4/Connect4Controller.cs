@@ -9,6 +9,7 @@ public class Connect4Controller : MonoBehaviour
     public GameObject redPuck;
     public GameObject yellowPuck;
 
+    public GameObject gameMesh; // for instantiation
     public GameObject gameOverPanel;
     public GameObject buttonPanel;
     public TextMeshProUGUI gameOverText;
@@ -40,11 +41,13 @@ public class Connect4Controller : MonoBehaviour
                 gameBoard[x,i] = turn;
                 if (turn == 0)
                 {
-                    GameObject newPuck = (GameObject)Instantiate(redPuck, new Vector3(0.1f - (3f - x) * 8.7f, 1.7f + (i * 7.3f), 0), Quaternion.identity);
+                    GameObject newPuck = (GameObject)Instantiate(redPuck, new Vector3(gameMesh.transform.position.x + 0.1f - (3f - x) * 8.7f, gameMesh.transform.position.y + 1.7f + (i * 7.3f) - 20f, gameMesh.transform.position.z), Quaternion.identity);
+                    newPuck.transform.SetParent(gameMesh.transform);
                 }
                 else if (turn == 1)
                 {
-                    GameObject newPuck = (GameObject)Instantiate(yellowPuck, new Vector3(0.1f - (3f - x) * 8.7f, 1.7f + (i * 7.3f), 0), Quaternion.identity);
+                    GameObject newPuck = (GameObject)Instantiate(yellowPuck, new Vector3(gameMesh.transform.position.x + 0.1f - (3f - x) * 8.7f, gameMesh.transform.position.y + 1.7f + (i * 7.3f) - 20f, gameMesh.transform.position.z), Quaternion.identity);
+                    newPuck.transform.SetParent(gameMesh.transform);
                 }
                 // check win condition
                 int winner = checkWin(turn, x, i);

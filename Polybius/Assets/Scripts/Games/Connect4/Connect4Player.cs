@@ -8,6 +8,7 @@ public class Connect4Player : MonoBehaviour
     public GameObject redPuck;
     public GameObject yellowPuck;
     private GameObject currentPuck;
+    public GameObject gameMesh; // used for instantiation
 
     public Connect4Controller gameController;
     private bool instantiated = false;
@@ -23,12 +24,14 @@ public class Connect4Player : MonoBehaviour
 
         if (gameController.getTurn() == 0 && !instantiated)
         {
-            currentPuck = (GameObject)Instantiate(redPuck, new Vector3(0.1f, 46.5f, 0), Quaternion.identity);
+            currentPuck = (GameObject)Instantiate(redPuck, new Vector3(gameMesh.transform.position.x + 0.1f, gameMesh.transform.position.y + 46.5f - 20f, gameMesh.transform.position.z), Quaternion.identity);
+            currentPuck.transform.SetParent(gameMesh.transform);
             instantiated = true;
         }
         else if (gameController.getTurn() == 1 && !instantiated)
         {
-            currentPuck = (GameObject)Instantiate(yellowPuck, new Vector3(0.1f, 46.5f, 0), Quaternion.identity);
+            currentPuck = (GameObject)Instantiate(yellowPuck, new Vector3(gameMesh.transform.position.x + 0.1f, gameMesh.transform.position.y + 46.5f - 20f, gameMesh.transform.position.z), Quaternion.identity);
+            currentPuck.transform.SetParent(gameMesh.transform);
             instantiated = true;
         }
     }
