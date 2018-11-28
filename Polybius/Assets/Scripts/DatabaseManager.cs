@@ -83,7 +83,7 @@ namespace polybius {
                 {
 
                     // REST: Get user
-                    string j = "{\"users\":" + PolybiusManager.dm.getRequest("GET", null, flaskIP + "/users?username=" + PolybiusManager.player.getUsername()) + "}";
+                    string j = PolybiusManager.dm.getRequest("GET", null, flaskIP + "/users?username=" + PolybiusManager.player.getUsername());
                     Debug.Log(j);
                     Uarr u = JsonUtility.FromJson<Uarr>(j);
 
@@ -179,9 +179,36 @@ namespace polybius {
                 Debug.LogError("Error: " + err.Message);
             });
         }
+        [Serializable]
+        public class feed
+        {
+            public string feedback;
+              public string subject;
 
+            public feed(string f, string t)
+            {
+                feedback = f;
+                subject = t;
+            }   
+        }
         public void sendFeedBack(string feedback, string subject) {
             // TODO: Flask send feedback query
+            feed s = new feed(feedback,subject);
+
+            // REST: Send message
+            RestClient.Post<ServerResponse>(flaskIP + "/feedback", s).Then(resp => {
+                if (resp.success)
+                {
+                    Debug.Log("Successfully sent feedback");
+                    PolybiusManager.sendNotification("Feedback sent", "Your feedback was sent successfully");
+                }
+                else
+                {
+                    Debug.LogError("Could not send feedback: " + resp.message);
+                }
+            }).Catch(err => {
+                Debug.LogError("Error: " + err.Message);
+            });
         }
 
         public bool checkFriend(User friend){
@@ -235,16 +262,16 @@ namespace polybius {
 		public bool checkBlocked(int blockID){
             string url =    flaskIP + "/block?user1ID=" + PolybiusManager.player.getUserID() +
                             "&user2ID=" + blockID.ToString();
-            bool toReturn = false;
+            bool toReturn = true;
 
             // REST: Check blocked
-            RestClient.Get(url).Then(resp => {
-                if (!resp.Text.Contains("0"))
-                    toReturn = true;
-            }).Catch(err => {
-                Debug.LogError("Error: " + err.Message);
-            });
-
+            string j = PolybiusManager.dm.getRequest("GET", null, url);
+            Debug.Log(j);
+            Uarr results = JsonUtility.FromJson<Uarr>(j);
+            if (j.Contains("0"))
+            {
+                toReturn = false;
+            }
             return toReturn;
         }
 
@@ -447,7 +474,7 @@ namespace polybius {
             string url = flaskIP + "/friends?user1ID=" + userID.ToString();
 
             // REST: Get array of friends
-            string j = "{\"friends\":" + PolybiusManager.dm.getRequest("GET", null, url) + "}";
+            string j = PolybiusManager.dm.getRequest("GET", null, url);
             Debug.Log(j);
             Lfrds fri = JsonUtility.FromJson<Lfrds>(j);
             List < User > results = new List<User>();

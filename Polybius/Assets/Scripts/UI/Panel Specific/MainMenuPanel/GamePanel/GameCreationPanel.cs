@@ -23,6 +23,7 @@ namespace polybius {
 
         public void createGame() {
 			PolybiusManager.dm.host(name.text, gp.currGameType);
+            PolybiusManager.dm.hostLobby(name.text);
         }
     }
 }

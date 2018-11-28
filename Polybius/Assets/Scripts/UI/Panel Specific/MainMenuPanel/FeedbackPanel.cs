@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 
 namespace polybius {
     public class FeedbackPanel : MonoBehaviour {
@@ -13,7 +15,7 @@ namespace polybius {
         }
 
 
-        void sendFeedback() {
+        public void sendFeedback() {
             PolybiusManager.dm.sendFeedBack("Topic: " + topic.GetComponent<TMP_InputField>().text,
                 feedback.GetComponent<TMP_InputField>().text);
         }
