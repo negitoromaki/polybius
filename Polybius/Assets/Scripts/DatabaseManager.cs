@@ -179,6 +179,50 @@ namespace polybius {
                 Debug.LogError("Error: " + err.Message);
             });
         }
+
+        [Serializable]
+        public class statsend
+        {
+            public int pongwins;
+            public int userID;
+
+            public statsend(int f, int t)
+            {
+                pongwins = f;
+                userID = t;
+            }
+        }
+
+
+        public void setStat(int[] statistic, string statname )
+        {
+            statsend s = new statsend(statistic[0], PolybiusManager.player.userID);
+
+            RestClient.Put<ServerResponse>(flaskIP + "/stats", s).Then(resp => {
+                if (resp.success)
+                {
+                    Debug.Log("Successful");
+                }
+                else
+                {
+                    Debug.LogError("Could not: " + resp.message);
+                }
+            }).Catch(err => {
+                Debug.LogError("Error: " + err.Message);
+            });
+        }
+        public statsend getStat()
+        {
+            string url = flaskIP + "/stats?userID=" + PolybiusManager.player.userID;
+            string j = PolybiusManager.dm.getRequest("GET", null, url);
+            Debug.Log(j);
+            statsend u = JsonUtility.FromJson<statsend>(j);
+            return u;
+        }
+
+
+
+
         [Serializable]
         public class feed
         {
