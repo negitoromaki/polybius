@@ -7,6 +7,12 @@ public class PongBall : MonoBehaviour
 {
     private Rigidbody rb;
 
+    private bool isPaused = true;
+    private bool stateChanged = false;
+    private Vector3 currentVelocity;
+
+    public CustomTrackableHandler trackHandler; // used for vuforia
+
     public float speed = 5f;
     public PongManager manager;
 
@@ -24,14 +30,60 @@ public class PongBall : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = rb.velocity.normalized * speed;
+        if (trackHandler.isTracked)
+        {
+            if (isPaused)
+            {
+                isPaused = false;
+                stateChanged = true;
+            }
+        }
+        else
+        {
+            isPaused = true;
+            stateChanged = false;
+        }
+
+        if (!isPaused)
+        {
+            if (stateChanged)
+            {
+                Debug.Log("Changing velocity back!");
+                rb.velocity = currentVelocity;
+                stateChanged = false;
+            }
+            else
+            {
+                currentVelocity = rb.velocity;
+            }
+
+            // just to make sure the ball doesn't get stuck
+            if (Mathf.Abs(rb.velocity.x) < 2)
+            {
+                float xVal = Random.Range(4, 8) * (Random.Range(0, 2) * 2 - 1); // first part gives you a random num from 4 to 8 and second part is either positive or negative
+                Vector3 newVel = rb.velocity;
+                newVel.x = xVal;
+                rb.velocity = newVel;
+            }
+
+            rb.velocity = rb.velocity.normalized * speed;
+        }
+        else
+        {
+            Debug.Log("Changing velocity to zero!");
+            rb.velocity = Vector3.zero;
+
+            Debug.Log(rb.velocity);
+        }
     }
 
     public void ResetBall()
     {
         //rb.velocity = Vector3.zero;
         transform.position = new Vector3(0, 0, 0);
-        rb.velocity = new Vector3((Random.Range(0, 2) * 2 - 1) * speed, 0, (Random.Range(0, 2) * 2 - 1) * speed);
+        Vector3 newVel = new Vector3((Random.Range(0, 2) * 2 - 1) * speed, 0, (Random.Range(0, 2) * 2 - 1) * speed);
+        rb.velocity = newVel;
+        currentVelocity = newVel;
     }
 
     private void OnCollisionEnter(Collision collision)
