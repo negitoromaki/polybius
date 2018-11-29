@@ -81,11 +81,12 @@ c.execute("""
 """)
 db.commit()
 
+# Make sure feedback database exists
 c.execute("""
 	CREATE TABLE IF NOT EXISTS feedback (
-		id		integer primary key autoincrement unique,
+		id			integer primary key autoincrement unique,
 		subject		text not null,
-		feed	        text not null
+		feedback	text not null
 	);
 """)
 db.commit()
@@ -669,8 +670,9 @@ def api_feedback():
                 # Get vars
                 feedback = json.get('feedback')
                 subject = json.get('subject')
+				
                 if feedback and subject:
-                        c.execute('INSERT or IGNORE INTO feedback (subject, feedback) VALUES (?, ?)',(subject, feedback))
+                        c.execute('INSERT or IGNORE INTO feedback (subject, feedback) VALUES (?, ?)', (subject, feedback))
                         db.commit()
                         resp = jsonify(dict(success=True, message="Feedback Sent"))
                 else:
