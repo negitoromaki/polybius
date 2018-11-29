@@ -202,7 +202,7 @@ namespace polybius {
         public List<Stat> getStat() {
             string url = flaskIP + "/stats?userID=" + PolybiusManager.player.userID;
 
-            string j = "{\"stats\":" + PolybiusManager.dm.getRequest("GET", null, url) + "}";
+            string j = PolybiusManager.dm.getRequest("GET", null, url);
             Debug.Log("Get Stat: " + j);
             StatArray statArray = JsonUtility.FromJson<StatArray>(j);
 
@@ -488,7 +488,7 @@ namespace polybius {
             string url = flaskIP + "/friends?user1ID=" + userID.ToString();
 
             // REST: Get array of friends
-            string j = "{\"friends\":" + PolybiusManager.dm.getRequest("GET", null, url) + "}";
+            string j = PolybiusManager.dm.getRequest("GET", null, url);
             Debug.Log(j);
             FriendArray fri = JsonUtility.FromJson<FriendArray>(j);
             List <User> results = new List<User>();
@@ -538,7 +538,7 @@ namespace polybius {
             string url = flaskIP + "/lobbies?gameType=" + gameType;
             List<Game> lobbies = new List<Game>();
 
-            string j = "{\"games\":" + PolybiusManager.dm.getRequest("GET", null, url) + "}";
+            string j = PolybiusManager.dm.getRequest("GET", null, url);
             Debug.Log(j);
             Games results = JsonUtility.FromJson<Games>(j);
 

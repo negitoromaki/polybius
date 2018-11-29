@@ -375,7 +375,7 @@ def api_lobbies(lobby_id = -1):
 
 			# Get column names and desc and turn into json
 			columns = c.description
-			resp = jsonify([{columns[index][0]:column for index,
+			resp = jsonify(	games=[{columns[index][0]:column for index,
                             column in enumerate(value)} for value in c.fetchall()])
 		else:
 			resp = jsonify(dict(success=False, message="gameType not specified"))
@@ -546,7 +546,7 @@ def api_stats():
 
 			# Get column names and desc and turn into json
 			columns = c.description
-			resp = jsonify([{columns[index][0]:column for index,
+			resp = jsonify(	stats=[{columns[index][0]:column for index,
                             column in enumerate(value)} for value in c.fetchall()])
 		else:
 			resp = jsonify(dict(success=False, message="userID not specified"))
