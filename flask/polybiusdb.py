@@ -81,6 +81,15 @@ c.execute("""
 """)
 db.commit()
 
+c.execute("""
+	CREATE TABLE IF NOT EXISTS feedback (
+		id		integer primary key autoincrement unique,
+		subject		text not null,
+		feed	        text not null
+	);
+""")
+db.commit()
+
 # Close cursor and db
 c.close()
 db.close()
@@ -151,7 +160,7 @@ def api_users(user_id = -1):
 
 		# Get column names and desc and turn into json
 		columns = c.description
-		resp = jsonify([{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
+		resp = jsonify(users=[{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
 
 	# Add new user by posting
 	elif request.method == 'POST':
@@ -190,7 +199,7 @@ def api_users(user_id = -1):
 			username 		= json.get('username')
 			password 		= json.get('password')
 			email 			= json.get('email')
-			dob				= json.get('dob')
+			dob			= json.get('dob')
 			isOnline		= json.get('isOnline')
 			privacy 		= json.get('privacy')
 			currLobbyID 	= json.get('currLobbyID')
@@ -313,7 +322,7 @@ def api_count():
 
 			# Get column names and desc and turn into json
 			columns = c.description
-			resp = jsonify([{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
+			resp = jsonify(msg=[{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
 
 			# Delete messages once read
 			c.execute('DELETE FROM messages WHERE receiverID = ? AND senderID = ?', (receiverID, senderID))
@@ -584,10 +593,10 @@ def api_friends():
 			# Check if 2 userIDs, return friend status
 			if user2ID:
 				# Eliminate double entries
-				if (user2ID < user1ID):
-					temp = user2ID
-					user2ID = user1ID
-					user1ID = temp
+				#if (user2ID < user1ID):
+				#	temp = user2ID
+				#	user2ID = user1ID
+				#	user1ID = temp
 
 				c.execute('SELECT COUNT(*) FROM friends WHERE user1ID = ? AND user2ID = ?', (user1ID, user2ID))
 				resp = jsonify(dict(result=(c.fetchone())))
@@ -598,7 +607,7 @@ def api_friends():
 
 				# Get column names and desc and turn into json
 				columns = c.description
-				resp = jsonify([{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
+				resp = jsonify(friends=[{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
 
 		# No user1ID
 		else:
@@ -612,10 +621,10 @@ def api_friends():
 		user2ID = json.get('user2ID')
 
 		# Eliminate double entries
-		if (user2ID < user1ID):
-			temp = user2ID
-			user2ID = user1ID
-			user1ID = temp
+		#if (user2ID < user1ID):
+		#	temp = user2ID
+		#	user2ID = user1ID
+		#	user1ID = temp
 
 		if user1ID and user2ID:
 			c.execute('INSERT or IGNORE INTO friends (user1ID, user2ID) VALUES (?, ?)', (user1ID, user2ID,))
@@ -632,10 +641,10 @@ def api_friends():
 		user2ID = json.get('user2ID')
 
 		# Eliminate double entries
-		if (user2ID < user1ID):
-			temp = user2ID
-			user2ID = user1ID
-			user1ID = temp
+		#if (user2ID < user1ID):
+		#	temp = user2ID
+		#	user2ID = user1ID
+		#	user1ID = temp
 
 		if user1ID and user2ID:
 			c.execute('DELETE FROM friends WHERE user1ID = ? AND user2ID = ?', (user1ID, user2ID,))
@@ -648,6 +657,27 @@ def api_friends():
 	c.close()
 	db.close()
 	return resp
+
+@app.route('/feedback', methods=['POST'])
+#@requires_auth
+def api_feedback():
+        db = sqlite3.connect('polybius.db')
+        c = db.cursor()
+        json = request.get_json()
+        if request.method == 'POST':
+
+                # Get vars
+                feedback = json.get('feedback')
+                subject = json.get('subject')
+                if feedback and subject:
+                        c.execute('INSERT or IGNORE INTO feedback (?, ?) VALUES (?, ?)',(subject, feedback))
+                        db.commit()
+                        resp = jsonify(dict(success=True, message="Feedback Sent"))
+                else:
+                        resp = jsonify(dict(success=False, message="feedback not specified"))
+        c.close()
+        db.close()
+        return resp
 
 # Run server
 if __name__ == '__main__':
