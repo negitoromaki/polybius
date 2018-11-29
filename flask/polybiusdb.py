@@ -188,7 +188,7 @@ def api_users(user_id = -1):
 				c.execute('SELECT userID FROM users WHERE username = ?',(username,))
 				r= int(c.fetchone()[0])
 				print(r)
-				c.execute('INSERT or IGNORE INTO stats (userID,pongWins) VALUES (?,0)',(r,))
+				c.execute('INSERT or IGNORE INTO stats (userID,pongWins,tttWins,connect4Wins) VALUES (?,0,0,0)',(r,))
 				db.commit()
 			else:
 				resp = jsonify(dict(success=False, message="User fields not unique"))
