@@ -22,7 +22,7 @@ c.execute("""
 		isOnline 	bit not null,
 		privacy		bit not null,
 		currLobbyID integer,
-		reports		integer
+		reports		integer not null
 	);
 """)
 db.commit()
@@ -458,9 +458,9 @@ def api_report():
 			c.execute('SELECT reports FROM users WHERE userID = ?', (userID,))
 			numReports = int(c.fetchone()[0]) + 1
 
-			# Deleting user if above 5
+			# Block user for everyone if above 5
 			if numReports > 5:
-				c.execute('DELETE FROM users WHERE userID= ?', (numReports, userID))
+				c.execute('INSERT or IGNORE INTO blocked (blockerID, blockedID) VALUES (?, ?)', (-1, userID))
 			else:
 				c.execute('UPDATE users SET reports = ? WHERE userID = ?',
 				          (numReports, userID))
@@ -489,7 +489,7 @@ def api_block():
 		blockedID = request.args.get('blockedID')
 
 		if blockerID and blockedID:
-			c.execute('SELECT COUNT(*) FROM blocked WHERE blockerID = ? AND blockedID = ?', (blockerID, blockedID))
+			c.execute('SELECT COUNT(*) FROM blocked WHERE (blockerID = ? OR blockerID = -1) AND blockedID = ?', (blockerID, blockedID))
 			resp = jsonify(dict(result=int(c.fetchone()[0])))
 		else:
 			resp = jsonify(dict(success=False, message="blockerID/blockedID not specified"))
@@ -670,7 +670,7 @@ def api_feedback():
                 feedback = json.get('feedback')
                 subject = json.get('subject')
                 if feedback and subject:
-                        c.execute('INSERT or IGNORE INTO feedback (?, ?) VALUES (?, ?)',(subject, feedback))
+                        c.execute('INSERT or IGNORE INTO feedback (subject, feedback) VALUES (?, ?)',(subject, feedback))
                         db.commit()
                         resp = jsonify(dict(success=True, message="Feedback Sent"))
                 else:

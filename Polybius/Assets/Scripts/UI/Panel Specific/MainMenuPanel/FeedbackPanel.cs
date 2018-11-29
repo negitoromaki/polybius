@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace polybius {
     public class FeedbackPanel : MonoBehaviour {
-        public GameObject topic, feedback;
+        public TMP_InputField topic, feedback;
 
 
         private void Start() {
@@ -16,8 +16,7 @@ namespace polybius {
 
 
         public void sendFeedback() {
-            PolybiusManager.dm.sendFeedBack("Topic: " + topic.GetComponent<TMP_InputField>().text,
-                feedback.GetComponent<TMP_InputField>().text);
+            PolybiusManager.dm.sendFeedBack("Topic: " + topic.text, feedback.text);
         }
     }
 }
