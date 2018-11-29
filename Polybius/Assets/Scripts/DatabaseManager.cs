@@ -501,11 +501,10 @@ namespace polybius {
 
         [Serializable]
         public class MessageArray {
-            public Message[] messages;
+            public Message[] msg;
         }
 
-        public List<Message> getMessages(string senderUsername) {
-            User u = getUser(senderUsername);
+        public List<Message> getMessages(User u) {
             List<Message> r = new List<Message>();
 
             if (u != null) {
@@ -518,14 +517,14 @@ namespace polybius {
                 Debug.Log(j);
 
                 // Add to results
-                if (j.Contains("senderID")) {
-                    MessageArray results = JsonUtility.FromJson<MessageArray>(j);
-                    for (int i = 0; i < results.messages.Length; i++)
-                        r.Add(new Message(PolybiusManager.player, u, results.messages[i].time, results.messages[i].message));
-                }
+                MessageArray results = JsonUtility.FromJson<MessageArray>(j);
+                if (results.msg.Length > 0)
+                    foreach (Message m in results.msg)
+                        r.Add(m);
             } else {
                 Debug.LogError("Could not get messages, other user is null");
             }
+
             return r;
         }
 

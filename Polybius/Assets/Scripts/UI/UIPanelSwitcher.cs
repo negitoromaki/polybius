@@ -10,7 +10,7 @@ namespace polybius {
 
         private GameObject activePanel;
 
-        private void Start() {
+        private void OnEnable() {
             // Set all children
             if (setInactive) {
                 for (int i = 0; i < transform.childCount; i++) {

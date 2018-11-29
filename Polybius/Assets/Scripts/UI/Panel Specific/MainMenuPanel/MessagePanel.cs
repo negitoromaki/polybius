@@ -13,40 +13,36 @@ namespace polybius {
 
         // Variables
         private User otherUser;
-        private List<Message> messages;
+        private List<Message> localMessages;
 
         public void OnEnable() {
+            otherUser = PolybiusManager.dm.getUser(otherUser.getUsername());
             Debug.Assert(otherUser != null && scrollRect != null && title != null && messageParent != null);
             title.GetComponent<TextMeshProUGUI>().text = otherUser.getUsername();
-            messages = PolybiusManager.dm.getMessages(otherUser.getUsername());
+            localMessages = PolybiusManager.dm.getMessages(otherUser);
         }
 
         public void Update() {
             if (Time.frameCount % 30 == 0)
-            {
-                List<Message> m = PolybiusManager.dm.getMessages(otherUser.getUsername());
-                if(m!=null)
-                messages = m;
+                localMessages = PolybiusManager.dm.getMessages(otherUser);
 
-            }
-
-            if (messages.Count > 0)
+            if (localMessages.Count > 0)
                 displayMessages();
         }
 
         void displayMessages() {
-            for (int i = 0; i < messages.Count; i++) {
+            foreach (Message m in localMessages) {
                 GameObject newMessage = null;
-                if (messages[i].senderID == PolybiusManager.player.getUserID()) {
+                if (m.senderID == PolybiusManager.player.getUserID()) {
                     newMessage = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Blue Message"), messageParent.transform);
                 } else {
                     newMessage = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Green Message"), messageParent.transform);
                 }
 
-                newMessage.transform.Find("Message").gameObject.GetComponent<TextMeshProUGUI>().text = messages[i].message;
-                newMessage.transform.Find("Timestamp").gameObject.GetComponent<TextMeshProUGUI>().text = messages[i].time;
+                newMessage.transform.Find("Message").gameObject.GetComponent<TextMeshProUGUI>().text = m.message;
+                newMessage.transform.Find("Timestamp").gameObject.GetComponent<TextMeshProUGUI>().text = m.time;
             }
-            messages.Clear();
+            localMessages.Clear();
         }
 
         IEnumerator ScrollToBottom() {
@@ -56,18 +52,27 @@ namespace polybius {
 
         public void sendMessage(TMP_InputField inputField) {
             if (!string.IsNullOrEmpty(inputField.text)) {
+                Debug.Log("Time: " + DateTime.Now.ToShortDateString().ToString() + " " + DateTime.Now.ToShortTimeString().ToString());
                 Message m = new Message(PolybiusManager.player,
                                         otherUser,
-                                        DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString(),
+                                        DateTime.Now.ToShortDateString().ToString() + " " + DateTime.Now.ToShortTimeString().ToString(),
                                         inputField.text);
 
-                messages.Add(m);
                 PolybiusManager.dm.sendMessage(m);
 
                 inputField.text = "";
+                localMessages = PolybiusManager.dm.getMessages(otherUser);
+                localMessages.Add(m);
                 displayMessages();
                 StartCoroutine(ScrollToBottom());
             }
+        }
+
+        public void OnDisable() {
+            foreach (Transform child in messageParent.transform)
+                GameObject.Destroy(child.gameObject);
+            localMessages.Clear();
+            otherUser = null;
         }
 
         // Setter functions for username and id

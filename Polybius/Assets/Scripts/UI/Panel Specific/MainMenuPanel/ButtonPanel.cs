@@ -11,8 +11,7 @@ public class ButtonPanel : MonoBehaviour {
 
     private GameObject activeButton;
 
-	// Use this for initialization
-	void Start () {
+	public void OnEnable() {
         // Set all inactive except active one
         for (int i = 0; i < transform.childCount; i++)
             transform.GetChild(i).gameObject.GetComponent<Image>().color = unselectedColor;
