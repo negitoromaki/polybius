@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pong.unity
     guid: bd7b3fa67053ec14aaf80368d7090a70
+  - enabled: 1
+    path: Assets/Scenes/TicTacToe.unity
+    guid: 4b7498f81b7de1a45b6786c397fa5756
+  - enabled: 1
+    path: Assets/Scenes/Connect4.unity
+    guid: 2e85dab6b1b5fae41b653d825a5a31da
   m_configObjects: {}
