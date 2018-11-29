@@ -464,6 +464,34 @@ namespace polybius {
             });
         }
 
+        [Serializable]
+        public class ServerDob {
+            public int userID;
+            public string dob;
+
+            public ServerDob(int uID, string d) {
+                userID = uID;
+                dob = d;
+            }
+        }
+
+        public void setDob(string dob) {
+            // JSON
+            ServerDob o = new ServerDob(PolybiusManager.player.getUserID(), dob);
+            Debug.Log(JsonUtility.ToJson(o));
+
+            // REST: Set privacy
+            RestClient.Put<ServerResponse>(flaskIP + "/users", o).Then(resp => {
+                if (resp.success) {
+                    Debug.Log("Successfully set currentUser's dob to: " + dob);
+                } else {
+                    Debug.LogError("Could not set currentUser's isOnline: " + resp.message);
+                }
+            }).Catch(err => {
+                Debug.LogError("Error: " + err.Message);
+            });
+        }
+
         // Functions returning a List
 
         public List<User> searchUsers(string search) {
@@ -671,8 +699,6 @@ namespace polybius {
 			o.PutUtfString ("roomName", roomName);
 			sfs.Send(new ExtensionRequest("SetHost", o));
 			isHost = true;
-
-
 		}
 
 

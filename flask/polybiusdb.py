@@ -74,9 +74,11 @@ db.commit()
 # Make sure statistics database exists
 c.execute("""
 	CREATE TABLE IF NOT EXISTS stats (
-		id		integer primary key autoincrement unique,
-		userID		integer not null,
-		pongWins	integer not null
+		id				integer primary key autoincrement unique,
+		userID			integer not null,
+		pongWins		integer not null,
+		tttWins			integer not null,
+		connect4Wins	integer not null
 	);
 """)
 db.commit()
@@ -554,20 +556,50 @@ def api_stats():
 
 	# Modify stats
 	elif request.method == 'PUT':
-
+	
 		# Get vars
 		userID 		= json.get('userID')
 		pongWins 	= json.get('pongWins')
+		tttWins		= json.get('tttWins')
+		connect4Wins= json.get('connect4Wins')
 
-		if userID:
-			# Update username
-			if pongWins:
+		if userID is not None:
+			# Update pongWins
+			if pongWins > 0:
+				c.execute('SELECT pongWins FROM stats WHERE userID = ?', (userID,))
+				pongWins = int(c.fetchone()[0]) + 1
 				c.execute('UPDATE stats SET pongWins = ? WHERE userID = ?', (pongWins, userID))
 				db.commit()
 				if c.rowcount > 0:
-					resp = jsonify(dict(success=True, message="Updated pongWins"))
+					resp = jsonify(dict(success=True, message="Incremented pongWins"))
 				else:
-					resp = jsonify(dict(success=False, message="Could not update pongWins"))
+					resp = jsonify(dict(success=False, message="Could not increment pongWins"))
+			
+			# Update tttWins
+			elif tttWins > 0:
+				c.execute('SELECT tttWins FROM stats WHERE userID = ?', (userID,))
+				tttWins = int(c.fetchone()[0]) + 1
+				c.execute('UPDATE stats SET tttWins = ? WHERE userID = ?', (tttWins, userID))
+				db.commit()
+				if c.rowcount > 0:
+					resp = jsonify(dict(success=True, message="Incremented tttWins"))
+				else:
+					resp = jsonify(dict(success=False, message="Could not increment tttWins"))
+			
+			# Update connect4Wins
+			elif connect4Wins > 0:
+				c.execute('SELECT connect4Wins FROM stats WHERE userID = ?', (userID,))
+				connect4Wins = int(c.fetchone()[0]) + 1
+				c.execute('UPDATE stats SET connect4Wins = ? WHERE userID = ?', (connect4Wins, userID))
+				db.commit()
+				if c.rowcount > 0:
+					resp = jsonify(dict(success=True, message="Incremented connect4Wins"))
+				else:
+					resp = jsonify(dict(success=False, message="Could not increment connect4Wins"))
+			
+			else:
+				resp = jsonify(dict(success=False, message="Could not find stat to increment"))
+			
 		else:
 			resp = jsonify(dict(success=False, message="userID not specified"))
 

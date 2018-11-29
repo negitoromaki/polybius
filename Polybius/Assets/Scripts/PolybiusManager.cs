@@ -209,8 +209,8 @@ namespace polybius {
                     return true;
                 Match m = Regex.Match(newDob, "(1[012]|0?[1-9])\\/(3[01]|[12][0-9]|0?[1-9])\\/((?:19|20)\\d{2})");
                 if (m.Success) {
+                    PolybiusManager.dm.setDob(newDob);
                     dob = newDob;
-                    // TODO: call database dob update function
                     return true;
                 }
             }
