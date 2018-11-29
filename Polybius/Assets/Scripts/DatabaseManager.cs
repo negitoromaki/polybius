@@ -280,29 +280,48 @@ namespace polybius {
             });
         }
 
-		public bool checkBlocked(int blockID){
-            string url =    flaskIP + "/block?user1ID=" + PolybiusManager.player.getUserID() +
-                            "&user2ID=" + blockID.ToString();
+        [Serializable]
+        public class BlockedResponse {
+            public int result;
+        }
+
+        public bool isBlocked(int userID){
+            if (PolybiusManager.player.blockedUsers.Contains(userID))
+                return true;
+
+            string url =    flaskIP + "/block?blockerID=" + PolybiusManager.player.getUserID() +
+                            "&blockedID=" + userID.ToString();
 
             // REST: Check blocked
             string j = PolybiusManager.dm.getRequest("GET", null, url);
-            Debug.Log(j);
-            UserArray results = JsonUtility.FromJson<UserArray>(j);
+            Debug.Log("Blocked: " + j);
+            BlockedResponse results = JsonUtility.FromJson<BlockedResponse>(j);
 
-            return !j.Contains("0");
+            return results.result > 0;
+        }
+
+        [Serializable]
+        public class BlockServer {
+            public int blockerID, blockedID;
+
+            public BlockServer(int u1ID, int u2ID) {
+                blockerID = u1ID;
+                blockedID = u2ID;
+            }
         }
 
         public void BlockPlayer(User user) {
-			if (!checkBlocked(user.getUserID()))
+			if (isBlocked(user.getUserID()))
 				return;
 
             // JSON
-            ServerFriend f = new ServerFriend(PolybiusManager.player.getUserID(), user.getUserID());
+            BlockServer b = new BlockServer(PolybiusManager.player.getUserID(), user.getUserID());
 
             // REST: Block player
-            RestClient.Post<ServerResponse>(flaskIP + "/block", f).Then(resp => {
+            RestClient.Post<ServerResponse>(flaskIP + "/block", b).Then(resp => {
                 if (resp.success) {
                     Debug.Log("Successfully blocked player");
+                    PolybiusManager.player.blockedUsers.Add(user.getUserID());
                 } else {
                     Debug.LogError("Could not block player: " + resp.message);
                 }

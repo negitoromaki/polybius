@@ -85,7 +85,7 @@ namespace polybius {
         public int userID;
         public List<Message> messages = new List<Message>();
         public List<User> friends = new List<User>();
-        public List<string> blockedUsers = new List<string>();
+        public List<int> blockedUsers = new List<int>();
 
         public User() : this(null, null, null, "--/--/----") {}
 

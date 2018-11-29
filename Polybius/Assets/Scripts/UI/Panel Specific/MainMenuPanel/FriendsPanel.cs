@@ -30,7 +30,7 @@ namespace polybius {
             // Display friends
             GameObject friend;
             for (int i = 0; i < PolybiusManager.player.friends.Count; i++) {
-                if (!PolybiusManager.player.blockedUsers.Contains(PolybiusManager.player.friends[i].getUsername())) {
+                if (!PolybiusManager.player.blockedUsers.Contains(PolybiusManager.player.friends[i].getUserID())) {
                     friend = Instantiate(Resources.Load<GameObject>("Prefabs/UI/FriendButton"), parent.transform);
                     friend.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = PolybiusManager.player.friends[i].getUsername();
                     int temp = i;

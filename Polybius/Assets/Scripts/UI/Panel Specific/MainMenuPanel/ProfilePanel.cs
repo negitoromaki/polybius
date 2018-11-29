@@ -7,7 +7,7 @@ using TMPro;
 namespace polybius {
     public class ProfilePanel : MonoBehaviour {
 
-        public GameObject MainMenuPanel, ButtonPanel, parent, prevPanel, prevButton, blockButton;
+        public GameObject MainMenuPanel, ButtonPanel, parent, prevPanel, prevButton, blockButton, reportButton;
         public User currentUser;
 
         private Image backButton;
@@ -32,11 +32,12 @@ namespace polybius {
             // Load resources
             titlePrefab = Resources.Load<GameObject>("Prefabs/UI/Title");
             statisticPrefab = Resources.Load<GameObject>("Prefabs/UI/Statistic");
-            Debug.Assert(titlePrefab != null && statisticPrefab != null && parent != null);
+            Debug.Assert(titlePrefab != null && statisticPrefab != null && parent != null && reportButton != null);
         }
 
         public void OnEnable() {
             // Enable/Disable back button
+            reportButton.SetActive(currentUser != PolybiusManager.player);
             backButton.enabled = (currentUser != PolybiusManager.player);
             blockButton.SetActive(currentUser != PolybiusManager.player);
             if (backButton.enabled)
@@ -81,7 +82,8 @@ namespace polybius {
 
         public void OnDisable() {
             foreach (Transform child in parent.transform)
-                GameObject.Destroy(child.gameObject);
+                if (child.name != "Report Button")
+                    GameObject.Destroy(child.gameObject);
         }
 
         public void goBack() {
@@ -90,10 +92,8 @@ namespace polybius {
         }
 
         public void blockUser() {
-            if (!PolybiusManager.player.blockedUsers.Contains(currentUser.getUsername())) {
+            if (!PolybiusManager.player.blockedUsers.Contains(currentUser.getUserID()))
                 PolybiusManager.dm.BlockPlayer(currentUser);
-                PolybiusManager.player.blockedUsers.Add(currentUser.getUsername());
-            }
             goBack();
         }
 

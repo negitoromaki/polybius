@@ -16,7 +16,7 @@ namespace polybius {
 
         private void OnEnable() {
             // Checking
-            Debug.Assert(searchBar != null &&
+            Debug.Assert(   searchBar != null &&
                             parent != null &&
                             ProfilePanel != null &&
                             ButtonPanel != null &&
@@ -51,8 +51,8 @@ namespace polybius {
                 for (int i = 0; i < results.Count; i++) {
 					if (results[i].getUsername() != null &&
                         results[i].getUsername().ToLower().Contains(currSearch.ToLower()) &&
-                        PolybiusManager.player.getUsername() != results[i].getUsername() &&
-                        !PolybiusManager.player.blockedUsers.Contains(results[i].getUsername())) {
+                        PolybiusManager.player.getUserID() != results[i].getUserID() &&
+                        !PolybiusManager.dm.isBlocked(results[i].getUserID())) {
 
                         result = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UserButton"), parent.transform);
                         result.transform.Find("NameText").GetComponent<TextMeshProUGUI>().text = results[i].getUsername();
