@@ -55,11 +55,13 @@ namespace polybius {
             addSection("User Statistics:", userStats);
 
             if (!currentUser.getPrivacy() || currentUser == PolybiusManager.player) {
+                List<Stat> s = PolybiusManager.dm.getStat();
+
                 string[,] connect4Stats = new string[1, 2];
-                connect4Stats[0, 0] = "Games Won: ";
-                Debug.Log("Current profile's username: " + currentUser.getUsername());
-                connect4Stats[0, 1] = currentUser.getUsername().GetHashCode().ToString();
-                addSection("Pong Statistics:", connect4Stats);
+                connect4Stats[0, 0] = "Pong Wins: ";
+                connect4Stats[0, 1] = s[0].pongWins.ToString();
+
+                addSection("Game Statistics:", connect4Stats);
             }
         }
 

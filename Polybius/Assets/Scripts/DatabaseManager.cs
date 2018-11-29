@@ -30,15 +30,13 @@ namespace polybius {
 
         private string flaskIP = "http://128.211.240.229:5000";
 
-        public string getRequest(string method, WWWForm json, string url)
-        {
+        public string getRequest(string method, WWWForm json, string url) {
             // Create request
             UnityWebRequest request = new UnityWebRequest(url, method);
             request.downloadHandler = new DownloadHandlerBuffer();
 
             // Ensure headers for JSON data say JSON
-            if (method == "POST" || method == "PUT")
-            {
+            if (method == "POST" || method == "PUT") {
                 // Set upload handler
                 request.uploadHandler = new UploadHandlerRaw(json.data);
 
@@ -52,52 +50,41 @@ namespace polybius {
             while (!request.isDone) { }
 
             // Get result
-            if (request.isNetworkError || request.isHttpError)
-            {
+            if (request.isNetworkError || request.isHttpError) {
                 Debug.Log("Network Error: " + request.error);
                 return "{\"message\": \"Network/HTTP Error\",\"success\": false}";
-            }
-            else
-            {
+            } else {
                 return request.downloadHandler.text;
             }
         }
-        public class ServerResponse
-        {
+        public class ServerResponse {
             public bool success;
             public string message;
         }
         [Serializable]
-        public class Uarr
-        {
+        public class Uarr {
             public List<User> users;
         }
 
         // login user
-        public void login()
-        {
-            if (!PolybiusManager.loggedIn)
-            {
+        public void login() {
+            if (!PolybiusManager.loggedIn) {
                 if (!string.IsNullOrEmpty(PolybiusManager.player.getPassword()) &&
-                    !string.IsNullOrEmpty(PolybiusManager.player.getUsername()))
-                {
+                    !string.IsNullOrEmpty(PolybiusManager.player.getUsername())) {
 
                     // REST: Get user
                     string j = PolybiusManager.dm.getRequest("GET", null, flaskIP + "/users?username=" + PolybiusManager.player.getUsername());
                     Debug.Log(j);
                     Uarr u = JsonUtility.FromJson<Uarr>(j);
 
-                    if (u.users[0].getPassword() == PolybiusManager.player.getPassword())
-                    {
+                    if (u.users[0].getPassword() == PolybiusManager.player.getPassword()) {
                         // Login successful, set player as returned user
                         PolybiusManager.player = u.users[0];
                         Debug.Log("Login successfull");
 
                         // Set isOnline to true
                         setOnline(true);
-                    }
-                    else
-                    {
+                    } else {
                         Debug.LogError("Login unsuccessful");
                     }
                 }
@@ -129,7 +116,7 @@ namespace polybius {
                 setOnline(false);
         }
 
-		public User getUser(string username){
+        public User getUser(string username) {
             // REST: Get array of users with username
             string url = flaskIP + "/users?username=" + username;
             string j = PolybiusManager.dm.getRequest("GET", null, url);
@@ -138,8 +125,7 @@ namespace polybius {
 
             return u.users[0];
         }
-        public User getidUser(int id)
-        {
+        public User getidUser(int id) {
 
 
             // REST: Get array of users with username
@@ -180,52 +166,40 @@ namespace polybius {
             });
         }
 
-        [Serializable]
-        public class statsend
-        {
-            public int pongwins;
-            public int userID;
-
-            public statsend(int f, int t)
-            {
-                pongwins = f;
-                userID = t;
-            }
-        }
-
-
-        public void setStat(int[] statistic, string statname )
-        {
-            statsend s = new statsend(statistic[0], PolybiusManager.player.userID);
+        public void setStat(int[] statistic, string statname) {
+            Stat s = new Stat(statistic[0], PolybiusManager.player.userID);
 
             RestClient.Put<ServerResponse>(flaskIP + "/stats", s).Then(resp => {
-                if (resp.success)
-                {
-                    Debug.Log("Successful");
-                }
-                else
-                {
-                    Debug.LogError("Could not: " + resp.message);
+                if (resp.success) {
+                    Debug.Log("Set stat successful");
+                } else {
+                    Debug.LogError("Could not set stat: " + resp.message);
                 }
             }).Catch(err => {
                 Debug.LogError("Error: " + err.Message);
             });
         }
-        public statsend getStat()
-        {
-            string url = flaskIP + "/stats?userID=" + PolybiusManager.player.userID;
-            string j = PolybiusManager.dm.getRequest("GET", null, url);
-            Debug.Log(j);
-            statsend u = JsonUtility.FromJson<statsend>(j);
-            return u;
-        }
-
-
-
 
         [Serializable]
-        public class feed
-        {
+        public class StatArray {
+            public Stat[] stats;
+        }
+
+        public List<Stat> getStat() {
+            string url = flaskIP + "/stats?userID=" + PolybiusManager.player.userID;
+
+            string j = "{\"stats\":" + PolybiusManager.dm.getRequest("GET", null, url) + "}";
+            Debug.Log("Get Stat: " + j);
+            StatArray statArray = JsonUtility.FromJson<StatArray>(j);
+
+            List<Stat> results = new List<Stat>();
+            foreach (Stat s in statArray.stats)
+                results.Add(s);
+            return results;
+        }
+
+        [Serializable]
+        public class feed {
             public string feedback;
               public string subject;
 
@@ -235,6 +209,7 @@ namespace polybius {
                 subject = t;
             }   
         }
+
         public void sendFeedBack(string feedback, string subject) {
             // TODO: Flask send feedback query
             feed s = new feed(feedback,subject);
@@ -503,17 +478,17 @@ namespace polybius {
             return results.users;
         }
         [Serializable]
-        public class Frds
-        {
+        public class Frds {
             public int id;
             public int user1ID;
             public int user2ID;
         }
+
         [Serializable]
-        public class Lfrds
-        {
+        public class Lfrds {
             public List<Frds> friends;
         }
+
         public List<User> getFriends(int userID) {
             string url = flaskIP + "/friends?user1ID=" + userID.ToString();
 
@@ -531,14 +506,12 @@ namespace polybius {
         }
 
         [Serializable]
-        public class gMsg
-        {
+        public class gMsg {
             public List<msg> msg;
         }
 
         [Serializable]
-        public class msg
-        {
+        public class msg {
             public string message;
             public int messageID;
             public int receiverID;

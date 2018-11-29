@@ -28,6 +28,16 @@ namespace polybius {
     }
 
     [Serializable]
+    public class Stat {
+        public int userID, pongWins;
+
+        public Stat(int f, int t) {
+            userID = t;
+            pongWins = f;
+        }
+    }
+
+    [Serializable]
     public class Message {
         public User sender, receiver;
         public System.DateTime timestamp;
