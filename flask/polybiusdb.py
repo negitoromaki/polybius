@@ -33,7 +33,7 @@ c.execute("""
 		messageID 	integer primary key autoincrement unique,
 		senderID 	integer not null,
 		receiverID 	integer not null,
-		time 		datetime unique not null,
+		time 		text unique not null,
 		message 	text not null
 	);
 """)
@@ -168,7 +168,7 @@ def api_users(user_id = -1):
 			resp = jsonify(dict(success=False, message="Username/Password/Email/Dob not specified"))
 		else:
 			# Insert into server or ignore if duplicate
-			c.execute('INSERT or IGNORE INTO users (username, password, email, dob, privacy, isOnline, loggedIn, reports) VALUES (?, ?, ?, ?, ?, 1, 0)', (username, password, email, dob, privacy))
+			c.execute('INSERT or IGNORE INTO users (username, password, email, dob, privacy, isOnline, reports) VALUES (?, ?, ?, ?, ?, 1, 0)', (username, password, email, dob, privacy))
 			db.commit()
 
 			if c.rowcount > 0:

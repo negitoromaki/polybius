@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,14 +37,14 @@ namespace polybius {
         void displayMessages() {
             for (int i = 0; i < messages.Count; i++) {
                 GameObject newMessage = null;
-                if (messages[i].sender == PolybiusManager.player) {
+                if (messages[i].senderID == PolybiusManager.player.getUserID()) {
                     newMessage = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Blue Message"), messageParent.transform);
                 } else {
                     newMessage = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Green Message"), messageParent.transform);
                 }
 
                 newMessage.transform.Find("Message").gameObject.GetComponent<TextMeshProUGUI>().text = messages[i].message;
-                newMessage.transform.Find("Timestamp").gameObject.GetComponent<TextMeshProUGUI>().text = messages[i].timestamp.ToString();
+                newMessage.transform.Find("Timestamp").gameObject.GetComponent<TextMeshProUGUI>().text = messages[i].time;
             }
             messages.Clear();
         }
@@ -55,9 +56,14 @@ namespace polybius {
 
         public void sendMessage(TMP_InputField inputField) {
             if (!string.IsNullOrEmpty(inputField.text)) {
-                Message m = new Message(PolybiusManager.player, otherUser, System.DateTime.Now, inputField.text);
+                Message m = new Message(PolybiusManager.player,
+                                        otherUser,
+                                        DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString(),
+                                        inputField.text);
+
                 messages.Add(m);
-                PolybiusManager.dm.sendMessageRequest(m);
+                PolybiusManager.dm.sendMessage(m);
+
                 inputField.text = "";
                 displayMessages();
                 StartCoroutine(ScrollToBottom());

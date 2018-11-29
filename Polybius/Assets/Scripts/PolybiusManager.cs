@@ -39,15 +39,14 @@ namespace polybius {
 
     [Serializable]
     public class Message {
-        public User sender, receiver;
-        public System.DateTime timestamp;
-        public string message;
+        public int messageID, receiverID, senderID;
+        public string message, time;
 
-        public Message(User sender, User receiver, System.DateTime timestamp, string message) {
-            this.receiver = receiver;
-            this.sender = sender;
-            this.timestamp = timestamp;
-            this.message = message;
+        public Message(User s, User r, string t, string m) {
+            senderID = s.getUserID();
+            receiverID = r.getUserID();
+            time = t;
+            message = m;
         }
     }
 
