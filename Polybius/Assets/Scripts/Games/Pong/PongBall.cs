@@ -30,6 +30,11 @@ public class PongBall : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (manager.gameOver)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
         if (trackHandler.isTracked)
         {
             if (isPaused)
