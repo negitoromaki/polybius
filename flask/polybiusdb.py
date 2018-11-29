@@ -14,7 +14,7 @@ c = db.cursor()
 # Make sure user database exists
 c.execute("""
 	CREATE TABLE IF NOT EXISTS users (
-		userID 			integer primary key autoincrement unique,
+		userID 		integer primary key autoincrement unique,
 		username 	text unique not null,
 		password 	text not null,
 		email 		text unique not null,
