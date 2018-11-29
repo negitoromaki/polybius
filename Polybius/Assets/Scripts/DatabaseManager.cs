@@ -123,6 +123,8 @@ namespace polybius {
         public void logout() {
             if (PolybiusManager.loggedIn)
                 setOnline(false);
+            if (!PolybiusManager.loggedIn)
+                PolybiusManager.player = null;
         }
 
         public User getUser(string username) {
@@ -294,7 +296,7 @@ namespace polybius {
 
             // REST: Check blocked
             string j = PolybiusManager.dm.getRequest("GET", null, url);
-            Debug.Log("Blocked: " + j);
+            Debug.Log("User " + userID.ToString() + " Blocked: " + j);
             BlockedResponse results = JsonUtility.FromJson<BlockedResponse>(j);
 
             return results.result > 0;
@@ -424,6 +426,7 @@ namespace polybius {
             // REST: Set privacy
             RestClient.Put<ServerResponse>(flaskIP + "/users", p).Then(resp => {
                 if (resp.success) {
+                    PolybiusManager.player.privacy = privacy;
                     Debug.Log("Successfully set user " + userID.ToString() + " privacy to " + privacy);
                 } else {
                     Debug.LogError("Could not set user " + userID.ToString() + "s privacy");

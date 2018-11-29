@@ -154,13 +154,6 @@ namespace polybius {
         // User Field Setters
         // ------------------
 
-        // Sets user's privacy status
-        // Choose to set privacy to true or not
-        public void setPrivacy(bool privacy) {
-            this.privacy = privacy;
-            PolybiusManager.dm.setPrivacy(userID, privacy);
-        }
-
         // Updates the username if it contains appropriate characters
         // Returns true if valid username
         public bool setUsername(string newUser) {

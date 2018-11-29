@@ -74,7 +74,7 @@ namespace polybius {
         }
 
         public void toggleSocial() {
-            PolybiusManager.player.setPrivacy(!PolybiusManager.player.getPrivacy());
+            PolybiusManager.dm.setPrivacy(PolybiusManager.player.getUserID(), !PolybiusManager.player.getPrivacy());
         }
     }
 }
