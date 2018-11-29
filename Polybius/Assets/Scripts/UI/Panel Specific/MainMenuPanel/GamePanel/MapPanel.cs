@@ -20,10 +20,14 @@ namespace polybius {
         private List<GameObject> _spawnedObjects;
 
         void OnEnable() {
+            displayMap();
+        }
+
+        private void displayMap() {
             locationString = (PolybiusManager.currGame.latCoord + "," + PolybiusManager.currGame.longCoord);
             Debug.Log("Set location to: " + locationString);
 
-            Debug.Assert(   !string.IsNullOrEmpty(locationString) &&
+            Debug.Assert(!string.IsNullOrEmpty(locationString) &&
                             map != null &&
                             markerParent != null &&
                             _markerPrefab != null &&

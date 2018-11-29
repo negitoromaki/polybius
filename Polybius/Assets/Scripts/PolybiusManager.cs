@@ -29,11 +29,13 @@ namespace polybius {
 
     [Serializable]
     public class Stat {
-        public int userID, pongWins;
+        public int userID, pongWins, tttWins, connect4Wins;
 
-        public Stat(int f, int t) {
-            userID = t;
-            pongWins = f;
+        public Stat(int u, int p, int t, int c) {
+            userID = u;
+            pongWins = p;
+            tttWins = t;
+            connect4Wins = c;
         }
     }
 

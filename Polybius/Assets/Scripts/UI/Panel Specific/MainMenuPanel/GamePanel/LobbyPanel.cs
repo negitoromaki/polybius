@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 namespace polybius {
@@ -54,7 +55,17 @@ namespace polybius {
 
         public void startGame(int i) {
             PolybiusManager.currGame = games[i];
-			PolybiusManager.dm.joinRoom(games[i].name);
+
+            // Start correct game scene
+            if (games[i].gameType == "none") {
+                Debug.LogError("Attempting to join game of type none!");
+            } else if (games[i].gameType == "pong") {
+                SceneManager.LoadScene("Pong");
+            } else if (games[i].gameType == "ticTacToe") {
+                SceneManager.LoadScene("TicTacToe");
+            } else if (games[i].gameType == "connect4") {
+                SceneManager.LoadScene("Connect4");
+            }
         }
 
         public void displayLocation(int i) {
@@ -80,12 +91,6 @@ namespace polybius {
 
         bool getLocation() {
 
-            // Debug
-            PolybiusManager.currLat = 40.426970f;
-            PolybiusManager.currLong = -86.916468f;
-            return true;
-
-            /*
             // Get Location
             // Check if location is enabled
             if (!Input.location.isEnabledByUser)
@@ -113,7 +118,6 @@ namespace polybius {
 
             Input.location.Stop();
             return true;
-            */
         }
 
         public void backButton() {

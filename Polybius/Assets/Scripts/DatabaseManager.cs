@@ -182,9 +182,7 @@ namespace polybius {
             });
         }
 
-        public void setStat(int[] statistic, string statname) {
-            Stat s = new Stat(statistic[0], PolybiusManager.player.userID);
-
+        public void setStat(Stat s) {
             RestClient.Put<ServerResponse>(flaskIP + "/stats", s).Then(resp => {
                 if (resp.success) {
                     Debug.Log("Set stat successful");
@@ -714,8 +712,6 @@ namespace polybius {
 			tmpRoomName = roomName;
 			sfs.Send (new JoinRoomRequest (roomName));
 		}
-
-
 
 		void onJoin (BaseEvent e){
 			//get initial data
