@@ -6,6 +6,6 @@ using UnityEngine.SceneManagement;
 public class SwitchSceneButton : MonoBehaviour {
 
 	public void goBackToUI() {
-        SceneManager.LoadScene("UI-Dev");
+        SceneManager.LoadScene("UI");
     }
 }
