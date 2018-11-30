@@ -407,7 +407,6 @@ namespace polybius {
         }
 
         public void deleteCurrGame() {
-            // REST: Create lobby
             RestClient.Delete(flaskIP + "/lobbies/" + PolybiusManager.currGame.lobbyID.ToString()).Then(json => {
                 ServerResponse resp = JsonUtility.FromJson<ServerResponse>(json.Text);
 
