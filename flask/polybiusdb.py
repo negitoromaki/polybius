@@ -691,7 +691,7 @@ def api_friends():
 	db.close()
 	return resp
 
-@app.route('/feedback', methods=['POST'])
+@app.route('/feedback', methods=['GET','POST'])
 #@requires_auth
 def api_feedback():
         db = sqlite3.connect('polybius.db')
@@ -709,6 +709,14 @@ def api_feedback():
                         resp = jsonify(dict(success=True, message="Feedback Sent"))
                 else:
                         resp = jsonify(dict(success=False, message="feedback not specified"))
+						
+        elif request.method == 'GET':
+		
+                c.execute('SELECT * FROM feedback')
+                columns = c.description
+                resp = jsonify(feedback=[{columns[index][0]:column for index, column in enumerate(value)} for value in c.fetchall()])
+				
+			
         c.close()
         db.close()
         return resp
@@ -716,3 +724,4 @@ def api_feedback():
 # Run server
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port="5000")
+	
