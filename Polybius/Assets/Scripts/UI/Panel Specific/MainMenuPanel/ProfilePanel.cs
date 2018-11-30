@@ -59,11 +59,11 @@ namespace polybius {
                 List<Stat> s = PolybiusManager.dm.getStat();
 
                 string[,] connect4Stats = new string[3, 2];
-                connect4Stats[0, 0] = "Pong Wins: ";
+                connect4Stats[0, 0] = "Pong Games Played: ";
                 connect4Stats[0, 1] = s[0].pongWins.ToString();
-                connect4Stats[1, 0] = "Tic Tac Toe Wins: ";
+                connect4Stats[1, 0] = "Tic Tac Toe Games Played: ";
                 connect4Stats[1, 1] = s[0].tttWins.ToString();
-                connect4Stats[2, 0] = "Connect 4 Wins: ";
+                connect4Stats[2, 0] = "Connect 4 Games Played: ";
                 connect4Stats[2, 1] = s[0].connect4Wins.ToString();
 
                 addSection("Game Statistics:", connect4Stats);

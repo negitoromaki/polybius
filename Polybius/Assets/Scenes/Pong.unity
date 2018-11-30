@@ -1281,6 +1281,7 @@ GameObject:
   - component: {fileID: 941558195}
   - component: {fileID: 941558194}
   - component: {fileID: 941558193}
+  - component: {fileID: 941558196}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1345,7 +1346,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 941558194}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 941558196}
+        m_MethodName: goBackToUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &941558194
@@ -1382,6 +1394,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 941558191}
   m_CullTransparentMesh: 0
+--- !u!114 &941558196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 941558191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bea7326ddcbf7e43b1bfb1cc462b65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &941561401
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,6 +2720,7 @@ GameObject:
   - component: {fileID: 1895307066}
   - component: {fileID: 1895307068}
   - component: {fileID: 1895307067}
+  - component: {fileID: 1895307069}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -2758,3 +2782,15 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1895307065}
   m_CullTransparentMesh: 0
+--- !u!114 &1895307069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1895307065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca10d5e11ed81b4db3a3cc2e8a7a880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameType: pong
