@@ -43,7 +43,7 @@ namespace polybius {
                         if (games[i].gameType == gp.currGameType) {
                             game = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
                             float delta = getCoordDist(games[i].latCoord, games[i].longCoord, PolybiusManager.currLat, PolybiusManager.currLong);
-                            game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta * 5280 + "ft";
+                            game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join " + games[i].name + " - " + delta * 5280 + "ft";
 
                             // Ensure buttons work when clicked
                             int temp = i;
