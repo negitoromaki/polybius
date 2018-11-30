@@ -37,7 +37,8 @@ namespace polybius {
 
         public void OnEnable() {
             // Enable/Disable back button
-            reportButton.SetActive(currentUser != PolybiusManager.player);
+            reportButton.SetActive(currentUser != PolybiusManager.player &&
+                !PolybiusManager.player.reportedUsers.Contains(currentUser.getUserID()));
             backButton.enabled = (currentUser != PolybiusManager.player);
             blockButton.SetActive(currentUser != PolybiusManager.player);
             if (backButton.enabled)
@@ -102,7 +103,9 @@ namespace polybius {
         }
 
         public void reportUser() {
+            PolybiusManager.player.reportedUsers.Add(currentUser.getUserID());
             PolybiusManager.dm.reportUser(currentUser.getUsername());
+            blockUser();
         }
     }
 }

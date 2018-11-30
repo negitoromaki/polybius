@@ -88,6 +88,7 @@ namespace polybius {
         public List<Message> messages = new List<Message>();
         public List<User> friends = new List<User>();
         public List<int> blockedUsers = new List<int>();
+        public List<int> reportedUsers = new List<int>();
 
         public User() : this(null, null, null, "--/--/----") {}
 
@@ -211,9 +212,12 @@ namespace polybius {
                     return true;
                 Match m = Regex.Match(newDob, "(1[012]|0?[1-9])\\/(3[01]|[12][0-9]|0?[1-9])\\/((?:19|20)\\d{2})");
                 if (m.Success) {
-                    PolybiusManager.dm.setDob(newDob);
-                    dob = newDob;
-                    return true;
+                    // Check year
+                    if (Convert.ToInt32(newDob.Substring(newDob.Length - 4)) < DateTime.Now.Year - 13) {
+                        PolybiusManager.dm.setDob(newDob);
+                        dob = newDob;
+                        return true;
+                    }
                 }
             }
             return false;
