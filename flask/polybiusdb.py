@@ -45,8 +45,8 @@ c.execute("""
 		lobbyID 	integer primary key autoincrement unique,
 		name 		text unique not null,
 		gameType 	text not null,
-		latCoord 	float unique not null,
-		longCoord	float unique not null
+		latCoord 	float not null,
+		longCoord	float not null
 	);
 """)
 db.commit()
