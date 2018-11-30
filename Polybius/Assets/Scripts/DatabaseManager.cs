@@ -639,6 +639,8 @@ namespace polybius {
 
         void Update() {
             sfs.ProcessEvents();
+            if (PolybiusManager.player == null)
+                PolybiusManager.player = new User();
         }
 
         //event listeners
