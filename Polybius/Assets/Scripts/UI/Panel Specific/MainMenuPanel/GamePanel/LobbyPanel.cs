@@ -17,35 +17,39 @@ namespace polybius {
             if (Time.frameCount % 30 == 0) {
                 if (gp.currGameType != "none") {
                     if (getLocation()) {
-                        // Checking
-                        Debug.Assert(gp != null &&
-                                        MapPanel != null &&
-                                        parent != null &&
-                                        createPanel != null &&
-                                        scrollRect != null &&
-                                        ErrorMessage != null);
-
-                        foreach (Transform child in parent.transform)
-                            GameObject.Destroy(child.gameObject);
-
-                        // Get games
-                        games = PolybiusManager.dm.getLobbies(gp.currGameType);
-
-                        GameObject game;
-                        for (int i = 0; i < games.Count; i++) {
-                            if (games[i].gameType == gp.currGameType) {
-                                game = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
-                                float delta = getCoordDist(games[i].latCoord, games[i].longCoord, PolybiusManager.currLat, PolybiusManager.currLong);
-                                game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta * 5280 + "ft";
-
-                                // Ensure buttons work when clicked
-                                int temp = i;
-                                game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(temp));
-                                game.transform.Find("Map").GetComponent<Button>().onClick.AddListener(() => displayLocation(temp));
-                            }
-                        }
                     } else {
-                        GetComponent<UIPanelSwitcher>().ChangeMenu(ErrorMessage);
+                        //GetComponent<UIPanelSwitcher>().ChangeMenu(ErrorMessage);
+                        // DEBUG: Location
+                        PolybiusManager.currLat = 40.427604f;
+                        PolybiusManager.currLong = -86.916966f;
+                    }
+
+                    // Checking
+                    Debug.Assert(   gp != null &&
+                                    MapPanel != null &&
+                                    parent != null &&
+                                    createPanel != null &&
+                                    scrollRect != null &&
+                                    ErrorMessage != null);
+
+                    foreach (Transform child in parent.transform)
+                        GameObject.Destroy(child.gameObject);
+
+                    // Get games
+                    games = PolybiusManager.dm.getLobbies(gp.currGameType);
+
+                    GameObject game;
+                    for (int i = 0; i < games.Count; i++) {
+                        if (games[i].gameType == gp.currGameType) {
+                            game = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Lobby"), parent.transform);
+                            float delta = getCoordDist(games[i].latCoord, games[i].longCoord, PolybiusManager.currLat, PolybiusManager.currLong);
+                            game.transform.Find("Join Game").Find("Text").GetComponent<TextMeshProUGUI>().text = "Join - " + delta * 5280 + "ft";
+
+                            // Ensure buttons work when clicked
+                            int temp = i;
+                            game.transform.Find("Join Game").GetComponent<Button>().onClick.AddListener(() => startGame(temp));
+                            game.transform.Find("Map").GetComponent<Button>().onClick.AddListener(() => displayLocation(temp));
+                        }
                     }
                 } else {
                     Debug.LogError("Gametype == none!!");
@@ -91,6 +95,10 @@ namespace polybius {
 
         bool getLocation() {
 
+            #if UNITY_ANDROID
+            Input.compass.enabled = true;
+            #endif
+
             // Get Location
             // Check if location is enabled
             if (!Input.location.isEnabledByUser)
@@ -98,8 +106,8 @@ namespace polybius {
 
             // Wait until service initializes
             Input.location.Start();
-            for (int i = 0; i < 20 && Input.location.status == LocationServiceStatus.Initializing; i++)
-                Thread.Sleep(1000);
+            for (int i = 0; i < 1 && Input.location.status == LocationServiceStatus.Initializing; i++)
+                Thread.Sleep(500);
 
             // Check if service did not initialize
             if (Input.location.status == LocationServiceStatus.Initializing) {
@@ -110,11 +118,11 @@ namespace polybius {
             if (Input.location.status == LocationServiceStatus.Failed) {
                 Debug.LogError("Unable to determine device location");
                 return false;
-            } else {
-                PolybiusManager.currLat = Input.location.lastData.latitude;
-                PolybiusManager.currLong = Input.location.lastData.longitude;
-                Debug.Log(PolybiusManager.currLat + ", " + PolybiusManager.currLong);
             }
+
+            PolybiusManager.currLat = Input.location.lastData.latitude;
+            PolybiusManager.currLong = Input.location.lastData.longitude;
+            Debug.Log(PolybiusManager.currLat + ", " + PolybiusManager.currLong);
 
             Input.location.Stop();
             return true;

@@ -40,7 +40,7 @@ namespace polybius {
             {
                 location = Conversions.StringToLatLon(locationString);
                 map.SetCenterLatitudeLongitude(location);
-                map.Initialize(location, 10);
+                map.Initialize(location, 15);
                 GameObject instance = Instantiate(_markerPrefab, markerParent.transform);
                 instance.transform.localPosition = map.GeoToWorldPosition(location, true);
                 instance.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
