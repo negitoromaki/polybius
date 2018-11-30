@@ -63,11 +63,11 @@ namespace polybius {
             // Start correct game scene
             if (games[i].gameType == "none") {
                 Debug.LogError("Attempting to join game of type none!");
-            } else if (games[i].gameType == "pong") {
+            } else if (games[i].gameType.ToLower() == "pong") {
                 SceneManager.LoadScene("Pong");
-            } else if (games[i].gameType == "ticTacToe") {
+            } else if (games[i].gameType.ToLower() == "tictactoe") {
                 SceneManager.LoadScene("TicTacToe");
-            } else if (games[i].gameType == "connect4") {
+            } else if (games[i].gameType.ToLower() == "connect4") {
                 SceneManager.LoadScene("Connect4");
             }
         }

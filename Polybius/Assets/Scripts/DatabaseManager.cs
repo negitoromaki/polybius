@@ -406,6 +406,22 @@ namespace polybius {
             });
         }
 
+        public void deleteCurrGame() {
+            // REST: Create lobby
+            RestClient.Delete(flaskIP + "/lobbies/" + PolybiusManager.currGame.lobbyID.ToString()).Then(json => {
+                ServerResponse resp = JsonUtility.FromJson<ServerResponse>(json.Text);
+
+                if (resp.success) {
+                    Debug.Log("Successfully deleted lobby: " + PolybiusManager.currGame.lobbyID.ToString());
+                    PolybiusManager.currGame = null;
+                } else {
+                    Debug.LogError("Could not delete lobby: " + resp.message);
+                }
+            }).Catch(err => {
+                Debug.LogError("Error: " + err.Message);
+            });
+        }
+
         [Serializable]
         public class ServerPrivacy {
             public int userID;

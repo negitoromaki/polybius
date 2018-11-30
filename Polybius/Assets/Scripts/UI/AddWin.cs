@@ -21,7 +21,7 @@ namespace polybius {
             }
 
             PolybiusManager.dm.setStat(s);
-            PolybiusManager.currGame = null;
+            PolybiusManager.dm.deleteCurrGame();
         }
     }
 }
